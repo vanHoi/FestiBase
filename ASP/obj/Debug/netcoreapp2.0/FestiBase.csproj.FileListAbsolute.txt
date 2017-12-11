@@ -1,0 +1,10 @@
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\bin\Debug\netcoreapp2.0\FestiBase.deps.json
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\bin\Debug\netcoreapp2.0\FestiBase.runtimeconfig.json
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\bin\Debug\netcoreapp2.0\FestiBase.runtimeconfig.dev.json
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\bin\Debug\netcoreapp2.0\FestiBase.dll
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\bin\Debug\netcoreapp2.0\FestiBase.pdb
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\obj\Debug\netcoreapp2.0\FestiBase.csproj.CoreCompileInputs.cache
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\obj\Debug\netcoreapp2.0\FestiBase.AssemblyInfoInputs.cache
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\obj\Debug\netcoreapp2.0\FestiBase.AssemblyInfo.cs
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\obj\Debug\netcoreapp2.0\FestiBase.dll
+C:\Users\Ivo\Documents\HAN\ISE Project\FestiBase\obj\Debug\netcoreapp2.0\FestiBase.pdb
