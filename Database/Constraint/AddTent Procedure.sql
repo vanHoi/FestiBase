@@ -13,7 +13,10 @@ CREATE PROC procAddTent
 	@color VARCHAR(50),
 	@floor_type VARCHAR(50),
 	@capacity INT
+<<<<<<< HEAD
 AS
+=======
+>>>>>>> origin/master
 BEGIN
 	BEGIN TRY
 		IF (@podium_number IS NOT NULL)
