@@ -4,15 +4,15 @@ CREATE PROC addTent
 	@tent_number INT,
 	@podium_number INT,
 	@length INT,
-  @width INT,
-  @side_height INT,
-  @ridge_height INT,
-  @construction_width INT,
-  @construction_length INT,
-  @tent_type VARCHAR(50),
-  @color VARCHAR(50),
-  @floor_type VARCHAR(50),
-  @capacity INT
+	@width INT,
+	@side_height INT,
+	@ridge_height INT,
+	@construction_width INT,
+	@construction_length INT,
+	@tent_type VARCHAR(50),
+	@color VARCHAR(50),
+	@floor_type VARCHAR(50),
+	@capacity INT
 BEGIN
     DECLARE @rowc INT = @@ROWCOUNT
     IF @rowc = 0 RETURN
