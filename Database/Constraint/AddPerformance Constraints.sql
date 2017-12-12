@@ -81,25 +81,73 @@ BEGIN
 		RETURN
 	SET NOCOUNT ON
     BEGIN TRY
+		IF EXISTS (SELECT podium_number
+				   FROM performance
+				   WHERE podium_number IN (SELECT podium_number
+										  FROM inserted)
+				   AND artist_number IN (SELECT artist_number
+										FROM inserted)
+				   AND date IN (SELECT date
+							   FROM inserted)
+				   AND start_time BETWEEN (SELECT start_time FROM inserted) AND (SELECT DATEADD(minute, play_time, start_time) FROM inserted))
+		BEGIN
+			SELECT * FROM inserted
+			--;THROW 50001, 'There is already an artist playing on this stage at that time', 1
+		END
+		/*
+		IF EXISTS (SELECT *
+				   FROM performance
+				   WHERE podium_number IN (SELECT podium_number
+										  FROM inserted)
+				   AND artist_number IN (SELECT artist_number
+										FROM inserted)
+				   AND date IN (SELECT date
+							   FROM inserted)
+				   AND start_time BETWEEN (SELECT start_time FROM inserted) AND (SELECT DATEADD(minute, play_time, start_time) FROM inserted))
+		BEGIN
+			;THROW 50001, 'There is already an artist playing on this stage at that time', 1
+		END
+		*/
+		/*
+		IF EXISTS (SELECT p.*
+				   FROM performance p INNER JOIN inserted i
+				   ON p.podium_number = i.podium_number
+				   WHERE p.podium_number = i.podium_number
+				   AND p.artist_number = i.artist_number
+				   AND p.date = i.date
+				   AND p.start_time BETWEEN i.start_time AND DATEADD(minute, i.play_time, i.start_time))
+		BEGIN
+			;THROW 50001, 'There is already an artist playing on this stage at that time', 1
+		END
+		*/
+		/*
 		IF EXISTS (SELECT *
 				   FROM performance
 				   WHERE podium_number = (SELECT podium_number
 										  FROM inserted)
-				   AND start_time BETWEEN (SELECT start_time FROM inserted) AND (SELECT DATEADD(hour, play_time, start_time) FROM inserted)
-				   OR DATEADD(hour, play_time, start_time) BETWEEN (SELECT start_time FROM inserted) AND (SELECT DATEADD(hour, play_time, start_time) FROM inserted))
+				   AND artist_number = (SELECT artist_number
+										FROM inserted)
+				   AND date = (SELECT date
+									 FROM inserted)
+				   AND DATEADD(minute, play_time, start_time) BETWEEN (SELECT start_time FROM inserted) AND (SELECT DATEADD(minute, play_time, start_time) FROM inserted))
 		BEGIN
-			;THROW 50001, 'There is already an artist playing on this stage at that time', 1
+			;THROW 50001, 'There is already an artist playing on this stage at that time 22', 1
 		END
 
 		IF EXISTS (SELECT *
 				   FROM performance
 				   WHERE podium_number = (SELECT podium_number
 										  FROM inserted)
+				   AND artist_number = (SELECT artist_number
+									    FROM inserted)
+				   AND date = (SELECT date
+									 FROM inserted)
 				   AND start_time < (SELECT start_time FROM inserted) 
-				   AND DATEADD(hour, play_time, start_time) > (SELECT DATEADD(hour, play_time, start_time) FROM inserted))
+				   AND DATEADD(minute, play_time, start_time) > (SELECT DATEADD(minute, play_time, start_time) FROM inserted))
 		BEGIN
-			;THROW 50001, 'There is already an artist playing on this stage at that time', 1
+			;THROW 50001, 'There is already an artist playing on this stage at that time 33', 1
 		END
+		*/
     END TRY
     BEGIN CATCH
         ;THROW
@@ -110,4 +158,31 @@ GO
 --test
 SELECT * FROM PERFORMANCE
 
-EXEC PROC sp
+SELECT * FROM PODIUM
+
+--Werkt niet
+BEGIN TRAN
+EXEC sp_insert_performance 1, 2, '01-04-2017', '15:00:00', 60
+ROLLBACK TRAN
+
+BEGIN TRAN
+EXEC sp_insert_performance 1, 2, '01-04-2017', '14:00:00', 140
+ROLLBACK TRAN
+
+--Werkt wel
+BEGIN TRAN
+EXEC sp_insert_performance 2, 3, '05-04-2017', '16:00:00', 110
+ROLLBACK TRAN
+
+BEGIN TRAN
+EXEC sp_insert_performance 1, 4, '02-04-2017', '17:00:00', 120
+ROLLBACK TRAN
+
+insert into PERFORMANCE values (2, 3, '05-04-2017', '16:00:00', 110)
+
+SELECT *
+				   FROM performance
+				   WHERE podium_number IN (SELECT podium_number FROM performance WHERE podium_number = 2)
+				   AND artist_number IN (SELECT artist_number FROM performance WHERE artist_number = 4)
+				   AND date IN (SELECT date FROM performance WHERE date = '05-04-2017')
+				   --AND p.start_time BETWEEN '16:00:00' AND DATEADD(minute, 110, '16:00:00')
