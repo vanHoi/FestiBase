@@ -12,9 +12,12 @@ Twee artiesten kunnen niet tegelijk een optreden hebben op hetzelfde podium.
 USE FestiBase
 GO
 
-DROP PROC IF EXISTS spInsertPerformance
+/*
+	Insert into performance
+*/
+DROP PROC IF EXISTS sp_insert_performance
 GO
-CREATE PROC spInsertPerformance
+CREATE PROC sp_insert_performance
 	@podium_number INT,
 	@artist_number INT,
 	@date		   DATE,
@@ -36,6 +39,38 @@ BEGIN
 END
 GO
 
+/*
+	Update performance
+*/
+DROP PROC IF EXISTS sp_update_performance
+GO
+CREATE PROC sp_update_performance
+	@performance_number INT,
+	@podium_number INT,
+	@artist_number INT,
+	@date		   DATE,
+	@start_time	   TIME,
+	@play_time	   INT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE PERFORMANCE SET 
+		podium_number = @podium_number,
+		artist_number = @artist_number,
+		date = @date,
+		start_time = @start_time,
+		play_time = @play_time
+		WHERE performance_number = @performance_number
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+END
+GO
+
+/*
+	Twee artiesten kunnen niet tegelijk een optreden hebben op hetzelfde podium.
+*/
 DROP TRIGGER IF EXISTS trg_artists_on_podium
 GO
 CREATE TRIGGER trg_artists_on_podium ON PERFORMANCE
@@ -71,3 +106,8 @@ BEGIN
     END CATCH
 END
 GO
+
+--test
+SELECT * FROM PERFORMANCE
+
+EXEC PROC sp
