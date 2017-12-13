@@ -21,12 +21,12 @@ DROP PROC IF EXISTS sp_check_performances
 GO
 CREATE PROC sp_check_performances
 	@performance_number INT = NULL,
-	@podium_number INT,
-	@artist_number INT,
-	@date		   DATE,
-	@start_time	   TIME,
-	@play_time	   INT,
-	@insert		   BIT
+	@podium_number		INT,
+	@artist_number		INT,
+	@date				DATE,
+	@start_time			TIME,
+	@play_time			INT,
+	@insert				BIT
 AS
 BEGIN
 	BEGIN TRY
@@ -49,7 +49,7 @@ BEGIN
 				 @play_time)
 			END
 		
-		ELSE IF @insert = 0
+		ELSE IF @insert = 0 AND @performance_number != NULL
 			BEGIN
 				UPDATE PERFORMANCE SET 
 				podium_number = @podium_number,
@@ -58,6 +58,10 @@ BEGIN
 				start_time = @start_time,
 				play_time = @play_time
 				WHERE performance_number = @performance_number
+			END
+		ELSE IF @insert = 0 AND @performance_number = NULL
+			BEGIN
+				;THROW 50001, '@performance_number cannot be NULL if an update is to be commenced', 1
 			END
 	END TRY
 	BEGIN CATCH
