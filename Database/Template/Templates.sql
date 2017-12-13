@@ -26,11 +26,30 @@ END
 GO
 
 CREATE PROCEDURE prcMaatschappij_balie
-	@ CHAR(2),
-	@ INT
+	@insert BIT,
+	@surrogate_key INT = NULL,
+	@text VARCHAR(50),
+	@number INT
 AS
 BEGIN
 	BEGIN TRY
+
+		-- Enter checks here
+		-->
+
+		-- Inser or update start
+		IF (@insert = 1)
+		BEGIN
+			-- insert code
+		END
+		ELSE 
+		BEGIN
+			IF (@surrogate_key = null)
+			BEGIN
+				;THROW 50000, 'You must supply a surrogate key with an update statement.', 1
+			END
+			-- update code
+		END
 
 	END TRY
 	BEGIN CATCH

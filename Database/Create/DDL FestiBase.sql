@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      FestiBase									*/
-/* PDM version 4												*/											
+/* PDM version 4												*/	
 /* DDL script													*/
 /*==============================================================*/
 
@@ -312,9 +312,9 @@ create table PERFORMANCE (
    performance_number   int identity (1,1)   not null,
    podium_number        int                  not null,
    artist_number        int                  not null,
-   date                 datetime             null,
-   start_time           datetime             null,
-   play_time            datetime             not null,
+   date                 date				 null,
+   start_time           time				 null,
+   play_time            int					 not null,
    constraint PK_PERFORMANCE primary key (performance_number),
    constraint FK_PERFORMA_PERFORMAN_PODIUM foreign key (podium_number)
       references PODIUM (podium_number),

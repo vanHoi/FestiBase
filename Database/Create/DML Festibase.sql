@@ -193,8 +193,8 @@ INSERT INTO TOILET (coc_number, festival_number, toilet_code, toilet_capacity) V
 GO
 
 INSERT INTO PERFORMANCE (podium_number, artist_number, date, start_time, play_time) VALUES
-(1, 1, convert(datetime, '12-02-1993 00:00:00', 105), convert(datetime, '01-04-2017 15:00:00', 105), 60),
-(2, 2, convert(datetime, '12-02-1993 00:00:00', 105), convert(datetime, '02-04-2018 14:00:00', 105), 90)
+(1, 1, '01-04-2017', convert(varchar(8), '15:00:00', 108), 60),
+(2, 2, '02-04-2018', convert(varchar(8), '14:00:00', 108), 90)
 GO
 
 INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES
