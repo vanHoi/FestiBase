@@ -91,10 +91,11 @@ go
 /* Table: COMPANY_BRANCH                                        */
 /*==============================================================*/
 create table COMPANY_BRANCH (
+   branch_number	    int				     identity,		
    coc_number           varchar(8)           not null,
    town_number          int                  not null,
    street               varchar(50)          not null,
-   house_number         int                  not null,
+   house_number         int                  not null
    constraint PK_COMPANY_BRANCH primary key (coc_number),
    constraint FK_COMPANY__COMPANY_B_TOWN foreign key (town_number)
       references TOWN (town_number),
@@ -207,7 +208,7 @@ create table CATERING (
    coc_number           varchar(8)           not null,
    festival_number      int                  not null,
    name                 varchar(50)          not null,
-   Attribute_52         bit                  not null,
+   electricity          bit                  not null,
    constraint PK_CATERING primary key (catering_number),
    constraint FK_CATERING_CATERING__FESTIVAL foreign key (coc_number, festival_number)
       references FESTIVAL_COMPANY (coc_number, festival_number)
@@ -340,7 +341,7 @@ create table PODIUM (
    free_span_length     int                  not null,
    free_span_height     int                  null,
    environment          text                 not null,
-   build_time           int                  not null,
+   time_between_performances   int           not null,
    constraint PK_PODIUM primary key (podium_number),
    constraint AK_KEY_2_PODIUM unique (festival_number, name),
    constraint FK_PODIUM_RELATIONS_FESTIVAL foreign key (festival_number)
@@ -361,7 +362,7 @@ create table PERFORMANCE (
    date                 datetime             null,
    start_time           datetime             null,
    play_time            int                  not null,
-   build_time_override  int                  null,
+   time_between_performances_override  int   null,
    constraint PK_PERFORMANCE primary key (performance_number),
    constraint AK_KEY_2_PERFORMA unique (podium_number, artist_number, festival_number, date, start_time),
    constraint FK_PERFORMA_PERFORMAN_PODIUM foreign key (podium_number)
