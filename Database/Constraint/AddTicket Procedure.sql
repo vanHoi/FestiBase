@@ -45,13 +45,11 @@ INSERT INTO Town VALUES (1, 'Nijmegen')
 INSERT INTO COMPANY_BRANCH VALUES ('01010101', 1, 'Heyendaalseweg', 1)
 INSERT INTO FESTIVAL_COMPANY VALUES (1, 1, 'L. Chen', 'Verkoopt tickets', '0612345678')
 
---Startdatum te vroeg
+--date_valid_from is too early
 EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 11:00:00', '17-12-2017 22:00:00'
 
---Einddatum is te laat
+--date_valid_to is too late
 EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 13:00:00', '17-12-2017 23:30:00'
 
---Goed
+--Works
 EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 13:00:00', '17-12-2017 22:00:00'
-
---INSERT INTO TICKET_TYPE VALUES (1, 1, 'Normale ticket', 500.00, '13-12-2017 13:00:00', '17-12-2017 22:30:00')
