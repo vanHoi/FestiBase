@@ -39,15 +39,10 @@ SET DATEFORMAT dmy
 INSERT INTO Organisation VALUES ('Organisatie Paaspop')
 
 INSERT INTO Festival VALUES (1, 'Paaspop', '13-12-2017 12:00:00', '17-12-2017 23:00:00', 'Nijmegen', 2.99)
-
 INSERT INTO Company VALUES ('01010101', 'TicketMaster')
-
 INSERT INTO Country VALUES ('Nederland')
-
 INSERT INTO Town VALUES (1, 'Nijmegen')
-
 INSERT INTO COMPANY_BRANCH VALUES ('01010101', 1, 'Heyendaalseweg', 1)
-
 INSERT INTO FESTIVAL_COMPANY VALUES (1, 1, 'L. Chen', 'Verkoopt tickets', '0612345678')
 
 --Startdatum te vroeg
