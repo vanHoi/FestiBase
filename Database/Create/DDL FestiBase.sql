@@ -1,6 +1,7 @@
 /*==============================================================*/
-/* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     13/12/2017 12:30:19                          */
+/* DBMS name:      FestiBase									*/
+/* PDM version 5												*/
+/* DDL script													*/
 /*==============================================================*/
 USE master
 GO
@@ -123,7 +124,7 @@ go
 /* Table: ARTIST_FILE                                           */
 /*==============================================================*/
 create table ARTIST_FILE (
-   file_number          int                  not null,
+   file_number          int                  identity,
    artist_number        int                  not null,
    coc_number           varchar(8)           not null,
    festival_number      int                  not null,
@@ -162,7 +163,6 @@ create table VISITOR (
    first_name           varchar(50)          null,
    surname              varchar(50)          null,
    constraint PK_VISITOR primary key (visitor_number),
-   constraint AK_KEY_2_VISITOR unique (email)
 )
 go
 

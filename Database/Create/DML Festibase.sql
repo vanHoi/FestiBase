@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      FestiBase									*/
-/* PDM version 4												*/
+/* PDM version 5												*/
 /* testdata													    */
 /*==============================================================*/
 
@@ -31,7 +31,9 @@ INSERT INTO COMPANY (coc_number, name) VALUES
 (23456008,'Stagecompany'),
 (23456045, 'Burger King'),
 (23456046, 'Roberts Inbreekservices'),
-(23456048, 'Leons Kaartjes Oplichterijen')
+(23456048, 'Leons Kaartjes Oplichterijen'),
+(23456060, 'D-Records'),
+(23456061, 'Music HQ')
 GO
 
 INSERT INTO ORGANISATION (name) VALUES
@@ -58,18 +60,35 @@ INSERT INTO TOWN (country_number, town_name) VALUES
 (1, 'Schijndel')
 GO
 
-INSERT INTO FESTIVAL_COMPANY (coc_number, festival_number, town_number, telephone_number, street, house_number, contact_person, description) VALUES
-(23456003, 1, 1, '0612345678', 'aleidestraat', '15', 'Robert Verkerk', 'Tent verhuur'),
-(23456005, 1, 2, '0271234567', 'Hatertseweg', '123', 'Freddie Heineken', 'Ja, bier!!'),
-(23456006, 1, 3, '0698765432', 'schijndelseweg', '5', 'Henk van Amstel', 'Attractieverhuur'),
-(23456006, 2, 3, '0698478512', 'maaskantjeseweg', '5', 'Klaas van Heineken', 'Attractieverhuur'),
-(23456001, 3, 3, '0611122233', 'grotestraat', '2', 'Frida Heemskerk', 'hamburgerbar'),
-(23456001, 2, 3, '0624577885', 'hondenkaas', '25', 'Mac Donalds', 'Voedselcatering'),
-(23456005, 3, 3, '0687433772', 'datdorp', '27', 'Ham Burgers', 'Hamburgerbar'),
-(23456045, 1, 1, '0654188745', 'Coolestraat', '28', 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf'),
-(23456045, 2, 1, '0654188745', 'Coolestraat', '28', 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf'),
-(23456048, 1, 2, '0654788412', 'Oplichtersstraat', '1', 'Leon De Oplichter', 'Ticket bedrijf')
+INSERT INTO COMPANY_BRANCH(coc_number, town_name, street, house_number) VALUES
+(23456003, '0612345678', 'aleidestraat', '15'),
+(23456005, '0271234567', 'Hatertseweg', '123'),
+(23456006, '0698765432', 'schijndelseweg', '5'),
+(23456006, '0698478512', 'maaskantjeseweg', '5'),
+(23456001, '0611122233', 'grotestraat', '2'),
+(23456001, '0624577885', 'hondenkaas', '25'),
+(23456005, '0687433772', 'datdorp', '27'),
+(23456045, '0654188745', 'Coolestraat', '28'),
+(23456045, '0654188745', 'Coolestraat', '28'),
+(23456048, '0654788412', 'Oplichtersstraat', '1')
 GO
+
+INSERT INTO FESTIVAL_COMPANY (coc_number, festival_number, contact_person, description, telephone_number) VALUES
+(23456003, 1, 'Robert Verkerk', 'Tent verhuur', '0612345678'),
+(23456005, 1, 'Freddie Heineken', 'Ja, bier!!', '0271234567'),
+(23456006, 1, 'Henk van Amstel', 'Attractieverhuur', '0698765432'),
+(23456006, 2, 'Klaas van Heineken', 'Attractieverhuur', '0698478512'),
+(23456001, 3, 'Frida Heemskerk', 'hamburgerbar', '0611122233'),
+(23456001, 2, 'Mac Donalds', 'Voedselcatering', '0624577885'),
+(23456005, 3, 'Ham Burgers', 'Hamburgerbar', '0687433772'),
+(23456045, 1, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
+(23456045, 2, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
+(23456048, 1, 'Leon De Oplichter', 'Ticket bedrijf', '0654788412')
+GO
+
+INSERT INTO ARTIST_FILE (artist_number, coc_number, festival_number, "file", description) VALUES
+(1, 23456060, 2, 'contract 3ROBI', 'Het contract van 3ROBI'),
+(2, 23456061, 2, 'contract B-Front', 'Het contract van B-Front')
 
 INSERT INTO ATTRACTION (coc_number, festival_number, name, attraction_type) VALUES
 (23456006, 1, 'Henks Draaimolen', 'Draaimolen'),
