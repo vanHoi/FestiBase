@@ -4,27 +4,23 @@
 /* Constraint													*/
 /*==============================================================*/
 
-/*
-Constraint:		
-Twee artiesten kunnen niet tegelijk een optreden hebben op hetzelfde podium.
-*/
-
 USE FestiBase
 GO
 
 /*
 	Twee artiesten kunnen niet tegelijk optreden. IF oke, dan insert of update.
-	@performance_number  (IF insert, geeft 0 mee)
+	@performance_number		(IF insert, geef NULL mee)
 	@podium_number
 	@artist_number
 	@date
 	@start_time
 	@play_time
+	@insert					(IF insert dan 1, IF update dan 0)
 */
 DROP PROC IF EXISTS sp_check_performances
 GO
 CREATE PROC sp_check_performances
-	@performance_number INT,
+	@performance_number INT = NULL,
 	@podium_number INT,
 	@artist_number INT,
 	@date		   DATE,
@@ -69,13 +65,6 @@ BEGIN
 	END CATCH
 END
 GO
-
---test
-SELECT * FROM PERFORMANCE
-
-SELECT * FROM PODIUM
-
-
 
 
 --Deze insert werkt niet
