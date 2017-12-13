@@ -19,10 +19,8 @@ DROP CONSTRAINT IF EXISTS chkRidgeHeightMustBeGreaterOrEqualToSideHeight
 GO
 ALTER TABLE TENT
 ADD CONSTRAINT chkRidgeHeightMustBeGreaterOrEqualToSideHeight
-CHECK (ridge_height >= length)
+CHECK (ridge_height >= side_height)
 GO
-
-SELECT * FROM TENT
 
 /* Testdata */
 
