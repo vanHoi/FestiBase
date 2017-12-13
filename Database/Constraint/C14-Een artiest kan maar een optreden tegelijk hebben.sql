@@ -31,7 +31,7 @@ BEGIN
 					OR DATEADD(minute, @play_time, @start_time) BETWEEN start_time AND DATEADD(minute, play_time, start_time))
 					)
 		BEGIN
-			;THROW 50001, 'This artist has already a performance. You can’t add second performance. ', 1
+			;THROW 50001, 'This artist has already a performance. You can''t add second performance. ', 1
 		END
 
 		INSERT INTO PERFORMANCE 
