@@ -1,4 +1,6 @@
-﻿CREATE TRIGGER TRG_VALID_TICKET ON TICKET_TYPE
+﻿DROP TRIGGER if exists trg_valid_ticket
+GO
+CREATE TRIGGER trg_valid_ticket ON TICKET_TYPE
 AFTER INSERT
 AS
 BEGIN
@@ -22,6 +24,23 @@ BEGIN
 		;THROW
 	END CATCH
 END
-
+GO
 
 --Tests
+SET DATEFORMAT dmy
+
+INSERT INTO Organisation VALUES ('Organisatie Paaspop')
+
+INSERT INTO Festival VALUES (1, 'Paaspop', '13-12-2017 12:00:00', '17-12-2017 23:00:00', 'Nijmegen', 2.99)
+
+INSERT INTO Company VALUES ('01010101', 'TicketMaster')
+
+INSERT INTO Country VALUES ('Nederland')
+
+INSERT INTO Town VALUES (1, 'Nijmegen')
+
+INSERT INTO COMPANY_BRANCH VALUES ('01010101', 1, 'Heyendaalseweg', 1)
+
+INSERT INTO FESTIVAL_COMPANY VALUES ('01010101', 3, 'L. Chen', 'Verkoopt tickets', '0612345678')
+
+INSERT INTO TICKET_TYPE VALUES ('01010101', 3, 'Normale ticket', 500.00, '13-12-2017 11:00:00', '17-12-2017 23:00:00')

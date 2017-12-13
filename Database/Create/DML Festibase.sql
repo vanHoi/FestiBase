@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      FestiBase									*/
-/* PDM version 4												*/
+/* PDM version 5												*/
 /* testdata													    */
 /*==============================================================*/
 
@@ -18,20 +18,6 @@ INSERT INTO ARTIST (artist_name) VALUES
 ('Big Shaq'),
 ('Eminem'),
 ('Rapper Sjors')
-GO
-
-INSERT INTO COMPANY (coc_number, name) VALUES
-(23456001,'Henks Hamburgers'),
-(23456002,'Roys Reuzenrad'),
-(23456003,'Verkerk Verhuur'),
-(23456004,'Piets Podiums'),
-(23456005,'Heineken'),
-(23456006,'Aries Attracties'),
-(23456007,'Tentencompany'),
-(23456008,'Stagecompany'),
-(23456045, 'Burger King'),
-(23456046, 'Roberts Inbreekservices'),
-(23456048, 'Leons Kaartjes Oplichterijen')
 GO
 
 INSERT INTO ORGANISATION (name) VALUES
@@ -52,30 +38,83 @@ INSERT INTO COUNTRY (country_name) VALUES
 ('Belgie')
 GO
 
+
 INSERT INTO TOWN (country_number, town_name) VALUES
 (1, 'Cuijk'),
 (1, 'Nijmegen'),
 (1, 'Schijndel')
 GO
 
-INSERT INTO FESTIVAL_COMPANY (coc_number, festival_number, town_number, telephone_number, street, house_number, contact_person, description) VALUES
-(23456003, 1, 1, '0612345678', 'aleidestraat', '15', 'Robert Verkerk', 'Tent verhuur'),
-(23456005, 1, 2, '0271234567', 'Hatertseweg', '123', 'Freddie Heineken', 'Ja, bier!!'),
-(23456006, 1, 3, '0698765432', 'schijndelseweg', '5', 'Henk van Amstel', 'Attractieverhuur'),
-(23456006, 2, 3, '0698478512', 'maaskantjeseweg', '5', 'Klaas van Heineken', 'Attractieverhuur'),
-(23456001, 3, 3, '0611122233', 'grotestraat', '2', 'Frida Heemskerk', 'hamburgerbar'),
-(23456001, 2, 3, '0624577885', 'hondenkaas', '25', 'Mac Donalds', 'Voedselcatering'),
-(23456005, 3, 3, '0687433772', 'datdorp', '27', 'Ham Burgers', 'Hamburgerbar'),
-(23456045, 1, 1, '0654188745', 'Coolestraat', '28', 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf'),
-(23456045, 2, 1, '0654188745', 'Coolestraat', '28', 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf'),
-(23456048, 1, 2, '0654788412', 'Oplichtersstraat', '1', 'Leon De Oplichter', 'Ticket bedrijf')
+INSERT INTO COMPANY (coc_number, name) VALUES
+(23456001,'Henks Hamburgers'),
+(23456002,'Roys Reuzenrad'),
+(23456003,'Verkerk Verhuur'),
+(23456004,'Piets Podiums'),
+(23456005,'Heineken'),
+(23456006,'Aries Attracties'),
+(23456007,'Tentencompany'),
+(23456008,'Stagecompany'),
+(23456045, 'Burger King'),
+(23456046, 'Roberts Inbreekservices'),
+(23456048, 'Leons Kaartjes Oplichterijen'),
+(23456060, 'D-Records'),
+(23456061, 'Music HQ')
 GO
+
+INSERT INTO COMPANY_BRANCH(coc_number, town_number, street, house_number) VALUES
+(23456003, 1, 'aleidestraat', '15'),
+(23456005, 2, 'Hatertseweg', '123'),
+(23456006, 1, 'schijndelseweg', '5'),
+(23456006, 2, 'maaskantjeseweg', '5'),
+(23456001, 3, 'grotestraat', '2'),
+(23456001, 2, 'hondenkaas', '25'),
+(23456005, 1, 'datdorp', '27'),
+(23456045, 1, 'Coolestraat', '28'),
+(23456045, 3, 'Coolestraat', '28'),
+(23456048, 3, 'Oplichtersstraat', '1')
+GO
+
+INSERT INTO FESTIVAL_COMPANY (coc_number, festival_number, contact_person, description, telephone_number) VALUES
+(23456003, 1, 'Robert Verkerk', 'Tent verhuur', '0612345678'),
+(23456005, 1, 'Freddie Heineken', 'Ja, bier!!', '0271234567'),
+(23456006, 1, 'Henk van Amstel', 'Attractieverhuur', '0698765432'),
+(23456006, 2, 'Klaas van Heineken', 'Attractieverhuur', '0698478512'),
+(23456001, 3, 'Frida Heemskerk', 'hamburgerbar', '0611122233'),
+(23456001, 2, 'Mac Donalds', 'Voedselcatering', '0624577885'),
+(23456005, 3, 'Ham Burgers', 'Hamburgerbar', '0687433772'),
+(23456045, 1, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
+(23456045, 2, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
+(23456048, 1, 'Leon De Oplichter', 'Ticket bedrijf', '0654788412')
+GO
+
+INSERT INTO ARTIST_FILE (artist_number, coc_number, festival_number, "file", description) VALUES
+(1, 23456060, 2, 'contract 3ROBI', 'Het contract van 3ROBI'),
+(2, 23456061, 2, 'contract B-Front', 'Het contract van B-Front')
 
 INSERT INTO ATTRACTION (coc_number, festival_number, name, attraction_type) VALUES
 (23456006, 1, 'Henks Draaimolen', 'Draaimolen'),
 (23456006, 1, 'Booster', 'Booster'),
 (23456045, 2, 'Booster', 'Booster'),
 (23456045, 2, 'Das Omen', 'Spookhuis')
+GO
+
+INSERT INTO VISITOR (email, first_name, surname) VALUES
+('robertverkerk@hetnet.nl', 'Robert', 'Verkerk'),
+('mariusssss@gmail.com', 'Mariuszsz', 'Blautzik'),
+('ivorr@reumkens.nl', 'Ivo', 'Reumkens'),
+(null, null, null)
+GO
+
+INSERT INTO TICKET_TYPE (coc_number, festival_number, ticket_type, price, date_valid_from, date_valid_to) VALUES
+(23456048, 1, 'Premium ticket', '75', GETDATE(), GETDATE() + 3),
+(23456048, 1, 'VIP', '120', GETDATE(), GETDATE() + 1),
+(23456048, 1, 'dagticket', '50', GETDATE(), GETDATE() + 3)
+GO
+
+INSERT INTO BOUGHT_TICKET (coc_number, festival_number, ticket_type, visitor_number) VALUES
+(23456048, 1, 'Premium ticket', 1),
+(23456048, 1, 'Premium ticket', 1),
+(23456048, 1, 'VIP', 2)
 GO
 
 INSERT INTO CATERING (coc_number, festival_number, name, electricity) VALUES
@@ -104,6 +143,13 @@ INSERT INTO GENRE_of_ARTIST (genre_number, artist_number) VALUES
 (4, 7)
 GO
 
+INSERT INTO GENRE_preference_VISITOR (visitor_number, genre_number) VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 4)
+GO
+
 INSERT INTO LOCKER (coc_number, festival_number) VALUES
 (23456045, 1),
 (23456045, 1),
@@ -123,16 +169,24 @@ INSERT INTO LOCKER (coc_number, festival_number) VALUES
 (23456045, 2)
 GO
 
-INSERT INTO VISITOR (email, first_name, surname) VALUES
-('robertverkerk@hetnet.nl', 'Robert', 'Verkerk'),
-('mariusssss@gmail.com', 'Mariuszsz', 'Blautzik'),
-('ivorr@reumkens.nl', 'Ivo', 'Reumkens'),
-(null, null, null)
-GO
-
 INSERT INTO LOCKER_RENTED (locker_number, visitor_number, start_date, end_date) VALUES
 (1, 1, convert(datetime, '15-07-2017 00:00:00', 105), convert(datetime, '17-07-2017 00:00:00', 105)),
 (2, 3, convert(datetime, '15-07-2017 00:00:00', 105), null)
+GO
+
+INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES
+(1, 'tent1', 3000, 5000, 240, 400, 5200, 3200, 'aluhal', 'wit', 'dansvloer', 10000),
+(2, 'tent2', 3000, 5000, 240, 400, 5200, 3200, 'pagode', 'wit', 'cassetevloer', 1000)
+GO
+
+INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_depth, free_span_height, environment, time_between_performance) VALUES
+(1, NULL, 'Heineken Stage', 1500, 1000, 400, 600, 50, 12000, 800, 1400, 900, 'description of environment', 60),
+(1, 2, 'PopPodium', 1500, 1200, NULL, 700, 100, 12000, 800, 1000, 900, 'beautiful trees', 60)
+GO
+
+INSERT INTO PERFORMANCE (podium_number, artist_number, date, start_time, play_time, time_between_performances_override) VALUES
+(1, 1, 1, '01-04-2017', convert(varchar(8), '16:00:00', 108), 90),
+(1, 2, 1, '02-04-2018', convert(varchar(8), '14:00:00', 108), 90)
 GO
 
 INSERT INTO PERSONAL_INFORMATION (visitor_number, town_number, telephone_number, birthdate, twitter_username, facebook_username) VALUES
@@ -141,45 +195,14 @@ INSERT INTO PERSONAL_INFORMATION (visitor_number, town_number, telephone_number,
 (3, 2, '0632141587', convert(datetime, '12-02-1996 00:00:00', 105), NULL, NULL)
 GO
 
-INSERT INTO GENRE_preference_VISITOR (visitor_number, genre_number) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(3, 4)
-GO
-
-INSERT INTO ARTIST_preferred_by_VISITOR (artist_number, visitor_number) VALUES
-(1, 2),
-(2, 1),
-(4, 1),
-(3, 2)
-GO
-
-INSERT INTO TICKET_TYPE (coc_number, festival_number, ticket_type, price, date_valid_from, date_valid_to) VALUES
-(23456048, 1, 'Premium ticket', '75', GETDATE(), GETDATE() + 3),
-(23456048, 1, 'VIP', '120', GETDATE(), GETDATE() + 1),
-(23456048, 1, 'dagticket', '50', GETDATE(), GETDATE() + 3)
-GO
-
-INSERT INTO BOUGHT_TICKET (coc_number, festival_number, ticket_type, visitor_number) VALUES
-(23456048, 1, 'Premium ticket', 1),
-(23456048, 1, 'Premium ticket', 1),
-(23456048, 1, 'VIP', 2)
-GO
-
-INSERT INTO PODIUM (festival_number, genre_number, name, podium_width, podium_depth, height, capacity, floorheight, floor_load, free_span_width, free_span_depth, free_span_height, environment) VALUES
-(1, NULL, 'Heineken Stage', 1500, 1000, 400, 5000, 50, 180, 200, 1400, 900, 'description of environment'),
-(1, 1, 'PopPodium', 1200, 1000, NULL, 10000, 100, 200, 200, 1000, 900, 'beautiful trees')
-GO
-
 INSERT INTO PODIUM_FILE(podium_number, coc_number, festival_number, "file", description) VALUES
 (1, 23456003, 1, 'path/to/buildingbook.pdf', 'a beautifl description'),
 (2, 23456003, 1, 'path/to/file.pdf', 'a description')
 GO
 
-INSERT INTO TENT (podium_number, length, width, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES
-(1, 5000, 3000, 240, 400, 5200, 3200, 'aluhal', 'wit', 'dansvloer', 10000),
-(2, 5000, 3000, 240, 400, 5200, 3200, 'pagode', 'wit', 'cassetevloer', 1000)
+INSERT INTO PODIUM_plays_GENRE (genre_number, podium_number) VALUES
+(1, 1),
+(2, 2)
 GO
 
 INSERT INTO TENT_FILE(tent_number, coc_number, festival_number, "file", description) VALUES
@@ -192,9 +215,17 @@ INSERT INTO TOILET (coc_number, festival_number, toilet_code, toilet_capacity) V
 (23456003, 1, 'Toilet 2', 50)
 GO
 
-INSERT INTO PERFORMANCE (podium_number, artist_number, date, start_time, play_time) VALUES
-(1, 1, '01-04-2017', convert(varchar(8), '15:00:00', 108), 60),
-(2, 2, '02-04-2018', convert(varchar(8), '14:00:00', 108), 90)
+INSERT INTO ARTIST_preferred_by_VISITOR (artist_number, visitor_number) VALUES
+(1, 2),
+(2, 1),
+(4, 1),
+(3, 2)
+GO
+
+INSERT INTO VISITOR_likes_PERFORMANCE (visitor_number, performance_number) VALUES
+(1, 2),
+(1, 1),
+(2, 1)
 GO
 
 INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES
@@ -202,3 +233,5 @@ INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VAL
 (1,1),
 (2,1)
 GO
+
+
