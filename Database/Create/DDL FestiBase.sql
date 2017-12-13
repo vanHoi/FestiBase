@@ -91,11 +91,11 @@ go
 /* Table: COMPANY_BRANCH                                        */
 /*==============================================================*/
 create table COMPANY_BRANCH (
-   branch_number        int                  not null,
+   branch_number        int                  identity,
    coc_number           varchar(8)           not null,
    town_number          int                  not null,
    street               varchar(50)          not null,
-   house_number         int                  not null,
+   house_number         varchar(20)          not null,
    constraint PK_COMPANY_BRANCH primary key (branch_number),
    constraint FK_COMPANY__COMPANY_B_TOWN foreign key (town_number)
       references TOWN (town_number),
@@ -359,10 +359,10 @@ create table PERFORMANCE (
    podium_number        int                  not null,
    artist_number        int                  not null,
    festival_number      int                  not null,
-   date                 datetime             null,
-   start_time           datetime             null,
+   date                 date				 null,
+   start_time           time				 null,
    play_time            int                  not null,
-   time_between_performances_override int                  null,
+   time_between_performances_override int    null,
    constraint PK_PERFORMANCE primary key (performance_number),
    constraint AK_KEY_2_PERFORMA unique (podium_number, artist_number, festival_number, date, start_time),
    constraint FK_PERFORMA_PERFORMAN_PODIUM foreign key (podium_number)
