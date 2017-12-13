@@ -1,2 +1,2 @@
-.vs
-ASP/obj
+/.vs/*
+/ASP/obj/*
