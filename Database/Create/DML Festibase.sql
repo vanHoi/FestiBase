@@ -189,8 +189,8 @@ INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, cons
 GO
 
 INSERT INTO PERFORMANCE (podium_number, artist_number, festival_number, date, start_time, play_time, time_between_performances_override) VALUES
-(1, 1, 1, '01-04-2017', convert(varchar(8), '16:00:00', 108), 120, 60),
-(1, 2, 1, '01-04-2017', convert(varchar(8), '14:00:00', 108), 90, 60)
+(1, 1, 1, '01-04-2017', convert(varchar(8), '17:00:00', 108), 120, 60),
+(1, 2, 1, '01-04-2017', convert(varchar(8), '14:00:00', 108), 110, 60)
 GO
 
 INSERT INTO PERSONAL_INFORMATION (visitor_number, town_number, telephone_number, birthdate, twitter_username, facebook_username) VALUES

@@ -12,9 +12,11 @@ GO
 	@performance_number		(IF insert, geef NULL mee)
 	@podium_number
 	@artist_number
+	@festival_number
 	@date
 	@start_time
 	@play_time
+	@override				(time_between_performances_override)
 	@insert					(IF insert dan 1, IF update dan 0)
 */
 DROP PROC IF EXISTS sp_check_performances
@@ -23,9 +25,11 @@ CREATE PROC sp_check_performances
 	@performance_number INT = NULL,
 	@podium_number		INT,
 	@artist_number		INT,
+	@festival_number	INT,
 	@date				DATE,
 	@start_time			TIME,
 	@play_time			INT,
+	@override			INT,
 	@insert				BIT
 AS
 BEGIN
@@ -33,6 +37,7 @@ BEGIN
 		IF EXISTS (SELECT podium_number
 				   FROM performance
 				   WHERE podium_number = @podium_number
+				   AND festival_number = @festival_number
 				   AND date = @date
 				   AND start_time BETWEEN @start_time AND DATEADD(minute, @play_time, @start_time))
 		BEGIN
@@ -44,9 +49,11 @@ BEGIN
 				INSERT INTO PERFORMANCE VALUES
 				(@podium_number,
 				 @artist_number,
+				 @festival_number,
 				 @date,
 				 @start_time,
-				 @play_time)
+				 @play_time,
+				 @override)
 			END
 		
 		ELSE IF @insert = 0 AND @performance_number != NULL
@@ -54,9 +61,11 @@ BEGIN
 				UPDATE PERFORMANCE SET 
 				podium_number = @podium_number,
 				artist_number = @artist_number,
+				festival_number = @festival_number,
 				date = @date,
 				start_time = @start_time,
-				play_time = @play_time
+				play_time = @play_time,
+				time_between_performances_override = @override
 				WHERE performance_number = @performance_number
 			END
 		ELSE IF @insert = 0 AND @performance_number = NULL
@@ -73,38 +82,38 @@ GO
 
 --Deze insert werkt niet
 BEGIN TRAN
-EXEC sp_check_performances 0, 1, 2, '01-04-2017', '15:00:00', 60, 1
+EXEC sp_check_performances 0, 1, 2, 1, '01-04-2017', '15:00:00', 120, 60, 1
 ROLLBACK TRAN
 
 BEGIN TRAN
-EXEC sp_check_performances 0, 1, 2, '01-04-2017', '14:00:00', 140, 1
+EXEC sp_check_performances 0, 1, 3, 1, '01-04-2017', '13:00:00', 600, 60, 1
 ROLLBACK TRAN
 
 --Deze insert werkt wel
 BEGIN TRAN
-EXEC sp_check_performances 0, 2, 3, '05-04-2017', '16:00:00', 110, 1
+EXEC sp_check_performances 0, 1, 4, 1, '01-04-2017', '20:00:00', 110, 60, 1
 ROLLBACK TRAN
 
 BEGIN TRAN
-EXEC sp_check_performances 0, 1, 4, '08-04-2017', '17:00:00', 120, 1
+EXEC sp_check_performances 0, 1, 5, 1, '02-04-2017', '17:00:00', 120, 60, 1
 ROLLBACK TRAN
 
 ---------------------------------------------------------------------
 
 --Deze update werkt niet
 BEGIN TRAN
-EXEC sp_check_performances 2, 1, 3, '01-04-2017', '15:00:00', 60, 0
+EXEC sp_check_performances 2, 1, 3, 1, '01-04-2017', '17:00:00', 60, 60, 0
 ROLLBACK TRAN
 
 BEGIN TRAN
-EXEC sp_check_performances 2, 1, 3, '01-04-2017', '14:00:00', 140, 0
+EXEC sp_check_performances 2, 1, 3, 1, '01-04-2017', '14:00:00', 140, 60, 0
 ROLLBACK TRAN
 
 --Deze update werkt niet
 BEGIN TRAN
-EXEC sp_check_performances 2, 2, 3, '02-04-2018', '15:00:00', 60, 0
+EXEC sp_check_performances 2, 2, 3, 1, '02-04-2018', '15:00:00', 60, 60, 0
 ROLLBACK TRAN
 
 BEGIN TRAN
-EXEC sp_check_performances 2, 1, 4, '08-04-2017', '17:00:00', 120, 0
+EXEC sp_check_performances 2, 1, 4, 1, '08-04-2017', '17:00:00', 120, 60, 0
 ROLLBACK TRAN
