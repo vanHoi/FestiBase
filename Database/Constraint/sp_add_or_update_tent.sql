@@ -45,3 +45,15 @@ BEGIN
 	END CATCH
 
 END
+GO
+
+-- Test
+
+-- Insert
+EXEC sp_add_or_update_tent 1, null, 1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+
+-- Update
+-- Loopup the just added tent to edit it
+DECLARE @tent_number INT;
+SELECT @tent_number = tent_number FROM TENT WHERE name = 'Test Tent' AND festival_number = 2
+EXEC sp_add_or_update_tent 0, @tent_number, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
