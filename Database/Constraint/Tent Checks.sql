@@ -1,7 +1,7 @@
-ALTER TABLE dbo.TENT
+ALTER TABLE TENT
 DROP CONSTRAINT IF EXISTS chkConstructionWidthMustBeGreaterOrEqualToWidth
 GO
-ALTER TABLE dbo.TENT
+ALTER TABLE TENT
 ADD CONSTRAINT chkConstructionWidthMustBeGreaterOrEqualToWidth
 CHECK (construction_width >= width)
 GO
@@ -11,7 +11,7 @@ DROP CONSTRAINT IF EXISTS chkBuildingLengthMustBeGreaterOrEqualToLength
 GO
 ALTER TABLE TENT
 ADD CONSTRAINT chkBuildingLengthMustBeGreaterOrEqualToLength
-CHECK (construction_lenght >= lenght)
+CHECK (construction_length >= length)
 GO
 
 ALTER TABLE TENT
@@ -19,8 +19,10 @@ DROP CONSTRAINT IF EXISTS chkRidgeHeightMustBeGreaterOrEqualToSideHeight
 GO
 ALTER TABLE TENT
 ADD CONSTRAINT chkRidgeHeightMustBeGreaterOrEqualToSideHeight
-CHECK (ridge_height >= lenght)
+CHECK (ridge_height >= length)
 GO
+
+SELECT * FROM TENT
 
 /* Testdata */
 
