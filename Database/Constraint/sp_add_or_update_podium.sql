@@ -89,55 +89,72 @@ GO
 
 /* Tests */
 
--- Add new tent to test with
-INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES (1, 'Hele Grote Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000) 
--- Search for the podium_number
-DECLARE @tent_number INT;
-SELECT @tent_number = tent_number FROM TENT WHERE festival_number = 1 AND name = 'Hele Grote Tent'
-SELECT @tent_number
--- Number 3 in my case, we're going to add the podiums to this tent
-
-/* Correct insert */
+/* Correct insert with a tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 1', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
--- Search for the tent number
-DECLARE @tent_number INT;
-SELECT @tent_number = MAX(tent_number) FROM TENT
-SELECT @tent_number
--- Number  3 in my case, we're going to update this tent
+ROLLBACK TRAN
 
 /* Correct insert without a tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 0, 'Tent zonder podium', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Weinig ruimte', 60
+ROLLBACK TRAN
 
 /* Podium too wide for the tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1400, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
+BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1400, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Podium is too long for the tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 2200, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
+BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 2200, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Podium floor height is higher then the side height of the tent */
-UPDATE TENT SET ridge_height = 10000 WHERE tent_number = 3
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+BEGIN TRAN
+ROLLBACK TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Capacity from the podium is too high for the tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 100, 600, 15000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
+BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 100, 600, 15000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Not enough standing room (less then 3 meters) on the podium */
+BEGIN TRAN
 UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
+BEGIN TRAN
+UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Podium is too high for the tent */
+BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
+BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Update zonder tentnummer */
-
+BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 0, 1, 0, 'Tent 15', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
 
 /* Correcte update */
-
-EXEC sp_add_or_update_podium 0, 3, 1, 3, 'Tent 1', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 1, 3, 'Tent 1', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+ROLLBACK TRAN
