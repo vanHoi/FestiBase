@@ -1,6 +1,6 @@
-﻿DROP PROCEDURE if exists sp_valid_ticket
+﻿DROP PROCEDURE if exists sp_add_ticket_type
 GO
-CREATE PROCEDURE sp_valid_ticket
+CREATE PROCEDURE sp_add_ticket_type
 @festival_number INT,
 @branch_number INT,
 @ticket_type VARCHAR(50),
@@ -38,13 +38,13 @@ GO
 SET DATEFORMAT ymd
 
 --date_valid_from is too early
-EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-14 23:00:00', '2017-07-17 00:00:00'
+EXEC sp_add_ticket_type 1, 10, 'VIP ticket', 500.00, '2017-07-14 23:00:00', '2017-07-17 00:00:00'
 
 --date_valid_to is too late
-EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 01:00:00'
+EXEC sp_add_ticket_type 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 01:00:00'
 
 --Works, Date is exactly on the start and end-date of the festival
-EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 00:00:00'
+EXEC sp_add_ticket_type 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 00:00:00'
 
 --Works
-EXEC sp_valid_ticket 1, 10, 'Normal ticket', 500.00, '2017-07-15 05:00:00', '2017-07-16 23:00:00'
+EXEC sp_add_ticket_type 1, 10, 'Normal ticket', 500.00, '2017-07-15 05:00:00', '2017-07-16 23:00:00'
