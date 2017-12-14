@@ -10,10 +10,10 @@ GO
 USE FestiBase
 GO
 
-DROP PROC IF EXISTS addLockerRented
+DROP PROC IF EXISTS add_locker_rented
 GO
 
-CREATE PROCEDURE addLockerRented
+CREATE PROCEDURE add_locker_rented
 	@locker_number int, --PK
 	@start_date datetime, --PK
 	@end_date datetime,
@@ -96,38 +96,37 @@ GO
 
 /* enddate before enddate festival */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
+EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
 ROLLBACK TRAN
 
 /* startdate after startdate festival */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
+EXEC add_locker_rented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
 ROLLBACK TRAN
 
 /* correct */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
+EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
 ROLLBACK TRAN
 
 /* new locker already rented */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
+EXEC add_locker_rented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
 ROLLBACK TRAN
-delete from LOCKER_RENTED where locker_number = 3 and start_date = '2017-07-15 19:00:00'
 
 /* update locker */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
+EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
 ROLLBACK TRAN
 
 /* add locker then update locker */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC addLockerRented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
+EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
 ROLLBACK TRAN
 
 /* add locker update locker fail */
 BEGIN TRAN
-EXEC addLockerRented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC addLockerRented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
+EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
 ROLLBACK TRAN
