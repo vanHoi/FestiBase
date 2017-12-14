@@ -22,7 +22,7 @@ BEGIN
 			)
 		)
 		BEGIN
-			;THROW 50001, 'Ticket datums liggen niet tussen de start- en einddatum van het festival.', 1
+			;THROW 50001, 'The valid dates of the ticket are not between the start and enddate of the festival.', 1
 		END
 
 		INSERT INTO TICKET_TYPE VALUES (@festival_number, @branch_number, @ticket_type, @price, @date_valid_from, @date_valid_to)
@@ -34,22 +34,17 @@ END
 GO
 
 --Tests
-SET DATEFORMAT dmy
-
-INSERT INTO Organisation VALUES ('Organisatie Paaspop')
-
-INSERT INTO Festival VALUES (1, 'Paaspop', '13-12-2017 12:00:00', '17-12-2017 23:00:00', 'Nijmegen', 2.99)
-INSERT INTO Company VALUES ('01010101', 'TicketMaster')
-INSERT INTO Country VALUES ('Nederland')
-INSERT INTO Town VALUES (1, 'Nijmegen')
-INSERT INTO COMPANY_BRANCH VALUES ('01010101', 1, 'Heyendaalseweg', 1)
-INSERT INTO FESTIVAL_COMPANY VALUES (1, 1, 'L. Chen', 'Verkoopt tickets', '0612345678')
+--Execute this statement first
+SET DATEFORMAT ymd
 
 --date_valid_from is too early
-EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 11:00:00', '17-12-2017 22:00:00'
+EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-14 23:00:00', '2017-07-17 00:00:00'
 
 --date_valid_to is too late
-EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 13:00:00', '17-12-2017 23:30:00'
+EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 01:00:00'
+
+--Works, Date is exactly on the start and end-date of the festival
+EXEC sp_valid_ticket 1, 10, 'VIP ticket', 500.00, '2017-07-15 00:00:00', '2017-07-17 00:00:00'
 
 --Works
-EXEC sp_valid_ticket 1, 1, 'VIP ticket', 500.00, '13-12-2017 13:00:00', '17-12-2017 22:00:00'
+EXEC sp_valid_ticket 1, 10, 'Normal ticket', 500.00, '2017-07-15 05:00:00', '2017-07-16 23:00:00'
