@@ -1,19 +1,8 @@
 /*==============================================================*/
-/* DBMS name:      FestiBase									*/
-/* PDM version 5												*/
-/* DDL script													*/
+/* DBMS name:      Microsoft SQL Server 2014                    */
+/* Created on:     14/12/2017 15:46:37                          */
 /*==============================================================*/
-USE master
-GO
 
-DROP DATABASE IF EXISTS FestiBase
-GO
-
-CREATE DATABASE FestiBase
-GO
-
-USE FestiBase
-GO
 
 /*==============================================================*/
 /* Table: ARTIST                                                */
@@ -333,15 +322,14 @@ create table PODIUM (
    name                 varchar(50)          not null,
    construction_width   int                  not null,
    construction_length  int                  not null,
-   floor_height         int                  null,
    construction_height  int                  null,
+   floor_height         int                  null,
    capacity             int                  not null,
    floor_load           int                  not null,
    free_span_width      int                  not null,
    free_span_length     int                  not null,
    free_span_height     int                  null,
    environment          text                 not null,
-   time_between_performances int                  not null,
    constraint PK_PODIUM primary key (podium_number),
    constraint AK_KEY_2_PODIUM unique (festival_number, name),
    constraint FK_PODIUM_RELATIONS_FESTIVAL foreign key (festival_number)
@@ -352,25 +340,40 @@ create table PODIUM (
 go
 
 /*==============================================================*/
+/* Table: PODIUM_PERFORMANCE_TIME                               */
+/*==============================================================*/
+create table PODIUM_PERFORMANCE_TIME (
+   podium_performance_time_number datetime             not null,
+   podium_number        int                  not null,
+   start_date_time      datetime             not null,
+   end_date_time        datetime             not null,
+   break_time           int                  null,
+   constraint PK_PODIUM_PERFORMANCE_TIME primary key (podium_performance_time_number),
+   constraint FK_PODIUM_P_PERFORMAN_PODIUM foreign key (podium_number)
+      references PODIUM (podium_number)
+)
+go
+
+/*==============================================================*/
 /* Table: PERFORMANCE                                           */
 /*==============================================================*/
 create table PERFORMANCE (
    performance_number   int                  identity,
-   podium_number        int                  not null,
    artist_number        int                  not null,
+   podium_performance_time_number datetime             not null,
    festival_number      int                  not null,
-   date                 date				 null,
-   start_time           time				 null,
-   play_time            int                  not null,
-   time_between_performances_override int    null,
+   start_date           datetime             not null,
+   start_time           datetime             null,
+   play_time            int                  null,
+   min_prep_time        int                  null,
    constraint PK_PERFORMANCE primary key (performance_number),
-   constraint AK_KEY_2_PERFORMA unique (podium_number, artist_number, festival_number, date, start_time),
-   constraint FK_PERFORMA_PERFORMAN_PODIUM foreign key (podium_number)
-      references PODIUM (podium_number),
+   constraint AK_KEY_2_PERFORMA unique (artist_number, festival_number, start_time),
    constraint FK_PERFORMA_PERFORMAN_ARTIST foreign key (artist_number)
       references ARTIST (artist_number),
    constraint FK_PERFORMA_RELATIONS_FESTIVAL foreign key (festival_number)
-      references FESTIVAL (festival_number)
+      references FESTIVAL (festival_number),
+   constraint FK_PERFORMA_RELATIONS_PODIUM_P foreign key (podium_performance_time_number)
+      references PODIUM_PERFORMANCE_TIME (podium_performance_time_number)
 )
 go
 
@@ -385,7 +388,7 @@ create table PERSONAL_INFORMATION (
    twitter_username     varchar(15)          null,
    facebook_username    varchar(70)          null,
    street               varchar(50)          null,
-   house_number         int                  null,
+   house_number         varchar(20)          null,
    constraint PK_PERSONAL_INFORMATION primary key (visitor_number),
    constraint FK_PERSONAL_RELATIONS_TOWN foreign key (town_number)
       references TOWN (town_number),
@@ -489,5 +492,4 @@ create table VISITOR_visited_PERFORMANCE (
       references PERFORMANCE (performance_number)
 )
 go
-
 
