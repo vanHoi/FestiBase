@@ -23,19 +23,19 @@ BEGIN
 		IF (@tent_number IS NOT NULL)
 		BEGIN
 
-			IF (@construction_width < (SELECT construction_width FROM TENT WHERE tent_number = @tent_number))
+			IF (@construction_width > (SELECT width FROM TENT WHERE tent_number = @tent_number))
 			BEGIN
 				;THROW 50001, 'The width of the podium can''t be greater or equal to the the width of the tent!', 1
 			END
 
-			IF (@construction_length < (SELECT construction_length FROM TENT WHERE tent_number = @tent_number))
+			IF (@construction_length > (SELECT length FROM TENT WHERE tent_number = @tent_number))
 			BEGIN
 				;THROW 50002, 'The length of the podium can''t be greater or equal to the the length of the tent!', 1
 			END
 
-			IF (@floor_height <= (SELECT side_height FROM TENT WHERE tent_number = @tent_number))
+			IF (@floor_height > (SELECT side_height FROM TENT WHERE tent_number = @tent_number))
 			BEGIN
-				;THROW 50003, 'The floor height of the podium can''t be greater or equal to the the side height of the tent!', 1
+				;THROW 50003, 'The floor height of the podium can''t be greater then the side height of the tent!', 1
 			END
 
 			IF (@capacity > (SELECT capacity FROM TENT WHERE tent_number = @tent_number))
@@ -43,12 +43,12 @@ BEGIN
 				;THROW 50004, 'The capacity of the podium can''t be greater than the the capacity of the tent!', 1
 			END
 
-			IF ((@floor_height + 300) < (SELECT ridge_height FROM TENT WHERE tent_number = @tent_number))
+			IF ((@floor_height + 300) > (SELECT ridge_height FROM TENT WHERE tent_number = @tent_number))
 			BEGIN
 				;THROW 50005, 'There is less then three meters standing space available from the podium floor to the highest point in the tent.', 1
 			END
 
-			IF (@construction_height <= (SELECT ridge_height FROM TENT WHERE tent_number = @tent_number))
+			IF (@construction_height >= (SELECT ridge_height FROM TENT WHERE tent_number = @tent_number))
 			BEGIN
 				;THROW 50006, 'The construction height of the podium can''t be greater or equal to the the ridge height of the tent!', 1
 			END
@@ -57,6 +57,10 @@ BEGIN
 
 	IF (@insert = 1)
 	BEGIN
+		IF (@tent_number = 0)
+		BEGIN
+			SET @tent_number = NULL -- THIS IS NEEDED, BECAUSE THE DATABASE WON'T ACCEPT THE NUMBER 0
+		END
 		INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, floor_height, construction_height, capacity,
 		floor_load, free_span_width, free_span_length, free_span_height, environment, time_between_performances)
 		 VALUES (@festival_number, @tent_number, @name, @construction_width, @construction_length, @floor_height, @construction_height, @capacity,
@@ -64,14 +68,14 @@ BEGIN
 	END
 	ELSE 
 	BEGIN
-		IF (@tent_number = null)
+		IF (@podium_number = 0)
 		BEGIN
 			;THROW 50000, 'You must supply a podium number with an update statement.', 1
 		END
 		UPDATE PODIUM SET festival_number = @festival_number, tent_number = @tent_number, name = @name, construction_width = @construction_width,
 			construction_length = @construction_length, floor_height = @floor_height, construction_height = @construction_height, capacity = @capacity,
 			floor_load = @floor_load, free_span_width = @free_span_width, free_span_length = @free_span_length, free_span_height = @free_span_height,
-			environment = @environment, time_between_performances = @time_between_performances
+			environment = @environment, time_between_performances = @time_between_performances WHERE podium_number = @podium_number
 	END
 
   END TRY
@@ -85,41 +89,55 @@ GO
 
 /* Tests */
 
--- Add new podium to test with
-INSERT INTO Podium (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floorheight, floor_load, free_span_width, free_span_depth, free_span_height, environment) VALUES (1, 'Test Stage', 1000, 600, 200, 600, 10000, 200, 15, 800, 500, 500, 'Plat vlak land') 
+-- Add new tent to test with
+INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES (1, 'Hele Grote Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000) 
 -- Search for the podium_number
-DECLARE @podium_number INT;
-SELECT @podium_number = podium_number FROM PODIUM WHERE festival_number = 1 AND name = 'Test Stage'
+DECLARE @tent_number INT;
+SELECT @tent_number = tent_number FROM TENT WHERE festival_number = 1 AND name = 'Hele Grote Tent'
+SELECT @tent_number
+-- Number 3 in my case, we're going to add the podiums to this tent
 
-/* Correcte insert */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+/* Correct insert */
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 1', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
 -- Search for the tent number
 DECLARE @tent_number INT;
 SELECT @tent_number = MAX(tent_number) FROM TENT
+SELECT @tent_number
+-- Number  3 in my case, we're going to update this tent
 
-/* Tent not wide enough for the podium */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 800, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 800, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+/* Correct insert without a tent */
+EXEC sp_add_or_update_podium 1, 0, 1, 0, 'Tent zonder podium', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Weinig ruimte', 60
 
-/* Tent not deep enough for the podium */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 500, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 1200, 500, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+/* Podium too wide for the tent */
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1400, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1400, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
 
-/* Tent side height are not high enough for the podium */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 2000, 200, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 1200, 2000, 200, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+/* Podium is too long for the tent */
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 2200, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 2200, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
 
-/* Tent to small for the podium */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 8000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 8000
+/* Podium floor height is higher then the side height of the tent */
+UPDATE TENT SET ridge_height = 10000 WHERE tent_number = 3
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+
+/* Capacity from the podium is too high for the tent */
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 100, 600, 15000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 100, 600, 15000, 12, 1000, 450, 450, 'Veel ruimte', 60
 
 /* Not enough standing room (less then 3 meters) on the podium */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 2000, 400, 400, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 1200, 2000, 400, 400, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
 
-/* Podium is to high for the tent */
-EXEC procAddOrUpdateTent 1, null, @podium_number, 1200, 2000, 400, 500, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
-EXEC procAddOrUpdateTent 0, @tent_number, @podium_number, 1200, 2000, 400, 500, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+/* Podium is too high for the tent */
+EXEC sp_add_or_update_podium 1, 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+EXEC sp_add_or_update_podium 0, 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
+
+/* Update zonder tentnummer */
+
+EXEC sp_add_or_update_podium 0, 0, 1, 0, 'Tent 15', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
 
 /* Correcte update */
-EXEC procAddOrUpdateTent 1, @tent_number, @podium_number, 3000, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+
+EXEC sp_add_or_update_podium 0, 3, 1, 3, 'Tent 1', 1200, 600, 100, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 60
