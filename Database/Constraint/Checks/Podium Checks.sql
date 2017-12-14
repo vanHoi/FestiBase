@@ -27,11 +27,11 @@ GO
 -- Correct
 INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment, time_between_performances) VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 400, 'Plat vlak land', 60) 
 
--- Width to great
+-- Width too wide
 INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment, time_between_performances) VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 1200, 500, 400, 'Plat vlak land', 60) 
 
--- Length to great
+-- Length too long
 INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment, time_between_performances) VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 700, 400, 'Plat vlak land', 60) 
 
--- Height to great
+-- Height too high
 INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment, time_between_performances) VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 550, 'Plat vlak land', 60) 
