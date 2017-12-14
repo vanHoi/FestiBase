@@ -131,7 +131,3 @@ BEGIN TRAN
 EXEC addLockerRented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
 EXEC addLockerRented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
 ROLLBACK TRAN
-
-
-
-select * from LOCKER_RENTED
