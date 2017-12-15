@@ -1,6 +1,7 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 4												*/	
+/* PDM version 4												*/
+/* Robert Verkerk												*/	
 /* Templates													*/
 /*==============================================================*/
 
@@ -10,10 +11,10 @@ GO
 USE FestiBase
 GO
 
-DROP PROC IF EXISTS add_locker_rented
+DROP PROC IF EXISTS add_or_update_locker_rented
 GO
 
-CREATE PROCEDURE add_locker_rented
+CREATE PROCEDURE add_or_update_locker_rented
 	@locker_number int, --PK
 	@start_date datetime, --PK
 	@end_date datetime,
@@ -44,16 +45,6 @@ BEGIN
 			BEGIN	
 				;THROW 50001, 'The enddate must be before the enddate of a festival', 1	
 			END
-		END
-
-		IF EXISTS (	SELECT 1
-					FROM LOCKER_RENTED
-					WHERE locker_number = @locker_number
-					AND visitor_number != @visitor_number
-					AND (( @start_date_to_check BETWEEN start_date AND end_date ) OR
-						( @end_date	BETWEEN start_date AND end_date ) ) )
-		BEGIN
-			;THROW 50002, 'This locker is already rented at the given start or end date.', 1
 		END
 
 		IF (@insert = 1)
@@ -96,37 +87,37 @@ GO
 
 /* enddate before enddate festival */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
+EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
 ROLLBACK TRAN
 
 /* startdate after startdate festival */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
+EXEC add_or_update_locker_rented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
 ROLLBACK TRAN
 
 /* correct */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
+EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
 ROLLBACK TRAN
 
 /* new locker already rented */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
+EXEC add_or_update_locker_rented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
 ROLLBACK TRAN
 
 /* update locker */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
+EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
 ROLLBACK TRAN
 
 /* add locker then update locker */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
+EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
 ROLLBACK TRAN
 
 /* add locker update locker fail */
 BEGIN TRAN
-EXEC add_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC add_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
+EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
 ROLLBACK TRAN
