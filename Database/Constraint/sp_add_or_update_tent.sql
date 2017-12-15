@@ -1,3 +1,14 @@
+/*==============================================================*/
+/* DBMS name:		FestiBase									*/
+/* PDM version 4												*/	
+/* Constraint													*/
+/*==============================================================*/
+
+/*
+Ivo Reumkens
+Procedure to add or update a tent
+*/
+
 DROP PROC IF EXISTS sp_add_or_update_tent;
 GO
 CREATE PROC sp_add_or_update_tent
