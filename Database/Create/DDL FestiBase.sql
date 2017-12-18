@@ -17,7 +17,7 @@ GO
 
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     18/12/2017 16:12:16                          */
+/* Created on:     18/12/2017 16:25:57                          */
 /*==============================================================*/
 
 
@@ -114,7 +114,7 @@ go
 /* Table: FESTIVAL_COMPANY                                      */
 /*==============================================================*/
 create table FESTIVAL_COMPANY (
-   festival_company_number int                  not null,
+   festival_company_number int                  identity,
    festival_number      int                  not null,
    branch_number        int                  not null,
    contact_person       varchar(50)          not null,
@@ -364,7 +364,7 @@ go
 /* Table: PODIUM_SCHEDULE                                       */
 /*==============================================================*/
 create table PODIUM_SCHEDULE (
-   podium_schedule_number datetime             not null,
+   podium_schedule_number int                  identity,
    podium_number        int                  not null,
    start_date           datetime             not null,
    start_time           datetime             null,
@@ -384,7 +384,7 @@ go
 create table PERFORMANCE (
    performance_number   int                  identity,
    artist_number        int                  not null,
-   podium_schedule_number datetime             null,
+   podium_schedule_number int                  null,
    festival_number      int                  not null,
    start_time           datetime             null,
    play_time            int                  not null,
@@ -492,5 +492,4 @@ create table VISITOR_visited_PERFORMANCE (
       references PERFORMANCE (performance_number)
 )
 go
-
 
