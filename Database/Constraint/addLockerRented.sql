@@ -35,43 +35,18 @@ BEGIN
 				SELECT @start_date_to_check = @new_start_date
 			END
 
-			/*check if startdate is na startdate van festival*/
-			IF (@start_date_to_check < (SELECT start_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
-			BEGIN	
-				;THROW 50000, 'The startdate must be after the startdate of a festival', 1
-			END
-			/*check if enddate is voor endate van festival*/
-			IF (@end_date > (SELECT end_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
-			BEGIN	
-				;THROW 50001, 'The enddate must be before the enddate of a festival', 1	
-			END
+			EXEC sp_check_locker_rented_start_end_date @start_date_to_check, @end_date, @locker_number
 		END
+
+		EXEC sp_check_visitor_rented @locker_number, @visitor_number, @start_date_to_check, @end_date, @insert
 
 		IF (@insert = 1)
 		BEGIN
-			IF EXISTS (	SELECT 1
-			FROM LOCKER_RENTED
-			WHERE locker_number = @locker_number
-			--AND visitor_number != @visitor_number
-			AND (( @start_date_to_check BETWEEN start_date AND end_date ) OR
-				( @end_date	BETWEEN start_date AND end_date ) ) )
-			BEGIN
-				;THROW 50002, 'This locker is already rented at the given start or end date.', 1
-			END
 			INSERT INTO LOCKER_RENTED VALUES (@locker_number, @start_date_to_check, @end_date, @visitor_number)
 		END
 		ELSE
 		BEGIN
-			IF EXISTS (	SELECT 1
-			FROM LOCKER_RENTED
-			WHERE locker_number = @locker_number
-			AND visitor_number != @visitor_number
-			AND (( @start_date_to_check BETWEEN start_date AND end_date ) OR
-				( @end_date	BETWEEN start_date AND end_date ) ) )
-			BEGIN
-				;THROW 50003, 'This locker is already rented at the given start or end date.', 1
-			END
-
+			
 			IF (@locker_number IS NULL AND @start_date IS NULL)
 			BEGIN
 				;THROW 50004, 'You must supply the full key(locker_number and start_date with an update statement.', 1
@@ -84,6 +59,76 @@ BEGIN
 	END CATCH
 END
 GO
+
+DROP PROC IF EXISTS sp_check_locker_rented_start_end_date
+GO
+
+CREATE PROC sp_check_locker_rented_start_end_date
+	@start_date datetime,
+	@end_date datetime,
+	@locker_number int
+AS
+BEGIN
+	BEGIN TRY
+		IF (@start_date < (SELECT start_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
+		BEGIN	
+			;THROW 50000, 'The startdate must be after the startdate of a festival', 1
+		END
+		/*check if enddate is voor endate van festival*/
+		IF (@end_date > (SELECT end_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
+		BEGIN	
+			;THROW 50001, 'The enddate must be before the enddate of a festival', 1	
+		END
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+END
+GO
+
+DROP PROC IF EXISTS sp_check_visitor_rented
+GO
+
+CREATE PROC sp_check_visitor_rented
+	@locker_number int,
+	@visitor_number int,
+	@start_date datetime,
+	@end_date datetime,
+	@insert bit
+AS
+BEGIN
+	BEGIN TRY
+	IF (@insert = 1)
+		BEGIN
+			IF EXISTS (	SELECT 1
+						FROM LOCKER_RENTED
+						WHERE locker_number = @locker_number
+						AND (( @start_date BETWEEN start_date AND end_date ) 
+						OR 	( @end_date	BETWEEN start_date AND end_date ) ) )
+			BEGIN
+				;THROW 50002, 'This locker is already rented at the given start or end date.', 1
+			END
+		END
+		ELSE
+		BEGIN
+			IF EXISTS (	SELECT 1
+						FROM LOCKER_RENTED
+						WHERE locker_number = @locker_number
+						AND visitor_number != @visitor_number
+						AND (( @start_date BETWEEN start_date AND end_date ) 
+						OR	( @end_date	BETWEEN start_date AND end_date ) ) )
+			BEGIN
+				;THROW 50003, 'This locker is already rented at the given start or end date.', 1
+			END
+
+		END
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+END
+GO
+
 
 /* enddate before enddate festival */
 BEGIN TRAN
