@@ -1,2 +1,6 @@
 .vs/*
 ASP/obj/*
+/Website/.vs/config/applicationhost.config
+/Website/.vs/Website/v15/Server/sqlite3/db.lock
+/Website/.vs/Website/v15/Server/sqlite3/storage.ide
+/Website/.vs/Website/v15/.suo
