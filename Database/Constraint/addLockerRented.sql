@@ -2,7 +2,7 @@
 /* DBMS name:		FestiBase									*/
 /* PDM version 4												*/
 /* Robert Verkerk												*/	
-/* Templates													*/
+/* Constraint													*/
 /*==============================================================*/
 
 USE master
@@ -11,10 +11,10 @@ GO
 USE FestiBase
 GO
 
-DROP PROC IF EXISTS add_or_update_locker_rented
+DROP PROC IF EXISTS sp_add_or_update_locker_rented
 GO
 
-CREATE PROCEDURE add_or_update_locker_rented
+CREATE PROCEDURE sp_add_or_update_locker_rented
 	@locker_number int, --PK
 	@start_date datetime, --PK
 	@end_date datetime,
@@ -25,18 +25,24 @@ AS
 BEGIN
 	BEGIN TRY
 		DECLARE @start_date_to_check datetime
+		
+			
+		IF (@locker_number IS NULL OR @start_date IS NULL)
+		BEGIN
+			;THROW 50004, 'You must supply locker_number and start_date.', 1
+		END
 
-		IF (@locker_number IS NOT NULL)
+		IF (@new_start_date IS NOT NULL)
+		BEGIN
+			SELECT @start_date_to_check = @new_start_date
+		END
+		ELSE
 		BEGIN
 			SELECT @start_date_to_check = @start_date
-
-			IF (@new_start_date IS NOT NULL)
-			BEGIN
-				SELECT @start_date_to_check = @new_start_date
-			END
-
-			EXEC sp_check_locker_rented_start_end_date @start_date_to_check, @end_date, @locker_number
 		END
+
+		EXEC sp_check_locker_rented_start_end_date @start_date_to_check, @end_date, @locker_number
+
 
 		EXEC sp_check_visitor_rented @locker_number, @visitor_number, @start_date_to_check, @end_date, @insert
 
@@ -46,11 +52,6 @@ BEGIN
 		END
 		ELSE
 		BEGIN
-			
-			IF (@locker_number IS NULL AND @start_date IS NULL)
-			BEGIN
-				;THROW 50004, 'You must supply the full key(locker_number and start_date with an update statement.', 1
-			END
 			UPDATE LOCKER_RENTED SET start_date = @start_date_to_check, end_date = @end_date, visitor_number = @visitor_number WHERE locker_number = @locker_number AND start_date = @start_date
 		END
 	END TRY
@@ -132,37 +133,37 @@ GO
 
 /* enddate before enddate festival */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-18 00:00:00',  1, 1
 ROLLBACK TRAN
 
 /* startdate after startdate festival */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-14 00:00:00',  '2017-07-17 00:00:00', 1, 1
 ROLLBACK TRAN
 
 /* correct */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 20:00:00',  1, 1
 ROLLBACK TRAN
 
 /* new locker already rented */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 19:00:00', '2017-07-16 20:00:00', 2, 1
 ROLLBACK TRAN
 
 /* update locker */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 15:00:00', 1, 0
 ROLLBACK TRAN
 
 /* add locker then update locker */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-16 15:00:00', 2, 0, '2017-07-15 22:00:00'
 ROLLBACK TRAN
 
 /* add locker update locker fail */
 BEGIN TRAN
-EXEC add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
-EXEC add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 21:00:00', '2017-07-15 22:00:00', 2, 1
+EXEC sp_add_or_update_locker_rented 3, '2017-07-15 00:00:00', '2017-07-15 21:30:00', 1, 0
 ROLLBACK TRAN
