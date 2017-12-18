@@ -3,6 +3,17 @@
 /* Created on:     14/12/2017 15:46:37                          */
 /*==============================================================*/
 
+USE master
+GO
+
+DROP DATABASE IF EXISTS FestiBase
+GO
+
+CREATE DATABASE FestiBase
+GO
+
+USE FestiBase
+GO
 
 /*==============================================================*/
 /* Table: ARTIST                                                */

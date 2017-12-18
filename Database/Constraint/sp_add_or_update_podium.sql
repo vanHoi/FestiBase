@@ -1,3 +1,15 @@
+/*==============================================================*/
+/* DBMS name:		FestiBase									*/
+/* PDM version 4												*/	
+/* Constraint													*/
+/*==============================================================*/
+
+/*
+Ivo Reumkens
+Procedure to add or update a podium
+Constraint:	2
+*/
+
 DROP PROC IF EXISTS sp_add_or_update_podium;
 GO
 CREATE PROC sp_add_or_update_podium
