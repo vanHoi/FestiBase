@@ -17,7 +17,7 @@ GO
 
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     18/12/2017 15:45:12                          */
+/* Created on:     18/12/2017 16:12:16                          */
 /*==============================================================*/
 
 
@@ -472,9 +472,9 @@ create table VISITOR_likes_PERFORMANCE (
    visitor_number       int                  not null,
    performance_number   int                  not null,
    constraint PK_VISITOR_LIKES_PERFORMANCE primary key (visitor_number, performance_number),
-   constraint FK_VISITOR__RELATIONS_VISITOR foreign key (visitor_number)
+   constraint FK_VISITOR_like_RELATIONS_VISITOR foreign key (visitor_number)
       references VISITOR (visitor_number),
-   constraint FK_VISITOR__RELATIONS_PERFORMA foreign key (performance_number)
+   constraint FK_VISITOR_LIKE_PERFORMANCE foreign key (performance_number)
       references PERFORMANCE (performance_number)
 )
 go
@@ -492,4 +492,5 @@ create table VISITOR_visited_PERFORMANCE (
       references PERFORMANCE (performance_number)
 )
 go
+
 
