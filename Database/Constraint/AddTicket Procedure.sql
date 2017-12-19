@@ -13,9 +13,9 @@ Constraint:	6
 */
 
 
-DROP PROCEDURE if exists sp_add_ticket_type
+DROP PROCEDURE if exists sp_add_or_update_ticket_type
 GO
-CREATE PROCEDURE sp_add_ticket_type
+CREATE PROCEDURE sp_add_or_update_ticket_type
 @festival_company_number INT,
 @ticket_type VARCHAR(50),
 @price money,
@@ -91,26 +91,26 @@ GO
 
 --date_valid_from is too early
 BEGIN TRAN
-EXEC sp_add_ticket_type 10, 'Super ticket', 500.00, '13-04-2017 23:30:00', '16-04-2017 23:50:00', 1
+EXEC sp_add_or_update_ticket_type 10, 'Super ticket', 500.00, '13-04-2017 23:30:00', '16-04-2017 23:50:00', 1
 ROLLBACK TRAN
 
 --date_valid_to is too late
 BEGIN TRAN
-EXEC sp_add_ticket_type 10, 'Super ticket', 500.00, '14-04-2017 02:00:00', '16-04-2017 23:59:30', 1
+EXEC sp_add_or_update_ticket_type 10, 'Super ticket', 500.00, '14-04-2017 02:00:00', '16-04-2017 23:59:30', 1
 ROLLBACK TRAN
 
 --Works, Date is exactly on the start and end-date of the festival
 BEGIN TRAN
-EXEC sp_add_ticket_type 10, 'Super ticket', 500.00, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 10, 'Super ticket', 500.00, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
 ROLLBACK TRAN
 
 --Works
 BEGIN TRAN
-EXEC sp_add_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 08:00:00', '16-04-2017 23:00:00', 1
+EXEC sp_add_or_update_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 08:00:00', '16-04-2017 23:00:00', 1
 ROLLBACK TRAN
 
 --Works with updates too
 BEGIN TRAN
-EXEC sp_add_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 08:00:00', '16-04-2017 23:00:00', 1
-EXEC sp_add_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 09:00:00', '16-04-2017 22:00:00', 0
+EXEC sp_add_or_update_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 08:00:00', '16-04-2017 23:00:00', 1
+EXEC sp_add_or_update_ticket_type 10, 'Superkoele ticket', 500.00, '14-04-2017 09:00:00', '16-04-2017 22:00:00', 0
 ROLLBACK TRAN
