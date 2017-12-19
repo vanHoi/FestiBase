@@ -17,7 +17,7 @@ GO
 
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     18/12/2017 16:25:57                          */
+/* Created on:     19/12/2017 10:26:56                          */
 /*==============================================================*/
 
 
@@ -170,7 +170,7 @@ create table VISITOR (
    first_name           varchar(50)          null,
    surname              varchar(50)          null,
    telephone_number     varchar(10)          null,
-   birthdate            datetime             null,
+   birthdate            date                 null,
    twitter_username     varchar(15)          null,
    facebook_username    varchar(70)          null,
    street               varchar(50)          null,
@@ -366,10 +366,10 @@ go
 create table PODIUM_SCHEDULE (
    podium_schedule_number int                  identity,
    podium_number        int                  not null,
-   start_date           datetime             not null,
-   start_time           datetime             null,
-   end_date             datetime             null,
-   end_time             datetime             null,
+   start_date           date                 not null,
+   start_time           time                 null,
+   end_date             date                 null,
+   end_time             time                 null,
    break_time           int                  null,
    constraint PK_PODIUM_SCHEDULE primary key (podium_schedule_number),
    constraint AK_KEY_2_PODIUM_S unique (podium_number, start_date),
@@ -386,7 +386,7 @@ create table PERFORMANCE (
    artist_number        int                  not null,
    podium_schedule_number int                  null,
    festival_number      int                  not null,
-   start_time           datetime             null,
+   start_time           time                 null,
    play_time            int                  not null,
    min_prep_time        int                  null,
    constraint PK_PERFORMANCE primary key (performance_number),
