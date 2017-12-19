@@ -3,13 +3,30 @@
 /* Created on:     14/12/2017 15:46:37                          */
 /*==============================================================*/
 
+USE master
+GO
+
+DROP DATABASE IF EXISTS FestiBase
+GO
+
+CREATE DATABASE FestiBase
+GO
+
+USE FestiBase
+GO
+
+/*==============================================================*/
+/* DBMS name:      Microsoft SQL Server 2014                    */
+/* Created on:     19/12/2017 10:26:56                          */
+/*==============================================================*/
+
 
 /*==============================================================*/
 /* Table: ARTIST                                                */
 /*==============================================================*/
 create table ARTIST (
    artist_number        int                  identity,
-   artist_name          varchar(50)          not null,
+   name                 varchar(50)          not null,
    constraint PK_ARTIST primary key (artist_number)
 )
 go
@@ -47,9 +64,9 @@ go
 /*==============================================================*/
 create table COUNTRY (
    country_number       int                  identity,
-   country_name         varchar(50)          not null,
+   name                 varchar(50)          not null,
    constraint PK_COUNTRY primary key (country_number),
-   constraint AK_KEY_2_COUNTRY unique (country_name)
+   constraint AK_KEY_2_COUNTRY unique (name)
 )
 go
 
@@ -59,7 +76,7 @@ go
 create table TOWN (
    town_number          int                  identity,
    country_number       int                  not null,
-   town_name            varchar(50)          not null,
+   name                 varchar(50)          not null,
    constraint PK_TOWN primary key (town_number),
    constraint FK_TOWN_TOWN_IN_C_COUNTRY foreign key (country_number)
       references COUNTRY (country_number)
@@ -97,12 +114,13 @@ go
 /* Table: FESTIVAL_COMPANY                                      */
 /*==============================================================*/
 create table FESTIVAL_COMPANY (
+   festival_company_number int                  identity,
    festival_number      int                  not null,
    branch_number        int                  not null,
    contact_person       varchar(50)          not null,
    description          text                 not null,
    telephone_number     varchar(10)          not null,
-   constraint PK_FESTIVAL_COMPANY primary key (festival_number, branch_number),
+   constraint PK_FESTIVAL_COMPANY primary key (festival_company_number),
    constraint FK_FESTIVAL_RELATIONS_FESTIVAL foreign key (festival_number)
       references FESTIVAL (festival_number),
    constraint FK_FESTIVAL_RELATIONS_COMPANY_ foreign key (branch_number)
@@ -116,16 +134,15 @@ go
 create table ARTIST_FILE (
    file_number          int                  identity,
    artist_number        int                  not null,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    "file"               varchar(50)          not null,
    description          text                 not null,
    constraint PK_ARTIST_FILE primary key (file_number),
-   constraint AK_KEY_2_ARTIST_F unique (festival_number, "file"),
+   constraint AK_KEY_2_ARTIST_F unique ("file"),
    constraint FK_ARTIST_F_RELATIONS_ARTIST foreign key (artist_number)
       references ARTIST (artist_number),
-   constraint FK_ARTIST_F_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint FK_ARTIST_F_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -134,13 +151,12 @@ go
 /*==============================================================*/
 create table ATTRACTION (
    attraction_number    int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    name                 varchar(50)          not null,
    attraction_type      varchar(50)          not null,
    constraint PK_ATTRACTION primary key (attraction_number),
-   constraint FK_ATTRACTI_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint FK_ATTRACTI_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -149,10 +165,19 @@ go
 /*==============================================================*/
 create table VISITOR (
    visitor_number       int                  identity,
+   town_number          int                  null,
    email                varchar(50)          null,
    first_name           varchar(50)          null,
    surname              varchar(50)          null,
-   constraint PK_VISITOR primary key (visitor_number)
+   telephone_number     varchar(10)          null,
+   birthdate            date                 null,
+   twitter_username     varchar(15)          null,
+   facebook_username    varchar(70)          null,
+   street               varchar(50)          null,
+   house_number         varchar(20)          null,
+   constraint PK_VISITOR primary key (visitor_number),
+   constraint FK_VISITOR_RELATIONS_TOWN foreign key (town_number)
+      references TOWN (town_number)
 )
 go
 
@@ -160,15 +185,14 @@ go
 /* Table: TICKET_TYPE                                           */
 /*==============================================================*/
 create table TICKET_TYPE (
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    ticket_type          varchar(50)          not null,
    price                money                not null,
    date_valid_from      datetime             not null,
    date_valid_to        datetime             null,
-   constraint PK_TICKET_TYPE primary key (festival_number, branch_number, ticket_type),
-   constraint FK_TICKET_T_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint PK_TICKET_TYPE primary key (festival_company_number, ticket_type),
+   constraint FK_TICKET_T_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -177,15 +201,15 @@ go
 /*==============================================================*/
 create table BOUGHT_TICKET (
    ticket_number        int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    ticket_type          varchar(50)          not null,
    visitor_number       int                  not null,
+   scan_date            datetime             null,
    constraint PK_BOUGHT_TICKET primary key (ticket_number),
    constraint FK_BOUGHT_T_VISITOR_B_VISITOR foreign key (visitor_number)
       references VISITOR (visitor_number),
-   constraint FK_BOUGHT_T_BOUGHT_TI_TICKET_T foreign key (festival_number, branch_number, ticket_type)
-      references TICKET_TYPE (festival_number, branch_number, ticket_type)
+   constraint FK_BOUGHT_T_BOUGHT_TI_TICKET_T foreign key (festival_company_number, ticket_type)
+      references TICKET_TYPE (festival_company_number, ticket_type)
 )
 go
 
@@ -194,13 +218,12 @@ go
 /*==============================================================*/
 create table CATERING (
    catering_number      int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    name                 varchar(50)          not null,
    electricity          bit                  not null,
    constraint PK_CATERING primary key (catering_number),
-   constraint FK_CATERING_CATERING__FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint FK_CATERING_CATERING__FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -209,14 +232,13 @@ go
 /*==============================================================*/
 create table FESTIVAL_COMPANY_FILE (
    file_number          int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    "file"               varchar(50)          not null,
    description          text                 not null,
    constraint PK_FESTIVAL_COMPANY_FILE primary key (file_number),
-   constraint AK_KEY_2_FESTIVAL unique (festival_number, "file"),
-   constraint FK_FESTIVAL_COMPANY_HAS_FILE foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint AK_KEY_2_FESTIVAL unique ("file"),
+   constraint FK_FESTIVAL_COMPANY_HAS_FILE foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -264,11 +286,10 @@ go
 /*==============================================================*/
 create table LOCKER (
    locker_number        int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    constraint PK_LOCKER primary key (locker_number),
-   constraint FK_LOCKER_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint FK_LOCKER_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -340,16 +361,19 @@ create table PODIUM (
 go
 
 /*==============================================================*/
-/* Table: PODIUM_PERFORMANCE_TIME                               */
+/* Table: PODIUM_SCHEDULE                                       */
 /*==============================================================*/
-create table PODIUM_PERFORMANCE_TIME (
-   podium_performance_time_number datetime             not null,
+create table PODIUM_SCHEDULE (
+   podium_schedule_number int                  identity,
    podium_number        int                  not null,
-   start_date_time      datetime             not null,
-   end_date_time        datetime             not null,
+   start_date           date                 not null,
+   start_time           time                 null,
+   end_date             date                 null,
+   end_time             time                 null,
    break_time           int                  null,
-   constraint PK_PODIUM_PERFORMANCE_TIME primary key (podium_performance_time_number),
-   constraint FK_PODIUM_P_PERFORMAN_PODIUM foreign key (podium_number)
+   constraint PK_PODIUM_SCHEDULE primary key (podium_schedule_number),
+   constraint AK_KEY_2_PODIUM_S unique (podium_number, start_date),
+   constraint FK_PODIUM_S_PODIUM_HA_PODIUM foreign key (podium_number)
       references PODIUM (podium_number)
 )
 go
@@ -360,11 +384,10 @@ go
 create table PERFORMANCE (
    performance_number   int                  identity,
    artist_number        int                  not null,
-   podium_performance_time_number datetime             not null,
+   podium_schedule_number int                  null,
    festival_number      int                  not null,
-   start_date           datetime             not null,
-   start_time           datetime             null,
-   play_time            int                  null,
+   start_time           time                 null,
+   play_time            int                  not null,
    min_prep_time        int                  null,
    constraint PK_PERFORMANCE primary key (performance_number),
    constraint AK_KEY_2_PERFORMA unique (artist_number, festival_number, start_time),
@@ -372,28 +395,8 @@ create table PERFORMANCE (
       references ARTIST (artist_number),
    constraint FK_PERFORMA_RELATIONS_FESTIVAL foreign key (festival_number)
       references FESTIVAL (festival_number),
-   constraint FK_PERFORMA_RELATIONS_PODIUM_P foreign key (podium_performance_time_number)
-      references PODIUM_PERFORMANCE_TIME (podium_performance_time_number)
-)
-go
-
-/*==============================================================*/
-/* Table: PERSONAL_INFORMATION                                  */
-/*==============================================================*/
-create table PERSONAL_INFORMATION (
-   visitor_number       int                  not null,
-   town_number          int                  null,
-   telephone_number     varchar(10)          null,
-   birthdate            datetime             null,
-   twitter_username     varchar(15)          null,
-   facebook_username    varchar(70)          null,
-   street               varchar(50)          null,
-   house_number         varchar(20)          null,
-   constraint PK_PERSONAL_INFORMATION primary key (visitor_number),
-   constraint FK_PERSONAL_RELATIONS_TOWN foreign key (town_number)
-      references TOWN (town_number),
-   constraint FK_PERSONAL_PERSONAL__VISITOR foreign key (visitor_number)
-      references VISITOR (visitor_number)
+   constraint FK_PERFORMA_RELATIONS_PODIUM_S foreign key (podium_schedule_number)
+      references PODIUM_SCHEDULE (podium_schedule_number)
 )
 go
 
@@ -403,16 +406,15 @@ go
 create table PODIUM_FILE (
    file_number          int                  identity,
    podium_number        int                  not null,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    "file"               varchar(50)          not null,
    description          text                 not null,
    constraint PK_PODIUM_FILE primary key (file_number),
-   constraint AK_KEY_2_PODIUM_F unique (festival_number, "file"),
+   constraint AK_KEY_2_PODIUM_F unique ("file"),
    constraint FK_PODIUM_F_PODIUM_FI_PODIUM foreign key (podium_number)
       references PODIUM (podium_number),
-   constraint FK_PODIUM_F_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint FK_PODIUM_F_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
@@ -436,14 +438,13 @@ go
 create table TENT_FILE (
    file_number          int                  identity,
    tent_number          int                  not null,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    "file"               varchar(50)          not null,
    description          text                 not null,
    constraint PK_TENT_FILE primary key (file_number),
-   constraint AK_KEY_2_TENT_FIL unique (festival_number, "file"),
-   constraint FK_TENT_FIL_RELATIONS_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number),
+   constraint AK_KEY_2_TENT_FIL unique ("file"),
+   constraint FK_TENT_FIL_RELATIONS_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number),
    constraint FK_TENT_FIL_RELATIONS_TENT foreign key (tent_number)
       references TENT (tent_number)
 )
@@ -454,14 +455,13 @@ go
 /*==============================================================*/
 create table TOILET (
    toilet_number        int                  identity,
-   festival_number      int                  not null,
-   branch_number        int                  not null,
+   festival_company_number int                  not null,
    name                 varchar(50)          not null,
    capacity             int                  not null,
    constraint PK_TOILET primary key (toilet_number),
-   constraint AK_KEY_2_TOILET unique (festival_number, name),
-   constraint FK_TOILET_TOILET_BY_FESTIVAL foreign key (festival_number, branch_number)
-      references FESTIVAL_COMPANY (festival_number, branch_number)
+   constraint AK_KEY_2_TOILET unique (name),
+   constraint FK_TOILET_TOILET_BY_FESTIVAL foreign key (festival_company_number)
+      references FESTIVAL_COMPANY (festival_company_number)
 )
 go
 
