@@ -87,7 +87,7 @@ BEGIN
 				;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 			END
 
-		ELSE IF @start_time BETWEEN (
+		ELSE IF @start_time BETWEEN @festival
 	END TRY
 	BEGIN CATCH
 		;THROW
