@@ -22,7 +22,7 @@ DROP CONSTRAINT IF EXISTS chk_building_length_must_be_greater_or_equal_to_length
 GO
 ALTER TABLE TENT
 ADD CONSTRAINT chk_building_length_must_be_greater_or_equal_to_length
-CHECK (construction_length >= length)
+CHECK (construction_length >= "length")
 GO
 
 ALTER TABLE TENT
