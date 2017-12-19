@@ -1,8 +1,9 @@
 /*==============================================================*/
 /* DBMS name:      FestiBase									*/
-/* PDM version 5												*/
-/* Last edited: 14-12-2017										*/
-/* testdata													    */
+/* PDM version 6												*/
+/* Last edited: 19-12-2017										*/
+/* Testdata													    */
+/* Yuri Vannisselroij, Robert Verkerk, Ivo Reumkens				*/
 /*==============================================================*/
 
 USE FestiBase
@@ -187,15 +188,15 @@ INSERT INTO LOCKER_RENTED (locker_number, visitor_number, start_date, end_date) 
 GO
 
 INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES
-(1, 'tent1', 3000, 5000, 240, 400, 5200, 3200, 'aluhal', 'wit', 'dansvloer', 10000),
-(2, 'tent2', 3000, 5000, 240, 400, 5200, 3200, 'pagode', 'wit', 'cassetevloer', 1000),
+(1, 'tent1', 5000, 3000, 240, 400, 5200, 3200, 'aluhal', 'wit', 'dansvloer', 10000),
+(2, 'tent2', 5000, 3000, 240, 400, 5200, 3200, 'pagode', 'wit', 'cassetevloer', 1000),
 (1, 'Hele Grote Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000) 
 GO
 
 INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, construction_height, floor_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) VALUES
-(1, NULL, 'Heineken Stage', 1500, 1000, 600, 100, 12000, 100, 800, 1400, 900, 'description of environment'),
-(1, 2, 'PopPodium', 1500, 1200, 700, null, 12000, 50, 800, 1000, 900, 'beautiful trees'),
-(3, 2, 'Main Stage', 3500, 1200, 800, 150, 12000, 120, 800, 700, 600, 'Hele grote open ruimte')
+(1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment'),
+(1, 2, 'PopPodium', 1500, 1200, 700, null, 12000, 50, 1300, 1000, 600, 'beautiful trees'),
+(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 12000, 120, 800, 700, 600, 'Hele grote open ruimte')
 GO
 
 INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, end_time, break_time) VALUES

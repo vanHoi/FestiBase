@@ -1,3 +1,14 @@
+/*==============================================================*/
+/* DBMS name:		FestiBase									*/
+/* PDM version 6												*/
+/* Ivo Reumkens													*/	
+/* 19-12-2017													*/
+/* Constraint 3													*/
+/*==============================================================*/
+
+USE FestiBase
+GO
+
 ALTER TABLE TENT
 DROP CONSTRAINT IF EXISTS chk_construction_width_must_be_greater_or_equal_to_width
 GO
