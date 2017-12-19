@@ -15,12 +15,11 @@ GO
 DROP PROC IF EXISTS sp_add_or_update_attraction;
 GO
 CREATE PROC sp_add_or_update_attraction
-	@attraction_number		INT,
-	@festival_number		INT,
-	@branch_time			INT,
-	@name					varchar(50),
-	@attraction_type		varchar(50),
-	@insert					BIT
+	@attraction_number			INT,
+	@festival_company_number	INT,
+	@name						varchar(50),
+	@attraction_type			varchar(50),
+	@insert						BIT
 AS
 BEGIN
 	BEGIN TRY
@@ -28,9 +27,8 @@ BEGIN
 		IF (@insert = 1)
 			BEGIN
 				/* INSERT */
-				INSERT INTO ATTRACTION (festival_number, branch_number, name, attraction_type) VALUES
-				(@festival_number,
-				 @branch_number,
+				INSERT INTO ATTRACTION (festival_company_number, name, attraction_type) VALUES
+				(@festival_company_number,
 				 @name,
 				 @attraction_type)
 			END
@@ -43,8 +41,7 @@ BEGIN
 
 					/* UPDATE */
 					UPDATE ATTRACTION SET 
-					festival_number = @festival_number,
-					branch_number = @branch_number,
+					festival_company_number = @festival_company_number,
 					name = @name,
 					attraction_type = @attraction_type
 					WHERE attraction_number = @attraction_number
