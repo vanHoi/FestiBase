@@ -1,7 +1,9 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 4												*/	
-/* Templates													*/
+/* PDM version:		6											*/
+/* Last edited:		20-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
+/* Procedure:		Insert + Update TABEL						*/
 /*==============================================================*/
 
 /*
@@ -24,6 +26,7 @@ GO
 	Procedure naam niet in camelcases, maar kleine letters en _
 	Gebruik een ;THROW, niet een RAISERROR.
 	@@ROWCOUNT voor efficiëntie
+	Voeg de bovenstaande doc toe
 */
 DROP TRIGGER IF EXISTS trg_
 GO
