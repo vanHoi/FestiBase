@@ -75,9 +75,13 @@ BEGIN
 		END
 		ELSE 
 		BEGIN
-			IF (@surrogate_key = null)
+			IF (@surrogate_key IS NULL)
 			BEGIN
-				;THROW 50000, 'You must supply a surrogate key with an update statement.', 1
+				;THROW 50000, '@surrogate_key cannot be NULL if an UPDATE is to be commenced.', 1
+			END
+			IF NOT EXISTS (SELECT 1 FROM table WHERE surrogate_key = @surrogate_key)
+			BEGIN
+				;THROW 50001, 'This unit does not exist.', 1
 			END
 			-- update code
 		END
