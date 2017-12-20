@@ -1,15 +1,15 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 4												*/	
-/* Constraint													*/
-/* Robert Verkerk												*/
-/* Procedure to add or update catering							*/
+/* PDM version:		6											*/	
+/* Last edited:		20-12-2017									*/
+/* Edited by:		Robert Verkerk								*/
+/* Procedure:		Insert + Update catering						*/
 /*==============================================================*/
 
 USE FestiBase
 GO
 
-DROP PROC IF EXISTS sp_add_or_update_catering;
+DROP PROC IF EXISTS sp_add_or_update_catering
 GO
 
 CREATE PROC sp_add_or_update_catering
@@ -50,13 +50,22 @@ GO
 BEGIN TRAN
 EXEC sp_add_or_update_catering 1, NULL, 1, 'Bier', 1
 ROLLBACK TRAN
+GO
 
 /*update*/
 BEGIN TRAN
 EXEC sp_add_or_update_catering 0, 4, 8, 'bier', 0
 ROLLBACK TRAN
+GO
 
 /*update fail*/
 BEGIN TRAN
 EXEC sp_add_or_update_catering 0, 5, 5, 'bier', 0
 ROLLBACK TRAN
+GO
+
+/*update fail*/
+BEGIN TRAN
+EXEC sp_add_or_update_catering 0, NULL, 5, 'bier', 0
+ROLLBACK TRAN
+GO
