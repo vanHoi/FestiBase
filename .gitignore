@@ -2,3 +2,4 @@
 *.lock
 *.opendb
 /Website/.vs/*
+databaseConnection.txt
