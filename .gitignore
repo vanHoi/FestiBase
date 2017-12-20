@@ -1,5 +1,6 @@
-.vs/*
+.vs\*
 *.lock
 *.opendb
-/Website/.vs/*
-databaseConnection.txt
+Website\.vs\*
+Website\Website\App_Code\DAO\databaseConnection.txt
+ASP\*
