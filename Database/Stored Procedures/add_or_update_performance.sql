@@ -51,9 +51,16 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@performance_number = null)
+				IF (@performance_number IS NULL)
 					BEGIN
 						;THROW 50000, '@performance_number cannot be NULL if an UPDATE is to be commenced', 1
+					END
+
+				ELSE IF NOT EXISTS (SELECT *
+								   FROM performance	
+								   WHERE performance_number = @performance_number)
+					BEGIN
+						;THROW 50000, 'This performance does not exist', 1
 					END
 
 					/* UPDATE */
@@ -73,37 +80,94 @@ BEGIN
 END
 GO
 
-/*
-	TEST
+
+/* 
+	These tests should work
 */
 
-SELECT * FROM podium_schedule
-
-SELECT * FROM performance
-
-SELECT * FROM artist
-
--- should work
+-- INSERT
 BEGIN TRAN
 EXEC sp_add_or_update_performance NULL, 8, 4, 2, '15:00:00', 90, 30, 1 
 ROLLBACK TRAN
+GO
 
 BEGIN TRAN
 EXEC sp_add_or_update_performance NULL, 8, NULL, 2, NULL, 90, 30, 1 
 ROLLBACK TRAN
+GO
 
--- should NOT work
+-- UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '22:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance 10, 8, 4, 2, '15:00:00', 90, 30, 0 
 ROLLBACK TRAN
+GO
 
+BEGIN TRAN
+EXEC sp_add_or_update_performance 10, 8, NULL, 2, NULL, 90, 30, 0
+ROLLBACK TRAN
+GO
+
+
+/*
+	These tests should NOT work
+*/
+
+-- INSERT (An artist is already playing during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '20:00:00', 90, 30, 1 
+ROLLBACK TRAN
+GO
+
+-- INSERT (This artist is already going to perform during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 9, 4, 2, '21:00:00', 90, 30, 1 
+ROLLBACK TRAN
+GO
+
+-- INSERT (The start_time cannot be known if the schedule is NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '15:00:00', 90, 30, 1 
 ROLLBACK TRAN
+GO
 
-SELECT 1
-FROM performance
-WHERE podium_schedule_number = @podium_schedule_number
-AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
-	OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
-	OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + @break_time, start_time)))
+-- INSERT (This performance does not fit the schedule)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '13:59:00', 90, 30, 1 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (An artist is already playing during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, 4, 2, '20:00:00', 90, 30, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This artist is already going to perform during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 9, 4, 2, '21:00:00', 90, 30, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (The start_time cannot be known if the schedule is NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, NULL, 2, '15:00:00', 90, 30, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This performance does not fit the schedule)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, 4, 2, '13:59:00', 90, 30, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (@performance_number cannot be NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '15:00:00', 90, 30, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This performance does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 300, 8, 4, 2, '15:00:00', 90, 30, 0
+ROLLBACK TRAN
+GO
