@@ -1,9 +1,9 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 6												*/	
-/* Robert Verkerk												*/
-/* Last edited: 20-12-2017										*/
-/* Procedure: Insert + Update locker							*/
+/* PDM version:		6											*/	
+/* Last edited:		20-12-2017									*/
+/* Edited by:		Robert Verkerk								*/
+/* Procedure:		Insert + Update locker						*/
 /*==============================================================*/
 USE FestiBase
 GO
