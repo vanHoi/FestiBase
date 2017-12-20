@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,12 +11,7 @@ public class DatabaseTest
 
     public DatabaseTest()
     {
-        conn = new SqlConnection("user id=sa;" +
-                                "password=wachtwoord123;" +
-                                "server=localhost;" +
-                                "Trusted_Connection=yes;" +
-                                "database=FestiBase; " +
-                                "connection timeout=30");
+        conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
 
         try
         {

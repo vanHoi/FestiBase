@@ -3,8 +3,12 @@
     "",
     "\\Database",
     "\\Database\\Constraint",
-    "\\Database\\Create"
+    "\\Database\\Create",
+    "\\Website",
+    "\\Website\\Website",
+    "\\Website\\Website\\App_Code",
+    "\\Website\\Website\\App_Code\\DAO"
   ],
-  "SelectedNode": "\\Database\\Constraint\\C14-Een artiest kan maar een optreden tegelijk hebben.sql",
+  "SelectedNode": "\\Website\\Website\\App_Code\\DAO\\DatabaseTest.cs",
   "PreviewInSolutionExplorer": false
 }

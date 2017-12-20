@@ -1,0 +1,6 @@
+﻿user id=sa;
+password=wachtwoord123;
+server=localhost;
+Trusted_Connection=yes;
+database=FestiBase;
+connection timeout=30;
