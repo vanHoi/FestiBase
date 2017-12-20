@@ -24,7 +24,7 @@ CREATE PROC sp_check_performance
 	@artist_number			INT,
 	@podium_schedule_number	INT	= NULL,
 	@festival_number		INT,
-	@start_time				DATETIME = NULL,
+	@start_time				TIME = NULL,
 	@play_time				INT,
 	@min_prep_time			INT,
 	@insert					BIT
@@ -64,30 +64,65 @@ BEGIN
 				END
 
 		/* Is the artist already playing during that time? */
-		ELSE IF EXISTS (SELECT 1
-						FROM performance p INNER JOIN podium_schedule ps
-							ON p.podium_schedule_number = ps.podium_schedule_number
-						WHERE p.artist_number = @artist_number
-						AND ps.start_date IN (SELECT start_date
-											  FROM podium_schedule
-											  WHERE podium_schedule_number = @podium_schedule_number)
-						AND @start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time))
-			BEGIN
-				;THROW 50000, 'This artist is already going to perform during that time', 1
-			END
-
+		ELSE IF ((@podium_schedule_number IS NOT NULL)
+			 AND (@start_time IS NOT NULL)
+			 AND (EXISTS (SELECT performance_number
+								   FROM performance p INNER JOIN podium_schedule ps
+									   ON p.podium_schedule_number = ps.podium_schedule_number
+								   WHERE p.artist_number = @artist_number
+								   AND ps.start_date IN (SELECT start_date
+														  FROM podium_schedule
+														  WHERE podium_schedule_number = @podium_schedule_number)
+									AND @start_time BETWEEN DATEADD(minute, 0 - @break_time, p.start_time) AND DATEADD(minute, p.play_time + @break_time, p.start_time))))
+							BEGIN
+								;THROW 50000, 'This artist is already going to perform during that time', 1
+							END
 		/* Is there a different artist already playing on the same stage during that time? */
-		ELSE IF EXISTS (SELECT 1
-						FROM performance
-						WHERE podium_schedule_number = @podium_schedule_number
-						AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
-							OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
-							OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + break_time, start_time))))
+		ELSE IF (@podium_schedule_number IS NOT NULL)
+				AND (@start_time IS NOT NULL)
+				AND (EXISTS (SELECT performance_number
+							FROM performance
+							WHERE podium_schedule_number = @podium_schedule_number
+							AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
+								OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
+								OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + @break_time, start_time)))))
 			BEGIN
 				;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 			END
 
-		ELSE IF @start_time BETWEEN @festival
+		/* Does the inserted/updated performance fit within the start and endtime of that podium_schedule */
+		ELSE IF @podium_schedule_number IS NOT NULL
+				AND @start_time IS NOT NULL
+				AND NOT (DATEADD(minute, 0 - @break_time, @start_time) NOT BETWEEN (SELECT start_time 
+																					FROM podium_schedule 
+																					WHERE podium_schedule_number = @podium_schedule_number)
+																	   AND (SELECT end_time 
+																			FROM podium_schedule 
+																			WHERE podium_schedule_number = @podium_schedule_number))
+				OR (DATEADD(minute, @play_time, @start_time) NOT BETWEEN (SELECT start_time 
+																		  FROM podium_schedule 
+																		  WHERE podium_schedule_number = @podium_schedule_number)
+															 AND (SELECT end_time 
+																  FROM podium_schedule 
+															      WHERE podium_schedule_number = @podium_schedule_number))
+				OR ((DATEADD(minute, 0 - @break_time, @start_time) < (SELECT start_time 
+																	  FROM podium_schedule 
+																	  WHERE podium_schedule_number = @podium_schedule_number))
+					AND (DATEADD(minute, @play_time, @start_time) > (SELECT end_time 
+																	 FROM podium_schedule 
+																	 WHERE podium_schedule_number = @podium_schedule_number)))
+			BEGIN
+				;THROW 50000, 'The inserted performance time does not fit within that podium_schedule', 1
+			END
+			
+		PRINT 'Ik haal het'
+		SELECT performance_number
+FROM performance
+WHERE podium_schedule_number = @podium_schedule_number
+AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
+	OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, play_time + @break_time, start_time)
+	OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + @break_time, start_time)))
+
 	END TRY
 	BEGIN CATCH
 		;THROW
