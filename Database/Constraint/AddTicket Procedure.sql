@@ -3,17 +3,49 @@
 /* PDM version:		6											*/
 /* Last edited:		19/12/2017									*/
 /* Author:			Leon Chen									*/
-/* Constraint													*/
+/* Constraint		Add or update ticket						*/
 /*==============================================================*/
 
-/*
-Leon Chen
-Procedure to add a new ticket_type to the database
-Constraint:	6
-*/
+DROP PROCEDURE IF EXISTS sp_check_ticket_type_start_end_date
+GO
+CREATE PROCEDURE sp_check_ticket_type_start_end_date
+@festival_company_number INT,
+@date_valid_from DATETIME,
+@date_valid_to DATETIME
+AS
+BEGIN
+	BEGIN TRY
+		IF(
+			NOT EXISTS(
+				SELECT * FROM Festival f
+				INNER JOIN FESTIVAL_COMPANY fc ON f.festival_number = fc.festival_number
+				WHERE fc.festival_company_number = @festival_company_number AND
+				@date_valid_from BETWEEN start_date AND end_date 
+			)
+		)
+		BEGIN
+			;THROW 50002, 'The start date of the ticket is not between the start and end date of the festival.', 1
+		END
 
+		IF(
+			NOT EXISTS(
+				SELECT * FROM Festival f
+				INNER JOIN FESTIVAL_COMPANY fc ON f.festival_number = fc.festival_number
+				WHERE fc.festival_company_number = @festival_company_number AND
+				@date_valid_to BETWEEN start_date AND end_date
+			)
+		)
+		BEGIN
+			;THROW 50003, 'The end date of the ticket is not between the start and end date of the festival.', 1
+		END
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+END
+GO
 
-DROP PROCEDURE if exists sp_add_or_update_ticket_type
+DROP PROCEDURE IF EXISTS sp_add_or_update_ticket_type
 GO
 CREATE PROCEDURE sp_add_or_update_ticket_type
 @festival_company_number INT,
@@ -34,48 +66,20 @@ BEGIN
 		BEGIN
 			INSERT INTO TICKET_TYPE VALUES (@festival_company_number, @ticket_type, @price, @date_valid_from, @date_valid_to)
 		END
-		ELSE BEGIN
+		ELSE 
+		BEGIN
+			IF (@festival_company_number IS NULL OR @ticket_type IS NULL)
+			BEGIN
+				;THROW 50000, 'Festival company number or ticket type cannot be NULL if an UPDATE is to be commenced.', 1
+			END
+			IF NOT EXISTS (SELECT 1 FROM TICKET_TYPE WHERE 
+			festival_company_number = @festival_company_number AND ticket_type = @ticket_type)
+			BEGIN
+				;THROW 50001, 'This record does not exist.', 1
+			END
+
 			UPDATE TICKET_TYPE SET festival_company_number = @festival_company_number, ticket_type = @ticket_type, price = @price,
 			date_valid_from = @date_valid_from, date_valid_to = @date_valid_to WHERE festival_company_number = @festival_company_number AND ticket_type = @ticket_type
-		END
-	END TRY
-	BEGIN CATCH
-		;THROW
-	END CATCH
-END
-GO
-
-DROP PROCEDURE if exists sp_check_ticket_type_start_end_date
-GO
-CREATE PROCEDURE sp_check_ticket_type_start_end_date
-@festival_company_number INT,
-@date_valid_from DATETIME,
-@date_valid_to DATETIME
-AS
-BEGIN
-	BEGIN TRY
-		IF(
-			NOT EXISTS(
-				SELECT * FROM Festival f
-				INNER JOIN FESTIVAL_COMPANY fc ON f.festival_number = fc.festival_number
-				WHERE fc.festival_company_number = @festival_company_number AND
-				@date_valid_from BETWEEN start_date AND end_date 
-			)
-		)
-		BEGIN
-			;THROW 50001, 'The start date of the ticket is not between the start and end date of the festival.', 1
-		END
-
-		IF(
-			NOT EXISTS(
-				SELECT * FROM Festival f
-				INNER JOIN FESTIVAL_COMPANY fc ON f.festival_number = fc.festival_number
-				WHERE fc.festival_company_number = @festival_company_number AND
-				@date_valid_to BETWEEN start_date AND end_date
-			)
-		)
-		BEGIN
-			;THROW 50002, 'The end date of the ticket is not between the start and end date of the festival.', 1
 		END
 	END TRY
 	BEGIN CATCH
