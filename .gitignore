@@ -4,3 +4,7 @@
 Website\.vs\*
 Website\Website\App_Code\DAO\databaseConnection.txt
 ASP\*
+.vs/
+ASP/obj/Debug/netcoreapp2.0/FestiBase.AssemblyInfo.cs
+ASP/obj/Release/netcoreapp2.0/FestiBase.AssemblyInfo.cs
+Website/Website/App_Code/DAO/databaseConnection.txt
