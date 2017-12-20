@@ -17,7 +17,7 @@ GO
 CREATE PROC sp_add_or_update_town
 	@town_number		INT = NULL,
 	@country_number		INT,
-	@town_name			VARCHAR(50),
+	@name				VARCHAR(50),
 	@insert				BIT
 AS
 BEGIN
@@ -26,21 +26,28 @@ BEGIN
 		IF (@insert = 1)
 			BEGIN
 				/* INSERT */
-				INSERT INTO TOWN (country_number, town_name) VALUES
+				INSERT INTO TOWN (country_number, name) VALUES
 				(@country_number,
-				 @town_name)
+				 @name)
 			END
 		ELSE
 			BEGIN
-				IF (@town_number = null)
+				IF (@town_number IS NULL)
 					BEGIN
 						;THROW 50000, '@town_number cannot be NULL if an UPDATE is to be commenced', 1
+					END
+
+				ELSE IF NOT EXISTS (SELECT *
+									FROM town
+									WHERE town_number = @town_number)
+					BEGIN
+						;THROW 50000, 'This town does not exist', 1
 					END
 
 					/* UPDATE */
 					UPDATE TOWN SET 
 					country_number = @country_number,
-					town_name = @town_name
+					name = @name
 					WHERE town_number = @town_number
 			END
 	END TRY
@@ -48,4 +55,28 @@ BEGIN
 		;THROW
 	END CATCH
 END
+GO
+
+-- Test INSERT
+BEGIN TRAN
+EXEC sp_add_or_update_town NULL, 1, 'Groningen', 1
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE
+BEGIN TRAN
+EXEC sp_add_or_update_town 1, 1, 'Groningen', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_town 234, 1, 'Groningen', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_town NULL, 1, 'Groningen', 0
+ROLLBACK TRAN
 GO

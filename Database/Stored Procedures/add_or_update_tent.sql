@@ -6,6 +6,9 @@
 /* Procedure:		Insert + Update TENT						*/
 /*==============================================================*/
 
+USE FestiBase
+GO
+
 /*
 	Procedure to add or update a TENT
 */
@@ -49,9 +52,16 @@ BEGIN
 			END
 		ELSE 
 			BEGIN
-				IF (@tent_number = null)
+				IF (@tent_number IS NULL)
 					BEGIN
 						;THROW 50000, '@tent_number cannot be NULL if an UPDATE is to be commenced', 1
+					END
+
+				ELSE IF NOT EXISTS (SELECT *
+									FROM tent
+									WHERE tent_number = @tent_number)
+					BEGIN
+						;THROW 50000, 'This tent does not exist', 1
 					END
 
 					/* UPDATE */
@@ -76,14 +86,26 @@ BEGIN
 END
 GO
 
--- Test
-
--- Insert
+-- Test INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_tent 1, null, 1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+EXEC sp_add_or_update_tent 1, NULL, 1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
 ROLLBACK TRAN
+GO
 
--- Update
+-- Test UPDATE
 BEGIN TRAN
 EXEC sp_add_or_update_tent 0, 1, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
 ROLLBACK TRAN
+GO
+
+-- Test UDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_tent 0, 200, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_tent 0, NULL, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+ROLLBACK TRAN
+GO

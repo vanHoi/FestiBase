@@ -21,7 +21,7 @@ CREATE PROC sp_add_or_update_visitor
 	@first_name			VARCHAR(50) = NULL,
 	@surname			VARCHAR(50) = NULL,
 	@telephone_number	VARCHAR(10) = NULL,
-	@birthdate			datetime = NULL,
+	@birthdate			DATE = NULL,
 	@twitter_username	VARCHAR(15) = NULL,
 	@facebook_username	VARCHAR(70) = NULL,
 	@street				VARCHAR(50) = NULL,
@@ -49,9 +49,16 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@visitor_number = null)
+				IF (@visitor_number IS NULL)
 					BEGIN
 						;THROW 50000, '@visitor_number cannot be NULL if an UPDATE is to be commenced', 1
+					END
+
+				ELSE IF NOT EXISTS (SELECT *
+									FROM visitor
+									WHERE visitor_number = @visitor_number)
+					BEGIN
+						;THROW 50000, 'This visitor does not exist', 1
 					END
 
 					/* UPDATE */
@@ -74,3 +81,29 @@ BEGIN
 	END CATCH
 END
 GO
+
+-- Test INSERT
+BEGIN TRAN
+EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 1
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE
+BEGIN TRAN
+EXEC sp_add_or_update_visitor 1, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_visitor 300, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+SELECT * FROM visitor
