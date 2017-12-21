@@ -81,11 +81,16 @@ BEGIN
 			IF (@surrogate_key = NULL OR @surrogate_key = 0)
 			BEGIN
 				;THROW 50000, '@surrogate_key cannot be NULL if an UPDATE is to be commenced.', 1
+			END
+			IF NOT EXISTS (SELECT 1 FROM table WHERE surrogate_key = @surrogate_key)
+			BEGIN
+				;THROW 50001, 'This unit does not exist.', 1
+			END
 			ELSE IF NOT EXISTS (SELECT *
 								FROM table
 								WHERE surrogate_key = @surrogate_key)
 			BEGIN
-				;THROW 50000, 'This unit does not exist', 1
+				;THROW 50000, 'This attribute does not exist', 1
 			END
 			-- update code
 		END
