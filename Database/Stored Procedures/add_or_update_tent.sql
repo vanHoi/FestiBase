@@ -1,10 +1,13 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		15-12-2017									*/
-/* Edited by:		Ivo Reumkens								*/
+/* Last edited:		21-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update TENT						*/
 /*==============================================================*/
+
+USE FestiBase
+GO
 
 /*
 	Procedure to add or update a TENT
@@ -12,7 +15,6 @@
 DROP PROC IF EXISTS sp_add_or_update_tent;
 GO
 CREATE PROC sp_add_or_update_tent
-	@insert BIT,
 	@tent_number INT = NULL,
 	@festival_number INT,
 	@name VARCHAR(50),
@@ -25,7 +27,8 @@ CREATE PROC sp_add_or_update_tent
 	@tent_type VARCHAR(50),
 	@color VARCHAR(50),
 	@floor_type VARCHAR(50),
-	@capacity INT
+	@capacity INT,
+	@insert BIT
 AS
 BEGIN
 	BEGIN TRY
@@ -49,12 +52,18 @@ BEGIN
 			END
 		ELSE 
 			BEGIN
-				IF (@tent_number = null)
+				IF (@tent_number IS NULL OR @tent_number = 0)
 					BEGIN
 						;THROW 50000, '@tent_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
 
-					/* UPDATE */
+				ELSE IF NOT EXISTS (SELECT *
+									FROM tent
+									WHERE tent_number = @tent_number)
+					BEGIN
+						;THROW 50000, 'This tent does not exist', 1
+					END
+
 					UPDATE TENT SET 
 					festival_number = @festival_number, 
 					name = @name, width = @width, 
@@ -76,14 +85,26 @@ BEGIN
 END
 GO
 
--- Test
-
--- Insert
+-- Test INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_tent 1, null, 1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+EXEC sp_add_or_update_tent NULL, 1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 1
 ROLLBACK TRAN
+GO
 
--- Update
+-- Test UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_tent 0, 1, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000
+EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
 ROLLBACK TRAN
+GO
+
+-- Test UDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_tent 200, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_tent NULL, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+ROLLBACK TRAN
+GO
