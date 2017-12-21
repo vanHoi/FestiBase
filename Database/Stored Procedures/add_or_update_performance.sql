@@ -21,7 +21,7 @@ CREATE PROC sp_add_or_update_performance
 	@festival_number		INT,
 	@start_time				TIME = NULL,
 	@play_time				INT,
-	@min_prep_time			INT,
+	@min_prep_time			INT = NULL,
 	@insert					BIT
 AS
 BEGIN
@@ -37,10 +37,8 @@ BEGIN
 		@min_prep_time,
 		@insert
 
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
 				(@artist_number,
 				 @podium_schedule_number,
@@ -51,7 +49,7 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@performance_number IS NULL)
+				IF (@performance_number IS NULL OR @performance_number = 0)
 					BEGIN
 						;THROW 50000, '@performance_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
@@ -63,7 +61,6 @@ BEGIN
 						;THROW 50000, 'This performance does not exist', 1
 					END
 
-					/* UPDATE */
 					UPDATE PERFORMANCE SET
 					artist_number = @artist_number,
 					podium_schedule_number = @podium_schedule_number,
@@ -88,6 +85,11 @@ GO
 -- INSERT
 BEGIN TRAN
 EXEC sp_add_or_update_performance NULL, 8, 4, 2, '15:00:00', 90, 30, 1 
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, NULL, 2, NULL, 90, NULL, 1 
 ROLLBACK TRAN
 GO
 

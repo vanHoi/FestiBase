@@ -26,45 +26,34 @@ CREATE PROC sp_check_performance
 	@festival_number		INT,
 	@start_time				TIME = NULL,
 	@play_time				INT,
-	@min_prep_time			INT,
+	@min_prep_time			INT = NULL,
 	@insert					BIT
 AS
 BEGIN
 	DECLARE @break_time INT
 
 	BEGIN TRY
-		/* Is the date of performance not known? */
 		IF @podium_schedule_number IS NULL
 			BEGIN
-				/* Is the start_time known when it shouldn't be known? */
 				IF @start_time IS NOT NULL
 					BEGIN
 						;THROW 50000, '@start_time must be NULL if the podium_schedule_number is NULL', 1
 					END
 			END
 
-		/* Is the date of performance known? */
 		IF @podium_schedule_number IS NOT NULL
 			BEGIN
-				/* Is the start_time known? */
+				SET @break_time = (SELECT break_time
+								   FROM podium_schedule
+								   WHERE podium_schedule_number = @podium_schedule_number)
 				IF @start_time IS NOT NULL
 					BEGIN
-
-						/* Is the artists minimal preparation time longer than the break_time within that schedule? */
-						IF @min_prep_time > (SELECT break_time
-											 FROM podium_schedule
-											 WHERE podium_schedule_number = @podium_schedule_number)
+						IF @min_prep_time > @break_time
 							BEGIN
 								;THROW 50000, '@min_prep_time cannot be higher than the break_time on this stage', 1
 							END
 
-						ELSE
-							BEGIN
-								SET @break_time = (SELECT break_time
-												   FROM podium_schedule
-												   WHERE podium_schedule_number = @podium_schedule_number)
-
-								/* Is the artist already playing during that time? */
+								/* BR15		Is the artist already playing during that time? */
 								IF EXISTS (SELECT performance_number
 										   FROM performance p INNER JOIN podium_schedule ps
 											   ON p.podium_schedule_number = ps.podium_schedule_number
@@ -78,7 +67,7 @@ BEGIN
 										;THROW 50000, 'This artist is already going to perform during that time', 1
 									END
 
-								/* Is there a different artist already playing on the same stage during that time? */
+								/* BR14		Is there a different artist already playing on the same stage during that time? */
 								ELSE IF EXISTS (SELECT performance_number
 												FROM performance
 												WHERE podium_schedule_number = @podium_schedule_number
@@ -92,7 +81,7 @@ BEGIN
 										;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 									END
 
-								/* Does the inserted/updated performance fit within the start and endtime of that podium_schedule */
+								/* BR20		Does the inserted/updated performance fit within the start and endtime of that podium_schedule */
 								ELSE IF (@start_time
 											NOT BETWEEN (SELECT start_time 
 														 FROM podium_schedule 
@@ -118,7 +107,6 @@ BEGIN
 									BEGIN
 										;THROW 50000, 'The inserted or updated performance time does not fit within that podium_schedule', 1
 									END
-							END
 					END
 			END
 	END TRY
