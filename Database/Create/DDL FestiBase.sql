@@ -1,6 +1,9 @@
 /*==============================================================*/
-/* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     14/12/2017 15:46:37                          */
+/* DBMS name:		FestiBase									*/
+/* PDM version:		6											*/
+/* Last edited:		21-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
+/* Script:			DDL											*/
 /*==============================================================*/
 
 USE master
@@ -14,12 +17,6 @@ GO
 
 USE FestiBase
 GO
-
-/*==============================================================*/
-/* DBMS name:      Microsoft SQL Server 2014                    */
-/* Created on:     19/12/2017 10:26:56                          */
-/*==============================================================*/
-
 
 /*==============================================================*/
 /* Table: ARTIST                                                */
@@ -119,7 +116,7 @@ create table FESTIVAL_COMPANY (
    branch_number        int                  not null,
    contact_person       varchar(50)          not null,
    description          text                 not null,
-   telephone_number     varchar(10)          not null,
+   telephone_number     varchar(15)          not null,
    constraint PK_FESTIVAL_COMPANY primary key (festival_company_number),
    constraint FK_FESTIVAL_RELATIONS_FESTIVAL foreign key (festival_number)
       references FESTIVAL (festival_number),
@@ -169,7 +166,7 @@ create table VISITOR (
    email                varchar(50)          null,
    first_name           varchar(50)          null,
    surname              varchar(50)          null,
-   telephone_number     varchar(10)          null,
+   telephone_number     varchar(15)          null,
    birthdate            date                 null,
    twitter_username     varchar(15)          null,
    facebook_username    varchar(70)          null,
