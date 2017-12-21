@@ -58,16 +58,12 @@ BEGIN
 			END
 			IF NOT EXISTS (SELECT 1 FROM PODIUM WHERE podium_number = @podium_number)
 			BEGIN
-				;THROW 50001, 'This unit does not exist.', 1
+				;THROW 50001, 'This podium does not exist.', 1
 			END
 			ELSE IF NOT EXISTS (SELECT *
 								FROM PODIUM
 								WHERE podium_number = @podium_number)
-			BEGIN
-				;THROW 50000, 'This attribute does not exist', 1
-			END
 
-					/* UPDATE */
 					UPDATE PODIUM SET 
 					festival_number = @festival_number,
 					tent_number = @tent_number,
