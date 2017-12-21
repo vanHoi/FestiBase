@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		18-12-2017									*/
+/* Last edited:		21-12-2017									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update VISITOR						*/
 /*==============================================================*/
@@ -21,7 +21,7 @@ CREATE PROC sp_add_or_update_visitor
 	@first_name			VARCHAR(50) = NULL,
 	@surname			VARCHAR(50) = NULL,
 	@telephone_number	VARCHAR(10) = NULL,
-	@birthdate			datetime = NULL,
+	@birthdate			DATE = NULL,
 	@twitter_username	VARCHAR(15) = NULL,
 	@facebook_username	VARCHAR(70) = NULL,
 	@street				VARCHAR(50) = NULL,
@@ -30,10 +30,8 @@ CREATE PROC sp_add_or_update_visitor
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO VISITOR (town_number, email, first_name, surname, telephone_number, birthdate, 
 									 twitter_username, facebook_username, street, house_number) VALUES
 				(@town_number,
@@ -49,12 +47,18 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@visitor_number = null)
+				IF (@visitor_number IS NULL OR @visitor_number = 0)
 					BEGIN
 						;THROW 50000, '@visitor_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
 
-					/* UPDATE */
+				ELSE IF NOT EXISTS (SELECT *
+									FROM visitor
+									WHERE visitor_number = @visitor_number)
+					BEGIN
+						;THROW 50000, 'This visitor does not exist', 1
+					END
+
 					UPDATE VISITOR SET 
 					town_number = @town_number,
 					email = @email,
@@ -74,3 +78,29 @@ BEGIN
 	END CATCH
 END
 GO
+
+-- Test INSERT
+BEGIN TRAN
+EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 1
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE
+BEGIN TRAN
+EXEC sp_add_or_update_visitor 1, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_visitor 300, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
+ROLLBACK TRAN
+GO
+
+SELECT * FROM visitor
