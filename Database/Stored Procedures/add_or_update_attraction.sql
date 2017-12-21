@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		20-12-2017									*/
+/* Last edited:		21-12-2017									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update ATTRACTION					*/
 /*==============================================================*/
@@ -23,10 +23,8 @@ CREATE PROC sp_add_or_update_attraction
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO ATTRACTION (festival_company_number, name, attraction_type) VALUES
 				(@festival_company_number,
 				 @name,
@@ -34,7 +32,7 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@attraction_number IS NULL)
+				IF (@attraction_number IS NULL OR @attraction_number = 0)
 					BEGIN
 						;THROW 50000, '@attraction_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
@@ -46,7 +44,6 @@ BEGIN
 						;THROW 50000, 'This attraction does not exist', 1
 					END
 
-				/* UPDATE */
 				UPDATE ATTRACTION SET 
 				festival_company_number = @festival_company_number,
 				name = @name,
