@@ -1,51 +1,76 @@
-/*==============================================================*/
+﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		18-12-2017									*/
-/* Edited by:		Yuri Vannisselroy							*/
-/* Procedure:		Insert + Update LOCKER						*/
+/* PDM version:		6											*/	
+/* Last edited:		20-12-2017									*/
+/* Edited by:		Robert Verkerk								*/
+/* Procedure:		Insert + Update locker						*/
 /*==============================================================*/
-
 USE FestiBase
 GO
 
-/*
-	Procedure to add or update a LOCKER
-*/
-DROP PROC IF EXISTS sp_add_or_update_locker;
+DROP PROCEDURE IF EXISTS sp_add_or_update_locker
 GO
-CREATE PROC sp_add_or_update_locker
-	@locker_number		INT = NULL,
-	@festival_number	INT,
-	@branch_number		INT,
-	@insert				BIT
+CREATE PROCEDURE sp_add_or_update_locker
+	@locker_number				INT = NULL,
+	@festival_company_number	INT,
+	@insert						BIT
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
+		BEGIN
+			INSERT INTO LOCKER (festival_company_number) VALUES 
+			(@festival_company_number)
+		END
+		ELSE 
+		BEGIN
+			IF (@locker_number IS null OR @locker_number = 0)
 			BEGIN
-				/* INSERT */
-				INSERT INTO LOCKER (festival_number, branch_number) VALUES
-				(@festival_number,
-				 @branch_number)
+				;THROW 50000, '@locker_number cannot be NULL if an update is to be commerced.', 1
 			END
-		ELSE
+			ELSE IF EXISTS (SELECT * FROM locker WHERE locker_number = @locker_number)
 			BEGIN
-				IF (@locker_number = null)
-					BEGIN
-						;THROW 50000, '@locker_number cannot be NULL if an UPDATE is to be commenced', 1
-					END
+				;THROW 50000, 'This locker does not exist', 1
+			END
 
-					/* UPDATE */
-					UPDATE LOCKER SET 
-					festival_number = @festival_number,
-					branch_number = @branch_number
-					WHERE locker_number = @locker_number
-			END
+			UPDATE LOCKER SET 
+			festival_company_number = @festival_company_number 
+			WHERE locker_number = @locker_number
+		END
+
 	END TRY
 	BEGIN CATCH
 		;THROW
 	END CATCH
 END
+GO
+
+/* add new locker */
+BEGIN TRAN
+EXEC sp_add_or_update_locker 1, NULL, 8
+ROLLBACK TRAN
+GO
+
+/* add locker, wrong company */
+BEGIN TRAN
+EXEC sp_add_or_update_locker 1, NULL, 999
+ROLLBACK TRAN
+GO
+
+/*update locker*/
+BEGIN TRAN
+EXEC sp_add_or_update_locker 0, 15, 7
+ROLLBACK TRAN
+GO
+
+/*update locker NULL*/
+BEGIN TRAN
+EXEC sp_add_or_update_locker 0, NULL, 8
+ROLLBACK TRAN
+GO
+
+/* update locker locker does not exists */
+BEGIN TRAN
+EXEC sp_add_or_update_locker 0, 9999, 8
+ROLLBACK TRAN
 GO
