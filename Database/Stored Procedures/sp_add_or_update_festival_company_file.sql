@@ -32,7 +32,7 @@ BEGIN
 		END
 	ELSE 
 			BEGIN
-					IF (@file_number = NULL OR @file_number = 0)
+					IF (@file_number IS NULL OR @file_number = 0)
 			BEGIN
 				;THROW 50000, '@file_number cannot be NULL or ZERO if an UPDATE is to be commenced.', 1
 			END
@@ -47,7 +47,6 @@ BEGIN
 				;THROW 50000, 'This attribute does not exist', 1
 			END
 
-					/* UPDATE */
 					UPDATE FESTIVAL_COMPANY_FILE SET 
 					festival_company_number = @festival_company_number,
 					"file" = @file,					
