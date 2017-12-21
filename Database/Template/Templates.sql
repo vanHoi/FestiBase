@@ -25,7 +25,7 @@ GO
 	Trigger naam begint met sp_
 	Procedure naam niet in camelcases, maar kleine letters en _
 	Gebruik een ;THROW, niet een RAISERROR.
-	@@ROWCOUNT voor efficiëntie
+	@@ROWCOUNT voor efficiÃ«ntie
 	Voeg de bovenstaande doc toe
 */
 DROP TRIGGER IF EXISTS trg_
@@ -60,10 +60,10 @@ GO
 DROP PROCEDURE IF EXISTS sp_
 GO
 CREATE PROCEDURE sp_
-	@insert BIT,
 	@surrogate_key INT = NULL,
 	@text VARCHAR(50),
-	@number INT
+	@number INT,
+	@insert BIT
 AS
 BEGIN
 	BEGIN TRY
@@ -78,7 +78,7 @@ BEGIN
 		END
 		ELSE 
 		BEGIN
-			IF (@surrogate_key IS NULL)
+			IF (@surrogate_key = NULL OR @surrogate_key = 0)
 			BEGIN
 				;THROW 50000, '@surrogate_key cannot be NULL if an UPDATE is to be commenced.', 1
 			END
