@@ -12,15 +12,16 @@ GO
 DROP PROCEDURE IF EXISTS sp_add_or_update_artist
 GO
 CREATE PROCEDURE sp_add_or_update_artist
-	@insert BIT,
-	@artist_number INT = NULL,
-	@name VARCHAR(50)
+	@artist_number	INT = NULL,
+	@name			VARCHAR(50),
+	@insert			BIT
 AS
 BEGIN
 	BEGIN TRY
 		IF (@insert = 1)
 		BEGIN
-			INSERT INTO ARTIST (name) VALUES (@name)
+			INSERT INTO ARTIST (name) VALUES 
+			(@name)
 		END
 		ELSE 
 		BEGIN
@@ -32,7 +33,10 @@ BEGIN
 			BEGIN
 				;THROW 50001, 'This artist does not exist.', 1
 			END
-			UPDATE ARTIST SET name = @name WHERE artist_number = @artist_number
+
+			UPDATE ARTIST SET 
+			name = @name 
+			WHERE artist_number = @artist_number
 		END
 
 	END TRY
