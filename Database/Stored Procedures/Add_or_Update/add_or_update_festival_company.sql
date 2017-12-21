@@ -20,7 +20,7 @@ CREATE PROC sp_add_or_update_festival_company
 	@branch_number				INT,
 	@contact_person				VARCHAR(50),
 	@description				TEXT,
-	@telephone_number			VARCHAR(10),
+	@telephone_number			VARCHAR(15),
 	@insert						BIT
 AS
 BEGIN
@@ -36,7 +36,7 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@festival_company_number IS NULL)
+				IF (@festival_company_number IS NULL OR @festival_company_number = 0)
 					BEGIN
 						;THROW 50000, '@festival_company_number cannot be NULL if an update is to be commenced', 1
 					END
@@ -84,5 +84,10 @@ GO
 -- UPDATE (SK cannot be NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_festival_company NULL, 1, 12, 'Kees Kroket', 'Beschrijving', '0612312312', 0
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_festival_company 0, 1, 12, 'Kees Kroket', 'Beschrijving', '0612312312', 0
 ROLLBACK TRAN
 GO
