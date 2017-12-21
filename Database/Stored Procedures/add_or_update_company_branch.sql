@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		18-12-2017									*/
+/* Last edited:		21-12-2017									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update COMPANY_BRANCH				*/
 /*==============================================================*/
@@ -24,10 +24,8 @@ CREATE PROC sp_add_or_update_company_branch
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO COMPANY_BRANCH (coc_number, town_number, street, house_number) VALUES
 				(@coc_number,
 				 @town_number,
@@ -36,12 +34,18 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@branch_number = null)
+				IF (@branch_number IS NULL OR @branch_number = 0)
 					BEGIN
 						;THROW 50000, '@branch_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
 
-					/* UPDATE */
+				ELSE IF NOT EXISTS (SELECT *
+									FROM company_branch
+									WHERE branch_number = @branch_number)
+					BEGIN
+						;THROW 50000, 'This company branch does not exist', 1
+					END
+
 					UPDATE COMPANY_BRANCH SET 
 					coc_number = @coc_number,
 					town_number = @town_number,
@@ -54,4 +58,28 @@ BEGIN
 		;THROW
 	END CATCH
 END
+GO
+
+-- Test INSERT
+BEGIN TRAN
+EXEC sp_add_or_update_company_branch NULL, 23456003, 3, 'Zwanenveld', '332', 1
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE
+BEGIN TRAN
+EXEC sp_add_or_update_company_branch 9, 23456045, 3, 'Coolestraatje', '332', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_company_branch 200, 23456045, 3, 'Zwanenveld', '332', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_company_branch NULL, 23456045, 3, 'Bleustraat', '332', 0
+ROLLBACK TRAN
 GO
