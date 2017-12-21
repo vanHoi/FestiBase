@@ -8,3 +8,7 @@ ASP\*
 ASP/obj/Debug/netcoreapp2.0/FestiBase.AssemblyInfo.cs
 ASP/obj/Release/netcoreapp2.0/FestiBase.AssemblyInfo.cs
 Website/Website/App_Code/DAO/databaseConnection.txt
+/ASP/obj/Release/netcoreapp2.0/FestiBase.csproj.CoreCompileInputs.cache
+/ASP/obj/Release/netcoreapp2.0/FestiBase.AssemblyInfoInputs.cache
+/ASP/obj/Debug/netcoreapp2.0/FestiBase.csproj.CoreCompileInputs.cache
+/ASP/obj/Debug/netcoreapp2.0/FestiBase.AssemblyInfoInputs.cache
