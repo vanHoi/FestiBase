@@ -11,32 +11,38 @@ GO
 DROP PROCEDURE IF EXISTS sp_add_or_update_toilet
 GO
 CREATE PROCEDURE sp_add_or_update_toilet
-	@insert BIT,
-	@toilet_number INT = NULL,
-	@festival_company_number INT,
-	@name VARCHAR(50),
-	@capacity INT
+	@toilet_number				INT = NULL,
+	@festival_company_number	INT,
+	@name						VARCHAR(50),
+	@capacity					INT,
+	@insert						BIT
 AS
 BEGIN
 	BEGIN TRY
-		-- Inser or update start
 		IF (@insert = 1)
-		BEGIN
-			INSERT INTO TOILET (festival_company_number, name, capacity) VALUES (@festival_company_number, @name, @capacity)
-		END
+			BEGIN
+				INSERT INTO TOILET (festival_company_number, name, capacity) VALUES 
+				(@festival_company_number, 
+				 @name, 
+				 @capacity)
+			END
 		ELSE 
-		BEGIN
-			IF (@toilet_number IS NULL)
 			BEGIN
-				;THROW 50000, '@toilet_number cannot be NULL if an update is to be commerced.', 1
-			END
-			ELSE IF NOT EXISTS (SELECT * FROM TOILET WHERE toilet_number = @toilet_number)
-			BEGIN
-				;THROW 50000, 'This toilet does not exist', 1
-			END
-			UPDATE TOILET SET festival_company_number = @festival_company_number, name = @name, capacity = @capacity WHERE toilet_number = @toilet_number
-		END
+				IF (@toilet_number IS NULL OR @toilet_number = 0)
+				BEGIN
+					;THROW 50000, '@toilet_number cannot be NULL if an update is to be commerced.', 1
+				END
+				ELSE IF NOT EXISTS (SELECT * FROM TOILET WHERE toilet_number = @toilet_number)
+				BEGIN
+					;THROW 50000, 'This toilet does not exist', 1
+				END
 
+				UPDATE TOILET SET 
+				festival_company_number = @festival_company_number, 
+				name = @name, 
+				capacity = @capacity 
+				WHERE toilet_number = @toilet_number
+			END
 	END TRY
 	BEGIN CATCH
 		;THROW
