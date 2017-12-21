@@ -56,9 +56,6 @@ CREATE PROCEDURE sp_add_or_update_ticket_type
 @insert bit
 AS
 BEGIN
-	IF @@ROWCOUNT = 0
-		RETURN
-	SET NOCOUNT ON
 	BEGIN TRY
 		EXEC sp_check_ticket_type_start_end_date @festival_company_number, @date_valid_from, @date_valid_to
 
