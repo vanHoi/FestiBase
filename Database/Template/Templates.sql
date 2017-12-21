@@ -1,7 +1,9 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 4												*/	
-/* Templates													*/
+/* PDM version:		6											*/
+/* Last edited:		20-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
+/* Procedure:		Insert + Update TABEL						*/
 /*==============================================================*/
 
 /*
@@ -23,7 +25,8 @@ GO
 	Trigger naam begint met sp_
 	Procedure naam niet in camelcases, maar kleine letters en _
 	Gebruik een ;THROW, niet een RAISERROR.
-	@@ROWCOUNT voor efficiëntie
+	@@ROWCOUNT voor efficiÃ«ntie
+	Voeg de bovenstaande doc toe
 */
 DROP TRIGGER IF EXISTS trg_
 GO
@@ -77,7 +80,11 @@ BEGIN
 		BEGIN
 			IF (@surrogate_key = NULL OR @surrogate_key = 0)
 			BEGIN
-				;THROW 50000, 'You must supply a surrogate key with an update statement.', 1
+				;THROW 50000, '@surrogate_key cannot be NULL if an UPDATE is to be commenced.', 1
+			END
+			IF NOT EXISTS (SELECT 1 FROM table WHERE surrogate_key = @surrogate_key)
+			BEGIN
+				;THROW 50001, 'This unit does not exist.', 1
 			END
 			ELSE IF NOT EXISTS (SELECT *
 								FROM table
