@@ -1,8 +1,8 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		15-12-2017									*/
-/* Edited by:		Ivo Reumkens								*/
+/* Last edited:		21-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update TENT						*/
 /*==============================================================*/
 

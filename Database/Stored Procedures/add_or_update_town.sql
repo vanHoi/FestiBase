@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		18-12-2017									*/
+/* Last edited:		21-12-2017									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update TOWN						*/
 /*==============================================================*/
