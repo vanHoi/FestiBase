@@ -25,7 +25,7 @@ BEGIN
 		END
 		ELSE 
 		BEGIN
-			IF (@artist_number IS NULL)
+			IF (@artist_number IS NULL OR @artist_number = 0)
 			BEGIN
 				;THROW 50000, '@artist_number cannot be NULL if an UPDATE is to be commenced.', 1
 			END
