@@ -22,17 +22,15 @@ CREATE PROC sp_add_or_update_town
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO TOWN (country_number, name) VALUES
 				(@country_number,
 				 @name)
 			END
 		ELSE
 			BEGIN
-				IF (@town_number IS NULL)
+				IF (@town_number IS NULL OR @town_number = 0)
 					BEGIN
 						;THROW 50000, '@town_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
@@ -44,7 +42,6 @@ BEGIN
 						;THROW 50000, 'This town does not exist', 1
 					END
 
-					/* UPDATE */
 					UPDATE TOWN SET 
 					country_number = @country_number,
 					name = @name

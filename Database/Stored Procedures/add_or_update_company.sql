@@ -21,24 +21,25 @@ CREATE PROC sp_add_or_update_company
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO COMPANY (coc_number, name) VALUES
 				(@coc_number,
 				 @name)
 			END
 		ELSE
 			BEGIN
-				IF NOT EXISTS (SELECT *
+				IF (@coc_number IS NULL OR @coc_number = 0)
+					BEGIN
+						;THROW 50000, '@coc_number cannot be NULL if an UPDATE is to be commenced', 1
+					END
+				ELSE IF NOT EXISTS (SELECT *
 							   FROM company
 							   WHERE coc_number = @coc_number)
 					BEGIN
-						;THROW 50000, 'This visitor does not exist', 1
+						;THROW 50000, 'This company does not exist', 1
 					END
 
-				/* UPDATE */
 				UPDATE COMPANY SET 
 				name = @name
 				WHERE coc_number = @coc_number
@@ -65,5 +66,16 @@ GO
 -- Test UPDATE (PK does not exist)
 BEGIN TRAN
 EXEC sp_add_or_update_company 23456090, 'Hans Hamburgers', 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_company NULL, 'Hans Hamburgers', 0
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_company 0, 'Hans Hamburgers', 0
 ROLLBACK TRAN
 GO

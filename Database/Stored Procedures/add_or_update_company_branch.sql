@@ -24,10 +24,8 @@ CREATE PROC sp_add_or_update_company_branch
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO COMPANY_BRANCH (coc_number, town_number, street, house_number) VALUES
 				(@coc_number,
 				 @town_number,
@@ -36,7 +34,7 @@ BEGIN
 			END
 		ELSE
 			BEGIN
-				IF (@branch_number IS NULL)
+				IF (@branch_number IS NULL OR @branch_number = 0)
 					BEGIN
 						;THROW 50000, '@branch_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
@@ -48,7 +46,6 @@ BEGIN
 						;THROW 50000, 'This company branch does not exist', 1
 					END
 
-					/* UPDATE */
 					UPDATE COMPANY_BRANCH SET 
 					coc_number = @coc_number,
 					town_number = @town_number,

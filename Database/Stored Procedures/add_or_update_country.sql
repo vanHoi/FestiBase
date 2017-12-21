@@ -21,16 +21,14 @@ CREATE PROC sp_add_or_update_country
 AS
 BEGIN
 	BEGIN TRY
-		/* IF @insert = 1, THEN INSERT.		IF @insert = 0, THEN UPDATE */
 		IF (@insert = 1)
 			BEGIN
-				/* INSERT */
 				INSERT INTO COUNTRY (name) VALUES
 				(@name)
 			END
 		ELSE
 			BEGIN
-				IF (@country_number IS NULL)
+				IF (@country_number IS NULL OR @country_number = 0)
 					BEGIN
 						;THROW 50000, '@country_number cannot be NULL if an UPDATE is to be commenced', 1
 					END
@@ -42,7 +40,6 @@ BEGIN
 						;THROW 50000, 'This country does not exist', 1
 					END
 
-					/* UPDATE */
 					UPDATE COUNTRY SET 
 					name = @name
 					WHERE country_number = @country_number

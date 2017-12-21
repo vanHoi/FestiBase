@@ -57,10 +57,10 @@ GO
 DROP PROCEDURE IF EXISTS sp_
 GO
 CREATE PROCEDURE sp_
-	@insert BIT,
 	@surrogate_key INT = NULL,
 	@text VARCHAR(50),
-	@number INT
+	@number INT,
+	@insert BIT
 AS
 BEGIN
 	BEGIN TRY
@@ -75,9 +75,15 @@ BEGIN
 		END
 		ELSE 
 		BEGIN
-			IF (@surrogate_key = null)
+			IF (@surrogate_key = NULL OR @surrogate_key = 0)
 			BEGIN
 				;THROW 50000, 'You must supply a surrogate key with an update statement.', 1
+			END
+			ELSE IF NOT EXISTS (SELECT *
+								FROM table
+								WHERE surrogate_key = @surrogate_key)
+			BEGIN
+				;THROW 50000, 'This attribute does not exist', 1
 			END
 			-- update code
 		END
