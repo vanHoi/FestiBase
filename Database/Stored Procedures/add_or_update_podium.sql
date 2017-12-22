@@ -56,13 +56,10 @@ BEGIN
 			BEGIN
 				;THROW 50000, '@podium_number cannot be NULL or ZERO if an UPDATE is to be commenced.', 1
 			END
-			IF NOT EXISTS (SELECT 1 FROM PODIUM WHERE podium_number = @podium_number)
+			ELSE IF NOT EXISTS (SELECT * FROM PODIUM WHERE podium_number = @podium_number)
 			BEGIN
 				;THROW 50001, 'This podium does not exist.', 1
 			END
-			ELSE IF NOT EXISTS (SELECT *
-								FROM PODIUM
-								WHERE podium_number = @podium_number)
 
 					UPDATE PODIUM SET 
 					festival_number = @festival_number,
@@ -115,12 +112,14 @@ BEGIN TRAN
 EXEC sp_add_or_update_podium NULL, 1, 0, 'TentDestructo', 2000,2000,500, 50, 5000, 50, 1900, 1700, 400, 'Leuke podium voor een leuke festival', 1    
 ROLLBACK TRAN
 
--- Failed Update
+/* update key NULL */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 0, 1, 2, 'House Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'House Music Elektro City', 0    
+EXEC sp_add_or_update_podium 0, 1, 2, 'House Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'House Music Elektro City', 0     
 ROLLBACK TRAN
+GO
 
--- Failed Update 2
+/* update, wrong podium */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 99999, 1, 2, 'Dragon Ball Super Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'KA-ME-HA-ME-HAAAAAAAAAAAAAAAAAAAAAAA', 0    
+EXEC sp_add_or_update_podium 99999, 99, 2, 'Dragon Ball Super Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'KA-ME-HA-ME-HAAAAAAAAAAAAAAAAAAAAAAA', 0    
 ROLLBACK TRAN
+GO
