@@ -21,7 +21,7 @@ BEGIN
 					   FROM ATTRACTION
 				       WHERE attraction_number = @attraction_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This attraction does not exist', 1
 			END
 
 		DELETE FROM ATTRACTION WHERE attraction_number = @attraction_number
