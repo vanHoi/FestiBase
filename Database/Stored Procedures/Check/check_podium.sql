@@ -15,7 +15,7 @@ GO
 	- The floor_height of the podium can't be greater then the side_height of the tent
 	- The building_width of the podium can't be greater then the width of the tent
 	- The building_length of the podium can't be greater then the length of the tent
-	- - The building_height of the podium can't be greater then the ridge_height of the tent
+	- The building_height of the podium can't be greater then the ridge_height of the tent
 	- There must be at least 3 meters between the podium floor and the ridge_height of the tent
 */
 
