@@ -21,7 +21,7 @@ BEGIN
 					   FROM COMPANY_BRANCH
 				       WHERE branch_number = @branch_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This company branch does not exist', 1
 			END
 
 		DELETE FROM COMPANY_BRANCH WHERE branch_number = @branch_number
