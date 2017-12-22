@@ -21,7 +21,7 @@ BEGIN
 					   FROM TENT
 				       WHERE tent_number = @tent_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This tent does not exist', 1
 			END
 
 		DELETE FROM TENT WHERE tent_number = @tent_number
