@@ -1,4 +1,12 @@
-﻿DROP PROCEDURE IF EXISTS sp_delete
+﻿/*==============================================================*/
+/* DBMS name:		FestiBase									*/
+/* PDM version:		6											*/
+/* Last edited:		22-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
+/* Procedure:		Delete TABEL								*/
+/*==============================================================*/
+
+DROP PROCEDURE IF EXISTS sp_delete
 GO
 CREATE PROCEDURE sp_delete
 	@surrogate_key INT

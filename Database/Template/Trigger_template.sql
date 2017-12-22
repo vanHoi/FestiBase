@@ -1,10 +1,11 @@
-﻿/*
-	Trigger naam begint met sp_
-	Procedure naam niet in camelcases, maar kleine letters en _
-	Gebruik een ;THROW, niet een RAISERROR.
-	@@ROWCOUNT voor efficiëntie
-	Voeg de bovenstaande doc toe
-*/
+﻿/*==============================================================*/
+/* DBMS name:		FestiBase									*/
+/* PDM version:		6											*/
+/* Last edited:		22-12-2017									*/
+/* Edited by:		Yuri Vannisselroy							*/
+/* Trigger on:		TABEL										*/
+/*==============================================================*/
+
 DROP TRIGGER IF EXISTS trg_
 GO
 CREATE TRIGGER trg_ ON TABLE
