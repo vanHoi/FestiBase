@@ -21,7 +21,7 @@ BEGIN
 					   FROM LOCKER
 				       WHERE locker_number = @locker_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This locker does not exist', 1
 			END
 
 		DELETE FROM LOCKER WHERE locker_number = @locker_number
