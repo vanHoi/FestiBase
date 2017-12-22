@@ -17,43 +17,34 @@ CREATE PROCEDURE sp_add_or_update_festival_company_file
  @file						VARCHAR(50),
  @description				TEXT,
  @insert					BIT
-
 AS
 BEGIN
 	BEGIN TRY
-
 		IF (@insert = 1)
 		BEGIN
 			INSERT INTO FESTIVAL_COMPANY_FILE(festival_company_number,"file","description")
 			VALUES (@festival_company_number,
 					@file,
 					@description)
-
 		END
-	ELSE 
-			BEGIN
-					IF (@file_number IS NULL OR @file_number = 0)
+		ELSE 
+		BEGIN
+			IF (@file_number IS NULL OR @file_number = 0)
 			BEGIN
 				;THROW 50000, '@file_number cannot be NULL or ZERO if an UPDATE is to be commenced.', 1
 			END
-			IF NOT EXISTS (SELECT 1 FROM FESTIVAL_COMPANY_FILE WHERE file_number = @file_number)
+			ELSE IF NOT EXISTS (SELECT * FROM FESTIVAL_COMPANY_FILE WHERE file_number = @file_number)
 			BEGIN
-				;THROW 50001, 'This unit does not exist.', 1
-			END
-			ELSE IF NOT EXISTS (SELECT *
-								FROM FESTIVAL_COMPANY_FILE
-								WHERE file_number = @file_number)
-			BEGIN
-				;THROW 50000, 'This attribute does not exist', 1
+				;THROW 50001, 'This file does not exist.', 1
 			END
 
-					UPDATE FESTIVAL_COMPANY_FILE SET 
-					festival_company_number = @festival_company_number,
-					"file" = @file,					
-					"description" = @description
-					WHERE file_number = @file_number
-			END
+			UPDATE FESTIVAL_COMPANY_FILE SET 
+			festival_company_number = @festival_company_number,
+			"file" = @file,					
+			"description" = @description
+			WHERE file_number = @file_number
 
+		END
 	END TRY
 	BEGIN CATCH
 		;THROW
@@ -61,9 +52,6 @@ BEGIN
 END
 GO
 
-
-
-Select * from FESTIVAL_COMPANY_FILE
 
 -- Test
 
@@ -77,18 +65,17 @@ BEGIN TRAN
 EXEC sp_add_or_update_festival_company_file 2,5, 'file/path/newjpgtent.jpg', 'Nieuwe afbeelding van de Draaimolen', 0 
 ROLLBACK TRAN
 
--- Failed Insert 
+-- Failed Update, incorrect filenumber 
 BEGIN TRAN
-EXEC sp_add_or_update_festival_company_file NULL, NULL, 'File/http.fire.com/firebook', 'Brandveiligheidsboek voor Defqon1', 1
+EXEC sp_add_or_update_festival_company_file 556, 1, 'File/http.fire.com/firebook', 'Brandveiligheidsboek voor Defqon1', 0
 ROLLBACK TRAN
 
--- Failed Update 
+-- Failed Update, no file number (0)
 BEGIN TRAN
 EXEC sp_add_or_update_festival_company_file 0, 1, 'File//fireworks', 'Fireworks for Mysteryland', 0
 ROLLBACK TRAN
 
--- Failed Update 
+-- Failed Update, no file number (NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_festival_company_file NULL, 5, 'File//Tent//HowItWorks', 'Tent Plattegrond for Mysteryland', 0
 ROLLBACK TRAN
-
