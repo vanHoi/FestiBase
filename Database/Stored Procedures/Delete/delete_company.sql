@@ -21,7 +21,7 @@ BEGIN
 					   FROM COMPANY
 				       WHERE coc_number = @coc_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This company does not exist', 1
 			END
 
 		DELETE FROM COMPANY WHERE coc_number = @coc_number
