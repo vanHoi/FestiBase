@@ -21,7 +21,7 @@ BEGIN
 					   FROM CATERING
 				       WHERE catering_number = @catering_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This catering does not exist', 1
 			END
 
 		DELETE FROM CATERING WHERE catering_number = @catering_number
