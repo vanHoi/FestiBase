@@ -50,24 +50,24 @@ GO
 
 /* insert */
 BEGIN TRAN
-EXEC sp_add_or_update_artist 1, NULL, 'freek'
+EXEC sp_add_or_update_artist NULL, 'freek', 1
 ROLLBACK TRAN
 GO
 
 /* update */
 BEGIN TRAN
-EXEC sp_add_or_update_artist 0, 1, 'name'
+EXEC sp_add_or_update_artist 1, 'name', 0
 ROLLBACK TRAN
 GO
 
 /* update key NULL */
 BEGIN TRAN
-EXEC sp_add_or_update_artist 0, NULL, 'name'
+EXEC sp_add_or_update_artist NULL, 'name', 0
 ROLLBACK TRAN
 GO
 
 /* update, wrong artist */
 BEGIN TRAN
-EXEC sp_add_or_update_artist 0, 9999, 'name'
+EXEC sp_add_or_update_artist 9999, 'name', 0
 ROLLBACK TRAN
 GO
