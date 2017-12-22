@@ -21,7 +21,7 @@ BEGIN
 				   WHERE genre_number = @genre_number
 				   AND podium_number = @podium_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'The genre of this podium does not exist', 1
 			END
 
 		DELETE FROM PODIUM_plays_GENRE WHERE genre_number = @genre_number AND podium_number = @podium_number
