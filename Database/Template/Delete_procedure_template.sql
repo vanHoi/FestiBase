@@ -6,6 +6,9 @@
 /* Procedure:		Delete TABEL								*/
 /*==============================================================*/
 
+USE FestiBase
+GO
+
 DROP PROCEDURE IF EXISTS sp_delete
 GO
 CREATE PROCEDURE sp_delete
@@ -14,8 +17,8 @@ AS
 BEGIN
 	BEGIN TRY
 		IF NOT EXISTS (SELECT *
-				   FROM tabel
-				   WHERE kolom = @surrogate_key)
+					   FROM tabel
+				       WHERE kolom = @surrogate_key)
 			BEGIN
 				;THROW 50000, 'This record does not exist', 1
 			END
