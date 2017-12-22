@@ -23,7 +23,7 @@ BEGIN
 				       WHERE locker_number = @locker_number
 					   AND "start_date" = @start_date)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This rented locker does not exist', 1
 			END
 
 		DELETE FROM LOCKER_RENTED WHERE locker_number = @locker_number 
