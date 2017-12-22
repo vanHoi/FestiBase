@@ -21,7 +21,7 @@ BEGIN
 				   WHERE festival_company_number = @festival_company_number
 				   AND ticket_type = @ticket_type)
 			BEGIN
-				;THROW 50000, 'This visitor did not visit this performance does not exist', 1
+				;THROW 50000, 'This ticket type does not exist', 1
 			END
 
 		DELETE FROM TICKET_TYPE WHERE festival_company_number = @festival_company_number AND ticket_type = @ticket_type
