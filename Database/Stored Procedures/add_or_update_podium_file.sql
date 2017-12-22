@@ -5,9 +5,9 @@
 /* Edited by:		Robert Verkerk								*/
 /* Procedure:		Insert + Update podium_file				*/
 /*==============================================================*/
+
 USE FestiBase
 GO
-
 
 DROP PROCEDURE IF EXISTS sp_add_or_podium_file
 GO
@@ -23,7 +23,7 @@ BEGIN
 	BEGIN TRY
 		IF (@insert = 1)
 		BEGIN
-			INSERT INTO PODIUM_FILE (podium_number, festival_company_number, "file", description) VALUES (@podium_number, @festival_company_number, @file, @description)
+			INSERT INTO PODIUM_FILE (podium_number, festival_company_number, "file", "description") VALUES (@podium_number, @festival_company_number, @file, @description)
 		END
 		ELSE 
 		BEGIN
