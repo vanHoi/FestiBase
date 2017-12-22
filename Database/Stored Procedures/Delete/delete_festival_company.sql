@@ -21,7 +21,7 @@ BEGIN
 					   FROM FESTIVAL_COMPANY
 				       WHERE festival_company_number = @festival_company_number)
 			BEGIN
-				;THROW 50000, 'This record does not exist', 1
+				;THROW 50000, 'This festival company does not exist', 1
 			END
 
 		DELETE FROM FESTIVAL_COMPANY WHERE festival_company_number = @festival_company_number
