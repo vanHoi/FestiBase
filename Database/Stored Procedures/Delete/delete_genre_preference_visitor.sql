@@ -3,7 +3,7 @@
 /* PDM version:		6											*/
 /* Last edited:		22-12-2017									*/
 /* Edited by:		Robert Verkerk								*/
-/* Procedure:		Delete genre	 						*/
+/* Procedure:		Delete genre	 							*/
 /*==============================================================*/
 USE FestiBase
 GO
