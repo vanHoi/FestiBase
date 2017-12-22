@@ -16,6 +16,7 @@ CREATE PROCEDURE sp_delete
 AS
 BEGIN
 	BEGIN TRY
+
 		IF NOT EXISTS (SELECT *
 					   FROM tabel
 				       WHERE kolom = @surrogate_key)
@@ -24,9 +25,22 @@ BEGIN
 			END
 
 		DELETE FROM tabel WHERE kolom = @surrogate_key
+
 	END TRY
 	BEGIN CATCH
 		;THROW
 	END CATCH
 END
+GO
+
+-- TEST
+BEGIN TRAN
+EXEC sp_delete 1
+ROLLBACK TRAN
+GO
+
+-- TEST (does not exist)
+BEGIN TRAN
+EXEC sp_delete 1000
+ROLLBACK TRAN
 GO
