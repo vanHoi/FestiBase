@@ -2,8 +2,8 @@
 /* DBMS name:      FestiBase									*/
 /* PDM version 6												*/
 /* Last edited: 19-12-2017										*/
-/* Testdata													    */
-/* Yuri Vannisselroij, Robert Verkerk, Ivo Reumkens				*/
+/* Edited by: Yuri Vannisselroy								    */
+/* Testdata														*/
 /*==============================================================*/
 
 USE FestiBase
@@ -196,7 +196,7 @@ GO
 INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, construction_height, floor_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) VALUES
 (1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment'),
 (1, 2, 'PopPodium', 1500, 1200, 700, null, 12000, 50, 1300, 1000, 600, 'beautiful trees'),
-(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 12000, 120, 800, 700, 600, 'Hele grote open ruimte')
+(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte')
 GO
 
 INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, end_time, break_time) VALUES
@@ -216,7 +216,7 @@ INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number,
 (6, 2, 2, convert(varchar(8), '18:00:00', 108), 120, 15),
 (7, 2, 2, convert(varchar(8), '20:15:00', 108), 60,  15),
 (1, 2, 2, convert(varchar(8), '22:15:00', 108), 90,  15),
-(8, 3, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
+(8, NULL, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
 (9, 4, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
 (10, 5, 3, convert(varchar(8), '21:15:00', 108), 90,  45)
 GO
@@ -244,7 +244,11 @@ GO
 INSERT INTO VISITOR_likes_PERFORMANCE (visitor_number, performance_number) VALUES
 (1, 2),
 (1, 1),
-(2, 1)
+(2, 1),
+(1, 9),
+(2, 9),
+(3, 9),
+(4, 9)
 GO
 
 INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES

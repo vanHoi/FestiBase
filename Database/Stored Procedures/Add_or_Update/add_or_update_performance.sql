@@ -173,3 +173,9 @@ BEGIN TRAN
 EXEC sp_add_or_update_performance 300, 8, 4, 2, '15:00:00', 90, 30, 0
 ROLLBACK TRAN
 GO
+
+-- UPDATE (WARNING)
+BEGIN TRAN 
+EXEC sp_add_or_update_performance 9, 8, 3, 2, '19:15:00', 90,  30, 0
+ROLLBACK TRAN
+GO
