@@ -26,6 +26,8 @@ CREATE PROC sp_add_or_update_podium_schedule
 AS
 BEGIN
 	BEGIN TRY
+		EXEC sp_check_podium_schedule @podium_number, @start_date, @start_time, @end_date, @end_time, @break_time
+
 		IF (@insert = 1)
 			BEGIN
 				INSERT INTO PODIUM_SCHEDULE (podium_number, "start_date", start_time, end_date, end_time, break_time) VALUES
@@ -66,8 +68,6 @@ BEGIN
 END
 GO
 
-SELECT * FROM festival
-
 -- Test INSERT
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 1
@@ -89,5 +89,16 @@ GO
 -- Test UPDATE (SK NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 0
+ROLLBACK TRAN
+GO
+
+-- Test INSERT (fails the check)
+BEGIN TRAN
+EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-16', '14:00:00', '2017-04-17', '02:00:00', 30, 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-13', '14:00:00', '2017-04-14', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
