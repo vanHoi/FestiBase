@@ -102,5 +102,3 @@ BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
 ROLLBACK TRAN
 GO
-
-SELECT * FROM visitor

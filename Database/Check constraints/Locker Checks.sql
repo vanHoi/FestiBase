@@ -21,15 +21,18 @@ GO
 
 -- Correct
 BEGIN TRAN
-INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) VALUES (1, GETDATE(), GETDATE() + 3, 1)
+INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) 
+VALUES (1, GETDATE(), GETDATE() + 3, 1)
 ROLLBACK TRAN
 
 -- End date before start date in date
 BEGIN TRAN
-INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) VALUES (1, GETDATE(), GETDATE() - 3, 1)
+INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) 
+VALUES (1, GETDATE(), GETDATE() - 3, 1)
 ROLLBACK TRAN
 
 -- End date before start date in time
 BEGIN TRAN
-INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) VALUES (1, GETDATE(), GETDATE() - 0.1, 1)
+INSERT INTO LOCKER_RENTED (locker_number, start_date, end_date, visitor_number) 
+VALUES (1, GETDATE(), GETDATE() - 0.1, 1)
 ROLLBACK TRAN
