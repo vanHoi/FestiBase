@@ -28,7 +28,7 @@ BEGIN
 			END
 	END TRY
 	BEGIN CATCH
-		;THROW 50000, '@visitor_number + @genre_number does not match .', 1 
+		;THROW 
 	END CATCH
 END
 GO
