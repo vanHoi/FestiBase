@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		08-01-2018									*/
+/* Last edited:		09-01-2018									*/
 /* Edited by:		Mariusz Blautzik							*/
 /* Procedure:		Insert VISITOR LIKES PERFORMANCE			*/
 /*==============================================================*/
@@ -28,7 +28,7 @@ BEGIN
 			END
 	END TRY
 	BEGIN CATCH
-		;THROW 50000, '@visitor_number + @performance_number does not match .', 1 
+		;THROW 
 	END CATCH
 END
 GO
