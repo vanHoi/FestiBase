@@ -22,6 +22,8 @@ BEGIN
 		RETURN
 	SET NOCOUNT ON
     BEGIN TRY
+		/* Checks if the amount of likes on a certain performance 
+		   might not fit on a podiums' capacity (Margin 1/10) */
 		IF (SELECT COUNT(*)
 			FROM visitor_likes_performance
 			WHERE performance_number = (SELECT performance_number
