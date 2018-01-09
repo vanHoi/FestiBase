@@ -11,6 +11,18 @@ public class Genre
     private int genreNumber;
     private string name;
 
+    public int GenreNumber
+    {
+        get => genreNumber;
+        set => genreNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
     public Genre(int genreNumber, string name)
     {
         this.genreNumber = genreNumber;

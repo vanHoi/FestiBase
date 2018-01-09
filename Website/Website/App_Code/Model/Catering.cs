@@ -13,6 +13,30 @@ public class Catering
     private string name;
     private bool electricity;
 
+    public int CateringNumber
+    {
+        get => cateringNumber;
+        set => cateringNumber = value;
+    }
+
+    public int FestivalCompanyNumber
+    {
+        get => festivalCompanyNumber;
+        set => festivalCompanyNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public bool Electricity
+    {
+        get => electricity;
+        set => electricity = value;
+    }
+
     public Catering(int cateringNumber, int festivalCompanyNumber, string name, bool electricity)
     {
         this.cateringNumber = cateringNumber;

@@ -23,6 +23,90 @@ public class Visitor
     private List<Performance> performancesLiked;
     private List<Performance> performancesVisited;
 
+    public int VisitorNumber
+    {
+        get => visitorNumber;
+        set => visitorNumber = value;
+    }
+
+    public int TownNumber
+    {
+        get => townNumber;
+        set => townNumber = value;
+    }
+
+    public string Email
+    {
+        get => email;
+        set => email = value;
+    }
+
+    public string FirstName
+    {
+        get => firstName;
+        set => firstName = value;
+    }
+
+    public string Surname
+    {
+        get => surname;
+        set => surname = value;
+    }
+
+    public string TelephoneNumber
+    {
+        get => telephoneNumber;
+        set => telephoneNumber = value;
+    }
+
+    public DateTime Birthdate
+    {
+        get => birthdate;
+        set => birthdate = value;
+    }
+
+    public string TwitterUsername
+    {
+        get => twitterUsername;
+        set => twitterUsername = value;
+    }
+
+    public string FacebookUsername
+    {
+        get => facebookUsername;
+        set => facebookUsername = value;
+    }
+
+    public string Street
+    {
+        get => street;
+        set => street = value;
+    }
+
+    public int HouseNumber
+    {
+        get => houseNumber;
+        set => houseNumber = value;
+    }
+
+    public List<Genre> GenrePreferences
+    {
+        get => genrePreferences;
+        set => genrePreferences = value;
+    }
+
+    public List<Performance> PerformancesLiked
+    {
+        get => performancesLiked;
+        set => performancesLiked = value;
+    }
+
+    public List<Performance> PerformancesVisited
+    {
+        get => performancesVisited;
+        set => performancesVisited = value;
+    }
+
     public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
         DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
     {

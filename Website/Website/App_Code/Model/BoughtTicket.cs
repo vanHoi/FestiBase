@@ -14,6 +14,36 @@ public class BoughtTicket
     private string visitorNumber;
     private DateTime scanDate;
 
+    public int TicketNumber
+    {
+        get => ticketNumber;
+        set => ticketNumber = value;
+    }
+
+    public int FestivalCompanyNumber
+    {
+        get => festivalCompanyNumber;
+        set => festivalCompanyNumber = value;
+    }
+
+    public string TicketType
+    {
+        get => ticketType;
+        set => ticketType = value;
+    }
+
+    public string VisitorNumber
+    {
+        get => visitorNumber;
+        set => visitorNumber = value;
+    }
+
+    public DateTime ScanDate
+    {
+        get => scanDate;
+        set => scanDate = value;
+    }
+
     public BoughtTicket(int ticketNumber, int festivalCompanyNumber, string ticketType, string visitorNumber, DateTime scanDate)
     {
         this.ticketNumber = ticketNumber;

@@ -14,6 +14,36 @@ public class CompanyBranch
     private string street;
     private string houseNumber;
 
+    public int BranchNumber
+    {
+        get => branchNumber;
+        set => branchNumber = value;
+    }
+
+    public int CocNumber
+    {
+        get => cocNumber;
+        set => cocNumber = value;
+    }
+
+    public int TownNumber
+    {
+        get => townNumber;
+        set => townNumber = value;
+    }
+
+    public string Street
+    {
+        get => street;
+        set => street = value;
+    }
+
+    public string HouseNumber
+    {
+        get => houseNumber;
+        set => houseNumber = value;
+    }
+
     public CompanyBranch(int branchNumber, int cocNumber, int townNumber, string street, string houseNumber)
     {
         this.branchNumber = branchNumber;

@@ -12,6 +12,24 @@ public class Town
     private int countryNumber;
     private string name;
 
+    public int TownNumber
+    {
+        get => townNumber;
+        set => townNumber = value;
+    }
+
+    public int CountryNumber
+    {
+        get => countryNumber;
+        set => countryNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
     public Town(int townNumber, int countryNumber, string name)
     {
         this.townNumber = townNumber;

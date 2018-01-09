@@ -16,6 +16,48 @@ public class Performance
     private int playTime;
     private int minPrepTime;
 
+    public int PerformanceNumber
+    {
+        get => performanceNumber;
+        set => performanceNumber = value;
+    }
+
+    public int ArtistNumber
+    {
+        get => artistNumber;
+        set => artistNumber = value;
+    }
+
+    public int PodiumScheduleNumber
+    {
+        get => podiumScheduleNumber;
+        set => podiumScheduleNumber = value;
+    }
+
+    public int FestivalNumber
+    {
+        get => festivalNumber;
+        set => festivalNumber = value;
+    }
+
+    public DateTime StartTime
+    {
+        get => startTime;
+        set => startTime = value;
+    }
+
+    public int PlayTime
+    {
+        get => playTime;
+        set => playTime = value;
+    }
+
+    public int MinPrepTime
+    {
+        get => minPrepTime;
+        set => minPrepTime = value;
+    }
+
     public Performance(int performanceNumber, int artistNumber, int podiumScheduleNumber, int festivalNumber, 
         DateTime startTime, int playTime, int minPrepTime)
     {

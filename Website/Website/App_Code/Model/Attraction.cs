@@ -13,6 +13,30 @@ public class Attraction
     private string name;
     private string attractionType;
 
+    public int AttractionNumber
+    {
+        get => attractionNumber;
+        set => attractionNumber = value;
+    }
+
+    public int FestivalCompanyNumber
+    {
+        get => festivalCompanyNumber;
+        set => festivalCompanyNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public string AttractionType
+    {
+        get => attractionType;
+        set => attractionType = value;
+    }
+
     public Attraction(int attractionNumber, int festivalCompanyNumber, string name, string attractionType)
     {
         this.attractionNumber = attractionNumber;

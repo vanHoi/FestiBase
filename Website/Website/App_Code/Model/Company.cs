@@ -11,6 +11,18 @@ public class Company
     private int cocNumber;
     private string name;
 
+    public int CocNumber
+    {
+        get => cocNumber;
+        set => cocNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
     public Company(int cocNumber, string name)
     {
         this.cocNumber = cocNumber;

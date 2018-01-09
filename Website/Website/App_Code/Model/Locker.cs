@@ -11,6 +11,18 @@ public class Locker
     private int lockerNumber;
     private int festivalCompanyNumber;
 
+    public int LockerNumber
+    {
+        get => lockerNumber;
+        set => lockerNumber = value;
+    }
+
+    public int FestivalCompanyNumber
+    {
+        get => festivalCompanyNumber;
+        set => festivalCompanyNumber = value;
+    }
+
     public Locker(int lockerNumber, int festivalCompanyNumber)
     {
         this.lockerNumber = lockerNumber;

@@ -22,6 +22,84 @@ public class Tent
     private string floorType;
     private string capacity;
 
+    public int TentNumber
+    {
+        get => tentNumber;
+        set => tentNumber = value;
+    }
+
+    public int FestivalNumber
+    {
+        get => festivalNumber;
+        set => festivalNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public int Width
+    {
+        get => width;
+        set => width = value;
+    }
+
+    public int Length
+    {
+        get => length;
+        set => length = value;
+    }
+
+    public int SideHeight
+    {
+        get => sideHeight;
+        set => sideHeight = value;
+    }
+
+    public int RidgeHeight
+    {
+        get => ridgeHeight;
+        set => ridgeHeight = value;
+    }
+
+    public int ConstructionWidth
+    {
+        get => constructionWidth;
+        set => constructionWidth = value;
+    }
+
+    public int ConstructionLength
+    {
+        get => constructionLength;
+        set => constructionLength = value;
+    }
+
+    public string TentType
+    {
+        get => tentType;
+        set => tentType = value;
+    }
+
+    public string Color
+    {
+        get => color;
+        set => color = value;
+    }
+
+    public string FloorType
+    {
+        get => floorType;
+        set => floorType = value;
+    }
+
+    public string Capacity
+    {
+        get => capacity;
+        set => capacity = value;
+    }
+
     public Tent(int tentNumber, int festivalNumber, string name, int width, int length, int sideHeight, int ridgeHeight, int constructionWidth, int constructionLength, string tentType, string color, string floorType, string capacity)
     {
         this.tentNumber = tentNumber;

@@ -13,6 +13,30 @@ public class Toilet
     private string name;
     private string capacity;
 
+    public int ToiletNumber
+    {
+        get => toiletNumber;
+        set => toiletNumber = value;
+    }
+
+    public int FestivalCompanyNumber
+    {
+        get => festivalCompanyNumber;
+        set => festivalCompanyNumber = value;
+    }
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public string Capacity
+    {
+        get => capacity;
+        set => capacity = value;
+    }
+
     public Toilet(int toiletNumber, int festivalCompanyNumber, string name, string capacity)
     {
         this.toiletNumber = toiletNumber;

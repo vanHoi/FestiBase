@@ -16,6 +16,48 @@ public class PodiumSchedule
     private DateTime endTime;
     private int breakTime;
 
+    public int PodiumScheduleNumber
+    {
+        get => podiumScheduleNumber;
+        set => podiumScheduleNumber = value;
+    }
+
+    public int PodiumNumber
+    {
+        get => podiumNumber;
+        set => podiumNumber = value;
+    }
+
+    public DateTime StartDate
+    {
+        get => startDate;
+        set => startDate = value;
+    }
+
+    public DateTime StartTime
+    {
+        get => startTime;
+        set => startTime = value;
+    }
+
+    public DateTime EndDate
+    {
+        get => endDate;
+        set => endDate = value;
+    }
+
+    public DateTime EndTime
+    {
+        get => endTime;
+        set => endTime = value;
+    }
+
+    public int BreakTime
+    {
+        get => breakTime;
+        set => breakTime = value;
+    }
+
     public PodiumSchedule(int podiumScheduleNumber, int podiumNumber, DateTime startDate, DateTime startTime, 
         DateTime endDate, DateTime endTime, int breakTime)
     {
