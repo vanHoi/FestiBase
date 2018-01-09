@@ -39,11 +39,3 @@ BEGIN
 	END CATCH
 END
 GO
-
-
-/*
-	Procedure naam begint met sp_
-	Procedure naam niet in camelcases, maar kleine letters en _
-	@surrogate_key moet ingevuld zijn voor een update, voor insert gebruik NULL.
-	Gebruik een ;THROW, niet een RAISERROR.
-*/
