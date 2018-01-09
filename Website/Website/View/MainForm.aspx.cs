@@ -15,7 +15,12 @@ public partial class View_MainForm : System.Web.UI.Page
 
         foreach (Festival f in festivalModel.getAllFestivals())
         {
-            listFestivals.Items.Add(f.Name);
+            listFestivals.Items.Add(new ListItem(f.Name, f.FestivalNumber.ToString()));
         }
+    }
+
+    protected void btnVisitor_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("VisitorLoginForm.aspx");
     }
 }

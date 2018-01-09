@@ -9,15 +9,17 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1><asp:Label ID="Label1" runat="server" Text="Welkom bij FestiBase!"></asp:Label></h1>
+            <h1>Welkom bij FestiBase!</h1>
         </div>
-        <p>
-            <asp:Label ID="Label2" runat="server" Text="Selecteer een festival:"></asp:Label>
-        </p>
+        <p>Selecteer een festival:</p>
+
         <asp:DropDownList ID="listFestivals" runat="server" Width="200px">
         </asp:DropDownList>
         <p>
-            <asp:Button ID="btnConfirm" runat="server" Height="46px" Text="Verder" Width="149px" />
+            <asp:Button ID="btnConfirm" runat="server" Height="35px" Text="Verder" Width="180px" />
+        </p>
+        <p>
+            <asp:Button ID="btnVisitor" runat="server" Height="35px" Text="Inloggen als bezoeker" Width="180px" OnClick="btnVisitor_Click" />
         </p>
     </form>
 </body>
