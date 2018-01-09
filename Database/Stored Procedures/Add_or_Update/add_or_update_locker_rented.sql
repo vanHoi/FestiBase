@@ -1,12 +1,10 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 4												*/
-/* Robert Verkerk												*/	
-/* Constraint													*/
+/* PDM version:		6											*/
+/* Last Edited:		19-12-2017									*/
+/* Edited by:		Robert Verkerk								*/	
+/* Procedure:		Insert + Update LOCKER_RENTED				*/
 /*==============================================================*/
-
-USE master
-GO
 
 USE FestiBase
 GO
@@ -15,8 +13,8 @@ DROP PROC IF EXISTS sp_add_or_update_locker_rented
 GO
 
 CREATE PROCEDURE sp_add_or_update_locker_rented
-	@locker_number int, --PK
-	@start_date datetime, --PK
+	@locker_number int,
+	@start_date datetime,
 	@end_date datetime,
 	@visitor_number int,
 	@insert bit,
