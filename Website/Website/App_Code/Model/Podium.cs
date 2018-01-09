@@ -24,6 +24,27 @@ public class Podium
     private string environment;
     private List<Genre> playsGenres;
 
+    public Podium(int podiumNumber, int festivalNumber, int tentNumber, string name, int constructionWidth, 
+        int constructionLength, int constructionHeight, int floorHeight, int capacity, int floorLoad, int freeSpanWidth, 
+        int freeSpanLength, int freeSpanHeight, string environment, List<Genre> playsGenres)
+    {
+        this.podiumNumber = podiumNumber;
+        this.festivalNumber = festivalNumber;
+        this.tentNumber = tentNumber;
+        this.name = name;
+        this.constructionWidth = constructionWidth;
+        this.constructionLength = constructionLength;
+        this.constructionHeight = constructionHeight;
+        this.floorHeight = floorHeight;
+        this.capacity = capacity;
+        this.floorLoad = floorLoad;
+        this.freeSpanWidth = freeSpanWidth;
+        this.freeSpanLength = freeSpanLength;
+        this.freeSpanHeight = freeSpanHeight;
+        this.environment = environment;
+        this.playsGenres = playsGenres;
+    }
+
     public int PodiumNumber
     {
         get => podiumNumber;
@@ -114,24 +135,4 @@ public class Podium
         set => playsGenres = value;
     }
 
-    public Podium(int podiumNumber, int festivalNumber, int tentNumber, string name, int constructionWidth, 
-        int constructionLength, int constructionHeight, int floorHeight, int capacity, int floorLoad, int freeSpanWidth, 
-        int freeSpanLength, int freeSpanHeight, string environment, List<Genre> playsGenres)
-    {
-        this.podiumNumber = podiumNumber;
-        this.festivalNumber = festivalNumber;
-        this.tentNumber = tentNumber;
-        this.name = name;
-        this.constructionWidth = constructionWidth;
-        this.constructionLength = constructionLength;
-        this.constructionHeight = constructionHeight;
-        this.floorHeight = floorHeight;
-        this.capacity = capacity;
-        this.floorLoad = floorLoad;
-        this.freeSpanWidth = freeSpanWidth;
-        this.freeSpanLength = freeSpanLength;
-        this.freeSpanHeight = freeSpanHeight;
-        this.environment = environment;
-        this.playsGenres = playsGenres;
-    }
 }

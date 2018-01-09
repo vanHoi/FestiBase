@@ -13,6 +13,14 @@ public class TicketType
     private double ticketPrice;
     private DateTime dateValidFrom;
     private DateTime dateValidTo;
+    public TicketType(int festivalCompanyNumber, string ticketType, double ticketPrice, DateTime dateValidFrom, DateTime dateValidTo)
+    {
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.ticketType = ticketType;
+        this.ticketPrice = ticketPrice;
+        this.dateValidFrom = dateValidFrom;
+        this.dateValidTo = dateValidTo;
+    }
 
     public int FestivalCompanyNumber
     {
@@ -42,14 +50,5 @@ public class TicketType
     {
         get => dateValidTo;
         set => dateValidTo = value;
-    }
-
-    public TicketType(int festivalCompanyNumber, string ticketType, double ticketPrice, DateTime dateValidFrom, DateTime dateValidTo)
-    {
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.ticketType = ticketType;
-        this.ticketPrice = ticketPrice;
-        this.dateValidFrom = dateValidFrom;
-        this.dateValidTo = dateValidTo;
     }
 }

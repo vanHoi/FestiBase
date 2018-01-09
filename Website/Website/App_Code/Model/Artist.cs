@@ -12,6 +12,13 @@ public class Artist
     private string name;
     private List<Genre> playsGenres;
 
+    public Artist(int artistNumber, string name, List<Genre> playsGenres)
+    {
+        this.artistNumber = artistNumber;
+        this.name = name;
+        this.playsGenres = playsGenres;
+    }
+
     public int ArtistNumber
     {
         get => artistNumber;
@@ -30,10 +37,4 @@ public class Artist
         set => playsGenres = value;
     }
 
-    public Artist(int artistNumber, string name, List<Genre> playsGenres)
-    {
-        this.artistNumber = artistNumber;
-        this.name = name;
-        this.playsGenres = playsGenres;
-    }
 }

@@ -14,6 +14,15 @@ public class TentFile
     private string file;
     private string description;
 
+    public TentFile(int fileNumber, int tentNumber, int festivalCompanyNumber, string file, string description)
+    {
+        this.fileNumber = fileNumber;
+        this.tentNumber = tentNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.file = file;
+        this.description = description;
+    }
+
     public int FileNumber
     {
         get => fileNumber;
@@ -42,14 +51,5 @@ public class TentFile
     {
         get => description;
         set => description = value;
-    }
-
-    public TentFile(int fileNumber, int tentNumber, int festivalCompanyNumber, string file, string description)
-    {
-        this.fileNumber = fileNumber;
-        this.tentNumber = tentNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.file = file;
-        this.description = description;
     }
 }

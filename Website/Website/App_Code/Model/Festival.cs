@@ -16,6 +16,17 @@ public class Festival
     private string location;
     private double tokenPrice;
 
+    public Festival(int festivalNumber, int organisationNumber, string name, DateTime startDate, DateTime endDate, string location, double tokenPrice)
+    {
+        this.festivalNumber = festivalNumber;
+        this.organisationNumber = organisationNumber;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.tokenPrice = tokenPrice;
+    }
+
     public int FestivalNumber
     {
         get => festivalNumber;
@@ -56,16 +67,5 @@ public class Festival
     {
         get => tokenPrice;
         set => tokenPrice = value;
-    }
-
-    public Festival(int festivalNumber, int organisationNumber, string name, DateTime startDate, DateTime endDate, string location, double tokenPrice)
-    {
-        this.festivalNumber = festivalNumber;
-        this.organisationNumber = organisationNumber;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-        this.tokenPrice = tokenPrice;
     }
 }

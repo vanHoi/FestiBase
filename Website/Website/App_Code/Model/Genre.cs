@@ -11,6 +11,12 @@ public class Genre
     private int genreNumber;
     private string name;
 
+    public Genre(int genreNumber, string name)
+    {
+        this.genreNumber = genreNumber;
+        this.name = name;
+    }
+
     public int GenreNumber
     {
         get => genreNumber;
@@ -21,11 +27,5 @@ public class Genre
     {
         get => name;
         set => name = value;
-    }
-
-    public Genre(int genreNumber, string name)
-    {
-        this.genreNumber = genreNumber;
-        this.name = name;
     }
 }

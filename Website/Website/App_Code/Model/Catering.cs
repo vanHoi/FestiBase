@@ -12,6 +12,13 @@ public class Catering
     private int festivalCompanyNumber;
     private string name;
     private bool electricity;
+    public Catering(int cateringNumber, int festivalCompanyNumber, string name, bool electricity)
+    {
+        this.cateringNumber = cateringNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.name = name;
+        this.electricity = electricity;
+    }
 
     public int CateringNumber
     {
@@ -35,13 +42,5 @@ public class Catering
     {
         get => electricity;
         set => electricity = value;
-    }
-
-    public Catering(int cateringNumber, int festivalCompanyNumber, string name, bool electricity)
-    {
-        this.cateringNumber = cateringNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.name = name;
-        this.electricity = electricity;
     }
 }

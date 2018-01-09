@@ -15,6 +15,16 @@ public class FestivalCompany
     private string description;
     private string telephoneNumber;
 
+    public FestivalCompany(int festivalCompanyNumber, int festivalNumber, int branchNumber, string contactPerson, string description, string telephoneNumber)
+    {
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalNumber = festivalNumber;
+        this.branchNumber = branchNumber;
+        this.contactPerson = contactPerson;
+        this.description = description;
+        this.telephoneNumber = telephoneNumber;
+    }
+
     public int FestivalCompanyNumber
     {
         get => festivalCompanyNumber;
@@ -51,13 +61,4 @@ public class FestivalCompany
         set => telephoneNumber = value;
     }
 
-    public FestivalCompany(int festivalCompanyNumber, int festivalNumber, int branchNumber, string contactPerson, string description, string telephoneNumber)
-    {
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.festivalNumber = festivalNumber;
-        this.branchNumber = branchNumber;
-        this.contactPerson = contactPerson;
-        this.description = description;
-        this.telephoneNumber = telephoneNumber;
-    }
 }

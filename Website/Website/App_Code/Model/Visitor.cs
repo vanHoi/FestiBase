@@ -22,6 +22,36 @@ public class Visitor
     private List<Genre> genrePreferences;
     private List<Performance> performancesLiked;
     private List<Performance> performancesVisited;
+    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
+        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
+    {
+        this.visitorNumber = visitorNumber;
+        this.townNumber = townNumber;
+        this.email = email;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.telephoneNumber = telephoneNumber;
+        this.birthdate = birthdate;
+        this.twitterUsername = twitterUsername;
+        this.facebookUsername = facebookUsername;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.genrePreferences = new List<Genre>();
+        this.performancesLiked = new List<Performance>();
+        this.performancesVisited = new List<Performance>();
+    }
+
+    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
+        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, 
+        List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited) : 
+            this(visitorNumber, townNumber, email, firstName, surname, telephoneNumber, birthdate, twitterUsername, 
+            facebookUsername, street, houseNumber)
+    {
+        this.genrePreferences = genrePreferences;
+        this.performancesLiked = performancesLiked;
+        this.performancesVisited = performancesVisited;
+    }
+
 
     public int VisitorNumber
     {
@@ -105,35 +135,5 @@ public class Visitor
     {
         get => performancesVisited;
         set => performancesVisited = value;
-    }
-
-    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
-        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
-    {
-        this.visitorNumber = visitorNumber;
-        this.townNumber = townNumber;
-        this.email = email;
-        this.firstName = firstName;
-        this.surname = surname;
-        this.telephoneNumber = telephoneNumber;
-        this.birthdate = birthdate;
-        this.twitterUsername = twitterUsername;
-        this.facebookUsername = facebookUsername;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.genrePreferences = new List<Genre>();
-        this.performancesLiked = new List<Performance>();
-        this.performancesVisited = new List<Performance>();
-    }
-
-    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
-        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, 
-        List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited) : 
-            this(visitorNumber, townNumber, email, firstName, surname, telephoneNumber, birthdate, twitterUsername, 
-            facebookUsername, street, houseNumber)
-    {
-        this.genrePreferences = genrePreferences;
-        this.performancesLiked = performancesLiked;
-        this.performancesVisited = performancesVisited;
     }
 }

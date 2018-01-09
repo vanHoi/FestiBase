@@ -14,6 +14,15 @@ public class CompanyBranch
     private string street;
     private string houseNumber;
 
+    public CompanyBranch(int branchNumber, int cocNumber, int townNumber, string street, string houseNumber)
+    {
+        this.branchNumber = branchNumber;
+        this.cocNumber = cocNumber;
+        this.townNumber = townNumber;
+        this.street = street;
+        this.houseNumber = houseNumber;
+    }
+
     public int BranchNumber
     {
         get => branchNumber;
@@ -42,14 +51,5 @@ public class CompanyBranch
     {
         get => houseNumber;
         set => houseNumber = value;
-    }
-
-    public CompanyBranch(int branchNumber, int cocNumber, int townNumber, string street, string houseNumber)
-    {
-        this.branchNumber = branchNumber;
-        this.cocNumber = cocNumber;
-        this.townNumber = townNumber;
-        this.street = street;
-        this.houseNumber = houseNumber;
     }
 }

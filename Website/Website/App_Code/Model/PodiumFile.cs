@@ -14,6 +14,15 @@ public class PodiumFile
     private string file;
     private string description;
 
+    public PodiumFile(int fileNumber, int podiumNumber, int festivalCompanyNumber, string file, string description)
+    {
+        this.fileNumber = fileNumber;
+        this.podiumNumber = podiumNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.file = file;
+        this.description = description;
+    }
+
     public int FileNumber
     {
         get => fileNumber;
@@ -44,12 +53,4 @@ public class PodiumFile
         set => description = value;
     }
 
-    public PodiumFile(int fileNumber, int podiumNumber, int festivalCompanyNumber, string file, string description)
-    {
-        this.fileNumber = fileNumber;
-        this.podiumNumber = podiumNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.file = file;
-        this.description = description;
-    }
 }

@@ -11,6 +11,12 @@ public class Organisation
     private int organisationNumber;
     private int name;
 
+    public Organisation(int organisationNumber, int name)
+    {
+        this.organisationNumber = organisationNumber;
+        this.name = name;
+    }
+
     public int OrganisationNumber
     {
         get => organisationNumber;
@@ -21,11 +27,5 @@ public class Organisation
     {
         get => name;
         set => name = value;
-    }
-
-    public Organisation(int organisationNumber, int name)
-    {
-        this.organisationNumber = organisationNumber;
-        this.name = name;
     }
 }

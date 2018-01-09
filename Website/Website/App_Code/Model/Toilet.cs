@@ -13,6 +13,14 @@ public class Toilet
     private string name;
     private string capacity;
 
+    public Toilet(int toiletNumber, int festivalCompanyNumber, string name, string capacity)
+    {
+        this.toiletNumber = toiletNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.name = name;
+        this.capacity = capacity;
+    }
+
     public int ToiletNumber
     {
         get => toiletNumber;
@@ -35,13 +43,5 @@ public class Toilet
     {
         get => capacity;
         set => capacity = value;
-    }
-
-    public Toilet(int toiletNumber, int festivalCompanyNumber, string name, string capacity)
-    {
-        this.toiletNumber = toiletNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.name = name;
-        this.capacity = capacity;
     }
 }

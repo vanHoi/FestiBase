@@ -11,6 +11,12 @@ public class Country
     private int countryNumber;
     private string name;
 
+    public Country(int countryNumber, string name)
+    {
+        this.countryNumber = countryNumber;
+        this.name = name;
+    }
+
     public int CountryNumber
     {
         get => countryNumber;
@@ -23,9 +29,4 @@ public class Country
         set => name = value;
     }
 
-    public Country(int countryNumber, string name)
-    {
-        this.countryNumber = countryNumber;
-        this.name = name;
-    }
 }

@@ -13,6 +13,14 @@ public class LockerRented
     private DateTime endDate;
     private int visitorNumber;
 
+    public LockerRented(int lockerNumber, DateTime startDate, DateTime endDate, int visitorNumber)
+    {
+        this.lockerNumber = lockerNumber;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.visitorNumber = visitorNumber;
+    }
+
     public int LockerNumber
     {
         get => lockerNumber;
@@ -35,13 +43,5 @@ public class LockerRented
     {
         get => visitorNumber;
         set => visitorNumber = value;
-    }
-
-    public LockerRented(int lockerNumber, DateTime startDate, DateTime endDate, int visitorNumber)
-    {
-        this.lockerNumber = lockerNumber;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.visitorNumber = visitorNumber;
     }
 }

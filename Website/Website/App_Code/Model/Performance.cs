@@ -16,6 +16,18 @@ public class Performance
     private int playTime;
     private int minPrepTime;
 
+    public Performance(int performanceNumber, int artistNumber, int podiumScheduleNumber, int festivalNumber, 
+        DateTime startTime, int playTime, int minPrepTime)
+    {
+        this.performanceNumber = performanceNumber;
+        this.artistNumber = artistNumber;
+        this.podiumScheduleNumber = podiumScheduleNumber;
+        this.festivalNumber = festivalNumber;
+        this.startTime = startTime;
+        this.playTime = playTime;
+        this.minPrepTime = minPrepTime;
+    }
+
     public int PerformanceNumber
     {
         get => performanceNumber;
@@ -56,17 +68,5 @@ public class Performance
     {
         get => minPrepTime;
         set => minPrepTime = value;
-    }
-
-    public Performance(int performanceNumber, int artistNumber, int podiumScheduleNumber, int festivalNumber, 
-        DateTime startTime, int playTime, int minPrepTime)
-    {
-        this.performanceNumber = performanceNumber;
-        this.artistNumber = artistNumber;
-        this.podiumScheduleNumber = podiumScheduleNumber;
-        this.festivalNumber = festivalNumber;
-        this.startTime = startTime;
-        this.playTime = playTime;
-        this.minPrepTime = minPrepTime;
     }
 }

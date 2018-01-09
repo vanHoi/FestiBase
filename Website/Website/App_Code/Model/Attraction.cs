@@ -13,6 +13,14 @@ public class Attraction
     private string name;
     private string attractionType;
 
+    public Attraction(int attractionNumber, int festivalCompanyNumber, string name, string attractionType)
+    {
+        this.attractionNumber = attractionNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.name = name;
+        this.attractionType = attractionType;
+    }
+
     public int AttractionNumber
     {
         get => attractionNumber;
@@ -37,11 +45,4 @@ public class Attraction
         set => attractionType = value;
     }
 
-    public Attraction(int attractionNumber, int festivalCompanyNumber, string name, string attractionType)
-    {
-        this.attractionNumber = attractionNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.name = name;
-        this.attractionType = attractionType;
-    }
 }

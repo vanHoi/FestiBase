@@ -14,6 +14,15 @@ public class ArtistFile
     private string file;
     private string description;
 
+    public ArtistFile(int fileNumber, int artistNumber, int festivalCompanyNumber, string file, string description)
+    {
+        this.fileNumber = fileNumber;
+        this.artistNumber = artistNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.file = file;
+        this.description = description;
+    }
+
     public int FileNumber
     {
         get => fileNumber;
@@ -44,12 +53,4 @@ public class ArtistFile
         set => description = value;
     }
 
-    public ArtistFile(int fileNumber, int artistNumber, int festivalCompanyNumber, string file, string description)
-    {
-        this.fileNumber = fileNumber;
-        this.artistNumber = artistNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.file = file;
-        this.description = description;
-    }
 }

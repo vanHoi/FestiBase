@@ -13,6 +13,14 @@ public class FestivalCompanyFile
     private string file;
     private string description;
 
+    public FestivalCompanyFile(int fileNumber, int festivalCompanyNumber, string file, string description)
+    {
+        this.fileNumber = fileNumber;
+        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.file = file;
+        this.description = description;
+    }
+
     public int FileNumber
     {
         get => fileNumber;
@@ -35,13 +43,5 @@ public class FestivalCompanyFile
     {
         get => description;
         set => description = value;
-    }
-
-    public FestivalCompanyFile(int fileNumber, int festivalCompanyNumber, string file, string description)
-    {
-        this.fileNumber = fileNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.file = file;
-        this.description = description;
     }
 }
