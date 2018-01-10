@@ -36,12 +36,14 @@ public class FestivalDAO
             while (reader.Read())
             {
                 festival = new Festival(Convert.ToInt32(reader["festival_number"]),
-                    Convert.ToInt32(reader["organisation_number"]),
+                    new Organisation(), 
                     Convert.ToString(reader["name"]),
                     Convert.ToDateTime(reader["start_date"]),
                     Convert.ToDateTime(reader["end_date"]),
                     Convert.ToString(reader["location"]),
                     Convert.ToDouble(reader["token_price"]));
+
+                festival.Organisation.OrganisationNumber = Convert.ToInt32(reader["organisation_number"]);
             }
 
             conn.Close();
@@ -66,12 +68,14 @@ public class FestivalDAO
             while (reader.Read())
             {
                 Festival festival = new Festival(Convert.ToInt32(reader["festival_number"]),
-                    Convert.ToInt32(reader["organisation_number"]),
+                    new Organisation(), 
                     Convert.ToString(reader["name"]),
                     Convert.ToDateTime(reader["start_date"]),
                     Convert.ToDateTime(reader["end_date"]),
                     Convert.ToString(reader["location"]),
                     Convert.ToDouble(reader["token_price"]));
+                festival.Organisation.OrganisationNumber = Convert.ToInt32(reader["organisation_number"]);
+
                 festivals.Add(festival);
             }
 

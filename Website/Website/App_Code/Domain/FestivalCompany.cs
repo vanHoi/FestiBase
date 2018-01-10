@@ -15,7 +15,11 @@ public class FestivalCompany
     private string description;
     private string telephoneNumber;
 
-    public FestivalCompany() { }
+    public FestivalCompany()
+    {
+        festival = new Festival();
+        companyBranch = new CompanyBranch();
+    }
 
     public FestivalCompany(int festivalCompanyNumber, Festival festival, CompanyBranch companyBranch, string contactPerson, string description, string telephoneNumber)
     {
@@ -63,4 +67,11 @@ public class FestivalCompany
         set => telephoneNumber = value;
     }
 
+    public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+    {
+        festival.FestivalNumber = festivalNumber;
+        festival.Name = name;
+        festival.StartDate = startDate;
+        festival.EndDate = endDate;
+    }
 }

@@ -9,19 +9,23 @@ using System.Web;
 public class Festival
 {
     private int festivalNumber;
-    private int organisationNumber;
+    private Organisation organisation;
     private string name;
     private DateTime startDate;
     private DateTime endDate;
     private string location;
     private double tokenPrice;
 
-    public Festival() { }
+    public Festival()
+    {
+        organisation = new Organisation();
+    }
 
-    public Festival(int festivalNumber, int organisationNumber, string name, DateTime startDate, DateTime endDate, string location, double tokenPrice)
+    public Festival(int festivalNumber, Organisation organisation, string name, DateTime startDate, 
+        DateTime endDate, string location, double tokenPrice)
     {
         this.festivalNumber = festivalNumber;
-        this.organisationNumber = organisationNumber;
+        this.organisation = organisation;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -35,10 +39,10 @@ public class Festival
         set => festivalNumber = value;
     }
 
-    public int OrganisationNumber
+    public Organisation Organisation
     {
-        get => organisationNumber;
-        set => organisationNumber = value;
+        get => organisation;
+        set => organisation = value;
     }
 
     public string Name

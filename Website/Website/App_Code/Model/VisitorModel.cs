@@ -8,15 +8,22 @@ using System.Web;
 /// </summary>
 public class VisitorModel
 {
-    private VisitorDAO visitorDao;
+    private VisitorDAO visitorDAO;
+    private BoughtTicketDAO boughtTicketDAO;
 
     public VisitorModel()
     {
-        visitorDao = new VisitorDAO();
+        visitorDAO = new VisitorDAO();
+        boughtTicketDAO = new BoughtTicketDAO();
     }
 
     public Visitor LoginVisitor(string email)
     {
-        return visitorDao.LoginVisitor(email);
+        return visitorDAO.LoginVisitor(email);
+    }
+
+    public List<BoughtTicket> getAllBoughtTicketsOfVisitor(int visitorNumber)
+    {
+        return boughtTicketDAO.getAllBoughtTicketsOfVisitor(visitorNumber);
     }
 }

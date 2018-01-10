@@ -9,16 +9,21 @@ using System.Web;
 public class TicketType
 {
     private FestivalCompany festivalCompany;
-    private string ticketType;
+    private string type;
     private double ticketPrice;
     private DateTime dateValidFrom;
     private DateTime dateValidTo;
 
-    public TicketType(FestivalCompany festivalCompany, string ticketType, double ticketPrice, DateTime dateValidFrom,
+    public TicketType()
+    {
+        festivalCompany = new FestivalCompany();
+    }
+
+    public TicketType(FestivalCompany festivalCompany, string type, double ticketPrice, DateTime dateValidFrom,
         DateTime dateValidTo)
     {
         this.festivalCompany = festivalCompany;
-        this.ticketType = ticketType;
+        this.type = type;
         this.ticketPrice = ticketPrice;
         this.dateValidFrom = dateValidFrom;
         this.dateValidTo = dateValidTo;
@@ -30,10 +35,10 @@ public class TicketType
         set => festivalCompany = value;
     }
 
-    public string TicketType1
+    public string Type
     {
-        get => ticketType;
-        set => ticketType = value;
+        get => type;
+        set => type = value;
     }
 
     public double TicketPrice
@@ -52,5 +57,15 @@ public class TicketType
     {
         get => dateValidTo;
         set => dateValidTo = value;
+    }
+
+    public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+    {
+        festivalCompany.addFestival(festivalNumber, name, startDate, endDate);
+    }
+
+    public Festival getFestival()
+    {
+        return festivalCompany.Festival;
     }
 }

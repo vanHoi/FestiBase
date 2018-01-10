@@ -13,9 +13,12 @@ public class BoughtTicket
     private string visitorNumber;
     private DateTime scanDate;
 
-    public BoughtTicket() { }
+    public BoughtTicket()
+    {
+        ticketType = new TicketType();
+    }
 
-    public BoughtTicket(int ticketNumber, int festivalCompanyNumber, TicketType ticketType, 
+    public BoughtTicket(int ticketNumber, TicketType ticketType, 
         string visitorNumber, DateTime scanDate)
     {
         this.ticketNumber = ticketNumber;
@@ -46,5 +49,15 @@ public class BoughtTicket
     {
         get => scanDate;
         set => scanDate = value;
+    }
+
+    public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+    {
+        ticketType.addFestival(festivalNumber, name, startDate, endDate);
+    }
+
+    public Festival getFestival()
+    {
+        return ticketType.getFestival();
     }
 }
