@@ -8,24 +8,26 @@ using System.Web;
 /// </summary>
 public class TicketType
 {
-    private int festivalCompanyNumber;
+    private FestivalCompany festivalCompany;
     private string ticketType;
     private double ticketPrice;
     private DateTime dateValidFrom;
     private DateTime dateValidTo;
-    public TicketType(int festivalCompanyNumber, string ticketType, double ticketPrice, DateTime dateValidFrom, DateTime dateValidTo)
+
+    public TicketType(FestivalCompany festivalCompany, string ticketType, double ticketPrice, DateTime dateValidFrom,
+        DateTime dateValidTo)
     {
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalCompany = festivalCompany;
         this.ticketType = ticketType;
         this.ticketPrice = ticketPrice;
         this.dateValidFrom = dateValidFrom;
         this.dateValidTo = dateValidTo;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string TicketType1

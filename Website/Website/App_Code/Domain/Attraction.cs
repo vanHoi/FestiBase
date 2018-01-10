@@ -9,14 +9,16 @@ using System.Web;
 public class Attraction
 {
     private int attractionNumber;
-    private int festivalCompanyNumber;
+    private FestivalCompany festivalCompany;
     private string name;
     private string attractionType;
 
-    public Attraction(int attractionNumber, int festivalCompanyNumber, string name, string attractionType)
+    public Attraction() { }
+
+    public Attraction(int attractionNumber, FestivalCompany festivalCompany, string name, string attractionType)
     {
         this.attractionNumber = attractionNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalCompany = festivalCompany;
         this.name = name;
         this.attractionType = attractionType;
     }
@@ -27,10 +29,10 @@ public class Attraction
         set => attractionNumber = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string Name

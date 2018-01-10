@@ -11,6 +11,8 @@ public class Country
     private int countryNumber;
     private string name;
 
+    public Country() { }
+
     public Country(int countryNumber, string name)
     {
         this.countryNumber = countryNumber;

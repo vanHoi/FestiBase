@@ -9,16 +9,18 @@ using System.Web;
 public class PodiumFile
 {
     private int fileNumber;
-    private int podiumNumber;
-    private int festivalCompanyNumber;
+    private Podium podium;
+    private FestivalCompany festivalCompany;
     private string file;
     private string description;
 
-    public PodiumFile(int fileNumber, int podiumNumber, int festivalCompanyNumber, string file, string description)
+    public PodiumFile() { }
+
+    public PodiumFile(int fileNumber, Podium podium, FestivalCompany festivalCompany, string file, string description)
     {
         this.fileNumber = fileNumber;
-        this.podiumNumber = podiumNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.podium = podium;
+        this.festivalCompany = festivalCompany;
         this.file = file;
         this.description = description;
     }
@@ -29,16 +31,16 @@ public class PodiumFile
         set => fileNumber = value;
     }
 
-    public int PodiumNumber
+    public Podium Podium
     {
-        get => podiumNumber;
-        set => podiumNumber = value;
+        get => podium;
+        set => podium = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string File

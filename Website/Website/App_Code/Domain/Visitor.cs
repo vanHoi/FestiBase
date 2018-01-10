@@ -9,7 +9,7 @@ using System.Web;
 public class Visitor
 {
     private int visitorNumber;
-    private int townNumber;
+    private Town town;
     private string email;
     private string firstName;
     private string surname;
@@ -22,11 +22,13 @@ public class Visitor
     private List<Genre> genrePreferences;
     private List<Performance> performancesLiked;
     private List<Performance> performancesVisited;
-    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
-        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
+
+    public Visitor() { }
+
+    public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
     {
         this.visitorNumber = visitorNumber;
-        this.townNumber = townNumber;
+        this.town = town;
         this.email = email;
         this.firstName = firstName;
         this.surname = surname;
@@ -36,22 +38,25 @@ public class Visitor
         this.facebookUsername = facebookUsername;
         this.street = street;
         this.houseNumber = houseNumber;
-        this.genrePreferences = new List<Genre>();
-        this.performancesLiked = new List<Performance>();
-        this.performancesVisited = new List<Performance>();
     }
 
-    public Visitor(int visitorNumber, int townNumber, string email, string firstName, string surname, string telephoneNumber, 
-        DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, 
-        List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited) : 
-            this(visitorNumber, townNumber, email, firstName, surname, telephoneNumber, birthdate, twitterUsername, 
-            facebookUsername, street, houseNumber)
+    public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited)
     {
+        this.visitorNumber = visitorNumber;
+        this.town = town;
+        this.email = email;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.telephoneNumber = telephoneNumber;
+        this.birthdate = birthdate;
+        this.twitterUsername = twitterUsername;
+        this.facebookUsername = facebookUsername;
+        this.street = street;
+        this.houseNumber = houseNumber;
         this.genrePreferences = genrePreferences;
         this.performancesLiked = performancesLiked;
         this.performancesVisited = performancesVisited;
     }
-
 
     public int VisitorNumber
     {
@@ -59,10 +64,10 @@ public class Visitor
         set => visitorNumber = value;
     }
 
-    public int TownNumber
+    public Town Town
     {
-        get => townNumber;
-        set => townNumber = value;
+        get => town;
+        set => town = value;
     }
 
     public string Email

@@ -9,15 +9,17 @@ using System.Web;
 public class CompanyBranch
 {
     private int branchNumber;
-    private int cocNumber;
+    private Company company;
     private int townNumber;
     private string street;
     private string houseNumber;
 
-    public CompanyBranch(int branchNumber, int cocNumber, int townNumber, string street, string houseNumber)
+    public CompanyBranch() { }
+
+    public CompanyBranch(int branchNumber, Company company, int townNumber, string street, string houseNumber)
     {
         this.branchNumber = branchNumber;
-        this.cocNumber = cocNumber;
+        this.company = company;
         this.townNumber = townNumber;
         this.street = street;
         this.houseNumber = houseNumber;
@@ -29,10 +31,10 @@ public class CompanyBranch
         set => branchNumber = value;
     }
 
-    public int CocNumber
+    public Company Company
     {
-        get => cocNumber;
-        set => cocNumber = value;
+        get => company;
+        set => company = value;
     }
 
     public int TownNumber

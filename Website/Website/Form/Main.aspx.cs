@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class View_MainForm : System.Web.UI.Page
+public partial class Form_Main : System.Web.UI.Page
 {
     private FestivalModel festivalModel;
 
@@ -21,6 +21,6 @@ public partial class View_MainForm : System.Web.UI.Page
 
     protected void btnVisitor_Click(object sender, EventArgs e)
     {
-        Response.Redirect("VisitorLoginForm.aspx");
+        Response.Redirect("VisitorLogin.aspx");
     }
 }

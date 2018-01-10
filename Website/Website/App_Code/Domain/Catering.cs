@@ -9,13 +9,16 @@ using System.Web;
 public class Catering
 {
     private int cateringNumber;
-    private int festivalCompanyNumber;
+    private FestivalCompany festivalCompany;
     private string name;
     private bool electricity;
-    public Catering(int cateringNumber, int festivalCompanyNumber, string name, bool electricity)
+
+    public Catering() { }
+
+    public Catering(int cateringNumber, FestivalCompany festivalCompany, string name, bool electricity)
     {
         this.cateringNumber = cateringNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalCompany = festivalCompany;
         this.name = name;
         this.electricity = electricity;
     }
@@ -26,10 +29,10 @@ public class Catering
         set => cateringNumber = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string Name

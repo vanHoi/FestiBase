@@ -11,6 +11,8 @@ public class Organisation
     private int organisationNumber;
     private int name;
 
+    public Organisation() { }
+
     public Organisation(int organisationNumber, int name)
     {
         this.organisationNumber = organisationNumber;

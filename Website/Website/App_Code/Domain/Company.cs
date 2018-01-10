@@ -11,6 +11,8 @@ public class Company
     private int cocNumber;
     private string name;
 
+    public Company() { }
+
     public Company(int cocNumber, string name)
     {
         this.cocNumber = cocNumber;

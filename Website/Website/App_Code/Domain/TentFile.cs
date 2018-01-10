@@ -9,16 +9,18 @@ using System.Web;
 public class TentFile
 {
     private int fileNumber;
-    private int tentNumber;
-    private int festivalCompanyNumber;
+    private Tent tent;
+    private FestivalCompany festivalCompany;
     private string file;
     private string description;
 
-    public TentFile(int fileNumber, int tentNumber, int festivalCompanyNumber, string file, string description)
+    public TentFile() { }
+
+    public TentFile(int fileNumber, Tent tent, FestivalCompany festivalCompany, string file, string description)
     {
         this.fileNumber = fileNumber;
-        this.tentNumber = tentNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.tent = tent;
+        this.festivalCompany = festivalCompany;
         this.file = file;
         this.description = description;
     }
@@ -29,16 +31,16 @@ public class TentFile
         set => fileNumber = value;
     }
 
-    public int TentNumber
+    public Tent Tent
     {
-        get => tentNumber;
-        set => tentNumber = value;
+        get => tent;
+        set => tent = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string File

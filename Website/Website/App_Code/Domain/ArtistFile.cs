@@ -9,16 +9,18 @@ using System.Web;
 public class ArtistFile
 {
     private int fileNumber;
-    private int artistNumber;
-    private int festivalCompanyNumber;
+    private Artist artist;
+    private FestivalCompany festivalCompany;
     private string file;
     private string description;
 
-    public ArtistFile(int fileNumber, int artistNumber, int festivalCompanyNumber, string file, string description)
+    public ArtistFile() { }
+
+    public ArtistFile(int fileNumber, Artist artist, FestivalCompany festivalCompany, string file, string description)
     {
         this.fileNumber = fileNumber;
-        this.artistNumber = artistNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.artist = artist;
+        this.festivalCompany = festivalCompany;
         this.file = file;
         this.description = description;
     }
@@ -29,16 +31,16 @@ public class ArtistFile
         set => fileNumber = value;
     }
 
-    public int ArtistNumber
+    public Artist Artist
     {
-        get => artistNumber;
-        set => artistNumber = value;
+        get => artist;
+        set => artist = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string File

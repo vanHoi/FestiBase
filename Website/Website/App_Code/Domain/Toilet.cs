@@ -9,14 +9,16 @@ using System.Web;
 public class Toilet
 {
     private int toiletNumber;
-    private int festivalCompanyNumber;
+    private FestivalCompany festivalCompany;
     private string name;
     private string capacity;
 
-    public Toilet(int toiletNumber, int festivalCompanyNumber, string name, string capacity)
+    public Toilet() { }
+
+    public Toilet(int toiletNumber, FestivalCompany festivalCompany, string name, string capacity)
     {
         this.toiletNumber = toiletNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalCompany = festivalCompany;
         this.name = name;
         this.capacity = capacity;
     }
@@ -27,10 +29,10 @@ public class Toilet
         set => toiletNumber = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
 
     public string Name

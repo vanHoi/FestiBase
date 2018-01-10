@@ -9,17 +9,19 @@ using System.Web;
 public class FestivalCompany
 {
     private int festivalCompanyNumber;
-    private int festivalNumber;
-    private int branchNumber;
+    private Festival festival;
+    private CompanyBranch companyBranch;
     private string contactPerson;
     private string description;
     private string telephoneNumber;
 
-    public FestivalCompany(int festivalCompanyNumber, int festivalNumber, int branchNumber, string contactPerson, string description, string telephoneNumber)
+    public FestivalCompany() { }
+
+    public FestivalCompany(int festivalCompanyNumber, Festival festival, CompanyBranch companyBranch, string contactPerson, string description, string telephoneNumber)
     {
         this.festivalCompanyNumber = festivalCompanyNumber;
-        this.festivalNumber = festivalNumber;
-        this.branchNumber = branchNumber;
+        this.festival = festival;
+        this.companyBranch = companyBranch;
         this.contactPerson = contactPerson;
         this.description = description;
         this.telephoneNumber = telephoneNumber;
@@ -31,16 +33,16 @@ public class FestivalCompany
         set => festivalCompanyNumber = value;
     }
 
-    public int FestivalNumber
+    public Festival Festival
     {
-        get => festivalNumber;
-        set => festivalNumber = value;
+        get => festival;
+        set => festival = value;
     }
 
-    public int BranchNumber
+    public CompanyBranch CompanyBranch
     {
-        get => branchNumber;
-        set => branchNumber = value;
+        get => companyBranch;
+        set => companyBranch = value;
     }
 
     public string ContactPerson

@@ -9,17 +9,20 @@ using System.Web;
 public class PodiumSchedule
 {
     private int podiumScheduleNumber;
-    private int podiumNumber;
+    private Podium podium;
     private DateTime startDate;
     private DateTime startTime;
     private DateTime endDate;
     private DateTime endTime;
     private int breakTime;
-    public PodiumSchedule(int podiumScheduleNumber, int podiumNumber, DateTime startDate, DateTime startTime, 
+
+    public PodiumSchedule() { }
+
+    public PodiumSchedule(int podiumScheduleNumber, Podium podium, DateTime startDate, DateTime startTime, 
         DateTime endDate, DateTime endTime, int breakTime)
     {
         this.podiumScheduleNumber = podiumScheduleNumber;
-        this.podiumNumber = podiumNumber;
+        this.podium = podium;
         this.startDate = startDate;
         this.startTime = startTime;
         this.endDate = endDate;
@@ -33,10 +36,10 @@ public class PodiumSchedule
         set => podiumScheduleNumber = value;
     }
 
-    public int PodiumNumber
+    public Podium Podium
     {
-        get => podiumNumber;
-        set => podiumNumber = value;
+        get => podium;
+        set => podium = value;
     }
 
     public DateTime StartDate

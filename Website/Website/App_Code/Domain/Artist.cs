@@ -12,6 +12,14 @@ public class Artist
     private string name;
     private List<Genre> playsGenres;
 
+    public Artist() { }
+
+    public Artist(int artistNumber, string name)
+    {
+        this.artistNumber = artistNumber;
+        this.name = name;
+    }
+
     public Artist(int artistNumber, string name, List<Genre> playsGenres)
     {
         this.artistNumber = artistNumber;

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorLoginForm.aspx.cs" Inherits="View_VisitorLogin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorLogin.aspx.cs" Inherits="Form_VisitorLogin" %>
 
 <!DOCTYPE html>
 

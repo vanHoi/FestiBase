@@ -9,20 +9,21 @@ using System.Web;
 public class Performance
 {
     private int performanceNumber;
-    private int artistNumber;
-    private int podiumScheduleNumber;
-    private int festivalNumber;
+    private Artist artist;
+    private PodiumSchedule podiumSchedule;
+    private Festival festival;
     private DateTime startTime;
     private int playTime;
     private int minPrepTime;
 
-    public Performance(int performanceNumber, int artistNumber, int podiumScheduleNumber, int festivalNumber, 
-        DateTime startTime, int playTime, int minPrepTime)
+    public Performance() { }
+
+    public Performance(int performanceNumber, Artist artist, PodiumSchedule podiumSchedule, Festival festival, DateTime startTime, int playTime, int minPrepTime)
     {
         this.performanceNumber = performanceNumber;
-        this.artistNumber = artistNumber;
-        this.podiumScheduleNumber = podiumScheduleNumber;
-        this.festivalNumber = festivalNumber;
+        this.artist = artist;
+        this.podiumSchedule = podiumSchedule;
+        this.festival = festival;
         this.startTime = startTime;
         this.playTime = playTime;
         this.minPrepTime = minPrepTime;
@@ -34,22 +35,22 @@ public class Performance
         set => performanceNumber = value;
     }
 
-    public int ArtistNumber
+    public Artist Artist
     {
-        get => artistNumber;
-        set => artistNumber = value;
+        get => artist;
+        set => artist = value;
     }
 
-    public int PodiumScheduleNumber
+    public PodiumSchedule PodiumSchedule
     {
-        get => podiumScheduleNumber;
-        set => podiumScheduleNumber = value;
+        get => podiumSchedule;
+        set => podiumSchedule = value;
     }
 
-    public int FestivalNumber
+    public Festival Festival
     {
-        get => festivalNumber;
-        set => festivalNumber = value;
+        get => festival;
+        set => festival = value;
     }
 
     public DateTime StartTime

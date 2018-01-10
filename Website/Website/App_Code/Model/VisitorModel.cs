@@ -15,8 +15,8 @@ public class VisitorModel
         visitorDao = new VisitorDAO();
     }
 
-    public void loginVisitor(string email)
+    public Visitor LoginVisitor(string email)
     {
-        visitorDao.LoginVisitor(email);
+        return visitorDao.LoginVisitor(email);
     }
 }

@@ -9,8 +9,8 @@ using System.Web;
 public class Podium
 {
     private int podiumNumber;
-    private int festivalNumber;
-    private int tentNumber;
+    private Festival festival;
+    private Tent tent;
     private string name;
     private int constructionWidth;
     private int constructionLength;
@@ -24,13 +24,33 @@ public class Podium
     private string environment;
     private List<Genre> playsGenres;
 
-    public Podium(int podiumNumber, int festivalNumber, int tentNumber, string name, int constructionWidth, 
-        int constructionLength, int constructionHeight, int floorHeight, int capacity, int floorLoad, int freeSpanWidth, 
-        int freeSpanLength, int freeSpanHeight, string environment, List<Genre> playsGenres)
+    public Podium() { }
+
+    public Podium(int podiumNumber, Festival festival, Tent tent, string name, int constructionWidth, int constructionLength, int constructionHeight, int floorHeight, int capacity, int floorLoad, int freeSpanWidth, int freeSpanLength, int freeSpanHeight, string environment)
     {
         this.podiumNumber = podiumNumber;
-        this.festivalNumber = festivalNumber;
-        this.tentNumber = tentNumber;
+        this.festival = festival;
+        this.tent = tent;
+        this.name = name;
+        this.constructionWidth = constructionWidth;
+        this.constructionLength = constructionLength;
+        this.constructionHeight = constructionHeight;
+        this.floorHeight = floorHeight;
+        this.capacity = capacity;
+        this.floorLoad = floorLoad;
+        this.freeSpanWidth = freeSpanWidth;
+        this.freeSpanLength = freeSpanLength;
+        this.freeSpanHeight = freeSpanHeight;
+        this.environment = environment;
+    }
+
+    public Podium(int podiumNumber, Festival festival, Tent tent, string name, int constructionWidth, int constructionLength, 
+        int constructionHeight, int floorHeight, int capacity, int floorLoad, int freeSpanWidth, int freeSpanLength, 
+        int freeSpanHeight, string environment, List<Genre> playsGenres)
+    {
+        this.podiumNumber = podiumNumber;
+        this.festival = festival;
+        this.tent = tent;
         this.name = name;
         this.constructionWidth = constructionWidth;
         this.constructionLength = constructionLength;
@@ -51,16 +71,16 @@ public class Podium
         set => podiumNumber = value;
     }
 
-    public int FestivalNumber
+    public Festival Festival
     {
-        get => festivalNumber;
-        set => festivalNumber = value;
+        get => festival;
+        set => festival = value;
     }
 
-    public int TentNumber
+    public Tent Tent
     {
-        get => tentNumber;
-        set => tentNumber = value;
+        get => tent;
+        set => tent = value;
     }
 
     public string Name

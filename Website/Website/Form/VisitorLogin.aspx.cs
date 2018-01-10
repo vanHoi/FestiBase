@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class View_VisitorLogin : System.Web.UI.Page
+public partial class Form_VisitorLogin : System.Web.UI.Page
 {
     private VisitorModel visitorModel;
 
@@ -16,16 +16,15 @@ public partial class View_VisitorLogin : System.Web.UI.Page
 
     protected void btnReturn_Click(object sender, EventArgs e)
     {
-        Response.Redirect("MainForm.aspx");
+        Response.Redirect("Main.aspx");
     }
 
     protected void btnLogin_Click(object sender, EventArgs e)
     {
         if (!String.IsNullOrEmpty(tboxEmail.Text))
         {
-            visitorModel.loginVisitor(tboxEmail.Text);
-            Session["email"] = tboxEmail.Text;
-            Response.Redirect("VisitorOverviewForm.aspx");
+            Session["visitor"] = visitorModel.LoginVisitor(tboxEmail.Text);
+            Response.Redirect("VisitorOverview.aspx");
         }
     }
 }

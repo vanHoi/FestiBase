@@ -9,12 +9,14 @@ using System.Web;
 public class Locker
 {
     private int lockerNumber;
-    private int festivalCompanyNumber;
+    private FestivalCompany festivalCompany;
 
-    public Locker(int lockerNumber, int festivalCompanyNumber)
+    public Locker() { }
+
+    public Locker(int lockerNumber, FestivalCompany festivalCompany)
     {
         this.lockerNumber = lockerNumber;
-        this.festivalCompanyNumber = festivalCompanyNumber;
+        this.festivalCompany = festivalCompany;
     }
 
     public int LockerNumber
@@ -23,10 +25,9 @@ public class Locker
         set => lockerNumber = value;
     }
 
-    public int FestivalCompanyNumber
+    public FestivalCompany FestivalCompany
     {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
+        get => festivalCompany;
+        set => festivalCompany = value;
     }
-
 }

@@ -9,13 +9,15 @@ using System.Web;
 public class Town
 {
     private int townNumber;
-    private int countryNumber;
+    private Country country;
     private string name;
 
-    public Town(int townNumber, int countryNumber, string name)
+    public Town() { }
+
+    public Town(int townNumber, Country country, string name)
     {
         this.townNumber = townNumber;
-        this.countryNumber = countryNumber;
+        this.country = country;
         this.name = name;
     }
 
@@ -25,10 +27,10 @@ public class Town
         set => townNumber = value;
     }
 
-    public int CountryNumber
+    public Country Country
     {
-        get => countryNumber;
-        set => countryNumber = value;
+        get => country;
+        set => country = value;
     }
 
     public string Name

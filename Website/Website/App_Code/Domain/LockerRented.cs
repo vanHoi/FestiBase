@@ -8,23 +8,31 @@ using System.Web;
 /// </summary>
 public class LockerRented
 {
-    private int lockerNumber;
+    private Locker locker;
     private DateTime startDate;
     private DateTime endDate;
-    private int visitorNumber;
+    private Visitor visitor;
 
-    public LockerRented(int lockerNumber, DateTime startDate, DateTime endDate, int visitorNumber)
+    public LockerRented() { }
+
+    public LockerRented(Locker locker, DateTime startDate, DateTime endDate, Visitor visitor)
     {
-        this.lockerNumber = lockerNumber;
+        this.locker = locker;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.visitorNumber = visitorNumber;
+        this.visitor = visitor;
     }
 
-    public int LockerNumber
+    public Locker Locker
     {
-        get => lockerNumber;
-        set => lockerNumber = value;
+        get => locker;
+        set => locker = value;
+    }
+
+    public Visitor Visitor
+    {
+        get => visitor;
+        set => visitor = value;
     }
 
     public DateTime StartDate
@@ -37,11 +45,5 @@ public class LockerRented
     {
         get => endDate;
         set => endDate = value;
-    }
-
-    public int VisitorNumber
-    {
-        get => visitorNumber;
-        set => visitorNumber = value;
     }
 }

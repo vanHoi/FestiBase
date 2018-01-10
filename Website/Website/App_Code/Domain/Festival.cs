@@ -16,6 +16,8 @@ public class Festival
     private string location;
     private double tokenPrice;
 
+    public Festival() { }
+
     public Festival(int festivalNumber, int organisationNumber, string name, DateTime startDate, DateTime endDate, string location, double tokenPrice)
     {
         this.festivalNumber = festivalNumber;

@@ -9,7 +9,7 @@ using System.Web;
 public class Tent
 {
     private int tentNumber;
-    private int festivalNumber;
+    private Festival festival;
     private string name;
     private int width;
     private int length;
@@ -22,10 +22,13 @@ public class Tent
     private string floorType;
     private string capacity;
 
-    public Tent(int tentNumber, int festivalNumber, string name, int width, int length, int sideHeight, int ridgeHeight, int constructionWidth, int constructionLength, string tentType, string color, string floorType, string capacity)
+    public Tent() { }
+
+    public Tent(int tentNumber, Festival festival, string name, int width, int length, int sideHeight, int ridgeHeight, 
+        int constructionWidth, int constructionLength, string tentType, string color, string floorType, string capacity)
     {
         this.tentNumber = tentNumber;
-        this.festivalNumber = festivalNumber;
+        this.festival = festival;
         this.name = name;
         this.width = width;
         this.length = length;
@@ -45,10 +48,10 @@ public class Tent
         set => tentNumber = value;
     }
 
-    public int FestivalNumber
+    public Festival Festival
     {
-        get => festivalNumber;
-        set => festivalNumber = value;
+        get => festival;
+        set => festival = value;
     }
 
     public string Name

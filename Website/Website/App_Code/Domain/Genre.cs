@@ -11,6 +11,8 @@ public class Genre
     private int genreNumber;
     private string name;
 
+    public Genre() { }
+
     public Genre(int genreNumber, string name)
     {
         this.genreNumber = genreNumber;
