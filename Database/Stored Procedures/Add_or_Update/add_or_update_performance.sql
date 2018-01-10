@@ -37,15 +37,6 @@ BEGIN
 		@min_prep_time,
 		@insert
 
-		DECLARE @podium_number INT
-		SET @podium_number = (SELECT podium_number FROM PODIUM_SCHEDULE where podium_schedule_number = @podium_schedule_number)
-
-		EXEC sp_check_podium_genre_with_artist_genre
-		@artist_number,
-		@podium_number
-		
-
-
 		IF (@insert = 1)
 			BEGIN
 				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
@@ -147,12 +138,6 @@ EXEC sp_add_or_update_performance NULL, 8, 4, 2, '13:59:00', 90, 30, 1
 ROLLBACK TRAN
 GO
 
--- INSERT (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 2, 1, 2, '14:00:00', 30, 5, 1
-ROLLBACK TRAN
-GO
-
 -- UPDATE (An artist is already playing during that time)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 9, 8, 4, 2, '20:00:00', 90, 30, 0
@@ -189,9 +174,8 @@ EXEC sp_add_or_update_performance 300, 8, 4, 2, '15:00:00', 90, 30, 0
 ROLLBACK TRAN
 GO
 
--- UPDATE (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 2, 1, 2, '14:00:00', 30, 5, 1
+-- UPDATE (WARNING)
+BEGIN TRAN 
+EXEC sp_add_or_update_performance 9, 8, 3, 2, '19:15:00', 90,  30, 0
 ROLLBACK TRAN
 GO
-
