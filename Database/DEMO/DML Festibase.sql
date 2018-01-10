@@ -6,7 +6,7 @@
 /* Yuri Vannisselroij, Robert Verkerk, Ivo Reumkens				*/
 /*==============================================================*/
 
-USE FestiBase
+USE FestiBaseDEMO
 GO
 
 SET DATEFORMAT DMY

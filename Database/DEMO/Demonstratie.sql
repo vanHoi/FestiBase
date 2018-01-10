@@ -2,7 +2,7 @@
 /*			Demonstratie			*/
 /* ================================	*/
 
-USE FestiBase
+USE FestiBaseDEMO
 GO
 
 
