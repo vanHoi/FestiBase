@@ -85,6 +85,12 @@ EXEC sp_add_or_update_visitor NULL, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', 
 ROLLBACK TRAN
 GO
 
+-- Test INSERT (cannot insert duplicate email)
+BEGIN TRAN
+EXEC sp_add_or_update_visitor NULL, 1, 'robertverkerk@hetnet.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 1
+ROLLBACK TRAN
+GO
+
 -- Test UPDATE
 BEGIN TRAN
 EXEC sp_add_or_update_visitor 1, 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 0
