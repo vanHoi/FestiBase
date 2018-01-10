@@ -24,6 +24,12 @@ CREATE PROC sp_add_or_update_ticket_type
 AS
 BEGIN
 	BEGIN TRY
+
+		EXEC sp_check_ticket_type_start_end_date 
+			@festival_company_number, 
+			@date_valid_from, 
+			@date_valid_to
+		
 		IF (@insert = 1)
 			BEGIN
 				INSERT INTO TICKET_TYPE (festival_company_number, ticket_type, price, date_valid_from, date_valid_to) VALUES
@@ -62,23 +68,25 @@ BEGIN
 END
 GO
 
-select * from FESTIVAL_COMPANY
-
-Select * from TICKET_TYPE
-
 -- INSERT SUCCESSFUL
+BEGIN TRAN
+EXEC sp_add_or_update_ticket_type 1, 'Ultra Weekend Ticket', 5000, '2017-04-14 10:00:00', '2017-04-16 23:00:00', 1
+ROLLBACK TRAN
+GO
+
+-- INSERT FAILED
 BEGIN TRAN
 EXEC sp_add_or_update_ticket_type 10, 'Ultra Weekend Ticket', 5000, '2018-07-20 10:00:00', '2018-07-23 23:00:00', 1
 ROLLBACK TRAN
 GO
 
--- INSERT SUCCESSFUL
+-- INSERT FAILED
 BEGIN TRAN
 EXEC sp_add_or_update_ticket_type 10, 'VIP 2018', 290, '2018-05-20 10:00:00', '2018-05-23 23:30:00', 1 
 ROLLBACK TRAN
 GO
 
--- UPDATE SUCCESSFUL
+-- UPDATE FAILED
 BEGIN TRAN
 EXEC sp_add_or_update_ticket_type 10, 'VIP', 175, '2014-04-14 00:00:00', '2014-04-16 23:59:00', 0
 ROLLBACK TRAN
