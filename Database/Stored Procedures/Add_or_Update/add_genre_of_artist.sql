@@ -44,3 +44,15 @@ BEGIN TRAN
 EXEC sp_add_genre_of_artist 3, 7   
 ROLLBACK TRAN
 GO
+
+-- INSERT FAILED
+BEGIN TRAN
+EXEC sp_add_genre_of_artist 8, 20   
+ROLLBACK TRAN
+GO
+
+-- INSERT FAILED
+BEGIN TRAN
+EXEC sp_add_genre_of_artist 0, 5   
+ROLLBACK TRAN
+GO
