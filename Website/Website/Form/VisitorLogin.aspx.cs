@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Net.Mail;
 using Model;
 
 namespace Form
 {
-    public partial class Form_VisitorLogin : System.Web.UI.Page
+    public partial class FormVisitorLogin : System.Web.UI.Page
     {
-        private VisitorModel visitorModel;
+        private VisitorModel _visitorModel;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            visitorModel = new VisitorModel();
+            _visitorModel = new VisitorModel();
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
@@ -19,11 +20,17 @@ namespace Form
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrEmpty(tboxEmail.Text))
+            if (!String.IsNullOrEmpty(tboxEmail.Text) && IsValidEmail(tboxEmail.Text))
             {
-                Session["visitor"] = visitorModel.LoginVisitor(tboxEmail.Text);
+                Session["visitor"] = _visitorModel.LoginVisitor(tboxEmail.Text);
                 Response.Redirect("VisitorOverview.aspx");
             }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            MailAddress mailAddress = new MailAddress(email);
+            return mailAddress.Address == email;
         }
     }
 }

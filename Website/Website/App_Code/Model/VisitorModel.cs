@@ -23,9 +23,9 @@ namespace Model
             return _visitorDao.LoginVisitor(email);
         }
 
-        public List<BoughtTicket> getAllBoughtTicketsOfVisitor(int visitorNumber)
+        public List<BoughtTicket> GetAllBoughtTicketsOfVisitor(int visitorNumber)
         {
-            return _boughtTicketDao.getAllBoughtTicketsOfVisitor(visitorNumber);
+            return _boughtTicketDao.GetAllBoughtTicketsOfVisitor(visitorNumber);
         }
 
         public bool addVisitorToTicket(int visitorNumber, int ticketNumber)

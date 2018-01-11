@@ -16,14 +16,14 @@ namespace Model
             _festivalDao = new FestivalDAO();
         }
 
-        public List<Festival> getAllFestivals()
+        public List<Festival> GetAllFestivals()
         {
-            return _festivalDao.getAllFestivals();
+            return _festivalDao.GetAllFestivals();
         }
 
-        public Festival getFestivalByNumber(int number)
+        public Festival GetFestivalByNumber(int number)
         {
-            return _festivalDao.getFestivalbyNumber(number);
+            return _festivalDao.GetFestivalbyNumber(number);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace DAO
             }
         }
 
-        public List<BoughtTicket> getAllBoughtTicketsOfVisitor(int visitorNumber)
+        public List<BoughtTicket> GetAllBoughtTicketsOfVisitor(int visitorNumber)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace DAO
                 while (reader.Read())
                 {
                     BoughtTicket boughtTicket = new BoughtTicket();
-                    boughtTicket.addFestival(Convert.ToInt32(reader["festival_number"]), Convert.ToString(reader["name"]),
+                    boughtTicket.AddFestival(Convert.ToInt32(reader["festival_number"]), Convert.ToString(reader["name"]),
                         Convert.ToDateTime(reader["start_date"]), Convert.ToDateTime(reader["end_date"]));
                     boughtTicket.TicketType.Type = Convert.ToString(reader["ticket_type"]);
 
