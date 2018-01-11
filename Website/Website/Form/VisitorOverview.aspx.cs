@@ -75,7 +75,7 @@ namespace Form
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Session.Remove("visitorNumber");
+            Session.Remove("visitor");
             Response.Redirect("VisitorLogin.aspx");
         }
     }
