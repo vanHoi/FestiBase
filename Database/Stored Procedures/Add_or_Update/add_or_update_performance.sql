@@ -1,12 +1,15 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		19-12-2017									*/
+/* PDM version:		7											*/
+/* Last edited:		11-01-2018									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update PERFORMANCE					*/
 /*==============================================================*/
 
 USE FestiBase
+GO
+
+SET DATEFORMAT DMY
 GO
 
 /*
@@ -19,6 +22,7 @@ CREATE PROC sp_add_or_update_performance
 	@artist_number			INT,
 	@podium_schedule_number	INT	= NULL,
 	@festival_number		INT,
+	@start_date				DATE,
 	@start_time				TIME = NULL,
 	@play_time				INT,
 	@min_prep_time			INT = NULL,
@@ -32,6 +36,7 @@ BEGIN
 		@artist_number,
 		@podium_schedule_number,
 		@festival_number,
+		@start_date,
 		@start_time,
 		@play_time,
 		@min_prep_time,
@@ -81,10 +86,10 @@ GO
 /* 
 	These tests should work
 */
-
+select * from festival
 -- INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '15:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018','15:00:00', 90, 30, 1 
 ROLLBACK TRAN
 GO
 
