@@ -11,7 +11,7 @@ public partial class Form_VisitorOverview : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        VisitorModel visitorModel = new VisitorModel();
+        visitorModel = new VisitorModel();
 
         if (Session["visitor"] == null)
         {
