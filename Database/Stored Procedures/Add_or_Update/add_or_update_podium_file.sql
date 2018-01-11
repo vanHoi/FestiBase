@@ -3,7 +3,7 @@
 /* PDM version:		6											*/
 /* Last edited:		21-12-2017									*/
 /* Edited by:		Robert Verkerk								*/
-/* Procedure:		Insert + Update podium_file				*/
+/* Procedure:		Insert + Update PODIUM_FILE					*/
 /*==============================================================*/
 
 USE FestiBase
