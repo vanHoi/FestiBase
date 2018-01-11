@@ -16,17 +16,24 @@ DROP PROC IF EXISTS sp_add_or_update_town;
 GO
 CREATE PROC sp_add_or_update_town
 	@town_number		INT = NULL,
-	@country_number		INT,
-	@name				VARCHAR(50),
+	@country_name		VARCHAR(50),
+	@town_name			VARCHAR(50),
 	@insert				BIT
 AS
 BEGIN
 	BEGIN TRY
+		
+		EXEC sp_check_if_country_exists @country_name
+
+		DECLARE @country_number INT = (SELECT country_number
+									   FROM COUNTRY
+									   WHERE "name" = @country_name)
+
 		IF (@insert = 1)
 			BEGIN
-				INSERT INTO TOWN (country_number, name) VALUES
+				INSERT INTO TOWN (country_number, "name") VALUES
 				(@country_number,
-				 @name)
+				 @town_name)
 			END
 		ELSE
 			BEGIN
@@ -44,7 +51,7 @@ BEGIN
 
 					UPDATE TOWN SET 
 					country_number = @country_number,
-					name = @name
+					"name" = @town_name
 					WHERE town_number = @town_number
 			END
 	END TRY
@@ -57,6 +64,12 @@ GO
 -- Test INSERT
 BEGIN TRAN
 EXEC sp_add_or_update_town NULL, 1, 'Groningen', 1
+ROLLBACK TRAN
+GO
+
+-- Test INSERT (new country)
+BEGIN TRAN
+EXEC sp_add_or_update_town NULL, 'Brazilië', 'Rio', 1
 ROLLBACK TRAN
 GO
 
