@@ -30,11 +30,7 @@ namespace Form
         private bool IsValidEmail(string email)
         {
             MailAddress mailAddress = new MailAddress(email);
-            if (mailAddress.Address == email)
-            {
-                return true;
-            }
-            return false;
+            return mailAddress.Address == email;
         }
     }
 }
