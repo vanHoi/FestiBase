@@ -2,11 +2,11 @@
 /* DBMS name:      FestiBase									*/
 /* PDM version 6												*/
 /* Last edited: 19-12-2017										*/
-/* Edited by: Yuri Vannisselroy								    */
-/* Testdata														*/
+/* Testdata													    */
+/* Yuri Vannisselroij, Robert Verkerk, Ivo Reumkens				*/
 /*==============================================================*/
 
-USE FestiBase
+USE FestiBaseDEMO
 GO
 
 SET DATEFORMAT DMY
@@ -196,7 +196,7 @@ GO
 INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, construction_height, floor_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) VALUES
 (1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment'),
 (1, 2, 'PopPodium', 1500, 1200, 700, null, 12000, 50, 1300, 1000, 600, 'beautiful trees'),
-(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte')
+(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 12000, 120, 800, 700, 600, 'Hele grote open ruimte')
 GO
 
 INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, end_time, break_time) VALUES
@@ -207,18 +207,18 @@ INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, en
 (3, '17-06-2018', '16:00:00', '17-06-2018', '02:00:00', 60)
 GO
 
-INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
-(1, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
-(2, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 30,  30),
-(3, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
-(4, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 75,  60),
-(5, 2, 2, '30-03-2018', convert(varchar(8), '10:00:00', 108), 75,  15),
-(6, 2, 2, '31-03-2018', convert(varchar(8), '18:00:00', 108), 120, 15),
-(7, 2, 2, '30-03-2018', convert(varchar(8), '20:15:00', 108), 60,  15),
-(1, 2, 2, '31-03-2018', convert(varchar(8), '22:15:00', 108), 90,  15),
-(8, NULL, 2, '31-03-2018', NULL, 90,  30),
-(9, 4, 2, '30-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
-(10, 5, 3, '15-06-2018', convert(varchar(8), '21:15:00', 108), 90,  45)
+INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
+(1, 1, 2, convert(varchar(8), NULL, 108), 60,  15),
+(2, 1, 2, convert(varchar(8), NULL, 108), 30,  30),
+(3, 1, 2, convert(varchar(8), NULL, 108), 60,  15),
+(4, 1, 2, convert(varchar(8), NULL, 108), 75,  60),
+(5, 2, 2, convert(varchar(8), '10:00:00', 108), 75,  15),
+(6, 2, 2, convert(varchar(8), '18:00:00', 108), 120, 15),
+(7, 2, 2, convert(varchar(8), '20:15:00', 108), 60,  15),
+(1, 2, 2, convert(varchar(8), '22:15:00', 108), 90,  15),
+(8, 3, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
+(9, 4, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
+(10, 5, 3, convert(varchar(8), '21:15:00', 108), 90,  45)
 GO
 
 INSERT INTO PODIUM_FILE(podium_number, festival_company_number, "file", description) VALUES
@@ -244,11 +244,7 @@ GO
 INSERT INTO VISITOR_likes_PERFORMANCE (visitor_number, performance_number) VALUES
 (1, 2),
 (1, 1),
-(2, 1),
-(1, 9),
-(2, 9),
-(3, 9),
-(4, 9)
+(2, 1)
 GO
 
 INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES
@@ -257,5 +253,4 @@ INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VAL
 (2,1)
 GO
 
-USE master
-GO
+

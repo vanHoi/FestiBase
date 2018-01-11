@@ -2,7 +2,8 @@
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
 /* Last edited:		20-12-2017									*/
-/* Edited by:		Mariusz Blautzik							*/
+/* Created by:		Mariusz Blautzik							*/
+/* Edited by:		Ivo Reumkens								*/
 /* Procedure:		Insert + Update PODIUM						*/
 /*==============================================================*/
 
@@ -30,6 +31,14 @@ CREATE PROCEDURE sp_add_or_update_podium
 AS
 BEGIN
 	BEGIN TRY
+
+		/* Checking the constraints on performance */
+		EXEC sp_check_podium @tent_number, @construction_width, @construction_length, @construction_height, @floor_height, @capacity, @free_span_width, @free_span_length, @free_span_height
+
+		IF (@tent_number = 0)
+		BEGIN
+			SET @tent_number = NULL -- THIS IS NEEDED, BECAUSE THE DATABASE WON'T ACCEPT THE NUMBER 0
+		END
 
 		IF (@insert = 1)
 		BEGIN
@@ -85,41 +94,102 @@ BEGIN
 END
 GO
 
--- Test
-Select * from PODIUM
--- Successful Insert
-BEGIN TRAN
-EXEC sp_add_or_update_podium NULL, 1, 2, 'TentDestructo', 2000,2000,500, 50, 5000, 50, 1900, 1700, 400, 'Leuke podium voor een leuke festival', 1    
-ROLLBACK TRAN
+-- Procedure and Constraint tests
 
--- Successful Insert 2
+/* Correct insert with a tent */
 BEGIN TRAN
-EXEC sp_add_or_update_podium NULL, 1, NULL, 'TerroDrang', 4500, 4500, NULL, NULL, 3500, 100, 4000, 4000, NULL, 'Open Stage Defqon 1', 1
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
 ROLLBACK TRAN
+GO
 
--- Successful Update
+/* Correct insert without a tent */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 2, 1, 2, 'Rock-Podium vol2', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'Rock-Podium 2000 voor Paaspop 2019', 0    
+EXEC sp_add_or_update_podium 0, 1, 0, 'Tent zonder podium', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Weinig ruimte', 1
 ROLLBACK TRAN
+GO
 
--- Successful Update 2
+/* Podium too wide for the tent */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 2, 1, 3, 'TerroDrangDangDang', 5000, 5000, 300, 10,1590, 50,4700, 4700,270, 'Leuke Bomen en Lichten', 0   
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1400, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
 ROLLBACK TRAN
+GO
 
--- Failed Insert
 BEGIN TRAN
-EXEC sp_add_or_update_podium NULL, 1, 0, 'TentDestructo', 2000,2000,500, 50, 5000, 50, 1900, 1700, 400, 'Leuke podium voor een leuke festival', 1    
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1400, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
+GO
 
-/* update key NULL */
+/* Podium is too long for the tent */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 0, 1, 2, 'House Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'House Music Elektro City', 0     
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 2200, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 2200, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Podium floor height is higher then the side height of the tent */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 550, 600, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Capacity from the podium is too high for the tent */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 600, 100, 15000, 12, 1000, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 600, 100, 15000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Not enough standing room (less then 3 meters) on the podium */
+BEGIN TRAN
+UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Podium is too high for the tent */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Update zonder tentnummer */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 0, 'Tent 15', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* Correcte update */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 1, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
 GO
 
 /* update, wrong podium */
 BEGIN TRAN
-EXEC sp_add_or_update_podium 99999, 99, 2, 'Dragon Ball Super Stage', 4000,4000,700, 10, 5000, 100, 3500, 3500, 500, 'KA-ME-HA-ME-HAAAAAAAAAAAAAAAAAAAAAAA', 0    
+EXEC sp_add_or_update_podium 666, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
 GO
