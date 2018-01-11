@@ -24,7 +24,7 @@
                 <asp:TableCell runat="server"><b>Programma</b></asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-        <asp:Button ID="btnLogout" runat="server" Height="30px" OnClick="btnLogout_Click" Text="Uitloggen" Width="108px" />
+        <asp:Button ID="btnLogout" runat="server" Height="30px" OnClick="btnLogoutClick" Text="Uitloggen" Width="108px" />
         <p>
             <asp:Button ID="btnGenre" runat="server" Height="30px" Text="Mijn genres" Width="107px" />
         </p>
