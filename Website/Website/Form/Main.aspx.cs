@@ -5,15 +5,16 @@ using Model;
 
 namespace Form
 {
-    public partial class Form_Main : System.Web.UI.Page
+    public partial class FormMain : System.Web.UI.Page
     {
-        private FestivalModel festivalModel;
+        private FestivalModel _festivalModel;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            festivalModel = new FestivalModel();
+            _festivalModel = new FestivalModel();
+            listFestivals.Items.Clear();
 
-            foreach (Festival f in festivalModel.getAllFestivals())
+            foreach (Festival f in _festivalModel.GetAllFestivals())
             {
                 listFestivals.Items.Add(new ListItem(f.Name, f.FestivalNumber.ToString()));
             }

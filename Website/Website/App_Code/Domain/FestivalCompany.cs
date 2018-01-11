@@ -35,7 +35,7 @@ namespace Domain
 
         public string TelephoneNumber { get; set; }
 
-        public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+        public void AddFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
         {
             Festival.FestivalNumber = festivalNumber;
             Festival.Name = name;

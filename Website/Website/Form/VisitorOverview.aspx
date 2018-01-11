@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorOverview.aspx.cs" Inherits="Form.Form_VisitorOverview" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorOverview.aspx.cs" Inherits="Form.FormVisitorOverview" %>
 
 <!DOCTYPE html>
 

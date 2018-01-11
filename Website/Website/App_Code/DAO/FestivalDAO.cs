@@ -28,7 +28,7 @@ namespace DAO
             }
         }
 
-        public Festival getFestivalbyNumber(int number)
+        public Festival GetFestivalbyNumber(int number)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace DAO
             return null;
         }
 
-        public List<Festival> getAllFestivals()
+        public List<Festival> GetAllFestivals()
         {
             try
             {

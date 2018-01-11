@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorLogin.aspx.cs" Inherits="Form.Form_VisitorLogin" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorLogin.aspx.cs" Inherits="Form.FormVisitorLogin" %>
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
             <h1>Welkom bezoeker!</h1>
             <p>Geef uw emailadres op om door te gaan:</p>
         </div>
-        <asp:TextBox ID="tboxEmail" runat="server" Width="220px"></asp:TextBox>
+        <asp:TextBox ID="tboxEmail" runat="server" Width="220px" TextMode="Email"></asp:TextBox>
         <p>
             <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Inloggen" />
         </p>

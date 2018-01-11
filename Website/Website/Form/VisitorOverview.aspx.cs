@@ -5,7 +5,7 @@ using Model;
 
 namespace Form
 {
-    public partial class Form_VisitorOverview : System.Web.UI.Page
+    public partial class FormVisitorOverview : System.Web.UI.Page
     {
         private VisitorModel _visitorModel;
 
@@ -25,34 +25,34 @@ namespace Form
             }
             else
             {
-                lblVisitor.Text = "Welkom " + visitor.FirstName;
+                lblVisitor.Text = "Welkom " + visitor.FirstName + "!";
             }
 
             if (visitor != null)
-                foreach (BoughtTicket b in _visitorModel.getAllBoughtTicketsOfVisitor(visitor.VisitorNumber))
+                foreach (BoughtTicket b in _visitorModel.GetAllBoughtTicketsOfVisitor(visitor.VisitorNumber))
                 {
                     TableRow row = new TableRow();
 
-                    TableCell cell = new TableCell {Text = b.getFestival().Name};
+                    TableCell cell = new TableCell {Text = b.GetFestival().Name};
 
                     TableCell cell2 = new TableCell {Text = b.TicketType.Type};
 
                     TableCell cell3 = new TableCell();
-                    if (b.getFestival().StartDate.Date == b.getFestival().EndDate.Date)
+                    if (b.GetFestival().StartDate.Date == b.GetFestival().EndDate.Date)
                     {
-                        cell3.Text = b.getFestival().StartDate.ToString("dd/MM/yyyy");
+                        cell3.Text = b.GetFestival().StartDate.ToString("dd/MM/yyyy");
                     }
                     else
                     {
-                        cell3.Text = b.getFestival().StartDate.ToString("dd/MM/yyyy") + " t/m " +
-                                     b.getFestival().EndDate.ToString("dd/MM/yyyy");
+                        cell3.Text = b.GetFestival().StartDate.ToString("dd/MM/yyyy") + " t/m " +
+                                     b.GetFestival().EndDate.ToString("dd/MM/yyyy");
                     }
 
 
                     TableCell cell4 = new TableCell();
                     Button btnProgram = new Button
                     {
-                        Text = b.getFestival().EndDate < DateTime.Now ? "Beheer bezochte optredens" : "Bekijk programma"
+                        Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer bezochte optredens" : "Bekijk programma"
                     };
 
 

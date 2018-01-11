@@ -29,14 +29,14 @@ namespace Domain
 
         public DateTime ScanDate { get; set; }
 
-        public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+        public void AddFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
         {
-            TicketType.addFestival(festivalNumber, name, startDate, endDate);
+            TicketType.AddFestival(festivalNumber, name, startDate, endDate);
         }
 
-        public Festival getFestival()
+        public Festival GetFestival()
         {
-            return TicketType.getFestival();
+            return TicketType.GetFestival();
         }
     }
 }

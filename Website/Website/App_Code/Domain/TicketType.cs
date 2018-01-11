@@ -32,12 +32,12 @@ namespace Domain
 
         public DateTime DateValidTo { get; set; }
 
-        public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+        public void AddFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
         {
-            FestivalCompany.addFestival(festivalNumber, name, startDate, endDate);
+            FestivalCompany.AddFestival(festivalNumber, name, startDate, endDate);
         }
 
-        public Festival getFestival()
+        public Festival GetFestival()
         {
             return FestivalCompany.Festival;
         }
