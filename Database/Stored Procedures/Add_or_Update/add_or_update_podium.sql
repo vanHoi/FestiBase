@@ -35,6 +35,9 @@ BEGIN
 		/* Checking the constraints on performance */
 		EXEC sp_check_podium @tent_number, @construction_width, @construction_length, @construction_height, @floor_height, @capacity, @free_span_width, @free_span_length, @free_span_height
 
+		/* Check if the podium and tent are from the same festival */
+		EXEC sp_check_podium_tent_festival @podium_number, @tent_number
+
 		IF (@tent_number = 0)
 		BEGIN
 			SET @tent_number = NULL -- THIS IS NEEDED, BECAUSE THE DATABASE WON'T ACCEPT THE NUMBER 0
@@ -191,5 +194,17 @@ GO
 /* update, wrong podium */
 BEGIN TRAN
 EXEC sp_add_or_update_podium 666, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
+ROLLBACK TRAN
+GO
+
+/* tent from wrong festival  */
+BEGIN TRAN
+EXEC sp_add_or_update_podium 1, 1, 2, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 1
+ROLLBACK TRAN
+GO
+
+/* update tent from wrong festival */
+BEGIN TRAN 
+EXEC sp_add_or_update_podium 1, 1, 2, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 0
 ROLLBACK TRAN
 GO
