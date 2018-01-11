@@ -1,41 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Town
-/// </summary>
-public class Town
+﻿namespace Domain
 {
-    private int townNumber;
-    private Country country;
-    private string name;
-
-    public Town() { }
-
-    public Town(int townNumber, Country country, string name)
+    /// <summary>
+    /// Summary description for Town
+    /// </summary>
+    public class Town
     {
-        this.townNumber = townNumber;
-        this.country = country;
-        this.name = name;
-    }
+        public Town() { }
 
-    public int TownNumber
-    {
-        get => townNumber;
-        set => townNumber = value;
-    }
+        public Town(int townNumber, Country country, string name)
+        {
+            this.TownNumber = townNumber;
+            this.Country = country;
+            this.Name = name;
+        }
 
-    public Country Country
-    {
-        get => country;
-        set => country = value;
-    }
+        public int TownNumber { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
+        public Country Country { get; set; }
+
+        public string Name { get; set; }
     }
 }

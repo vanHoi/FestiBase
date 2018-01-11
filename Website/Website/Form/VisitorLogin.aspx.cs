@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Model;
 
-public partial class Form_VisitorLogin : System.Web.UI.Page
+namespace Form
 {
-    private VisitorModel visitorModel;
-
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Form_VisitorLogin : System.Web.UI.Page
     {
-        visitorModel = new VisitorModel();
-    }
+        private VisitorModel visitorModel;
 
-    protected void btnReturn_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Main.aspx");
-    }
-
-    protected void btnLogin_Click(object sender, EventArgs e)
-    {
-        if (!String.IsNullOrEmpty(tboxEmail.Text))
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Session["visitor"] = visitorModel.LoginVisitor(tboxEmail.Text);
-            Response.Redirect("VisitorOverview.aspx");
+            visitorModel = new VisitorModel();
+        }
+
+        protected void btnReturn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Main.aspx");
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(tboxEmail.Text))
+            {
+                Session["visitor"] = visitorModel.LoginVisitor(tboxEmail.Text);
+                Response.Redirect("VisitorOverview.aspx");
+            }
         }
     }
 }

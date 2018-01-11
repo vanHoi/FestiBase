@@ -1,57 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for CompanyBranch
-/// </summary>
-public class CompanyBranch
+﻿namespace Domain
 {
-    private int branchNumber;
-    private Company company;
-    private int townNumber;
-    private string street;
-    private string houseNumber;
-
-    public CompanyBranch() { }
-
-    public CompanyBranch(int branchNumber, Company company, int townNumber, string street, string houseNumber)
+    /// <summary>
+    /// Summary description for CompanyBranch
+    /// </summary>
+    public class CompanyBranch
     {
-        this.branchNumber = branchNumber;
-        this.company = company;
-        this.townNumber = townNumber;
-        this.street = street;
-        this.houseNumber = houseNumber;
-    }
+        public CompanyBranch() { }
 
-    public int BranchNumber
-    {
-        get => branchNumber;
-        set => branchNumber = value;
-    }
+        public CompanyBranch(int branchNumber, Company company, int townNumber, string street, string houseNumber)
+        {
+            this.BranchNumber = branchNumber;
+            this.Company = company;
+            this.TownNumber = townNumber;
+            this.Street = street;
+            this.HouseNumber = houseNumber;
+        }
 
-    public Company Company
-    {
-        get => company;
-        set => company = value;
-    }
+        public int BranchNumber { get; set; }
 
-    public int TownNumber
-    {
-        get => townNumber;
-        set => townNumber = value;
-    }
+        public Company Company { get; set; }
 
-    public string Street
-    {
-        get => street;
-        set => street = value;
-    }
+        public int TownNumber { get; set; }
 
-    public string HouseNumber
-    {
-        get => houseNumber;
-        set => houseNumber = value;
+        public string Street { get; set; }
+
+        public string HouseNumber { get; set; }
     }
 }

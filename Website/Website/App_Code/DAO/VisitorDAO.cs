@@ -1,130 +1,132 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Web;
+using Domain;
 
-/// <summary>
-/// Summary description for VisitorDAO
-/// </summary>
-public class VisitorDAO
+namespace DAO
 {
-    private SqlConnection conn;
-
-    public VisitorDAO()
+    /// <summary>
+    /// Summary description for VisitorDAO
+    /// </summary>
+    public class VisitorDAO
     {
-        conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
+        private readonly SqlConnection _conn;
 
-        try
+        public VisitorDAO()
         {
-            conn.Open();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-    }
+            _conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
 
-    public Visitor LoginVisitor(string email)
-    {
-        try
-        {
-            Visitor visitor = new Visitor();
-            SqlCommand command = new SqlCommand("SELECT * FROM Visitor WHERE email = @email", conn);
-            command.Parameters.AddWithValue("email", email);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                if (reader["visitor_number"] != DBNull.Value)
+                _conn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public Visitor LoginVisitor(string email)
+        {
+            try
+            {
+                Visitor visitor = new Visitor();
+                SqlCommand command = new SqlCommand("SELECT * FROM Visitor WHERE email = @email", _conn);
+                command.Parameters.AddWithValue("email", email);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    visitor.VisitorNumber = Convert.ToInt32(reader["visitor_number"]);
-
-                    if (reader["email"] != DBNull.Value)
+                    if (reader["visitor_number"] != DBNull.Value)
                     {
-                        visitor.Email = Convert.ToString(reader["email"]);
-                    }
+                        visitor.VisitorNumber = Convert.ToInt32(reader["visitor_number"]);
 
-                    if (reader["town_number"] != DBNull.Value)
-                    {
-                        visitor.Town = new Town
+                        if (reader["email"] != DBNull.Value)
                         {
-                            TownNumber = Convert.ToInt32(reader["town_number"])
-                        };
-                    }
+                            visitor.Email = Convert.ToString(reader["email"]);
+                        }
 
-                    if (reader["first_name"] != DBNull.Value)
-                    {
-                        visitor.FirstName = Convert.ToString(reader["first_name"]);
-                    }
+                        if (reader["town_number"] != DBNull.Value)
+                        {
+                            visitor.Town = new Town
+                            {
+                                TownNumber = Convert.ToInt32(reader["town_number"])
+                            };
+                        }
 
-                    if (reader["surname"] != DBNull.Value)
-                    {
-                        visitor.Surname = Convert.ToString(reader["surname"]);
-                    }
+                        if (reader["first_name"] != DBNull.Value)
+                        {
+                            visitor.FirstName = Convert.ToString(reader["first_name"]);
+                        }
 
-                    if (reader["telephone_number"] != DBNull.Value)
-                    {
-                        visitor.TelephoneNumber = Convert.ToString(reader["telephone_number"]);
-                    }
+                        if (reader["surname"] != DBNull.Value)
+                        {
+                            visitor.Surname = Convert.ToString(reader["surname"]);
+                        }
 
-                    if (reader["birthdate"] != DBNull.Value)
-                    {
-                        visitor.Birthdate = Convert.ToDateTime(reader["birthdate"]);
-                    }
+                        if (reader["telephone_number"] != DBNull.Value)
+                        {
+                            visitor.TelephoneNumber = Convert.ToString(reader["telephone_number"]);
+                        }
 
-                    if (reader["twitter_username"] != DBNull.Value)
-                    {
-                        visitor.TwitterUsername = Convert.ToString(reader["twitter_username"]);
-                    }
+                        if (reader["birthdate"] != DBNull.Value)
+                        {
+                            visitor.Birthdate = Convert.ToDateTime(reader["birthdate"]);
+                        }
 
-                    if (reader["facebook_username"] != DBNull.Value)
-                    {
-                        visitor.FacebookUsername = Convert.ToString(reader["facebook_username"]);
-                    }
+                        if (reader["twitter_username"] != DBNull.Value)
+                        {
+                            visitor.TwitterUsername = Convert.ToString(reader["twitter_username"]);
+                        }
 
-                    if (reader["street"] != DBNull.Value)
-                    {
-                        visitor.Street = Convert.ToString(reader["street"]);
-                    }
+                        if (reader["facebook_username"] != DBNull.Value)
+                        {
+                            visitor.FacebookUsername = Convert.ToString(reader["facebook_username"]);
+                        }
 
-                    if (reader["house_number"] != DBNull.Value)
+                        if (reader["street"] != DBNull.Value)
+                        {
+                            visitor.Street = Convert.ToString(reader["street"]);
+                        }
+
+                        if (reader["house_number"] != DBNull.Value)
+                        {
+                            visitor.HouseNumber = Convert.ToInt32(reader["house_number"]);
+                        }   
+                    }
+                    else
                     {
-                        visitor.HouseNumber = Convert.ToInt32(reader["house_number"]);
-                    }   
+                        visitor = AddVisitor(email);
+                    }
                 }
-                else
-                {
-                    visitor = AddVisitor(email);
-                }
+
+                _conn.Close();
+                return visitor;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
 
-            conn.Close();
-            return visitor;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
+            return null;
         }
 
-        return null;
-    }
-
-    public Visitor AddVisitor(string email)
-    {
-        try
+        public Visitor AddVisitor(string email)
         {
-            SqlCommand command = new SqlCommand("EXEC sp_add_or_update_visitor NULL, NULL, @email, NULL, " +
-                                                "NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1", conn);
-            command.Parameters.AddWithValue("email", email);
-            command.ExecuteNonQuery();
-            return LoginVisitor(email);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
+            try
+            {
+                SqlCommand command = new SqlCommand("EXEC sp_add_or_update_visitor NULL, NULL, @email, NULL, " +
+                                                    "NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1", _conn);
+                command.Parameters.AddWithValue("email", email);
+                command.ExecuteNonQuery();
+                return LoginVisitor(email);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
-        return null;
+            return null;
+        }
     }
 }

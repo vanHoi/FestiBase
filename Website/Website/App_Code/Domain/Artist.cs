@@ -1,48 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-/// <summary>
-/// Summary description for Artist
-/// </summary>
-public class Artist
+namespace Domain
 {
-    private int artistNumber;
-    private string name;
-    private List<Genre> playsGenres;
-
-    public Artist() { }
-
-    public Artist(int artistNumber, string name)
+    /// <summary>
+    /// Summary description for Artist
+    /// </summary>
+    public class Artist
     {
-        this.artistNumber = artistNumber;
-        this.name = name;
-    }
+        public Artist() { }
 
-    public Artist(int artistNumber, string name, List<Genre> playsGenres)
-    {
-        this.artistNumber = artistNumber;
-        this.name = name;
-        this.playsGenres = playsGenres;
-    }
+        public Artist(int artistNumber, string name)
+        {
+            this.ArtistNumber = artistNumber;
+            this.Name = name;
+        }
 
-    public int ArtistNumber
-    {
-        get => artistNumber;
-        set => artistNumber = value;
-    }
+        public Artist(int artistNumber, string name, List<Genre> playsGenres)
+        {
+            this.ArtistNumber = artistNumber;
+            this.Name = name;
+            this.PlaysGenres = playsGenres;
+        }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public int ArtistNumber { get; set; }
 
-    public List<Genre> PlaysGenres
-    {
-        get => playsGenres;
-        set => playsGenres = value;
-    }
+        public string Name { get; set; }
 
+        public List<Genre> PlaysGenres { get; set; }
+    }
 }

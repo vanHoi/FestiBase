@@ -1,49 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for LockerRented
-/// </summary>
-public class LockerRented
+namespace Domain
 {
-    private Locker locker;
-    private DateTime startDate;
-    private DateTime endDate;
-    private Visitor visitor;
-
-    public LockerRented() { }
-
-    public LockerRented(Locker locker, DateTime startDate, DateTime endDate, Visitor visitor)
+    /// <summary>
+    /// Summary description for LockerRented
+    /// </summary>
+    public class LockerRented
     {
-        this.locker = locker;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.visitor = visitor;
-    }
+        public LockerRented() { }
 
-    public Locker Locker
-    {
-        get => locker;
-        set => locker = value;
-    }
+        public LockerRented(Locker locker, DateTime startDate, DateTime endDate, Visitor visitor)
+        {
+            this.Locker = locker;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            this.Visitor = visitor;
+        }
 
-    public Visitor Visitor
-    {
-        get => visitor;
-        set => visitor = value;
-    }
+        public Locker Locker { get; set; }
 
-    public DateTime StartDate
-    {
-        get => startDate;
-        set => startDate = value;
-    }
+        public Visitor Visitor { get; set; }
 
-    public DateTime EndDate
-    {
-        get => endDate;
-        set => endDate = value;
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
     }
 }

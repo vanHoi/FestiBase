@@ -1,122 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Tent
-/// </summary>
-public class Tent
+﻿namespace Domain
 {
-    private int tentNumber;
-    private Festival festival;
-    private string name;
-    private int width;
-    private int length;
-    private int sideHeight;
-    private int ridgeHeight;
-    private int constructionWidth;
-    private int constructionLength;
-    private string tentType;
-    private string color;
-    private string floorType;
-    private string capacity;
-
-    public Tent() { }
-
-    public Tent(int tentNumber, Festival festival, string name, int width, int length, int sideHeight, int ridgeHeight, 
-        int constructionWidth, int constructionLength, string tentType, string color, string floorType, string capacity)
+    /// <summary>
+    /// Summary description for Tent
+    /// </summary>
+    public class Tent
     {
-        this.tentNumber = tentNumber;
-        this.festival = festival;
-        this.name = name;
-        this.width = width;
-        this.length = length;
-        this.sideHeight = sideHeight;
-        this.ridgeHeight = ridgeHeight;
-        this.constructionWidth = constructionWidth;
-        this.constructionLength = constructionLength;
-        this.tentType = tentType;
-        this.color = color;
-        this.floorType = floorType;
-        this.capacity = capacity;
-    }
+        public Tent() { }
 
-    public int TentNumber
-    {
-        get => tentNumber;
-        set => tentNumber = value;
-    }
+        public Tent(int tentNumber, Festival festival, string name, int width, int length, int sideHeight, int ridgeHeight, 
+            int constructionWidth, int constructionLength, string tentType, string color, string floorType, string capacity)
+        {
+            this.TentNumber = tentNumber;
+            this.Festival = festival;
+            this.Name = name;
+            this.Width = width;
+            this.Length = length;
+            this.SideHeight = sideHeight;
+            this.RidgeHeight = ridgeHeight;
+            this.ConstructionWidth = constructionWidth;
+            this.ConstructionLength = constructionLength;
+            this.TentType = tentType;
+            this.Color = color;
+            this.FloorType = floorType;
+            this.Capacity = capacity;
+        }
 
-    public Festival Festival
-    {
-        get => festival;
-        set => festival = value;
-    }
+        public int TentNumber { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public Festival Festival { get; set; }
 
-    public int Width
-    {
-        get => width;
-        set => width = value;
-    }
+        public string Name { get; set; }
 
-    public int Length
-    {
-        get => length;
-        set => length = value;
-    }
+        public int Width { get; set; }
 
-    public int SideHeight
-    {
-        get => sideHeight;
-        set => sideHeight = value;
-    }
+        public int Length { get; set; }
 
-    public int RidgeHeight
-    {
-        get => ridgeHeight;
-        set => ridgeHeight = value;
-    }
+        public int SideHeight { get; set; }
 
-    public int ConstructionWidth
-    {
-        get => constructionWidth;
-        set => constructionWidth = value;
-    }
+        public int RidgeHeight { get; set; }
 
-    public int ConstructionLength
-    {
-        get => constructionLength;
-        set => constructionLength = value;
-    }
+        public int ConstructionWidth { get; set; }
 
-    public string TentType
-    {
-        get => tentType;
-        set => tentType = value;
-    }
+        public int ConstructionLength { get; set; }
 
-    public string Color
-    {
-        get => color;
-        set => color = value;
-    }
+        public string TentType { get; set; }
 
-    public string FloorType
-    {
-        get => floorType;
-        set => floorType = value;
-    }
+        public string Color { get; set; }
 
-    public string Capacity
-    {
-        get => capacity;
-        set => capacity = value;
+        public string FloorType { get; set; }
+
+        public string Capacity { get; set; }
     }
 }

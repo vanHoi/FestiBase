@@ -1,75 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for PodiumSchedule
-/// </summary>
-public class PodiumSchedule
+namespace Domain
 {
-    private int podiumScheduleNumber;
-    private Podium podium;
-    private DateTime startDate;
-    private DateTime startTime;
-    private DateTime endDate;
-    private DateTime endTime;
-    private int breakTime;
-
-    public PodiumSchedule() { }
-
-    public PodiumSchedule(int podiumScheduleNumber, Podium podium, DateTime startDate, DateTime startTime, 
-        DateTime endDate, DateTime endTime, int breakTime)
+    /// <summary>
+    /// Summary description for PodiumSchedule
+    /// </summary>
+    public class PodiumSchedule
     {
-        this.podiumScheduleNumber = podiumScheduleNumber;
-        this.podium = podium;
-        this.startDate = startDate;
-        this.startTime = startTime;
-        this.endDate = endDate;
-        this.endTime = endTime;
-        this.breakTime = breakTime;
-    }
+        public PodiumSchedule() { }
 
-    public int PodiumScheduleNumber
-    {
-        get => podiumScheduleNumber;
-        set => podiumScheduleNumber = value;
-    }
+        public PodiumSchedule(int podiumScheduleNumber, Podium podium, DateTime startDate, DateTime startTime, 
+            DateTime endDate, DateTime endTime, int breakTime)
+        {
+            this.PodiumScheduleNumber = podiumScheduleNumber;
+            this.Podium = podium;
+            this.StartDate = startDate;
+            this.StartTime = startTime;
+            this.EndDate = endDate;
+            this.EndTime = endTime;
+            this.BreakTime = breakTime;
+        }
 
-    public Podium Podium
-    {
-        get => podium;
-        set => podium = value;
-    }
+        public int PodiumScheduleNumber { get; set; }
 
-    public DateTime StartDate
-    {
-        get => startDate;
-        set => startDate = value;
-    }
+        public Podium Podium { get; set; }
 
-    public DateTime StartTime
-    {
-        get => startTime;
-        set => startTime = value;
-    }
+        public DateTime StartDate { get; set; }
 
-    public DateTime EndDate
-    {
-        get => endDate;
-        set => endDate = value;
-    }
+        public DateTime StartTime { get; set; }
 
-    public DateTime EndTime
-    {
-        get => endTime;
-        set => endTime = value;
-    }
+        public DateTime EndDate { get; set; }
 
-    public int BreakTime
-    {
-        get => breakTime;
-        set => breakTime = value;
-    }
+        public DateTime EndTime { get; set; }
 
+        public int BreakTime { get; set; }
+    }
 }

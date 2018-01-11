@@ -1,50 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Attraction
-/// </summary>
-public class Attraction
+﻿namespace Domain
 {
-    private int attractionNumber;
-    private FestivalCompany festivalCompany;
-    private string name;
-    private string attractionType;
-
-    public Attraction() { }
-
-    public Attraction(int attractionNumber, FestivalCompany festivalCompany, string name, string attractionType)
+    /// <summary>
+    /// Summary description for Attraction
+    /// </summary>
+    public class Attraction
     {
-        this.attractionNumber = attractionNumber;
-        this.festivalCompany = festivalCompany;
-        this.name = name;
-        this.attractionType = attractionType;
-    }
+        public Attraction() { }
 
-    public int AttractionNumber
-    {
-        get => attractionNumber;
-        set => attractionNumber = value;
-    }
+        public Attraction(int attractionNumber, FestivalCompany festivalCompany, string name, string attractionType)
+        {
+            this.AttractionNumber = attractionNumber;
+            this.FestivalCompany = festivalCompany;
+            this.Name = name;
+            this.AttractionType = attractionType;
+        }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public int AttractionNumber { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string AttractionType
-    {
-        get => attractionType;
-        set => attractionType = value;
-    }
+        public string Name { get; set; }
 
+        public string AttractionType { get; set; }
+    }
 }

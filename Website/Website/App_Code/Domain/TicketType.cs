@@ -1,71 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for TicketType
-/// </summary>
-public class TicketType
+namespace Domain
 {
-    private FestivalCompany festivalCompany;
-    private string type;
-    private double ticketPrice;
-    private DateTime dateValidFrom;
-    private DateTime dateValidTo;
-
-    public TicketType()
+    /// <summary>
+    /// Summary description for TicketType
+    /// </summary>
+    public class TicketType
     {
-        festivalCompany = new FestivalCompany();
-    }
+        public TicketType()
+        {
+            FestivalCompany = new FestivalCompany();
+        }
 
-    public TicketType(FestivalCompany festivalCompany, string type, double ticketPrice, DateTime dateValidFrom,
-        DateTime dateValidTo)
-    {
-        this.festivalCompany = festivalCompany;
-        this.type = type;
-        this.ticketPrice = ticketPrice;
-        this.dateValidFrom = dateValidFrom;
-        this.dateValidTo = dateValidTo;
-    }
+        public TicketType(FestivalCompany festivalCompany, string type, double ticketPrice, DateTime dateValidFrom,
+            DateTime dateValidTo)
+        {
+            this.FestivalCompany = festivalCompany;
+            this.Type = type;
+            this.TicketPrice = ticketPrice;
+            this.DateValidFrom = dateValidFrom;
+            this.DateValidTo = dateValidTo;
+        }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string Type
-    {
-        get => type;
-        set => type = value;
-    }
+        public string Type { get; set; }
 
-    public double TicketPrice
-    {
-        get => ticketPrice;
-        set => ticketPrice = value;
-    }
+        public double TicketPrice { get; set; }
 
-    public DateTime DateValidFrom
-    {
-        get => dateValidFrom;
-        set => dateValidFrom = value;
-    }
+        public DateTime DateValidFrom { get; set; }
 
-    public DateTime DateValidTo
-    {
-        get => dateValidTo;
-        set => dateValidTo = value;
-    }
+        public DateTime DateValidTo { get; set; }
 
-    public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
-    {
-        festivalCompany.addFestival(festivalNumber, name, startDate, endDate);
-    }
+        public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+        {
+            FestivalCompany.addFestival(festivalNumber, name, startDate, endDate);
+        }
 
-    public Festival getFestival()
-    {
-        return festivalCompany.Festival;
+        public Festival getFestival()
+        {
+            return FestivalCompany.Festival;
+        }
     }
 }

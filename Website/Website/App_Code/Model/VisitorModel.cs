@@ -1,29 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using DAO;
+using Domain;
 
-/// <summary>
-/// Summary description for VisitorModel
-/// </summary>
-public class VisitorModel
+namespace Model
 {
-    private VisitorDAO visitorDAO;
-    private BoughtTicketDAO boughtTicketDAO;
-
-    public VisitorModel()
+    /// <summary>
+    /// Summary description for VisitorModel
+    /// </summary>
+    public class VisitorModel
     {
-        visitorDAO = new VisitorDAO();
-        boughtTicketDAO = new BoughtTicketDAO();
-    }
+        private readonly VisitorDAO _visitorDao;
+        private readonly BoughtTicketDAO _boughtTicketDao;
 
-    public Visitor LoginVisitor(string email)
-    {
-        return visitorDAO.LoginVisitor(email);
-    }
+        public VisitorModel()
+        {
+            _visitorDao = new VisitorDAO();
+            _boughtTicketDao = new BoughtTicketDAO();
+        }
 
-    public List<BoughtTicket> getAllBoughtTicketsOfVisitor(int visitorNumber)
-    {
-        return boughtTicketDAO.getAllBoughtTicketsOfVisitor(visitorNumber);
+        public Visitor LoginVisitor(string email)
+        {
+            return _visitorDao.LoginVisitor(email);
+        }
+
+        public List<BoughtTicket> getAllBoughtTicketsOfVisitor(int visitorNumber)
+        {
+            return _boughtTicketDao.getAllBoughtTicketsOfVisitor(visitorNumber);
+        }
     }
 }

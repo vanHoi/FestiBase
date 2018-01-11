@@ -1,34 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Company
-/// </summary>
-public class Company
+﻿namespace Domain
 {
-    private int cocNumber;
-    private string name;
-
-    public Company() { }
-
-    public Company(int cocNumber, string name)
+    /// <summary>
+    /// Summary description for Company
+    /// </summary>
+    public class Company
     {
-        this.cocNumber = cocNumber;
-        this.name = name;
-    }
+        public Company() { }
 
-    public int CocNumber
-    {
-        get => cocNumber;
-        set => cocNumber = value;
-    }
+        public Company(int cocNumber, string name)
+        {
+            this.CocNumber = cocNumber;
+            this.Name = name;
+        }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public int CocNumber { get; set; }
 
+        public string Name { get; set; }
+    }
 }

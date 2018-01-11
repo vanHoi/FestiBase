@@ -1,34 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Country
-/// </summary>
-public class Country
+﻿namespace Domain
 {
-    private int countryNumber;
-    private string name;
-
-    public Country() { }
-
-    public Country(int countryNumber, string name)
+    /// <summary>
+    /// Summary description for Country
+    /// </summary>
+    public class Country
     {
-        this.countryNumber = countryNumber;
-        this.name = name;
-    }
+        public Country() { }
 
-    public int CountryNumber
-    {
-        get => countryNumber;
-        set => countryNumber = value;
-    }
+        public Country(int countryNumber, string name)
+        {
+            this.CountryNumber = countryNumber;
+            this.Name = name;
+        }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public int CountryNumber { get; set; }
 
+        public string Name { get; set; }
+    }
 }

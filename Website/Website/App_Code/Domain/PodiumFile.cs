@@ -1,58 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for PodiumFile
-/// </summary>
-public class PodiumFile
+﻿namespace Domain
 {
-    private int fileNumber;
-    private Podium podium;
-    private FestivalCompany festivalCompany;
-    private string file;
-    private string description;
-
-    public PodiumFile() { }
-
-    public PodiumFile(int fileNumber, Podium podium, FestivalCompany festivalCompany, string file, string description)
+    /// <summary>
+    /// Summary description for PodiumFile
+    /// </summary>
+    public class PodiumFile
     {
-        this.fileNumber = fileNumber;
-        this.podium = podium;
-        this.festivalCompany = festivalCompany;
-        this.file = file;
-        this.description = description;
-    }
+        public PodiumFile() { }
 
-    public int FileNumber
-    {
-        get => fileNumber;
-        set => fileNumber = value;
-    }
+        public PodiumFile(int fileNumber, Podium podium, FestivalCompany festivalCompany, string file, string description)
+        {
+            this.FileNumber = fileNumber;
+            this.Podium = podium;
+            this.FestivalCompany = festivalCompany;
+            this.File = file;
+            this.Description = description;
+        }
 
-    public Podium Podium
-    {
-        get => podium;
-        set => podium = value;
-    }
+        public int FileNumber { get; set; }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public Podium Podium { get; set; }
 
-    public string File
-    {
-        get => file;
-        set => file = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    }
+        public string File { get; set; }
 
+        public string Description { get; set; }
+    }
 }

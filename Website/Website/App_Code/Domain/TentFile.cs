@@ -1,57 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for TentFile
-/// </summary>
-public class TentFile
+﻿namespace Domain
 {
-    private int fileNumber;
-    private Tent tent;
-    private FestivalCompany festivalCompany;
-    private string file;
-    private string description;
-
-    public TentFile() { }
-
-    public TentFile(int fileNumber, Tent tent, FestivalCompany festivalCompany, string file, string description)
+    /// <summary>
+    /// Summary description for TentFile
+    /// </summary>
+    public class TentFile
     {
-        this.fileNumber = fileNumber;
-        this.tent = tent;
-        this.festivalCompany = festivalCompany;
-        this.file = file;
-        this.description = description;
-    }
+        public TentFile() { }
 
-    public int FileNumber
-    {
-        get => fileNumber;
-        set => fileNumber = value;
-    }
+        public TentFile(int fileNumber, Tent tent, FestivalCompany festivalCompany, string file, string description)
+        {
+            this.FileNumber = fileNumber;
+            this.Tent = tent;
+            this.FestivalCompany = festivalCompany;
+            this.File = file;
+            this.Description = description;
+        }
 
-    public Tent Tent
-    {
-        get => tent;
-        set => tent = value;
-    }
+        public int FileNumber { get; set; }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public Tent Tent { get; set; }
 
-    public string File
-    {
-        get => file;
-        set => file = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string Description
-    {
-        get => description;
-        set => description = value;
+        public string File { get; set; }
+
+        public string Description { get; set; }
     }
 }

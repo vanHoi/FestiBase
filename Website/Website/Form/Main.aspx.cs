@@ -1,26 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
+using Domain;
+using Model;
 
-public partial class Form_Main : System.Web.UI.Page
+namespace Form
 {
-    private FestivalModel festivalModel;
-
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class Form_Main : System.Web.UI.Page
     {
-        festivalModel = new FestivalModel();
+        private FestivalModel festivalModel;
 
-        foreach (Festival f in festivalModel.getAllFestivals())
+        protected void Page_Load(object sender, EventArgs e)
         {
-            listFestivals.Items.Add(new ListItem(f.Name, f.FestivalNumber.ToString()));
-        }
-    }
+            festivalModel = new FestivalModel();
 
-    protected void btnVisitor_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("VisitorLogin.aspx");
+            foreach (Festival f in festivalModel.getAllFestivals())
+            {
+                listFestivals.Items.Add(new ListItem(f.Name, f.FestivalNumber.ToString()));
+            }
+        }
+
+        protected void btnVisitor_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("VisitorLogin.aspx");
+        }
     }
 }

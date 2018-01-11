@@ -1,49 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Catering
-/// </summary>
-public class Catering
+﻿namespace Domain
 {
-    private int cateringNumber;
-    private FestivalCompany festivalCompany;
-    private string name;
-    private bool electricity;
-
-    public Catering() { }
-
-    public Catering(int cateringNumber, FestivalCompany festivalCompany, string name, bool electricity)
+    /// <summary>
+    /// Summary description for Catering
+    /// </summary>
+    public class Catering
     {
-        this.cateringNumber = cateringNumber;
-        this.festivalCompany = festivalCompany;
-        this.name = name;
-        this.electricity = electricity;
-    }
+        public Catering() { }
 
-    public int CateringNumber
-    {
-        get => cateringNumber;
-        set => cateringNumber = value;
-    }
+        public Catering(int cateringNumber, FestivalCompany festivalCompany, string name, bool electricity)
+        {
+            this.CateringNumber = cateringNumber;
+            this.FestivalCompany = festivalCompany;
+            this.Name = name;
+            this.Electricity = electricity;
+        }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public int CateringNumber { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public bool Electricity
-    {
-        get => electricity;
-        set => electricity = value;
+        public string Name { get; set; }
+
+        public bool Electricity { get; set; }
     }
 }

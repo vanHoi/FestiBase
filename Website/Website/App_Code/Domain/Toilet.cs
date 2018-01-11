@@ -1,49 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Toilet
-/// </summary>
-public class Toilet
+﻿namespace Domain
 {
-    private int toiletNumber;
-    private FestivalCompany festivalCompany;
-    private string name;
-    private string capacity;
-
-    public Toilet() { }
-
-    public Toilet(int toiletNumber, FestivalCompany festivalCompany, string name, string capacity)
+    /// <summary>
+    /// Summary description for Toilet
+    /// </summary>
+    public class Toilet
     {
-        this.toiletNumber = toiletNumber;
-        this.festivalCompany = festivalCompany;
-        this.name = name;
-        this.capacity = capacity;
-    }
+        public Toilet() { }
 
-    public int ToiletNumber
-    {
-        get => toiletNumber;
-        set => toiletNumber = value;
-    }
+        public Toilet(int toiletNumber, FestivalCompany festivalCompany, string name, string capacity)
+        {
+            this.ToiletNumber = toiletNumber;
+            this.FestivalCompany = festivalCompany;
+            this.Name = name;
+            this.Capacity = capacity;
+        }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public int ToiletNumber { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string Capacity
-    {
-        get => capacity;
-        set => capacity = value;
+        public string Name { get; set; }
+
+        public string Capacity { get; set; }
     }
 }

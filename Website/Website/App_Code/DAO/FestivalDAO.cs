@@ -2,91 +2,98 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
 using System.Web;
+using Domain;
 
-/// <summary>
-/// Summary description for FestivalDAO
-/// </summary>
-public class FestivalDAO
+namespace DAO
 {
-    private SqlConnection conn;
-
-    public FestivalDAO()
+    /// <summary>
+    /// Summary description for FestivalDAO
+    /// </summary>
+    public class FestivalDAO
     {
-        conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
+        private readonly SqlConnection _conn;
 
-        try
+        public FestivalDAO()
         {
-            conn.Open();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-    }
+            _conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
 
-    public Festival getFestivalbyNumber(int number)
-    {
-        try
-        {
-            Festival festival = null;
-            SqlCommand command = new SqlCommand("SELECT * FROM FESTIVAL WHERE festival_number = " + number, conn);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                festival = new Festival(Convert.ToInt32(reader["festival_number"]),
-                    new Organisation(), 
-                    Convert.ToString(reader["name"]),
-                    Convert.ToDateTime(reader["start_date"]),
-                    Convert.ToDateTime(reader["end_date"]),
-                    Convert.ToString(reader["location"]),
-                    Convert.ToDouble(reader["token_price"]));
+                _conn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
 
-                festival.Organisation.OrganisationNumber = Convert.ToInt32(reader["organisation_number"]);
+        public Festival getFestivalbyNumber(int number)
+        {
+            try
+            {
+                Festival festival = null;
+                SqlCommand command = new SqlCommand("SELECT * FROM FESTIVAL WHERE festival_number = " + number, _conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    festival = new Festival(Convert.ToInt32(reader["festival_number"]),
+                        new Organisation(),
+                        Convert.ToString(reader["name"]),
+                        Convert.ToDateTime(reader["start_date"]),
+                        Convert.ToDateTime(reader["end_date"]),
+                        Convert.ToString(reader["location"]),
+                        Convert.ToDouble(reader["token_price"]))
+                    {
+                        Organisation = {OrganisationNumber = Convert.ToInt32(reader["organisation_number"])}
+                    };
+
+                }
+
+                _conn.Close();
+                return festival;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
 
-            conn.Close();
-            return festival;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
+            return null;
         }
 
-        return null;
-    }
-
-    public List<Festival> getAllFestivals()
-    {
-        try
+        public List<Festival> getAllFestivals()
         {
-            List<Festival> festivals = new List<Festival>();
-
-            SqlCommand command = new SqlCommand("SELECT * FROM FESTIVAL", conn);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            try
             {
-                Festival festival = new Festival(Convert.ToInt32(reader["festival_number"]),
-                    new Organisation(), 
-                    Convert.ToString(reader["name"]),
-                    Convert.ToDateTime(reader["start_date"]),
-                    Convert.ToDateTime(reader["end_date"]),
-                    Convert.ToString(reader["location"]),
-                    Convert.ToDouble(reader["token_price"]));
-                festival.Organisation.OrganisationNumber = Convert.ToInt32(reader["organisation_number"]);
+                List<Festival> festivals = new List<Festival>();
 
-                festivals.Add(festival);
+                SqlCommand command = new SqlCommand("SELECT * FROM FESTIVAL", _conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Festival festival = new Festival(Convert.ToInt32(reader["festival_number"]),
+                        new Organisation(),
+                        Convert.ToString(reader["name"]),
+                        Convert.ToDateTime(reader["start_date"]),
+                        Convert.ToDateTime(reader["end_date"]),
+                        Convert.ToString(reader["location"]),
+                        Convert.ToDouble(reader["token_price"]))
+                    {
+                        Organisation = {OrganisationNumber = Convert.ToInt32(reader["organisation_number"])}
+                    };
+
+                    festivals.Add(festival);
+                }
+
+                _conn.Close();
+                return festivals;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
 
-            conn.Close();
-            return festivals;
+            return null;
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-
-        return null;
     }
 }

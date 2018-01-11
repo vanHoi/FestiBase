@@ -1,144 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for Visitor
-/// </summary>
-public class Visitor
+namespace Domain
 {
-    private int visitorNumber;
-    private Town town;
-    private string email;
-    private string firstName;
-    private string surname;
-    private string telephoneNumber;
-    private DateTime birthdate;
-    private string twitterUsername;
-    private string facebookUsername;
-    private string street;
-    private int houseNumber;
-    private List<Genre> genrePreferences;
-    private List<Performance> performancesLiked;
-    private List<Performance> performancesVisited;
-
-    public Visitor() { }
-
-    public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
+    /// <summary>
+    /// Summary description for Visitor
+    /// </summary>
+    public class Visitor
     {
-        this.visitorNumber = visitorNumber;
-        this.town = town;
-        this.email = email;
-        this.firstName = firstName;
-        this.surname = surname;
-        this.telephoneNumber = telephoneNumber;
-        this.birthdate = birthdate;
-        this.twitterUsername = twitterUsername;
-        this.facebookUsername = facebookUsername;
-        this.street = street;
-        this.houseNumber = houseNumber;
-    }
+        public Visitor() { }
 
-    public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited)
-    {
-        this.visitorNumber = visitorNumber;
-        this.town = town;
-        this.email = email;
-        this.firstName = firstName;
-        this.surname = surname;
-        this.telephoneNumber = telephoneNumber;
-        this.birthdate = birthdate;
-        this.twitterUsername = twitterUsername;
-        this.facebookUsername = facebookUsername;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.genrePreferences = genrePreferences;
-        this.performancesLiked = performancesLiked;
-        this.performancesVisited = performancesVisited;
-    }
+        public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber)
+        {
+            this.VisitorNumber = visitorNumber;
+            this.Town = town;
+            this.Email = email;
+            this.FirstName = firstName;
+            this.Surname = surname;
+            this.TelephoneNumber = telephoneNumber;
+            this.Birthdate = birthdate;
+            this.TwitterUsername = twitterUsername;
+            this.FacebookUsername = facebookUsername;
+            this.Street = street;
+            this.HouseNumber = houseNumber;
+        }
 
-    public int VisitorNumber
-    {
-        get => visitorNumber;
-        set => visitorNumber = value;
-    }
+        public Visitor(int visitorNumber, Town town, string email, string firstName, string surname, string telephoneNumber, DateTime birthdate, string twitterUsername, string facebookUsername, string street, int houseNumber, List<Genre> genrePreferences, List<Performance> performancesLiked, List<Performance> performancesVisited)
+        {
+            this.VisitorNumber = visitorNumber;
+            this.Town = town;
+            this.Email = email;
+            this.FirstName = firstName;
+            this.Surname = surname;
+            this.TelephoneNumber = telephoneNumber;
+            this.Birthdate = birthdate;
+            this.TwitterUsername = twitterUsername;
+            this.FacebookUsername = facebookUsername;
+            this.Street = street;
+            this.HouseNumber = houseNumber;
+            this.GenrePreferences = genrePreferences;
+            this.PerformancesLiked = performancesLiked;
+            this.PerformancesVisited = performancesVisited;
+        }
 
-    public Town Town
-    {
-        get => town;
-        set => town = value;
-    }
+        public int VisitorNumber { get; set; }
 
-    public string Email
-    {
-        get => email;
-        set => email = value;
-    }
+        public Town Town { get; set; }
 
-    public string FirstName
-    {
-        get => firstName;
-        set => firstName = value;
-    }
+        public string Email { get; set; }
 
-    public string Surname
-    {
-        get => surname;
-        set => surname = value;
-    }
+        public string FirstName { get; set; }
 
-    public string TelephoneNumber
-    {
-        get => telephoneNumber;
-        set => telephoneNumber = value;
-    }
+        public string Surname { get; set; }
 
-    public DateTime Birthdate
-    {
-        get => birthdate;
-        set => birthdate = value;
-    }
+        public string TelephoneNumber { get; set; }
 
-    public string TwitterUsername
-    {
-        get => twitterUsername;
-        set => twitterUsername = value;
-    }
+        public DateTime Birthdate { get; set; }
 
-    public string FacebookUsername
-    {
-        get => facebookUsername;
-        set => facebookUsername = value;
-    }
+        public string TwitterUsername { get; set; }
 
-    public string Street
-    {
-        get => street;
-        set => street = value;
-    }
+        public string FacebookUsername { get; set; }
 
-    public int HouseNumber
-    {
-        get => houseNumber;
-        set => houseNumber = value;
-    }
+        public string Street { get; set; }
 
-    public List<Genre> GenrePreferences
-    {
-        get => genrePreferences;
-        set => genrePreferences = value;
-    }
+        public int HouseNumber { get; set; }
 
-    public List<Performance> PerformancesLiked
-    {
-        get => performancesLiked;
-        set => performancesLiked = value;
-    }
+        public List<Genre> GenrePreferences { get; set; }
 
-    public List<Performance> PerformancesVisited
-    {
-        get => performancesVisited;
-        set => performancesVisited = value;
+        public List<Performance> PerformancesLiked { get; set; }
+
+        public List<Performance> PerformancesVisited { get; set; }
     }
 }

@@ -1,27 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using DAO;
+using Domain;
 
-/// <summary>
-/// Summary description for FestivalModel
-/// </summary>
-public class FestivalModel
+namespace Model
 {
-    private FestivalDAO festivalDAO;
-
-    public FestivalModel()
+    /// <summary>
+    /// Summary description for FestivalModel
+    /// </summary>
+    public class FestivalModel
     {
-        festivalDAO = new FestivalDAO();
-    }
+        private readonly FestivalDAO _festivalDao;
 
-    public List<Festival> getAllFestivals()
-    {
-        return festivalDAO.getAllFestivals();
-    }
+        public FestivalModel()
+        {
+            _festivalDao = new FestivalDAO();
+        }
 
-    public Festival getFestivalByNumber(int number)
-    {
-        return festivalDAO.getFestivalbyNumber(number);
+        public List<Festival> getAllFestivals()
+        {
+            return _festivalDao.getAllFestivals();
+        }
+
+        public Festival getFestivalByNumber(int number)
+        {
+            return _festivalDao.getFestivalbyNumber(number);
+        }
     }
 }

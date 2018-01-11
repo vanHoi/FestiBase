@@ -1,77 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for Festival
-/// </summary>
-public class Festival
+namespace Domain
 {
-    private int festivalNumber;
-    private Organisation organisation;
-    private string name;
-    private DateTime startDate;
-    private DateTime endDate;
-    private string location;
-    private double tokenPrice;
-
-    public Festival()
+    /// <summary>
+    /// Summary description for Festival
+    /// </summary>
+    public class Festival
     {
-        organisation = new Organisation();
-    }
+        public Festival()
+        {
+            Organisation = new Organisation();
+        }
 
-    public Festival(int festivalNumber, Organisation organisation, string name, DateTime startDate, 
-        DateTime endDate, string location, double tokenPrice)
-    {
-        this.festivalNumber = festivalNumber;
-        this.organisation = organisation;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.location = location;
-        this.tokenPrice = tokenPrice;
-    }
+        public Festival(int festivalNumber, Organisation organisation, string name, DateTime startDate, 
+            DateTime endDate, string location, double tokenPrice)
+        {
+            this.FestivalNumber = festivalNumber;
+            this.Organisation = organisation;
+            this.Name = name;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            this.Location = location;
+            this.TokenPrice = tokenPrice;
+        }
 
-    public int FestivalNumber
-    {
-        get => festivalNumber;
-        set => festivalNumber = value;
-    }
+        public int FestivalNumber { get; set; }
 
-    public Organisation Organisation
-    {
-        get => organisation;
-        set => organisation = value;
-    }
+        public Organisation Organisation { get; set; }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
-    }
+        public string Name { get; set; }
 
-    public DateTime StartDate
-    {
-        get => startDate;
-        set => startDate = value;
-    }
+        public DateTime StartDate { get; set; }
 
-    public DateTime EndDate
-    {
-        get => endDate;
-        set => endDate = value;
-    }
+        public DateTime EndDate { get; set; }
 
-    public string Location
-    {
-        get => location;
-        set => location = value;
-    }
+        public string Location { get; set; }
 
-    public double TokenPrice
-    {
-        get => tokenPrice;
-        set => tokenPrice = value;
+        public double TokenPrice { get; set; }
     }
 }

@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Locker
-/// </summary>
-public class Locker
+﻿namespace Domain
 {
-    private int lockerNumber;
-    private FestivalCompany festivalCompany;
-
-    public Locker() { }
-
-    public Locker(int lockerNumber, FestivalCompany festivalCompany)
+    /// <summary>
+    /// Summary description for Locker
+    /// </summary>
+    public class Locker
     {
-        this.lockerNumber = lockerNumber;
-        this.festivalCompany = festivalCompany;
-    }
+        public Locker() { }
 
-    public int LockerNumber
-    {
-        get => lockerNumber;
-        set => lockerNumber = value;
-    }
+        public Locker(int lockerNumber, FestivalCompany festivalCompany)
+        {
+            this.LockerNumber = lockerNumber;
+            this.FestivalCompany = festivalCompany;
+        }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
+        public int LockerNumber { get; set; }
+
+        public FestivalCompany FestivalCompany { get; set; }
     }
 }

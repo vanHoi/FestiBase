@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Organisation
-/// </summary>
-public class Organisation
+﻿namespace Domain
 {
-    private int organisationNumber;
-    private int name;
-
-    public Organisation() { }
-
-    public Organisation(int organisationNumber, int name)
+    /// <summary>
+    /// Summary description for Organisation
+    /// </summary>
+    public class Organisation
     {
-        this.organisationNumber = organisationNumber;
-        this.name = name;
-    }
+        public Organisation() { }
 
-    public int OrganisationNumber
-    {
-        get => organisationNumber;
-        set => organisationNumber = value;
-    }
+        public Organisation(int organisationNumber, int name)
+        {
+            this.OrganisationNumber = organisationNumber;
+            this.Name = name;
+        }
 
-    public int Name
-    {
-        get => name;
-        set => name = value;
+        public int OrganisationNumber { get; set; }
+
+        public int Name { get; set; }
     }
 }

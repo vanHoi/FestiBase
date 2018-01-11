@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for Genre
-/// </summary>
-public class Genre
+﻿namespace Domain
 {
-    private int genreNumber;
-    private string name;
-
-    public Genre() { }
-
-    public Genre(int genreNumber, string name)
+    /// <summary>
+    /// Summary description for Genre
+    /// </summary>
+    public class Genre
     {
-        this.genreNumber = genreNumber;
-        this.name = name;
-    }
+        public Genre() { }
 
-    public int GenreNumber
-    {
-        get => genreNumber;
-        set => genreNumber = value;
-    }
+        public Genre(int genreNumber, string name)
+        {
+            this.GenreNumber = genreNumber;
+            this.Name = name;
+        }
 
-    public string Name
-    {
-        get => name;
-        set => name = value;
+        public int GenreNumber { get; set; }
+
+        public string Name { get; set; }
     }
 }

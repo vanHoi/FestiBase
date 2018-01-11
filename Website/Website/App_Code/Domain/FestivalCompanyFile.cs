@@ -1,49 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-/// <summary>
-/// Summary description for FestivalCompanyFile
-/// </summary>
-public class FestivalCompanyFile
+﻿namespace Domain
 {
-    private int fileNumber;
-    private FestivalCompany festivalCompany;
-    private string file;
-    private string description;
-
-    public FestivalCompanyFile() { }
-
-    public FestivalCompanyFile(int fileNumber, FestivalCompany festivalCompany, string file, string description)
+    /// <summary>
+    /// Summary description for FestivalCompanyFile
+    /// </summary>
+    public class FestivalCompanyFile
     {
-        this.fileNumber = fileNumber;
-        this.festivalCompany = festivalCompany;
-        this.file = file;
-        this.description = description;
-    }
+        public FestivalCompanyFile() { }
 
-    public FestivalCompany FestivalCompany
-    {
-        get => festivalCompany;
-        set => festivalCompany = value;
-    }
+        public FestivalCompanyFile(int fileNumber, FestivalCompany festivalCompany, string file, string description)
+        {
+            this.FileNumber = fileNumber;
+            this.FestivalCompany = festivalCompany;
+            this.File = file;
+            this.Description = description;
+        }
 
-    public int FileNumber
-    {
-        get => fileNumber;
-        set => fileNumber = value;
-    }
+        public FestivalCompany FestivalCompany { get; set; }
 
-    public string File
-    {
-        get => file;
-        set => file = value;
-    }
+        public int FileNumber { get; set; }
 
-    public string Description
-    {
-        get => description;
-        set => description = value;
+        public string File { get; set; }
+
+        public string Description { get; set; }
     }
 }

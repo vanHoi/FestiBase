@@ -1,77 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for FestivalCompany
-/// </summary>
-public class FestivalCompany
+namespace Domain
 {
-    private int festivalCompanyNumber;
-    private Festival festival;
-    private CompanyBranch companyBranch;
-    private string contactPerson;
-    private string description;
-    private string telephoneNumber;
-
-    public FestivalCompany()
+    /// <summary>
+    /// Summary description for FestivalCompany
+    /// </summary>
+    public class FestivalCompany
     {
-        festival = new Festival();
-        companyBranch = new CompanyBranch();
-    }
+        public FestivalCompany()
+        {
+            Festival = new Festival();
+            CompanyBranch = new CompanyBranch();
+        }
 
-    public FestivalCompany(int festivalCompanyNumber, Festival festival, CompanyBranch companyBranch, string contactPerson, string description, string telephoneNumber)
-    {
-        this.festivalCompanyNumber = festivalCompanyNumber;
-        this.festival = festival;
-        this.companyBranch = companyBranch;
-        this.contactPerson = contactPerson;
-        this.description = description;
-        this.telephoneNumber = telephoneNumber;
-    }
+        public FestivalCompany(int festivalCompanyNumber, Festival festival, CompanyBranch companyBranch, string contactPerson, string description, string telephoneNumber)
+        {
+            this.FestivalCompanyNumber = festivalCompanyNumber;
+            this.Festival = festival;
+            this.CompanyBranch = companyBranch;
+            this.ContactPerson = contactPerson;
+            this.Description = description;
+            this.TelephoneNumber = telephoneNumber;
+        }
 
-    public int FestivalCompanyNumber
-    {
-        get => festivalCompanyNumber;
-        set => festivalCompanyNumber = value;
-    }
+        public int FestivalCompanyNumber { get; set; }
 
-    public Festival Festival
-    {
-        get => festival;
-        set => festival = value;
-    }
+        public Festival Festival { get; set; }
 
-    public CompanyBranch CompanyBranch
-    {
-        get => companyBranch;
-        set => companyBranch = value;
-    }
+        public CompanyBranch CompanyBranch { get; set; }
 
-    public string ContactPerson
-    {
-        get => contactPerson;
-        set => contactPerson = value;
-    }
+        public string ContactPerson { get; set; }
 
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    }
+        public string Description { get; set; }
 
-    public string TelephoneNumber
-    {
-        get => telephoneNumber;
-        set => telephoneNumber = value;
-    }
+        public string TelephoneNumber { get; set; }
 
-    public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
-    {
-        festival.FestivalNumber = festivalNumber;
-        festival.Name = name;
-        festival.StartDate = startDate;
-        festival.EndDate = endDate;
+        public void addFestival(int festivalNumber, string name, DateTime startDate, DateTime endDate)
+        {
+            Festival.FestivalNumber = festivalNumber;
+            Festival.Name = name;
+            Festival.StartDate = startDate;
+            Festival.EndDate = endDate;
+        }
     }
 }

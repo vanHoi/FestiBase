@@ -1,73 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-/// <summary>
-/// Summary description for Performance
-/// </summary>
-public class Performance
+namespace Domain
 {
-    private int performanceNumber;
-    private Artist artist;
-    private PodiumSchedule podiumSchedule;
-    private Festival festival;
-    private DateTime startTime;
-    private int playTime;
-    private int minPrepTime;
-
-    public Performance() { }
-
-    public Performance(int performanceNumber, Artist artist, PodiumSchedule podiumSchedule, Festival festival, DateTime startTime, int playTime, int minPrepTime)
+    /// <summary>
+    /// Summary description for Performance
+    /// </summary>
+    public class Performance
     {
-        this.performanceNumber = performanceNumber;
-        this.artist = artist;
-        this.podiumSchedule = podiumSchedule;
-        this.festival = festival;
-        this.startTime = startTime;
-        this.playTime = playTime;
-        this.minPrepTime = minPrepTime;
-    }
+        public Performance() { }
 
-    public int PerformanceNumber
-    {
-        get => performanceNumber;
-        set => performanceNumber = value;
-    }
+        public Performance(int performanceNumber, Artist artist, PodiumSchedule podiumSchedule, Festival festival, DateTime startTime, int playTime, int minPrepTime)
+        {
+            this.PerformanceNumber = performanceNumber;
+            this.Artist = artist;
+            this.PodiumSchedule = podiumSchedule;
+            this.Festival = festival;
+            this.StartTime = startTime;
+            this.PlayTime = playTime;
+            this.MinPrepTime = minPrepTime;
+        }
 
-    public Artist Artist
-    {
-        get => artist;
-        set => artist = value;
-    }
+        public int PerformanceNumber { get; set; }
 
-    public PodiumSchedule PodiumSchedule
-    {
-        get => podiumSchedule;
-        set => podiumSchedule = value;
-    }
+        public Artist Artist { get; set; }
 
-    public Festival Festival
-    {
-        get => festival;
-        set => festival = value;
-    }
+        public PodiumSchedule PodiumSchedule { get; set; }
 
-    public DateTime StartTime
-    {
-        get => startTime;
-        set => startTime = value;
-    }
+        public Festival Festival { get; set; }
 
-    public int PlayTime
-    {
-        get => playTime;
-        set => playTime = value;
-    }
+        public DateTime StartTime { get; set; }
 
-    public int MinPrepTime
-    {
-        get => minPrepTime;
-        set => minPrepTime = value;
+        public int PlayTime { get; set; }
+
+        public int MinPrepTime { get; set; }
     }
 }
