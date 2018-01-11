@@ -216,7 +216,7 @@ INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number,
 (6, 2, 2, '31-03-2018', convert(varchar(8), '18:00:00', 108), 120, 15),
 (7, 2, 2, '30-03-2018', convert(varchar(8), '20:15:00', 108), 60,  15),
 (1, 2, 2, '31-03-2018', convert(varchar(8), '22:15:00', 108), 90,  15),
-(8, NULL, 2, '31-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
+(8, NULL, 2, '31-03-2018', NULL, 90,  30),
 (9, 4, 2, '30-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
 (10, 5, 3, '15-06-2018', convert(varchar(8), '21:15:00', 108), 90,  45)
 GO
@@ -257,4 +257,5 @@ INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VAL
 (2,1)
 GO
 
-
+USE master
+GO

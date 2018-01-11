@@ -384,7 +384,7 @@ create table PERFORMANCE (
    artist_number        int                  not null,
    podium_schedule_number int                  null,
    festival_number      int                  not null,
-   start_date           datetime             not null,
+   start_date           date             not null,
    start_time           time                 null,
    play_time            int                  not null,
    min_prep_time        int                  null,
