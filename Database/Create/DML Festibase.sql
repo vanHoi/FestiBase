@@ -207,18 +207,18 @@ INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, en
 (3, '17-06-2018', '16:00:00', '17-06-2018', '02:00:00', 60)
 GO
 
-INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
-(1, 1, 2, convert(varchar(8), NULL, 108), 60,  15),
-(2, 1, 2, convert(varchar(8), NULL, 108), 30,  30),
-(3, 1, 2, convert(varchar(8), NULL, 108), 60,  15),
-(4, 1, 2, convert(varchar(8), NULL, 108), 75,  60),
-(5, 2, 2, convert(varchar(8), '10:00:00', 108), 75,  15),
-(6, 2, 2, convert(varchar(8), '18:00:00', 108), 120, 15),
-(7, 2, 2, convert(varchar(8), '20:15:00', 108), 60,  15),
-(1, 2, 2, convert(varchar(8), '22:15:00', 108), 90,  15),
-(8, NULL, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
-(9, 4, 2, convert(varchar(8), '21:15:00', 108), 90,  30),
-(10, 5, 3, convert(varchar(8), '21:15:00', 108), 90,  45)
+INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
+(1, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
+(2, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 30,  30),
+(3, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
+(4, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 75,  60),
+(5, 2, 2, '30-03-2018', convert(varchar(8), '10:00:00', 108), 75,  15),
+(6, 2, 2, '31-03-2018', convert(varchar(8), '18:00:00', 108), 120, 15),
+(7, 2, 2, '30-03-2018', convert(varchar(8), '20:15:00', 108), 60,  15),
+(1, 2, 2, '31-03-2018', convert(varchar(8), '22:15:00', 108), 90,  15),
+(8, NULL, 2, '31-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
+(9, 4, 2, '30-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
+(10, 5, 3, '15-06-2018', convert(varchar(8), '21:15:00', 108), 90,  45)
 GO
 
 INSERT INTO PODIUM_FILE(podium_number, festival_company_number, "file", description) VALUES
