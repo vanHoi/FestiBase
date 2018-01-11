@@ -9,9 +9,9 @@
 USE FestiBase
 GO
 
-DROP PROCEDURE IF EXISTS sp_check_if_town_exists_with_visitor
+DROP PROCEDURE IF EXISTS sp_check_if_town_exists
 GO
-CREATE PROCEDURE sp_check_if_town_exists_with_visitor
+CREATE PROCEDURE sp_check_if_town_exists
 	@country_name	 VARCHAR(50),
 	@town_name		 VARCHAR(50)
 AS
@@ -27,6 +27,12 @@ BEGIN
 				@country_name, 
 				@town_name, 
 				1
+			END
+
+		ELSE
+			BEGIN
+				EXEC sp_check_if_country_exists
+				@country_name
 			END
 
 	END TRY
