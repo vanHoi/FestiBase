@@ -1,4 +1,4 @@
-/*==============================================================*/
+/*======	========================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		7											*/
 /* Last edited:		11-01-2018									*/
@@ -45,17 +45,20 @@ BEGIN
 		DECLARE @podium_number INT
  		SET @podium_number = (SELECT podium_number FROM PODIUM_SCHEDULE where podium_schedule_number = @podium_schedule_number)
 
- 		EXEC sp_check_podium_genre_with_artist_genre
-		@artist_number,
- 		@podium_number
+-- 		EXEC sp_check_podium_genre_with_artist_genre
+--		@artist_number,
+-- 		@podium_number
+
+		EXEC sp_check_podium_performance_festival
+		@podium_number,
+		@festival_number
 
 		IF (@insert = 1)
 			BEGIN
-				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
+				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
 				(@artist_number,
 				 @podium_schedule_number,
 				 @festival_number,
-				 @start_date,
 				 @start_time,
 				 @play_time,
 				 @min_prep_time)
@@ -78,7 +81,6 @@ BEGIN
 					artist_number = @artist_number,
 					podium_schedule_number = @podium_schedule_number,
 					festival_number = @festival_number,
-					"start_date" = @start_date,
 					start_time = @start_time,
 					play_time = @play_time,
 					min_prep_time = @min_prep_time
@@ -203,5 +205,17 @@ GO
 -- UPDATE (The artist has the wrong genre for this podium)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 2, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 1
+ROLLBACK TRAN
+GO
+
+--  INSERT ( Podium of wrong festival )
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, 3, 1, '30-03-2018', NULL, 90, 30, 1
+ROLLBACK TRAN
+GO
+
+-- UPDATE ( Podium of wrong festival)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 10, 8, 3, 2, '30-03-2018', NULL, 90, 30, 0
 ROLLBACK TRAN
 GO
