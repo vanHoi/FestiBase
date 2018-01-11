@@ -27,5 +27,10 @@ namespace Model
         {
             return _boughtTicketDao.getAllBoughtTicketsOfVisitor(visitorNumber);
         }
+
+        public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
+        {
+            return _boughtTicketDao.addVisitorToTicket(visitorNumber, ticketNumber);
+        }
     }
 }

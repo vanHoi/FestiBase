@@ -12,20 +12,19 @@ namespace Domain
             TicketType = new TicketType();
         }
 
-        public BoughtTicket(int ticketNumber, TicketType ticketType, 
-            string visitorNumber, DateTime scanDate)
+        public BoughtTicket(int ticketNumber, TicketType ticketType, Visitor visitor, DateTime scanDate)
         {
-            this.TicketNumber = ticketNumber;
-            this.TicketType = ticketType;
-            this.VisitorNumber = visitorNumber;
-            this.ScanDate = scanDate;
+            TicketNumber = ticketNumber;
+            TicketType = ticketType;
+            Visitor = visitor;
+            ScanDate = scanDate;
         }
 
         public int TicketNumber { get; set; }
 
         public TicketType TicketType { get; set; }
 
-        public string VisitorNumber { get; set; }
+        public Visitor Visitor { get; set; }
 
         public DateTime ScanDate { get; set; }
 
