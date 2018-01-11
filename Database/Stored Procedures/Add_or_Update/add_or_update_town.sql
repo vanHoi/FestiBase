@@ -63,7 +63,7 @@ GO
 
 -- Test INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_town NULL, 1, 'Groningen', 1
+EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 1
 ROLLBACK TRAN
 GO
 
@@ -75,18 +75,18 @@ GO
 
 -- Test UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_town 1, 1, 'Groningen', 0
+EXEC sp_add_or_update_town 1, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_town 234, 1, 'Groningen', 0
+EXEC sp_add_or_update_town 234, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_town NULL, 1, 'Groningen', 0
+EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
