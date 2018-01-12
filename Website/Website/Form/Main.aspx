@@ -11,42 +11,40 @@
 </head>
 <body class="d-flex flex-column">
 
-<form id="formStartpagina" runat="server" class="flex-grow">
+    <form id="formStartpagina" runat="server" class="flex-grow">
 
-    <section class="container text-center">
+        <section class="container text-center">
 
-        <div>
-            <h1 class="extra_padding_top_max">Welkom bij FestiBase!</h1>
-        </div>
+            <h1 class="extra-padding-top-xl">Welkom bij FestiBase!</h1>
         
-        <div class="row extra_padding_top_med">
-            <div class="col-3"></div>
-            <div class="col-6">
-                <div class="form-group text-left">
-                    <label>Selecteer uw festival:</label>
-                    <asp:DropDownList id="listFestivals" runat="server" CssClass="form-control" >
-                    </asp:DropDownList>
+            <div class="row extra-padding-top-med">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div class="form-group text-left">
+                        <label>Selecteer uw festival:</label>
+                        <asp:DropDownList id="listFestivals" runat="server" CssClass="form-control listbox" Height="80px" >
+                        </asp:DropDownList>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+            
+            <asp:Button ID="btnConfirm" runat="server" Text="Verder" class="btn btn-primary" />
+
+        </section>
+
+        <footer class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <img src="../Resources/images/logo.png" class="festibase-logo"/>
+                </div>
+                <div class="col"></div>
+                <div class="col text-right align-self-end">
+                    <asp:Button ID="btnVisitor" runat="server" Text="Inloggen als bezoeker" OnClick="btnVisitorClick" class="btn btn-primary" />
                 </div>
             </div>
-            <div class="col-3"></div>
-        </div>
-            
-        <asp:Button ID="btnConfirm" runat="server" Text="Verder" class="btn btn-primary" />
-
-    </section>
-
-    <footer class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <img src="../Resources/images/logo.png" width="250" height="200"/>
-            </div>
-            <div class="col"></div>
-            <div class="col text-right align-self-end">
-                <asp:Button ID="btnVisitor" runat="server" Text="Inloggen als bezoeker" OnClick="btnVisitorClick" class="btn btn-primary" />
-            </div>
-        </div>
-    </footer>
-</form>
+        </footer>
+    </form>
 
 </body>
 </html>

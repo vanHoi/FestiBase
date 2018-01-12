@@ -25,16 +25,38 @@ label {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.extra_padding_top_max {
+.extra-padding-top-xl {
     padding-top: 300px;
 }
 
-.extra_padding_top_med {
+.extra-padding-top-lg {
     padding-top: 200px;
 }
 
-.extra_padding_top_min {
-    padding-top: 100px;
+.extra-padding-top-med {
+    padding-top: 150px;
+}
+
+.extra-padding-top-sm {
+    padding-top: 75px;
+}
+
+.extra-padding-top-xs {
+    padding-top: 40px;
+}
+
+.festibase-logo {
+    width: 250px;
+    height: 200px;
+    opacity: 0.8;
+}
+
+.listbox {
+    height: 80px;
+}
+
+.btn-primary-big {
+    width: 700px;
 }
 
 /* Bootstrap Kleur Overrides */
@@ -180,4 +202,10 @@ a {
 
 .text-primary {
     color: #160e2f !important;
+}
+
+.form-control {
+    border: 3px solid #dee2e6;
+    height: 80px;
+    font-size: 28px;
 }
