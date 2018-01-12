@@ -88,3 +88,8 @@ ROLLBACK TRAN
 BEGIN TRAN
 EXEC sp_add_or_update_festival NULL, 4, 'Mysteryland', '2018-07-05 11:30:00', '2018-07-07 22:00:00', 'Amsterdam', '3.50', 0
 ROLLBACK TRAN
+
+-- Insert (start date not before end date)
+BEGIN TRAN
+EXEC sp_add_or_update_festival null, 2, 'Defqon #1', '2018-06-27 19:00:00', '2018-06-24 23:59:00', 'Biddingshuizen', '2.75', 1
+ROLLBACK TRAN
