@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		7											*/
-/* Last edited:		11-01-2018									*/
+/* Last edited:		12-01-2018									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update PERFORMANCE					*/
 /*==============================================================*/
@@ -30,6 +30,14 @@ CREATE PROC sp_add_or_update_performance
 AS
 BEGIN
 	BEGIN TRY
+		IF (@podium_schedule_number IS NOT NULL OR @podium_schedule_number != 0)
+			BEGIN
+				/* Checking if the start_date matches the schedules start_date */
+				EXEC sp_check_performance_date_with_podium_schedule
+				@start_date,
+				@podium_schedule_number
+			END
+
 		/* Checking the constraints on performance */
 		EXEC sp_check_performance 
 		@performance_number,
@@ -123,74 +131,74 @@ EXEC sp_add_or_update_performance 10, 8, NULL, 2, '30-03-2018', NULL, 90, 30, 0
 ROLLBACK TRAN
 GO
 
-
+SELECT * FROM dbo.PODIUM_SCHEDULE
 /*
 	These tests should NOT work
 */
 
 -- INSERT (An artist is already playing during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '20:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', '20:00:00', 90, 30, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (This artist is already going to perform during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 9, 4, 2, '30-03-2018', '21:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 9, 4, 2, '16-06-2018', '21:00:00', 90, 30, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (The start_time cannot be known if the schedule is NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '16-06-2018', '15:00:00', 90, 30, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (This performance does not fit the schedule)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '13:59:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', '13:59:00', 90, 30, 1 
 ROLLBACK TRAN
 GO
 
 -- UPDATE (An artist is already playing during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '20:00:00', 90, 30, 0
+EXEC sp_add_or_update_performance 9, 8, 4, 2, '16-06-2018', '20:00:00', 90, 30, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (This artist is already going to perform during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 9, 4, 2, '30-03-2018', '21:00:00', 90, 30, 0 
+EXEC sp_add_or_update_performance 9, 9, 4, 2, '16-06-2018', '21:00:00', 90, 30, 0 
 ROLLBACK TRAN
 GO
 
 -- UPDATE (The start_time cannot be known if the schedule is NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 0 
+EXEC sp_add_or_update_performance 9, 8, NULL, 2, '16-06-2018', '15:00:00', 90, 30, 0 
 ROLLBACK TRAN
 GO
 
 -- UPDATE (This performance does not fit the schedule)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '13:59:00', 90, 30, 0
+EXEC sp_add_or_update_performance 9, 8, 4, 2, '16-06-2018', '13:59:00', 90, 30, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (@performance_number cannot be NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 0 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '16-06-2018', '15:00:00', 90, 30, 0 
 ROLLBACK TRAN
 GO
 
 -- UPDATE (This performance does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 300, 8, 4, 2, '30-03-2018', '15:00:00', 90, 30, 0
+EXEC sp_add_or_update_performance 300, 8, 4, 2, '16-06-2018', '15:00:00', 90, 30, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (WARNING)
 BEGIN TRAN 
-EXEC sp_add_or_update_performance 9, 8, 3, 2, '30-03-2018', '19:15:00', 90,  30, 0
+EXEC sp_add_or_update_performance 9, 8, 3, 2, '15-06-2018', '19:15:00', 90,  30, 0
 ROLLBACK TRAN
 GO
 
@@ -203,5 +211,11 @@ GO
 -- UPDATE (The artist has the wrong genre for this podium)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 2, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 1
+ROLLBACK TRAN
+GO
+
+-- INSERT (dates do not match)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 2, 1, 2, '31-03-2018', '14:00:00', 30, 5, 1
 ROLLBACK TRAN
 GO
