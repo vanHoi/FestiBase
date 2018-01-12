@@ -68,14 +68,23 @@ label {
         font-size: 24px;
     }
 
-.tabel-titel {
-    font-size: 36px;
-    font-weight: bold;
-}
-
 .tabel {
     height: 100px;
     border: 1px solid #7a7a7a;
-    background: #ffffff;
-    opacity: 0.85;
+    font-size: 24px;
+    line-height: 100px;
+    white-space: nowrap;
+}
+
+    .tabel-wrapper tabel:nth-of-type(odd) {
+        background-color: rgba(255, 255, 255, .7);
+    }
+
+    .tabel-wrapper tabel:nth-of-type(even) {
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+.tabel-titel {
+    font-size: 36px;
+    font-weight: bold;
 }

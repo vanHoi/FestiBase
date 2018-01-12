@@ -13,92 +13,61 @@
 </head>
 <body>
     <form id="formBezoekerHoofdscherm" runat="server">
-        
+
         <section class="container-fluid">
-            
+
             <div class="row extra-padding-top-xs">
                 <div class="col-9"></div>
                 <div class="col-3 text-right">
                     <asp:Button ID="btnLogout" runat="server" OnClick="btnLogoutClick" Text="Uitloggen" CssClass="btn btn-primary btn-primary-small" />
                 </div>
             </div>
-            
+
             <div class="clearfix"></div>
-            
+
             <div class="row extra-padding-top-xs">
                 <div class="col-3"></div>
                 <div class="col-6 text-center">
-                    <h1 style="padding: 0;"><asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label></h1>
+                    <h1 style="padding: 0;">
+                        <asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label></h1>
                 </div>
                 <div class="col-3 text-right">
                     <asp:Button ID="btnGenre" runat="server" Text="Mijn genres" CssClass="btn btn-primary btn-primary-small" />
                 </div>
             </div>
-            
+
         </section>
 
         <section class="container text-center">
 
             <h3 class="extra-padding-top-sm">Hier ziet u een overzicht van uw festivals.</h3>
-            
+
             <div class="extra-padding-top-sm">
-                <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" CssClass="btn btn-primary btn-primary-big"/>
+                <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" CssClass="btn btn-primary btn-primary-big" />
             </div>
-            
+
             <div class="extra-padding-top-sm">
-                <asp:Table ID="tblTickets" runat="server" CellPadding="5" CellSpacing="0" GridLines="Both">
-                    <asp:TableRow runat="server">
-                        <asp:TableCell runat="server"><span class="tabel-titel">Festival</span></asp:TableCell>
-                        <asp:TableCell runat="server"><span class="tabel-titel">Ticket soort</span></asp:TableCell>
-                        <asp:TableCell runat="server"><span class="tabel-titel">Datum</span></asp:TableCell>
-                        <asp:TableCell runat="server"><span class="tabel-titel">Programma</span></asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
+                <asp:Panel ID="pnlTickets" runat="server">
+                    <div class="row tabel">
+                        <div class="col">
+                            <span class="tabel-titel">Festival</span>
+                        </div>
+                        <div class="col">
+                            <span class="tabel-titel">Ticket Soort</span>
+                        </div>
+                        <div class="col">
+                            <span class="tabel-titel">Datum</span>
+                        </div>
+                        <div class="col">
+                            <span class="tabel-titel">Programma</span>
+                        </div>
+                    </div>
+                </asp:Panel>
             </div>
-            
-            
-            <div class="row tabel">
-                <div class="col">
-                    <span class="tabel-titel">Festival</span>
-                </div>
-                <div class="col">
-                    <span class="tabel-titel">Ticket Soort</span>
-                </div>
-                <div class="col">
-                    <span class="tabel-titel">Datum</span>
-                </div>
-                <div class="col">
-                    <span class="tabel-titel">Programma</span>
-                </div>
-            </div>
-            <div class="row tabel">
-                <div class="col">
-                    Paaspop 2017
-                </div>
-                <div class="col">
-                    Dagticket
-                </div>
-                <div class="col">
-                    14-04-17
-                </div>
-                <div class="col">
-                    Knop
-                </div>
-            </div>
-            <div class="row tabel">
-                <div class="col">
-                    Paaspop 2016
-                </div>
-                <div class="col">
-                    Weekend
-                </div>
-                <div class="col">
-                    14-04-17 t/m 17-07-16
-                </div>
-                <div class="col">
-                    Knop
-                </div>
-            </div>
+
+            <div class="clearfix"></div>
+            <br />
+            <br />
 
         </section>
 
