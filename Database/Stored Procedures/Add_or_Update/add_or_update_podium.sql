@@ -208,3 +208,15 @@ BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 1, 2, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 0
 ROLLBACK TRAN
 GO
+
+
+-- Reviewed door Yuri
+BEGIN TRAN
+EXEC sp_add_or_update_podium 1, 2, 3, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 1
+ROLLBACK TRAN
+GO
+
+BEGIN TRAN
+EXEC sp_add_or_update_podium 1, 2, 3, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 0
+ROLLBACK TRAN
+GO
