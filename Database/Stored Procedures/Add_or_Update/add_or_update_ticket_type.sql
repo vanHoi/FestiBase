@@ -109,3 +109,9 @@ BEGIN TRAN
 EXEC sp_add_or_update_ticket_type 0, 'Zondag Ticket', 25, '2018-08-10 11:00:00', NULL, 0
 ROLLBACK TRAN
 GO
+
+-- INSERT (startdate before enddate)
+BEGIN TRAN
+EXEC sp_add_or_update_ticket_type 1, 'Ultra Weekend Ticket', 5000, '2017-04-16 10:00:00', '2017-04-14 23:00:00', 1
+ROLLBACK TRAN
+GO
