@@ -7,6 +7,7 @@
     <title>Inloggen als Bezoeker</title>
     <link rel="icon" type="image/png" href="~/Resources/favicon.png">
     <link href="~/Resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/bootstrap_overrides.css" rel="stylesheet" type="text/css" />
     <link href="~/Resources/css/style.css" rel="stylesheet" type="text/css" />
     <link href="~/Resources/css/style_visitor.css" rel="stylesheet" type="text/css" />
 </head>
@@ -24,7 +25,7 @@
                 <div class="col-6">
                     <div class="form-group text-left">
                         <label>E-mailadres:</label>
-                        <asp:TextBox ID="tboxEmail" runat="server" TextMode="Email" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="tboxEmail" runat="server" TextMode="Email" CssClass="form-control" ></asp:TextBox>
                     </div>
                 </div>
                 <div class="col-3"></div>

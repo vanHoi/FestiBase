@@ -52,7 +52,8 @@ namespace Form
                     TableCell cell4 = new TableCell();
                     Button btnProgram = new Button
                     {
-                        Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer bezochte optredens" : "Bekijk programma"
+                        Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer Bezochte Optredens" : "Bekijk Programma",
+                        CssClass = "btn btn-primary btn-primary-small"
                     };
 
 

@@ -6,6 +6,7 @@
     <title>Welkom bij FestiBase!</title>
     <link rel="icon" type="image/png" href="~/Resources/favicon.png">
     <link href="~/Resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Resources/css/bootstrap_overrides.css" rel="stylesheet" type="text/css" />
     <link href="~/Resources/css/style.css" rel="stylesheet" type="text/css" />
     <link href="~/Resources/css/style_main.css" rel="stylesheet" type="text/css" />
 </head>
@@ -22,7 +23,7 @@
                 <div class="col-6">
                     <div class="form-group text-left">
                         <label>Selecteer uw festival:</label>
-                        <asp:DropDownList id="listFestivals" runat="server" CssClass="form-control listbox" Height="80px" >
+                        <asp:DropDownList id="listFestivals" runat="server" CssClass="form-control" Height="80px" >
                         </asp:DropDownList>
                     </div>
                 </div>
