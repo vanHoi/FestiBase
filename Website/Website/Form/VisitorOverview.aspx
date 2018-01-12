@@ -55,6 +55,50 @@
                     </asp:TableRow>
                 </asp:Table>
             </div>
+            
+            
+            <div class="row tabel">
+                <div class="col">
+                    <span class="tabel-titel">Festival</span>
+                </div>
+                <div class="col">
+                    <span class="tabel-titel">Ticket Soort</span>
+                </div>
+                <div class="col">
+                    <span class="tabel-titel">Datum</span>
+                </div>
+                <div class="col">
+                    <span class="tabel-titel">Programma</span>
+                </div>
+            </div>
+            <div class="row tabel">
+                <div class="col">
+                    Paaspop 2017
+                </div>
+                <div class="col">
+                    Dagticket
+                </div>
+                <div class="col">
+                    14-04-17
+                </div>
+                <div class="col">
+                    Knop
+                </div>
+            </div>
+            <div class="row tabel">
+                <div class="col">
+                    Paaspop 2016
+                </div>
+                <div class="col">
+                    Weekend
+                </div>
+                <div class="col">
+                    14-04-17 t/m 17-07-16
+                </div>
+                <div class="col">
+                    Knop
+                </div>
+            </div>
 
         </section>
 

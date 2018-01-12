@@ -72,3 +72,10 @@ label {
     font-size: 36px;
     font-weight: bold;
 }
+
+.tabel {
+    height: 100px;
+    border: 1px solid #7a7a7a;
+    background: #ffffff;
+    opacity: 0.85;
+}
