@@ -55,14 +55,20 @@ BEGIN
 
 		IF (@insert = 1)
 			BEGIN
+				IF (@town_name IS NOT NULL AND @country_name IS NOT NULL)
+					BEGIN
+						EXEC sp_check_if_town_exists 
+						@country_name, 
+						@town_name
 
-				EXEC sp_check_if_town_exists 
-				@country_name, 
-				@town_name
-
-				SET @town_number = (SELECT town_number
-									FROM TOWN
-									WHERE "name" = @town_name)
+						SET @town_number = (SELECT town_number
+										FROM TOWN
+										WHERE "name" = @town_name)
+					END
+				ELSE
+					BEGIN
+						SET @town_number = NULL
+					END
 
 				INSERT INTO VISITOR (town_number, email, first_name, surname, telephone_number, birthdate, 
 									 twitter_username, facebook_username, street, house_number) VALUES
@@ -93,14 +99,20 @@ BEGIN
 
 				ELSE
 					BEGIN
+						IF (@town_name IS NOT NULL AND @country_name IS NOT NULL)
+							BEGIN
+								EXEC sp_check_if_town_exists 
+								@country_name, 
+								@town_name
 
-						EXEC sp_check_if_town_exists 
-						@country_name, 
-						@town_name
-
-						SET @town_number = (SELECT town_number
-											FROM TOWN
-											WHERE "name" = @town_name)
+								SET @town_number = (SELECT town_number
+												FROM TOWN
+												WHERE "name" = @town_name)
+							END
+						ELSE
+							BEGIN
+								SET @town_number = NULL
+							END
 
 						UPDATE VISITOR SET 
 						town_number = @town_number,
