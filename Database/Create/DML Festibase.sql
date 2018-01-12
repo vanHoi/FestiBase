@@ -1,9 +1,9 @@
 /*==============================================================*/
-/* DBMS name:      FestiBase									*/
-/* PDM version 6												*/
-/* Last edited: 19-12-2017										*/
-/* Edited by: Yuri Vannisselroy								    */
-/* Testdata														*/
+/* DBMS name:		FestiBase									*/
+/* PDM version		6											*/
+/* Last edited:		19-12-2017									*/
+/* Edited by:		Yuri Vannisselroy						    */
+/* Script:			DML											*/
 /*==============================================================*/
 
 USE FestiBase
@@ -202,9 +202,9 @@ GO
 INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, end_time, break_time) VALUES
 (1, '30-03-2018', '14:00:00', '30-03-2018', '23:00:00', 15),
 (2, '31-03-2018', '14:00:00', '31-03-2018', '23:00:00', 60),
-(3, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60),
-(3, '16-06-2018', '14:00:00', '15-06-2018', '23:00:00', 60),
-(3, '17-06-2018', '16:00:00', '17-06-2018', '02:00:00', 60)
+(3, '15-06-2018', '14:00:00', '16-06-2018', '22:30:00', 60),
+(3, '16-06-2018', '14:00:00', '16-06-2018', '23:00:00', 60),
+(3, '17-06-2018', '16:00:00', '18-06-2018', '02:00:00', 60)
 GO
 
 INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
