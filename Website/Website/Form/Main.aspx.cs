@@ -20,7 +20,7 @@ namespace Form
             }
         }
 
-        protected void btnVisitor_Click(object sender, EventArgs e)
+        protected void btnVisitorClick(object sender, EventArgs e)
         {
             Response.Redirect("VisitorLogin.aspx");
         }

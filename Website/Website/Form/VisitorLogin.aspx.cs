@@ -13,12 +13,12 @@ namespace Form
             _visitorModel = new VisitorModel();
         }
 
-        protected void btnReturn_Click(object sender, EventArgs e)
+        protected void btnReturnClick(object sender, EventArgs e)
         {
             Response.Redirect("Main.aspx");
         }
 
-        protected void btnLogin_Click(object sender, EventArgs e)
+        protected void btnLoginClick(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(tboxEmail.Text) && IsValidEmail(tboxEmail.Text))
             {

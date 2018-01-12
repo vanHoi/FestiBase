@@ -14,9 +14,9 @@
         </div>
         <asp:TextBox ID="tboxEmail" runat="server" Width="220px" TextMode="Email"></asp:TextBox>
         <p>
-            <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Inloggen" />
+            <asp:Button ID="btnLogin" runat="server" OnClick="btnLoginClick" Text="Inloggen" />
         </p>
-        <asp:Button ID="btnReturn" runat="server" OnClick="btnReturn_Click" Text="Terug" />
+        <asp:Button ID="btnReturn" runat="server" OnClick="btnReturnClick" Text="Terug" />
     </form>
 </body>
 </html>

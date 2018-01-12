@@ -26,7 +26,7 @@
             
         <asp:Button ID="btnConfirm" runat="server" Text="Verder" class="btn btn-primary" />
     </form>
-    </div>
+</div>
 <div class="container-fluid text-right">
     <div class="text-right">
         <asp:Button ID="btnVisitor" runat="server" Text="Inloggen als bezoeker" OnClick="btnVisitor_Click" class="btn btn-primary" />
