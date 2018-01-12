@@ -15,7 +15,7 @@
             <p>Hier ziet u een overzicht van uw festivals.</p>
 
         </div>
-        <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" OnClick="btnAddTicket_Click"/>
+        <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen"/>
         <asp:Table ID="tblTickets" runat="server" CellPadding="5" CellSpacing="0" GridLines="Both">
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server"><b>Festival</b></asp:TableCell>

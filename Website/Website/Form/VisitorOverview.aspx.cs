@@ -78,10 +78,5 @@ namespace Form
             Session.Remove("visitor");
             Response.Redirect("VisitorLogin.aspx");
         }
-
-        protected void btnAddTicket_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AddTicket.aspx");
-        }
     }
 }
