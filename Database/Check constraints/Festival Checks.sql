@@ -1,8 +1,8 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		19-12-2017									*/	
-/* Edited by:		Ivo Reumkens								*/
+/* PDM version:		7											*/
+/* Last edited:		12-01-2018									*/	
+/* Edited by:		Yuri Vannisselroy							*/
 /* Constraint:		Check dates									*/
 /*==============================================================*/
 
