@@ -19,7 +19,7 @@ namespace Form
                 Response.Redirect("VisitorLogin.aspx");
             }
 
-            Visitor visitor = (Visitor) Session["visitor"];
+            Visitor visitor = (Visitor)Session["visitor"];
             if (String.IsNullOrEmpty(visitor?.FirstName))
             {
                 lblVisitor.Text = "Welkom!";
