@@ -78,6 +78,7 @@ namespace DAO
 
 
                 BoughtTicket boughtTicket = new BoughtTicket();
+                
 
                 while (reader.Read())
                 {
@@ -110,11 +111,14 @@ namespace DAO
                 }
 
 
-                if(boughtTicket.Visitor.VisitorNumber == 0)
+                if(boughtTicket.Visitor.VisitorNumber != 0)
                 {
                     return false;
                 }
- 
+
+                _conn.Close();
+                _conn.Open();
+
                 command = new SqlCommand("EXEC sp_add_or_update_bought_ticket @ticketNumber, @festivalCompanyNumber, @ticketType, @visitorNumber	, @scanDate	,0", _conn);
                 command.Parameters.AddWithValue("ticketNumber", ticketNumber);
                 command.Parameters.AddWithValue("festivalCompanyNumber", boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber);

@@ -10,6 +10,7 @@ namespace Domain
         public BoughtTicket()
         {
             TicketType = new TicketType();
+            Visitor = new Visitor();
         }
 
         public BoughtTicket(int ticketNumber, TicketType ticketType, Visitor visitor, DateTime scanDate)

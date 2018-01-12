@@ -25,21 +25,30 @@ public partial class Form_AddTicket : System.Web.UI.Page
     }
 
 
-
-    protected void btnAdd_Click(object sender, EventArgs e)
+    protected void btnAddClick(object sender, EventArgs e)
     {
         if (!String.IsNullOrEmpty(tboxTicketNumber.Text))
         {
 
             Visitor visitor = (Visitor)Session["visitor"];
 
-            _visitorModel.addVisitorToTicket( visitor.VisitorNumber, Convert.ToInt32(tboxTicketNumber.Text));
+           if(_visitorModel.addVisitorToTicket(visitor.VisitorNumber, Convert.ToInt32(tboxTicketNumber.Text)))
+            {
+
+                Session["ticketAdded"] = true;
+                Response.Redirect("VisitorOverview.aspx");
+
+
+            }
+            else
+            {
+                labelError.Text = " Deze ticket is al gebruikt ";
+
+            }
         }
     }
 
-
-
-    protected void btnCancel_Click(object sender, EventArgs e)
+    protected void btnCancelClick(object sender, EventArgs e)
     {
         Response.Redirect("VisitorOverview.aspx");
     }

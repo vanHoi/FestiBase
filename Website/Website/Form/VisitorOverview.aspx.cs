@@ -18,6 +18,14 @@ namespace Form
                 Response.Redirect("VisitorLogin.aspx");
             }
 
+            if (Session["ticketAdded"] != null)
+            {
+                labelTicketAdded.Text = " De ticket is succesvol toegevoegd" ;
+                Session.Remove("ticketAdded");
+            }
+
+
+
             Visitor visitor = (Visitor) Session["visitor"];
             if (String.IsNullOrEmpty(visitor?.FirstName))
             {

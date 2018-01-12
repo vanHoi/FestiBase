@@ -13,6 +13,9 @@
                 <asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label>
             </h1>
             <p>Hier ziet u een overzicht van uw festivals.</p>
+            <p>
+                <asp:Label ID="labelTicketAdded" runat="server" Text=""></asp:Label>
+            </p>
 
         </div>
         <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" OnClick="btnAddTicket_Click"/>
