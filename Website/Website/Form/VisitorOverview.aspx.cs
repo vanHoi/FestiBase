@@ -67,7 +67,7 @@ namespace Form
                     Button btnProgram = new Button
                     {
                         Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer Bezochte Optredens" : "Bekijk Programma",
-                        CssClass = "btn btn-primary btn-primary-small"
+                        CssClass = "btn btn-primary btn-primary-small btn-primary-tabel"
                     };
 
 

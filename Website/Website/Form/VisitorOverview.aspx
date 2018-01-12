@@ -46,7 +46,7 @@
                 <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" CssClass="btn btn-primary btn-primary-big" />
             </div>
 
-            <div class="extra-padding-top-sm">
+            <div class="extra-padding-top-sm tabel-wrapper">
                 <asp:Panel ID="pnlTickets" runat="server">
                     <div class="row tabel">
                         <div class="col">
