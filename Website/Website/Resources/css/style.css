@@ -8,11 +8,33 @@
     Grijs: #7a7a7a
 */
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 100px;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 97.5%;
+    }
+}
+
 h1 {
     color: #ffffff;
-    padding-top: 140px;
+    font-size: 3rem;
+    padding-top: 5%;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-size: 72px;
+}
+
+@media (min-width: 1400px) {
+    h1 {
+        padding-top: 13%;
+        font-size: 4.5rem;
+    }
 }
 
 h2 {
@@ -21,61 +43,150 @@ h2 {
 
 label {
     color: #ffffff;
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.extra-padding-top-xl {
-    padding-top: 300px;
-}
-
-.extra-padding-top-lg {
-    padding-top: 200px;
-}
-
-.extra-padding-top-med {
-    padding-top: 150px;
-}
-
-.extra-padding-top-sm {
-    padding-top: 75px;
-}
-
-.extra-padding-top-xs {
-    padding-top: 40px;
-}
-
 .festibase-logo {
-    width: 250px;
-    height: 200px;
+    max-width: 225px;
+    max-height: 190px;
+    padding-top: 10px;
     opacity: 0.8;
 }
 
-.btn-primary-big {
-    width: 700px;
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 1rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+    footer .col {
+        max-width: 33%;
+    }
+
+    footer .btn {
+        max-width: 100%;
+    }
+
+.footer-padding {
+    padding-bottom: 120px;
+}
+
+.form-control {
+    border: 3px solid #dee2e6;
+    height: 80px;
+    font-size: 1.75rem;
     opacity: 0.9;
+}
+
+/* Paddings */
+
+.extra-padding-top-xl {
+    padding-top: 10%;
+}
+
+.extra-padding-top-lg {
+    padding-top: 8%;
+}
+
+.extra-padding-top-med {
+    padding-top: 6%;
+}
+
+.extra-padding-top-sm {
+    padding-top: 4%;
+}
+
+.extra-padding-top-xs {
+    padding-top: 2%;
+}
+
+@media (min-width: 1400px) {
+    .extra-padding-top-xl {
+        padding-top: 25%;
+    }
+
+    .extra-padding-top-lg {
+        padding-top: 18.4%;
+    }
+
+    .extra-padding-top-med {
+        padding-top: 13.8%;
+    }
+
+    .extra-padding-top-sm {
+        padding-top: 6.9%;
+    }
+
+    .extra-padding-top-xs {
+        padding-top: 3.7%;
+    }
+}
+
+/* Buttons */
+
+.btn {
+    white-space: normal;
+}
+
+.btn-primary {
+    width: 385px;
+    height: 80px;
+}
+
+    .btn-primary, .btn-primary:hover {
+        color: #fff;
+        font-size: 1.3rem;
+    }
+
+        .btn-primary:hover {
+            opacity: 1;
+        }
+
+.btn-primary-big {
+    width: 90%;
+    opacity: 0.9;
+}
+
+@media (min-width: 550px) and (max-width: 1399px) {
+    .btn-primary-big {
+        width: 500px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .btn-primary-big {
+        width: 700px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .btn-primary, .btn-primary:hover {
+        font-size: 2.15rem;
+    }
+}
+
+.btn-primary-small, .btn-primary-small:hover {
+    font-size: 1.5rem;
 }
 
 .btn-primary-small {
     width: 90%;
     max-width: 385px;
     height: 80px;
-    font-size: 24px;
+    font-size: 1.5rem;
     opacity: 0.9;
 }
 
-    .btn-primary-small:hover {
-        font-size: 24px;
-    }
-
-.btn-primary-tabel {
-    font-size: 15px;
-    margin-top: -8px;
+.btn-primary-tabel, .btn-primary-tabel:hover {
+    font-size: 0.9375rem;
+    margin-right: 0;
+    width: 100%;
 }
 
-    .btn-primary-tabel:hover {
-        font-size: 15px;
-    }
+/* Tabel */
 
 .tabel-wrapper .col {
     border-right: 1px #7a7a7a solid;
@@ -83,23 +194,48 @@ label {
     max-width: 25%;
 }
 
+    .tabel-wrapper .col:nth-of-type(4) {
+        border-right: 0;
+    }
+
 .tabel {
     height: 100px;
     border: 1px solid #7a7a7a;
-    font-size: 20px;
-    line-height: 100px;
-    white-space: nowrap;
+    border-top: 0;
+    font-size: 1.1rem;
 }
 
+    .tabel:nth-of-type(1) {
+        border-top: 1px solid #7a7a7a;
+    }
+
 .tabel-wrapper .tabel:nth-of-type(odd) {
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(255, 255, 255, .8);
 }
 
 .tabel-wrapper .tabel:nth-of-type(even) {
-    background-color: rgba(255, 255, 255, .85);
+    background-color: rgba(255, 255, 255, .7);
 }
 
 .tabel-titel {
-    font-size: 36px;
+    font-size: 1.2rem;
     font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+    .tabel-titel {
+        font-size: 2.25rem;
+    }
+
+    .tabel {
+        font-size: 1.25rem;
+    }
+}
+
+.tabel-center-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+    resize: vertical;
 }

@@ -5,6 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Inloggen als Bezoeker</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#160e2f">
     <link rel="icon" type="image/png" href="~/Resources/favicon.png">
     <link href="~/Resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Resources/css/bootstrap_overrides.css" rel="stylesheet" type="text/css" />
@@ -14,7 +17,7 @@
 <body>
     <form id="formLoginBezoeker" runat="server">
         
-        <section class="container text-center">
+        <section class="container text-center footer-padding">
 
             <h1>Welkom bezoeker!</h1>
 
@@ -35,10 +38,10 @@
             
         </section>
             
-        <footer class="container-fluid extra-padding-top-med">
+        <footer class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <img src="../Resources/images/logo.png" width="250" height="200"/>
+                    <img src="../Resources/images/logo.png" class="festibase-logo"/>
                 </div>
                 <div class="col"></div>
                 <div class="col text-right align-self-end">
