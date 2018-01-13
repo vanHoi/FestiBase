@@ -37,17 +37,17 @@ namespace Form
                     divRow.TagName = "div";
 
                     HtmlGenericControl divCell = new HtmlGenericControl();
-                    divCell.Attributes["class"] = "col tabel-center-vertical";
+                    divCell.Attributes["class"] = "col tabel-center-verticaal";
                     divCell.TagName = "div";
                     divCell.InnerHtml = b.GetFestival().Name;
 
                     HtmlGenericControl divCell2 = new HtmlGenericControl();
-                    divCell2.Attributes["class"] = "col tabel-center-vertical";
+                    divCell2.Attributes["class"] = "col tabel-center-verticaal";
                     divCell2.TagName = "div";
                     divCell2.InnerHtml = b.TicketType.Type;
 
                     HtmlGenericControl divCell3 = new HtmlGenericControl(); ;
-                    divCell3.Attributes["class"] = "col tabel-center-vertical";
+                    divCell3.Attributes["class"] = "col tabel-center-verticaal";
                     divCell3.TagName = "div";
 
                     if (b.GetFestival().StartDate.Date == b.GetFestival().EndDate.Date)
@@ -61,7 +61,7 @@ namespace Form
                     }
 
                     HtmlGenericControl divCell4 = new HtmlGenericControl();
-                    divCell4.Attributes["class"] = "col tabel-center-vertical";
+                    divCell4.Attributes["class"] = "col tabel-center-verticaal";
                     divCell4.TagName = "div";
 
                     Button btnProgram = new Button

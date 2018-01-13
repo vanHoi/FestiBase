@@ -232,7 +232,7 @@ footer {
     }
 }
 
-.tabel-center-vertical {
+.tabel-center-verticaal {
     display: flex;
     flex-direction: column;
     justify-content: center;

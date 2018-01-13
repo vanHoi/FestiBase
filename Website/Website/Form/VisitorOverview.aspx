@@ -52,16 +52,16 @@
             <div class="extra-padding-top-sm tabel-wrapper">
                 <asp:Panel ID="pnlTickets" runat="server">
                     <div class="row tabel">
-                        <div class="col tabel-center-vertical">
+                        <div class="col tabel-center-verticaal">
                             <span class="tabel-titel">Festival</span>
                         </div>
-                        <div class="col tabel-center-vertical">
+                        <div class="col tabel-center-verticaal">
                             <span class="tabel-titel">Ticket Soort</span>
                         </div>
-                        <div class="col tabel-center-vertical">
+                        <div class="col tabel-center-verticaal">
                             <span class="tabel-titel">Datum</span>
                         </div>
-                        <div class="col tabel-center-vertical">
+                        <div class="col tabel-center-verticaal">
                             <span class="tabel-titel">Programma</span>
                         </div>
                     </div>
