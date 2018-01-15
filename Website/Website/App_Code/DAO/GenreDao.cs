@@ -18,7 +18,7 @@ public class GenreDao
 
         try
         {
-            _conn.Open();
+            this.open();
         }
         catch (Exception e)
         {
@@ -47,6 +47,7 @@ public class GenreDao
         List<Genre> genres = new List<Genre>();
         try
         {
+            this.open();
             SqlCommand command = new SqlCommand("EXEC sp_get_genres_of_visitor @visitor_number", _conn);
             command.Parameters.AddWithValue("visitor_number", visitorNumber);
 
@@ -71,6 +72,7 @@ public class GenreDao
         List<Genre> genres = new List<Genre>();
         try
         {
+            this.open();
             SqlCommand command = new SqlCommand("EXEC sp_get_all_genres", _conn);
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
