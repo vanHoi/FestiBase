@@ -109,7 +109,7 @@ EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-0
 ROLLBACK TRAN
 GO
 
--- Test INSERT 
+-- Test INSERT (startdate same as enddate)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-15', '00:00:00', 30, 1
 ROLLBACK TRAN
