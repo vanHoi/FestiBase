@@ -3,7 +3,9 @@
 /* PDM version:		6											*/
 /* Last edited:		11-1-2018									*/
 /* Edited by:		Robert Verkerk								*/
-/* Procedure:		Check podium constraints (C2)				*/
+/* Procedure:		Procedure to check if the festival of the   */
+/*					tent is the same as the festival of the		*/
+/*					podium										*/
 /*==============================================================*/
 
 USE FestiBase

@@ -1,9 +1,9 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		6											*/
-/* Last edited:		20-12-2017									*/
+/* Last edited:		15-1-2018									*/
 /* Created by:		Mariusz Blautzik							*/
-/* Edited by:		Ivo Reumkens								*/
+/* Edited by:		Robert Verkerk								*/
 /* Procedure:		Insert + Update PODIUM						*/
 /*==============================================================*/
 
@@ -31,12 +31,13 @@ CREATE PROCEDURE sp_add_or_update_podium
 AS
 BEGIN
 	BEGIN TRY
+	
+		/* Check if the podium and tent are from the same festival */
+		EXEC sp_check_podium_tent_festival @podium_number, @tent_number
 
 		/* Checking the constraints on performance */
 		EXEC sp_check_podium @tent_number, @construction_width, @construction_length, @construction_height, @floor_height, @capacity, @free_span_width, @free_span_length, @free_span_height
 
-		/* Check if the podium and tent are from the same festival */
-		EXEC sp_check_podium_tent_festival @podium_number, @tent_number
 
 		IF (@tent_number = 0)
 		BEGIN
