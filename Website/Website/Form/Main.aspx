@@ -19,7 +19,7 @@
             <asp:Button ID="btnConfirm" runat="server" Height="35px" Text="Verder" Width="180px" />
         </p>
         <p>
-            <asp:Button ID="btnVisitor" runat="server" Height="35px" Text="Inloggen als bezoeker" Width="180px" OnClick="btnVisitor_Click" />
+            <asp:Button ID="btnVisitor" runat="server" Height="35px" Text="Inloggen als bezoeker" Width="180px" OnClick="btnVisitorClick" />
         </p>
     </form>
 </body>

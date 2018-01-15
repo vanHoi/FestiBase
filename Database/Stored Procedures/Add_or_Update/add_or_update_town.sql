@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		21-12-2017									*/
+/* PDM version:		7											*/
+/* Last edited:		11-01-2018									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update TOWN						*/
 /*==============================================================*/
@@ -16,17 +16,24 @@ DROP PROC IF EXISTS sp_add_or_update_town;
 GO
 CREATE PROC sp_add_or_update_town
 	@town_number		INT = NULL,
-	@country_number		INT,
-	@name				VARCHAR(50),
+	@country_name		VARCHAR(50),
+	@town_name			VARCHAR(50),
 	@insert				BIT
 AS
 BEGIN
 	BEGIN TRY
+		
+		EXEC sp_check_if_country_exists @country_name
+
+		DECLARE @country_number INT = (SELECT country_number
+									   FROM COUNTRY
+									   WHERE "name" = @country_name)
+
 		IF (@insert = 1)
 			BEGIN
-				INSERT INTO TOWN (country_number, name) VALUES
+				INSERT INTO TOWN (country_number, "name") VALUES
 				(@country_number,
-				 @name)
+				 @town_name)
 			END
 		ELSE
 			BEGIN
@@ -44,7 +51,7 @@ BEGIN
 
 					UPDATE TOWN SET 
 					country_number = @country_number,
-					name = @name
+					"name" = @town_name
 					WHERE town_number = @town_number
 			END
 	END TRY
@@ -56,24 +63,30 @@ GO
 
 -- Test INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_town NULL, 1, 'Groningen', 1
+EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 1
+ROLLBACK TRAN
+GO
+
+-- Test INSERT (new country)
+BEGIN TRAN
+EXEC sp_add_or_update_town NULL, 'Brazilië', 'Rio', 1
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_town 1, 1, 'Groningen', 0
+EXEC sp_add_or_update_town 1, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_town 234, 1, 'Groningen', 0
+EXEC sp_add_or_update_town 234, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_town NULL, 1, 'Groningen', 0
+EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO

@@ -64,7 +64,7 @@ namespace Form
                     };
 
 
-                    btnProgram.Click += btnProgram_Click;
+                    btnProgram.Click += btnProgramClick;
                     cell4.Controls.Add(btnProgram);
 
                     row.Cells.Add(cell);
@@ -76,20 +76,15 @@ namespace Form
                 }
         }
 
-        protected void btnProgram_Click(object sender, EventArgs e)
+        protected void btnProgramClick(object sender, EventArgs e)
         {
 
         }
 
-        protected void btnLogout_Click(object sender, EventArgs e)
+        protected void btnLogoutClick(object sender, EventArgs e)
         {
             Session.Remove("visitor");
             Response.Redirect("VisitorLogin.aspx");
-        }
-
-        protected void btnAddTicket_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AddTicket.aspx");
         }
     }
 }

@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		20-12-2017									*/
+/* PDM version:		7											*/
+/* Last edited:		11-01-2018									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Check performance constraints (C5)			*/
 /*==============================================================*/
@@ -24,6 +24,7 @@ CREATE PROC sp_check_performance
 	@artist_number			INT,
 	@podium_schedule_number	INT	= NULL,
 	@festival_number		INT,
+	@start_date				DATE,
 	@start_time				TIME = NULL,
 	@play_time				INT,
 	@min_prep_time			INT = NULL,

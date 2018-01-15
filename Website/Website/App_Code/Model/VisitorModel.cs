@@ -27,10 +27,5 @@ namespace Model
         {
             return _boughtTicketDao.GetAllBoughtTicketsOfVisitor(visitorNumber);
         }
-
-        public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
-        {
-            return _boughtTicketDao.addVisitorToTicket(visitorNumber, ticketNumber);
-        }
     }
 }

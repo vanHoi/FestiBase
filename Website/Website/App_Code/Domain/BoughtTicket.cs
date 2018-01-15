@@ -13,19 +13,20 @@ namespace Domain
             Visitor = new Visitor();
         }
 
-        public BoughtTicket(int ticketNumber, TicketType ticketType, Visitor visitor, DateTime scanDate)
+        public BoughtTicket(int ticketNumber, TicketType ticketType, 
+            string visitorNumber, DateTime scanDate)
         {
-            TicketNumber = ticketNumber;
-            TicketType = ticketType;
-            Visitor = visitor;
-            ScanDate = scanDate;
+            this.TicketNumber = ticketNumber;
+            this.TicketType = ticketType;
+            this.VisitorNumber = visitorNumber;
+            this.ScanDate = scanDate;
         }
 
         public int TicketNumber { get; set; }
 
         public TicketType TicketType { get; set; }
 
-        public Visitor Visitor { get; set; }
+        public string VisitorNumber { get; set; }
 
         public DateTime ScanDate { get; set; }
 

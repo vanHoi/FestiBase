@@ -1,8 +1,8 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		21-12-2017									*/
-/* Edited by:		Yuri Vannisselroy							*/
+/* PDM version:		7											*/
+/* Last edited:		11-01-2017									*/
+/* Edited by:		Leon Chen             						*/
 /* Script:			DDL											*/
 /*==============================================================*/
 
@@ -17,6 +17,7 @@ GO
 
 USE FestiBase
 GO
+
 
 /*==============================================================*/
 /* Table: ARTIST                                                */
@@ -200,7 +201,7 @@ create table BOUGHT_TICKET (
    ticket_number        int                  identity,
    festival_company_number int                  not null,
    ticket_type          varchar(50)          not null,
-   visitor_number       int                  not null,
+   visitor_number       int                  null,
    scan_date            datetime             null,
    constraint PK_BOUGHT_TICKET primary key (ticket_number),
    constraint FK_BOUGHT_T_VISITOR_B_VISITOR foreign key (visitor_number)
@@ -364,9 +365,9 @@ create table PODIUM_SCHEDULE (
    podium_schedule_number int                  identity,
    podium_number        int                  not null,
    start_date           date                 not null,
-   start_time           time                 null,
-   end_date             date                 null,
-   end_time             time                 null,
+   start_time           time                 not null,
+   end_date             date                 not null,
+   end_time             time                 not null,
    break_time           int                  null,
    constraint PK_PODIUM_SCHEDULE primary key (podium_schedule_number),
    constraint AK_KEY_2_PODIUM_S unique (podium_number, start_date),
@@ -383,6 +384,7 @@ create table PERFORMANCE (
    artist_number        int                  not null,
    podium_schedule_number int                  null,
    festival_number      int                  not null,
+   start_date           date             not null,
    start_time           time                 null,
    play_time            int                  not null,
    min_prep_time        int                  null,
@@ -489,4 +491,5 @@ create table VISITOR_visited_PERFORMANCE (
       references PERFORMANCE (performance_number)
 )
 go
+
 

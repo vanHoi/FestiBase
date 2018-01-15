@@ -18,7 +18,7 @@
             </p>
 
         </div>
-        <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen" OnClick="btnAddTicket_Click"/>
+        <asp:Button ID="btnAddTicket" runat="server" Text="Ticket toevoegen"/>
         <asp:Table ID="tblTickets" runat="server" CellPadding="5" CellSpacing="0" GridLines="Both">
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server"><b>Festival</b></asp:TableCell>
@@ -27,7 +27,7 @@
                 <asp:TableCell runat="server"><b>Programma</b></asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-        <asp:Button ID="btnLogout" runat="server" Height="30px" OnClick="btnLogout_Click" Text="Uitloggen" Width="108px" />
+        <asp:Button ID="btnLogout" runat="server" Height="30px" OnClick="btnLogoutClick" Text="Uitloggen" Width="108px" />
         <p>
             <asp:Button ID="btnGenre" runat="server" Height="30px" Text="Mijn genres" Width="107px" />
         </p>
