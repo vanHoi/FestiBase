@@ -6,126 +6,129 @@ using System.IO;
 using System.Web;
 using Domain;
 
-/// <summary>
-/// Summary description for GenreDao
-/// </summary>
-public class GenreDao
+namespace DAO
 {
-    private readonly SqlConnection _conn;
-    public GenreDao()
+    /// <summary>
+    /// Summary description for GenreDAO
+    /// </summary>
+    public class GenreDAO
     {
-        _conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
+        private readonly SqlConnection _conn;
+        public GenreDAO()
+        {
+            _conn = new SqlConnection(File.ReadAllText(HttpContext.Current.Server.MapPath("~/App_Code/DAO/databaseConnection.txt")));
 
-        try
-        {
-            this.open();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-    }
-
-    public void open()
-    {
-        try
-        {
-            if (_conn != null && _conn.State == ConnectionState.Closed)
+            try
             {
-                _conn.Open();
+                this.Open();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
         }
-        catch (Exception e)
+
+        public void Open()
         {
-            Console.WriteLine(e.ToString());
-        }
+            try
+            {
+                if (_conn != null && _conn.State == ConnectionState.Closed)
+                {
+                    _conn.Open();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         
-    }
+        }
 
-    internal List<Genre> GetGenresOfVisitor(int visitorNumber)
-    {
-        List<Genre> genres = new List<Genre>();
-        try
+        internal List<Genre> GetGenresOfVisitor(int visitorNumber)
         {
-            this.open();
-            SqlCommand command = new SqlCommand("EXEC sp_get_genres_of_visitor @visitor_number", _conn);
-            command.Parameters.AddWithValue("visitor_number", visitorNumber);
-
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            List<Genre> genres = new List<Genre>();
+            try
             {
-                Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]), Convert.ToString(reader["genre"]));
-                genres.Add(genre);
+                this.Open();
+                SqlCommand command = new SqlCommand("EXEC sp_get_genres_of_visitor @visitor_number", _conn);
+                command.Parameters.AddWithValue("visitor_number", visitorNumber);
+
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]), Convert.ToString(reader["genre"]));
+                    genres.Add(genre);
+                }
+
+                _conn.Close();
             }
-
-            _conn.Close();
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-        return genres;
-    }
-
-    public List<Genre> GetAllGenres()
-    {
-        List<Genre> genres = new List<Genre>();
-        try
-        {
-            this.open();
-            SqlCommand command = new SqlCommand("EXEC sp_get_all_genres", _conn);
-            SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
+            catch(Exception e)
             {
-                Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]),
-                                        Convert.ToString(reader["genre"]));
-                genres.Add(genre);
+                Console.WriteLine(e.ToString());
             }
+            return genres;
+        }
 
-            _conn.Close();
-        }
-        catch(Exception e)
+        public List<Genre> GetAllGenres()
         {
-            Console.WriteLine(e.ToString());
-        }
-        return genres;
-    }
+            List<Genre> genres = new List<Genre>();
+            try
+            {
+                this.Open();
+                SqlCommand command = new SqlCommand("EXEC sp_get_all_genres", _conn);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]),
+                        Convert.ToString(reader["genre"]));
+                    genres.Add(genre);
+                }
 
-    public void deleteLikedGenre(int genreNumber, int visitorNumber)
-    {
-        try
-        {
-            this.open();
-            SqlCommand command = new SqlCommand("EXEC sp_delete_genre_preference_visitor @visitor_number, @genre_number", _conn);
-            command.Parameters.AddWithValue("visitor_number", visitorNumber);
-            command.Parameters.AddWithValue("genre_number", genreNumber);
-            command.ExecuteNonQuery();
-            _conn.Close();
+                _conn.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return genres;
         }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-    }
 
-    public void addLikedGenre(int genreNumber, int visitorNumber)
-    {
-        try
+        public void DeleteLikedGenre(int genreNumber, int visitorNumber)
         {
-            this.open();
-            SqlCommand command = new SqlCommand("EXEC sp_add_genre_preference_visitor @visitor_number, @genre_number", _conn);
-            command.Parameters.AddWithValue("visitor_number", visitorNumber);
-            command.Parameters.AddWithValue("genre_number", genreNumber);
-            command.ExecuteNonQuery();
-            _conn.Close();
+            try
+            {
+                this.Open();
+                SqlCommand command = new SqlCommand("EXEC sp_delete_genre_preference_visitor @visitor_number, @genre_number", _conn);
+                command.Parameters.AddWithValue("visitor_number", visitorNumber);
+                command.Parameters.AddWithValue("genre_number", genreNumber);
+                command.ExecuteNonQuery();
+                _conn.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
-    }
 
-    public void close()
-    {
+        public void AddLikedGenre(int genreNumber, int visitorNumber)
+        {
+            try
+            {
+                this.Open();
+                SqlCommand command = new SqlCommand("EXEC sp_add_genre_preference_visitor @visitor_number, @genre_number", _conn);
+                command.Parameters.AddWithValue("visitor_number", visitorNumber);
+                command.Parameters.AddWithValue("genre_number", genreNumber);
+                command.ExecuteNonQuery();
+                _conn.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
+        public void Close()
+        {
+        }
     }
 }

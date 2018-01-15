@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorEditGenres.aspx.cs" Inherits="Form_VisitorEditGenres" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="VisitorEditGenres.aspx.cs" Inherits="Form.FormVisitorEditGenres" %>
 
 <!DOCTYPE html>
 
@@ -20,7 +20,7 @@
             <ul runat="server" id="genres_list">
             </ul>
         </div>
-        <asp:Button ID="return" runat="server" OnClick="btnReturn" Text="Terug" />
+        <asp:Button ID="return" runat="server" OnClick="BtnReturn" Text="Terug" />
     </form>
 </body>
 </html>

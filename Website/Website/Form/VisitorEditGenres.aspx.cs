@@ -1,95 +1,92 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 using Domain;
 using Model;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
 
-public partial class Form_VisitorEditGenres : System.Web.UI.Page
+namespace Form
 {
-    private VisitorModel _visitorModel;
-    private GenreModel _genreModel;
-
-    protected void Page_Load(object sender, EventArgs e)
+    public partial class FormVisitorEditGenres : System.Web.UI.Page
     {
-        _visitorModel = new VisitorModel();
-        _genreModel = new GenreModel();
+        private VisitorModel _visitorModel;
+        private GenreModel _genreModel;
 
-        if (Session["visitor"] == null)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("VisitorLogin.aspx");
-        }
+            _visitorModel = new VisitorModel();
+            _genreModel = new GenreModel();
 
-        Visitor visitor = (Visitor)Session["visitor"];
-
-        if ( visitor != null )
-        {
-            List<Genre> genres = _genreModel.getAllGenres();
-            List<Genre> visitorGenres = _visitorModel.GetGenresOfVisitor(visitor.VisitorNumber);
-            foreach (Genre g in genres)
+            if (Session["visitor"] == null)
             {
-                HtmlGenericControl li = new HtmlGenericControl("li");
-                li.InnerText = g.Name;
-
-                bool like = false;
-                Button update = new Button();
-                update.CommandArgument = Convert.ToString(g.GenreNumber);
-                foreach (Genre vg in visitorGenres)
-                {
-                    if(g.GenreNumber == vg.GenreNumber)
-                    {
-                        like = true;
-                    }
-                }
-                if (like)
-                {
-                    update.Text = "You like dis!";
-                    update.Click += new EventHandler(btnUpdateGenreUnlike);
-                }
-                else
-                {
-                    update.Text = "Do you like dis?";
-                    update.Click += new EventHandler(btnUpdateGenreLike);
-                }
-                update.OnClientClick = "return Confirm();";
-                
-                li.Controls.Add(update);
-
-
-                genres_list.Controls.Add(li);
+                Response.Redirect("VisitorLogin.aspx");
             }
+
+            Visitor visitor = (Visitor)Session["visitor"];
+
+            if ( visitor != null )
+            {
+                List<Genre> genres = _genreModel.GetAllGenres();
+                List<Genre> visitorGenres = _visitorModel.GetGenresOfVisitor(visitor.VisitorNumber);
+                foreach (Genre g in genres)
+                {
+                    HtmlGenericControl li = new HtmlGenericControl("li") {InnerText = g.Name};
+
+                    bool like = false;
+                    Button update = new Button {CommandArgument = Convert.ToString(g.GenreNumber)};
+                    foreach (Genre vg in visitorGenres)
+                    {
+                        if(g.GenreNumber == vg.GenreNumber)
+                        {
+                            like = true;
+                        }
+                    }
+                    if (like)
+                    {
+                        update.Text = "You like dis!";
+                        update.Click += BtnUpdateGenreUnlike;
+                    }
+                    else
+                    {
+                        update.Text = "Do you like dis?";
+                        update.Click += BtnUpdateGenreLike;
+                    }
+                    update.OnClientClick = "return Confirm();";
+                
+                    li.Controls.Add(update);
+
+                    genres_list.Controls.Add(li);
+                }
+            }
+
         }
 
-    }
+        protected void BtnUpdateGenreLike(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.CommandArgument);
+            Visitor visitor = (Visitor)Session["visitor"];
+            _visitorModel.AddLikedGenre(visitor.VisitorNumber, id);
+            this.Refresh();
+        }
 
-    protected void btnUpdateGenreLike(object sender, EventArgs e)
-    {
-        Button button = (Button)sender;
-        int id = Convert.ToInt32(button.CommandArgument);
-        Visitor visitor = (Visitor)Session["visitor"];
-        _visitorModel.addLikedGenre(visitor.VisitorNumber, id);
-        this.refresh();
-    }
+        protected void BtnUpdateGenreUnlike(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            int id = Convert.ToInt32(button.CommandArgument);
+            Visitor visitor = (Visitor)Session["visitor"];
+            _visitorModel.DeleteLikedGenre(visitor.VisitorNumber, id);
+            this.Refresh();
+        }
 
-    protected void btnUpdateGenreUnlike(object sender, EventArgs e)
-    {
-        Button button = (Button)sender;
-        int id = Convert.ToInt32(button.CommandArgument);
-        Visitor visitor = (Visitor)Session["visitor"];
-        _visitorModel.deleteLikedGenre(visitor.VisitorNumber, id);
-        this.refresh();
-    }
+        protected void Refresh()
+        {
+            Response.Redirect("VisitorEditGenres.aspx");
+        }
 
-    protected void refresh()
-    {
-        Response.Redirect("VisitorEditGenres.aspx");
-    }
-
-    protected void btnReturn(object sender, EventArgs e)
-    {
-        Response.Redirect("VisitorOverview.aspx");
+        protected void BtnReturn(object sender, EventArgs e)
+        {
+            Response.Redirect("VisitorOverview.aspx");
+        }
     }
 }

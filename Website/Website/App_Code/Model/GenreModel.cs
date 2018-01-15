@@ -1,24 +1,25 @@
-﻿using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using DAO;
+using Domain;
 
-/// <summary>
-/// Summary description for GenreModel
-/// </summary>
-public class GenreModel
+namespace Model
 {
-    private readonly GenreDao _genreDao;
-
-    public GenreModel()
+    /// <summary>
+    /// Summary description for GenreModel
+    /// </summary>
+    public class GenreModel
     {
-        _genreDao = new GenreDao();
-    }
+        private readonly GenreDAO _genreDao;
 
-    public List<Genre> getAllGenres()
-    {
-        return _genreDao.GetAllGenres();
-    }
+        public GenreModel()
+        {
+            _genreDao = new GenreDAO();
+        }
 
+        public List<Genre> GetAllGenres()
+        {
+            return _genreDao.GetAllGenres();
+        }
+
+    }
 }
