@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <h1>Genres beheren</h1>
+            <h1>Genres Beheren</h1>
             <p>
                 We leren u graag beter kennen om zo de artiesten beter te kunnen afstellen op uw wensen.
                 <br />

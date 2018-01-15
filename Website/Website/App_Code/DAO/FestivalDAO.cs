@@ -63,9 +63,9 @@ namespace DAO
 
         public List<Festival> GetAllFestivals()
         {
+            List<Festival> festivals = new List<Festival>();
             try
             {
-                List<Festival> festivals = new List<Festival>();
 
                 SqlCommand command = new SqlCommand("SELECT * FROM FESTIVAL", _conn);
                 SqlDataReader reader = command.ExecuteReader();
@@ -86,14 +86,13 @@ namespace DAO
                 }
 
                 _conn.Close();
-                return festivals;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
+            return festivals;
 
-            return null;
         }
     }
 }

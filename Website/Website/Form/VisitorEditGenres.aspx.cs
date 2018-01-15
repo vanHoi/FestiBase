@@ -26,37 +26,30 @@ namespace Form
 
             if ( visitor != null )
             {
-                List<Genre> genres = _genreModel.GetAllGenres();
                 List<Genre> visitorGenres = _visitorModel.GetGenresOfVisitor(visitor.VisitorNumber);
-                foreach (Genre g in genres)
-                {
-                    HtmlGenericControl li = new HtmlGenericControl("li") {InnerText = g.Name};
 
-                    bool like = false;
-                    Button update = new Button {CommandArgument = Convert.ToString(g.GenreNumber)};
-                    foreach (Genre vg in visitorGenres)
+                foreach (Genre g in visitorGenres)
+                {
+                    HtmlGenericControl li = new HtmlGenericControl("li") { InnerText = g.Name };
+
+                    Button update = new Button { CommandArgument = Convert.ToString(g.GenreNumber) };
+
+                    if (g.VisitorNumber != 0)
                     {
-                        if(g.GenreNumber == vg.GenreNumber)
-                        {
-                            like = true;
-                        }
-                    }
-                    if (like)
-                    {
-                        update.Text = "You like dis!";
+                        update.Text = "Unlike";
                         update.Click += BtnUpdateGenreUnlike;
                     }
                     else
                     {
-                        update.Text = "Do you like dis?";
+                        update.Text = "Like";
                         update.Click += BtnUpdateGenreLike;
                     }
                     update.OnClientClick = "return Confirm();";
-                
                     li.Controls.Add(update);
 
                     genres_list.Controls.Add(li);
                 }
+
             }
 
         }

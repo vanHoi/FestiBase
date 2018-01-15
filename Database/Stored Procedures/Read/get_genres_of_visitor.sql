@@ -16,9 +16,12 @@ CREATE PROCEDURE sp_get_genres_of_visitor
 AS
 BEGIN
 	BEGIN TRY
-		SELECT genre_number, genre 
-		FROM GENRE
-		WHERE genre_number IN (SELECT genre_number FROM GENRE_preference_VISITOR WHERE visitor_number = @visitor_number)		
+		SELECT G.genre_number, G.genre, GPV.visitor_number
+		FROM GENRE as G FULL OUTER JOIN GENRE_preference_VISITOR AS GPV
+		ON G.genre_number = GPV.genre_number
+		AND GPV.visitor_number = @visitor_number
+		WHERE G.genre_number IS NOT NULL
+		ORDER BY GPV.visitor_number DESC, G.genre ASC
 	END TRY
 	BEGIN CATCH
 		;THROW

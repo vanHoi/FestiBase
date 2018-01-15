@@ -56,7 +56,8 @@ namespace DAO
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]), Convert.ToString(reader["genre"]));
+                    var visNumTempt = (reader["visitor_number"] == DBNull.Value) ? 0 : Convert.ToInt32(reader["visitor_number"]); 
+                    Genre genre = new Genre(Convert.ToInt32(reader["genre_number"]), Convert.ToString(reader["genre"]), visNumTempt);
                     genres.Add(genre);
                 }
 
