@@ -1,11 +1,11 @@
 /* Bootstrap CSS Overrides */
 
-/* FestiBase kleuren:
-    Paars: #160e2f
-    Licht oranje: #fdb958
-    Licht paars: #492d9f
-    Oranje: #ff9b0c
-    Grijs: #7a7a7a
+/* FestiBase colors:
+    Purple: #160e2f
+    Light Orange: #fdb958
+    Light Purple: #492d9f
+    Orange: #ff9b0c
+    Grey: #7a7a7a
 */
 
 html {
@@ -180,7 +180,7 @@ footer {
     opacity: 0.9;
 }
 
-.btn-primary-tabel, .btn-primary-tabel:hover {
+.btn-primary-table, .btn-primary-table:hover {
     font-size: 0.9375rem;
     margin-right: 0;
     width: 100%;
@@ -188,51 +188,51 @@ footer {
 
 /* Tabel */
 
-.tabel-wrapper .col {
+.table-wrapper .col {
     border-right: 1px #7a7a7a solid;
     height: 100%;
     max-width: 25%;
 }
 
-    .tabel-wrapper .col:nth-of-type(4) {
+    .table-wrapper .col:nth-of-type(4) {
         border-right: 0;
     }
 
-.tabel {
+.table {
     height: 100px;
     border: 1px solid #7a7a7a;
     border-top: 0;
     font-size: 1.1rem;
 }
 
-    .tabel:nth-of-type(1) {
+    .table:nth-of-type(1) {
         border-top: 1px solid #7a7a7a;
     }
 
-.tabel-wrapper .tabel:nth-of-type(odd) {
+.table-wrapper .table:nth-of-type(odd) {
     background-color: rgba(255, 255, 255, .8);
 }
 
-.tabel-wrapper .tabel:nth-of-type(even) {
+.table-wrapper .table:nth-of-type(even) {
     background-color: rgba(255, 255, 255, .7);
 }
 
-.tabel-titel {
+.table_title {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 @media (min-width: 1200px) {
-    .tabel-titel {
+    .table_title {
         font-size: 2.25rem;
     }
 
-    .tabel {
+    .table {
         font-size: 1.25rem;
     }
 }
 
-.tabel-center-verticaal {
+.table-center-vertical {
     display: flex;
     flex-direction: column;
     justify-content: center;

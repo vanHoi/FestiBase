@@ -49,20 +49,20 @@
                 <asp:Button ID="btnAddTicket" runat="server" Text="Ticket Toevoegen" CssClass="btn btn-primary btn-primary-big" />
             </div>
 
-            <div class="extra-padding-top-sm tabel-wrapper">
+            <div class="extra-padding-top-sm table-wrapper">
                 <asp:Panel ID="pnlTickets" runat="server">
-                    <div class="row tabel">
-                        <div class="col tabel-center-verticaal">
-                            <span class="tabel-titel">Festival</span>
+                    <div class="row table">
+                        <div class="col table-center-vertical">
+                            <span class="table_title">Festival</span>
                         </div>
-                        <div class="col tabel-center-verticaal">
-                            <span class="tabel-titel">Ticket Soort</span>
+                        <div class="col table-center-vertical">
+                            <span class="table_title">Ticket Soort</span>
                         </div>
-                        <div class="col tabel-center-verticaal">
-                            <span class="tabel-titel">Datum</span>
+                        <div class="col table-center-vertical">
+                            <span class="table_title">Datum</span>
                         </div>
-                        <div class="col tabel-center-verticaal">
-                            <span class="tabel-titel">Programma</span>
+                        <div class="col table-center-vertical">
+                            <span class="table_title">Programma</span>
                         </div>
                     </div>
                 </asp:Panel>
