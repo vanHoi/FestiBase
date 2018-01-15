@@ -26,7 +26,7 @@
         </asp:Table>
         <asp:Button ID="btnLogout" runat="server" Height="30px" OnClick="btnLogoutClick" Text="Uitloggen" Width="108px" />
         <p>
-            <asp:Button ID="btnGenre" runat="server" Height="30px" Text="Mijn genres" Width="107px" />
+            <asp:Button ID="btnGenre" runat="server" Height="30px" OnClick="btnGenreEdit" Text="Mijn genres" Width="107px" />
         </p>
     </form>
 </body>

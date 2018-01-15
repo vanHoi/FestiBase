@@ -78,5 +78,10 @@ namespace Form
             Session.Remove("visitor");
             Response.Redirect("VisitorLogin.aspx");
         }
+
+        protected void btnGenreEdit(object sender, EventArgs e)
+        {
+            Response.Redirect("VisitorEditGenres.aspx");
+        }
     }
 }
