@@ -4,8 +4,8 @@
 /* PDM version:		6											*/
 /* Last edited:		8-1-2018									*/
 /* Edited by:		Robert Verkerk								*/
-/* Procedure:		CHECK if the genre of an artist				*/
-/*					is the same as the genre of the podium		*/
+/* Procedure:		Check if the performance and podium are		*/
+/*					from the same festival						*/
 /*==============================================================*/
 
 USE FestiBase

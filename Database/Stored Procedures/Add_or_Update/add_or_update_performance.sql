@@ -1,4 +1,4 @@
-/*======	========================================================*/
+/*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		7											*/
 /* Last edited:		11-01-2018									*/
@@ -55,10 +55,11 @@ BEGIN
 
 		IF (@insert = 1)
 			BEGIN
-				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, start_time, play_time, min_prep_time) VALUES
+				INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
 				(@artist_number,
 				 @podium_schedule_number,
 				 @festival_number,
+				 @start_date,
 				 @start_time,
 				 @play_time,
 				 @min_prep_time)
@@ -81,6 +82,7 @@ BEGIN
 					artist_number = @artist_number,
 					podium_schedule_number = @podium_schedule_number,
 					festival_number = @festival_number,
+					"start_date" = @start_date,
 					start_time = @start_time,
 					play_time = @play_time,
 					min_prep_time = @min_prep_time
