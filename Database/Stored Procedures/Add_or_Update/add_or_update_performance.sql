@@ -45,9 +45,9 @@ BEGIN
 		DECLARE @podium_number INT
  		SET @podium_number = (SELECT podium_number FROM PODIUM_SCHEDULE where podium_schedule_number = @podium_schedule_number)
 
--- 		EXEC sp_check_podium_genre_with_artist_genre
---		@artist_number,
--- 		@podium_number
+ 		EXEC sp_check_podium_genre_with_artist_genre
+		@artist_number,
+ 		@podium_number
 
 		EXEC sp_check_podium_performance_festival
 		@podium_number,
@@ -99,31 +99,31 @@ GO
 /* 
 	These tests should work
 */
-select * from festival
+
 -- INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018','15:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, 3, 3, '30-03-2018','15:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', NULL, 90, NULL, 1 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '30-03-2018', NULL, 90, NULL, 1 
 ROLLBACK TRAN
 GO
 
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', NULL, 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 3, '30-03-2018', NULL, 90, 30, 1 
 ROLLBACK TRAN
 GO
 
 -- UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_performance 10, 8, 4, 2, '30-03-2018', '15:00:00', 90, 30, 0 
+EXEC sp_add_or_update_performance 10, 1, 1, 1, '30-03-2018', '15:00:00', 90, 10, 0 
 ROLLBACK TRAN
 GO
 
 BEGIN TRAN
-EXEC sp_add_or_update_performance 10, 8, NULL, 2, '30-03-2018', NULL, 90, 30, 0
+EXEC sp_add_or_update_performance 10, 8, NULL, 1, '30-03-2018', NULL, 90, 30, 0
 ROLLBACK TRAN
 GO
 
@@ -134,85 +134,85 @@ GO
 
 -- INSERT (An artist is already playing during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '20:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '20:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (This artist is already going to perform during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 9, 4, 2, '30-03-2018', '21:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 9, 4, 2, '30-03-2018', '21:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (The start_time cannot be known if the schedule is NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 1 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (This performance does not fit the schedule)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '13:59:00', 90, 30, 1 
-ROLLBACK TRAN
-GO
-
--- UPDATE (An artist is already playing during that time)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '20:00:00', 90, 30, 0
-ROLLBACK TRAN
-GO
-
--- UPDATE (This artist is already going to perform during that time)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 9, 4, 2, '30-03-2018', '21:00:00', 90, 30, 0 
-ROLLBACK TRAN
-GO
-
--- UPDATE (The start_time cannot be known if the schedule is NULL)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 0 
-ROLLBACK TRAN
-GO
-
--- UPDATE (This performance does not fit the schedule)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '13:59:00', 90, 30, 0
-ROLLBACK TRAN
-GO
-
--- UPDATE (@performance_number cannot be NULL)
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 30, 0 
-ROLLBACK TRAN
-GO
-
--- UPDATE (This performance does not exist)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 300, 8, 4, 2, '30-03-2018', '15:00:00', 90, 30, 0
-ROLLBACK TRAN
-GO
-
--- UPDATE (WARNING)
-BEGIN TRAN 
-EXEC sp_add_or_update_performance 9, 8, 3, 2, '30-03-2018', '19:15:00', 90,  30, 0
-ROLLBACK TRAN
-GO
-
--- INSERT (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 1
-ROLLBACK TRAN
-GO
-
--- UPDATE (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 1
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '30-03-2018', '13:59:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 --  INSERT ( Podium of wrong festival )
 BEGIN TRAN
 EXEC sp_add_or_update_performance NULL, 8, 3, 1, '30-03-2018', NULL, 90, 30, 1
+ROLLBACK TRAN
+GO
+
+-- INSERT (The artist has the wrong genre for this podium)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 3, 1, 1, '30-03-2018', '14:00:00', 30, 5, 1
+ROLLBACK TRAN
+GO
+
+-- UPDATE (An artist is already playing during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '20:00:00', 90, 15, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This artist is already going to perform during that time)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 9, 4, 2, '30-03-2018', '21:00:00', 90, 15, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (The start_time cannot be known if the schedule is NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, NULL, 2, '30-03-2018', '15:00:00', 90, 15, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This performance does not fit the schedule)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 9, 8, 1, 1, '30-03-2018', '13:59:00', 90, 15, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (@performance_number cannot be NULL)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '30-03-2018', '15:00:00', 90, 15, 0 
+ROLLBACK TRAN
+GO
+
+-- UPDATE (This performance does not exist)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 300, 1, 1, 1, '30-03-2018', '15:00:00', 90, 15, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (WARNING - PODIUM TOO SMALL)
+BEGIN TRAN 
+EXEC sp_add_or_update_performance 9, 8, 3, 3, '15-06-2015', '14:00:00', 90,  15, 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE (The artist has the wrong genre for this podium)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 2, 5, 1, 1, '30-03-2018', '14:00:00', 30, 5, 1
 ROLLBACK TRAN
 GO
 

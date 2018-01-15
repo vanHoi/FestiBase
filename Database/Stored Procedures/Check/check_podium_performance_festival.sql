@@ -20,7 +20,7 @@ AS
 BEGIN
 	BEGIN TRY
 		-- check if podium has genres
-		IF (@festival_number != (select festival_number FROM PODIUM WHERE podium_number = @podium_number))
+		IF (@festival_number != (SELECT festival_number FROM PODIUM WHERE podium_number = @podium_number))
 		BEGIN
 		 ;THROW 500001, 'The festival number of the performance is not the same as the festival number of the podium.', 1
 		END
