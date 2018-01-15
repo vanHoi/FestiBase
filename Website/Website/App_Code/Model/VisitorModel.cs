@@ -30,7 +30,7 @@ namespace Model
 
         public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
         {
-            return _boughtTicketDao.addVisitorToTicket(visitorNumber, ticketNumber);
+            return _boughtTicketDao.AddVisitorToTicket(visitorNumber, ticketNumber);
         }
     }
 }

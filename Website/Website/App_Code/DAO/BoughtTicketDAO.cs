@@ -65,8 +65,7 @@ namespace DAO
             return null;
         }
 
-
-        public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
+        public bool AddVisitorToTicket(int visitorNumber, int ticketNumber)
         {
             try
             {
@@ -76,31 +75,14 @@ namespace DAO
 
                 SqlDataReader reader = command.ExecuteReader();
 
-
                 BoughtTicket boughtTicket = new BoughtTicket();
-
 
                 while (reader.Read())
                 {
 
-                    if (reader["visitor_number"] != DBNull.Value)
-                    {
-                        boughtTicket.Visitor.VisitorNumber = Convert.ToInt32(reader["visitor_number"]);
-                    }
-                    else
-                    {
-                        boughtTicket.Visitor.VisitorNumber = 0;
-                    }
+                    boughtTicket.Visitor.VisitorNumber = reader["visitor_number"] != DBNull.Value ? Convert.ToInt32(reader["visitor_number"]) : 0;
 
-
-                    if (reader["scan_date"] != DBNull.Value)
-                    {
-                        boughtTicket.ScanDate = Convert.ToDateTime(reader["scan_date"]);
-                    }
-                    else
-                    {
-                        boughtTicket.ScanDate = DateTime.MinValue;
-                    }
+                    boughtTicket.ScanDate = reader["scan_date"] != DBNull.Value ? Convert.ToDateTime(reader["scan_date"]) : DateTime.MinValue;
 
                     boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber = Convert.ToInt32(reader["festival_company_number"]);
 
@@ -109,7 +91,6 @@ namespace DAO
                     boughtTicket.TicketNumber = ticketNumber;
 
                 }
-
 
                 if (boughtTicket.Visitor.VisitorNumber != 0)
                 {
