@@ -210,7 +210,20 @@ GO
 
 -- UPDATE (The artist has the wrong genre for this podium)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 1
+EXEC sp_add_or_update_performance 2, 2, 1, 2, '30-03-2018', '14:00:00', 30, 5, 0
+ROLLBACK TRAN
+GO
+
+-- INSERT (Wrong starttime)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 2, NULL, 1, '30-04-1919', NULL, 10, 5, 1
+ROLLBACK TRAN
+GO 
+
+
+-- UPDATE (wrong starttime)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 2, 2, NULL, 2, '10-02-2005', NULL, 30, 5,  0
 ROLLBACK TRAN
 GO
 
