@@ -15,7 +15,7 @@ public partial class Form_AddTicket : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-         _visitorModel = new VisitorModel();
+        _visitorModel = new VisitorModel();
 
         if (Session["visitor"] == null)
         {
@@ -32,7 +32,7 @@ public partial class Form_AddTicket : System.Web.UI.Page
 
             Visitor visitor = (Visitor)Session["visitor"];
 
-           if(_visitorModel.addVisitorToTicket(visitor.VisitorNumber, Convert.ToInt32(tboxTicketNumber.Text)))
+            if (_visitorModel.addVisitorToTicket(visitor.VisitorNumber, Convert.ToInt32(tboxTicketNumber.Text)))
             {
 
                 Session["ticketAdded"] = true;

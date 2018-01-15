@@ -72,20 +72,20 @@ namespace DAO
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM BOUGHT_TICKET WHERE ticket_number = @ticketNumber", _conn);
 
-                 command.Parameters.AddWithValue("ticketNumber", ticketNumber);
+                command.Parameters.AddWithValue("ticketNumber", ticketNumber);
 
                 SqlDataReader reader = command.ExecuteReader();
 
 
                 BoughtTicket boughtTicket = new BoughtTicket();
-                
+
 
                 while (reader.Read())
                 {
-       
+
                     if (reader["visitor_number"] != DBNull.Value)
                     {
-                        boughtTicket.Visitor.VisitorNumber= Convert.ToInt32(reader["visitor_number"]);
+                        boughtTicket.Visitor.VisitorNumber = Convert.ToInt32(reader["visitor_number"]);
                     }
                     else
                     {
@@ -111,7 +111,7 @@ namespace DAO
                 }
 
 
-                if(boughtTicket.Visitor.VisitorNumber != 0)
+                if (boughtTicket.Visitor.VisitorNumber != 0)
                 {
                     return false;
                 }
@@ -119,7 +119,7 @@ namespace DAO
                 _conn.Close();
                 _conn.Open();
 
-                command = new SqlCommand("EXEC sp_add_or_update_bought_ticket @ticketNumber, @festivalCompanyNumber, @ticketType, @visitorNumber	, @scanDate	,0", _conn);
+                command = new SqlCommand("EXEC sp_add_or_update_bought_ticket @ticketNumber, @festivalCompanyNumber, @ticketType, @visitorNumber, @scanDate,0", _conn);
                 command.Parameters.AddWithValue("ticketNumber", ticketNumber);
                 command.Parameters.AddWithValue("festivalCompanyNumber", boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber);
                 command.Parameters.AddWithValue("ticketType", boughtTicket.TicketType.Type);
@@ -130,7 +130,7 @@ namespace DAO
                 }
                 else
                 {
-                   command.Parameters.AddWithValue("scanDate", boughtTicket.ScanDate);
+                    command.Parameters.AddWithValue("scanDate", boughtTicket.ScanDate);
                 }
                 command.ExecuteNonQuery();
 
