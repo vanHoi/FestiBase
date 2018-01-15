@@ -108,3 +108,9 @@ BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-14', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
+
+-- Test INSERT 
+BEGIN TRAN
+EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-15', '00:00:00', 30, 1
+ROLLBACK TRAN
+GO
