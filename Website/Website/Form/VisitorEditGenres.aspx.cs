@@ -10,12 +10,10 @@ namespace Form
     public partial class FormVisitorEditGenres : System.Web.UI.Page
     {
         private VisitorModel _visitorModel;
-        private GenreModel _genreModel;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _visitorModel = new VisitorModel();
-            _genreModel = new GenreModel();
 
             if (Session["visitor"] == null)
             {
@@ -30,24 +28,41 @@ namespace Form
 
                 foreach (Genre g in visitorGenres)
                 {
-                    HtmlGenericControl li = new HtmlGenericControl("li") { InnerText = g.Name };
+                    HtmlGenericControl divRow = new HtmlGenericControl();
+                    divRow.Attributes["class"] = "row table";
+                    divRow.TagName = "div";
 
-                    Button update = new Button { CommandArgument = Convert.ToString(g.GenreNumber) };
+                    HtmlGenericControl divCell = new HtmlGenericControl();
+                    divCell.Attributes["class"] = "col table-center-vertical";
+                    divCell.TagName = "div";
+                    divCell.InnerHtml = g.Name;
+
+                    HtmlGenericControl divCell2 = new HtmlGenericControl();
+                    divCell2.Attributes["class"] = "col table-center-vertical";
+                    divCell2.TagName = "div";
+
+                    Button btnGenre = new Button
+                    {
+                        CommandArgument = Convert.ToString(g.GenreNumber),
+                        Text = g.VisitorNumber != 0 ? "Unlike" : "Like",
+                        CssClass = "btn btn-primary btn-primary-small btn-primary-table"
+                    };
 
                     if (g.VisitorNumber != 0)
                     {
-                        update.Text = "Unlike";
-                        update.Click += BtnUpdateGenreUnlike;
+                        btnGenre.Click += BtnUpdateGenreUnlike;
                     }
                     else
                     {
-                        update.Text = "Like";
-                        update.Click += BtnUpdateGenreLike;
+                        btnGenre.Click += BtnUpdateGenreLike;
                     }
-                    update.OnClientClick = "return Confirm();";
-                    li.Controls.Add(update);
 
-                    genres_list.Controls.Add(li);
+                    divCell2.Controls.Add(btnGenre);
+
+                    divRow.Controls.Add(divCell);
+                    divRow.Controls.Add(divCell2);
+
+                    pnlGenres.Controls.Add(divRow);
                 }
 
             }

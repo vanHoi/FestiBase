@@ -31,7 +31,7 @@
             <div class="row extra-padding-top-xs">
                 <div class="col-3"></div>
                 <div class="col-6 text-center">
-                    <h1 style="padding: 0;">
+                    <h1 class="no-padding">
                         <asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label></h1>
                 </div>
                 <div class="col-3 text-right">
