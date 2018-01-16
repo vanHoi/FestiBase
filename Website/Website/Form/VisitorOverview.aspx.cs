@@ -46,7 +46,7 @@ namespace Form
                     divCell2.TagName = "div";
                     divCell2.InnerHtml = b.TicketType.Type;
 
-                    HtmlGenericControl divCell3 = new HtmlGenericControl(); ;
+                    HtmlGenericControl divCell3 = new HtmlGenericControl();
                     divCell3.Attributes["class"] = "col table-center-vertical";
                     divCell3.TagName = "div";
 
@@ -69,7 +69,6 @@ namespace Form
                         Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer Bezochte Optredens" : "Bekijk Programma",
                         CssClass = "btn btn-primary btn-primary-small btn-primary-table"
                     };
-
 
                     btnProgram.Click += btnProgramClick;
                     divCell4.Controls.Add(btnProgram);

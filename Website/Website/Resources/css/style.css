@@ -125,6 +125,10 @@ footer {
     }
 }
 
+.no-padding {
+    padding: 0;
+}
+
 /* Buttons */
 
 .btn {
@@ -191,7 +195,6 @@ footer {
 .table-wrapper .col {
     border-right: 1px #7a7a7a solid;
     height: 100%;
-    max-width: 25%;
 }
 
     .table-wrapper .col:nth-of-type(4) {
