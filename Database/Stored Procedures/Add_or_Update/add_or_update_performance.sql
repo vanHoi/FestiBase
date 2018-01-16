@@ -176,6 +176,18 @@ EXEC sp_add_or_update_performance NULL, 3, 1, 1, '30-03-2018', '14:00:00', 30, 5
 ROLLBACK TRAN
 GO
 
+-- INSERT (Wrong starttime)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 1, 1, 1, '30-03-2018', '09:00:00', 10, 5, 1
+ROLLBACK TRAN
+GO
+
+-- INSERT (dates do not match)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 1, 1, 1, '31-03-2014', '14:00:00', 30, 5, 1
+ROLLBACK TRAN
+GO
+
 -- UPDATE (An artist is already playing during that time)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 9, 8, 4, 2, '30-03-2018', '20:00:00', 90, 15, 0
@@ -202,7 +214,7 @@ GO
 
 -- UPDATE (@performance_number cannot be NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '30-03-2018', '15:00:00', 90, 15, 0 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '30-03-2018', NULL, 90, 15, 0 
 ROLLBACK TRAN
 GO
 
@@ -224,27 +236,14 @@ EXEC sp_add_or_update_performance 2, 5, 1, 1, '30-03-2018', '14:00:00', 30, 5, 1
 ROLLBACK TRAN
 GO
 
--- UPDATE ( Podium of wrong festival)
+-- UPDATE (Podium of wrong festival)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 10, 8, 3, 2, '30-03-2018', NULL, 90, 30, 0
 ROLLBACK TRAN
 GO
 
--- INSERT (Wrong starttime)
+-- UPDATE (wrong endtime)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 2, NULL, 1, '30-04-1919', NULL, 10, 5, 1
-ROLLBACK TRAN
-GO 
-
-
--- UPDATE (wrong starttime)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 2, NULL, 2, '10-02-2005', NULL, 30, 5,  0
-ROLLBACK TRAN
-GO
-
--- INSERT (dates do not match)
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 2, 1, 2, '31-03-2018', '14:00:00', 30, 5, 1
+EXEC sp_add_or_update_performance 2, 1, 1, 1, '30-03-2018', '23:01:00', 30, 5,  0
 ROLLBACK TRAN
 GO
