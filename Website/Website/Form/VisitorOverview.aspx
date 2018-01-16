@@ -15,7 +15,7 @@
     <link href="~/Resources/css/style_visitor.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="formBezoekerHoofdscherm" runat="server">
+  <form id="formBezoekerHoofdscherm" runat="server">
 
         <section class="container-fluid">
 
@@ -35,7 +35,7 @@
                         <asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label></h1>
                 </div>
                 <div class="col-3 text-right">
-                    <asp:Button ID="btnGenre" runat="server" Text="Mijn genres" CssClass="btn btn-primary btn-primary-small" />
+                    <asp:Button ID="btnGenre" runat="server" Text="Mijn genres" OnClick="btnGenreEdit" CssClass="btn btn-primary btn-primary-small" />
                 </div>
             </div>
 
@@ -71,7 +71,6 @@
             <footer class="container-fluid"></footer>
 
         </section>
-
     </form>
 </body>
 </html>
