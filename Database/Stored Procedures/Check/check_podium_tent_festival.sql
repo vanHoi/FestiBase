@@ -27,7 +27,7 @@ BEGIN
 		BEGIN
 		IF ( (SELECT festival_number FROM TENT where tent_number = @tent_number) != (SELECT festival_number FROM PODIUM where podium_number = @podium_number))
 			BEGIN
-				;THROW 500001, 'The festival of the podium and tent should be the same.', 1
+				;THROW 500001, 'The festival_number of the podium and tent should be the same.', 1
 			END
 		END
 	END TRY
