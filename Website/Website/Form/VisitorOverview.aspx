@@ -15,14 +15,6 @@
     <link href="~/Resources/css/style_visitor.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <div>
-            <h1>
-                <asp:Label ID="lblVisitor" runat="server" Text="Welkom "></asp:Label>
-            </h1>
-            <p>Hier ziet u een overzicht van uw festivals.</p>
-
-        </div>
-  
   <form id="formBezoekerHoofdscherm" runat="server">
 
         <section class="container-fluid">

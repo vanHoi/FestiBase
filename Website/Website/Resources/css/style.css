@@ -239,3 +239,7 @@ footer {
     height: 100px;
     resize: vertical;
 }
+
+.row{
+    margin-bottom: 0;
+}
