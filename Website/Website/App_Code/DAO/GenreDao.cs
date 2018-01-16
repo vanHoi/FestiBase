@@ -127,9 +127,5 @@ namespace DAO
                 Console.WriteLine(e.ToString());
             }
         }
-
-        public void Close()
-        {
-        }
     }
 }
