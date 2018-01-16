@@ -85,8 +85,8 @@ BEGIN
 													AND DATEADD(minute, play_time + @break_time, start_time)
 													OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
 														AND DATEADD(minute, play_time + @break_time, start_time)
-													OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) 
-														AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + @break_time, start_time))))
+													OR (@start_time <= DATEADD(minute, 0 - @break_time, start_time) 
+														AND DATEADD(minute, @play_time, @start_time) >= DATEADD(minute, play_time + @break_time, start_time))))
 									BEGIN
 										;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 									END
