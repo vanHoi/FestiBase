@@ -1,7 +1,7 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		7											*/
-/* Last edited:		11-01-2018									*/
+/* Last edited:		12-01-2018									*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update PERFORMANCE					*/
 /*==============================================================*/
@@ -30,6 +30,14 @@ CREATE PROC sp_add_or_update_performance
 AS
 BEGIN
 	BEGIN TRY
+		IF (@podium_schedule_number IS NOT NULL OR @podium_schedule_number != 0)
+			BEGIN
+				/* Checking if the start_date matches the schedules start_date */
+				EXEC sp_check_performance_date_with_podium_schedule
+				@start_date,
+				@podium_schedule_number
+			END
+
 		/* Checking the constraints on performance */
 		EXEC sp_check_performance 
 		@performance_number,
@@ -219,5 +227,24 @@ GO
 -- UPDATE ( Podium of wrong festival)
 BEGIN TRAN
 EXEC sp_add_or_update_performance 10, 8, 3, 2, '30-03-2018', NULL, 90, 30, 0
+ROLLBACK TRAN
+GO
+
+-- INSERT (Wrong starttime)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 2, NULL, 1, '30-04-1919', NULL, 10, 5, 1
+ROLLBACK TRAN
+GO 
+
+
+-- UPDATE (wrong starttime)
+BEGIN TRAN
+EXEC sp_add_or_update_performance 2, 2, NULL, 2, '10-02-2005', NULL, 30, 5,  0
+ROLLBACK TRAN
+GO
+
+-- INSERT (dates do not match)
+BEGIN TRAN
+EXEC sp_add_or_update_performance NULL, 2, 1, 2, '31-03-2018', '14:00:00', 30, 5, 1
 ROLLBACK TRAN
 GO

@@ -1,9 +1,10 @@
 /*==============================================================*/
-/* DBMS name:      FestiBase									*/
-/* PDM version 6												*/
-/* Last edited: 19-12-2017										*/
-/* Edited by: Yuri Vannisselroy								    */
-/* Testdata														*/
+/* DBMS name:		FestiBase									*/
+/* PDM version		6											*/
+/* Last edited:		19-12-2017									*/
+/* Created by:		Robert Verkerk								*/
+/* Edited by:		Yuri Vannisselroy & Ivo Reumkens		    */
+/* Script:			DML											*/
 /*==============================================================*/
 
 USE FestiBase
