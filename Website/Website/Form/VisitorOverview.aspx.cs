@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Domain;
 using Model;
@@ -18,7 +19,7 @@ namespace Form
                 Response.Redirect("VisitorLogin.aspx");
             }
 
-            Visitor visitor = (Visitor) Session["visitor"];
+            Visitor visitor = (Visitor)Session["visitor"];
             if (String.IsNullOrEmpty(visitor?.FirstName))
             {
                 lblVisitor.Text = "Welkom!";
@@ -31,40 +32,54 @@ namespace Form
             if (visitor != null)
                 foreach (BoughtTicket b in _visitorModel.GetAllBoughtTicketsOfVisitor(visitor.VisitorNumber))
                 {
-                    TableRow row = new TableRow();
+                    HtmlGenericControl divRow = new HtmlGenericControl();
+                    divRow.Attributes["class"] = "row table";
+                    divRow.TagName = "div";
 
-                    TableCell cell = new TableCell {Text = b.GetFestival().Name};
+                    HtmlGenericControl divCell = new HtmlGenericControl();
+                    divCell.Attributes["class"] = "col table-center-vertical";
+                    divCell.TagName = "div";
+                    divCell.InnerHtml = b.GetFestival().Name;
 
-                    TableCell cell2 = new TableCell {Text = b.TicketType.Type};
+                    HtmlGenericControl divCell2 = new HtmlGenericControl();
+                    divCell2.Attributes["class"] = "col table-center-vertical";
+                    divCell2.TagName = "div";
+                    divCell2.InnerHtml = b.TicketType.Type;
 
-                    TableCell cell3 = new TableCell();
+                    HtmlGenericControl divCell3 = new HtmlGenericControl(); ;
+                    divCell3.Attributes["class"] = "col table-center-vertical";
+                    divCell3.TagName = "div";
+
                     if (b.GetFestival().StartDate.Date == b.GetFestival().EndDate.Date)
                     {
-                        cell3.Text = b.GetFestival().StartDate.ToString("dd/MM/yyyy");
+                        divCell3.InnerHtml = b.GetFestival().StartDate.ToString("dd/MM/yyyy");
                     }
                     else
                     {
-                        cell3.Text = b.GetFestival().StartDate.ToString("dd/MM/yyyy") + " t/m " +
-                                     b.GetFestival().EndDate.ToString("dd/MM/yyyy");
+                        divCell3.InnerHtml = b.GetFestival().StartDate.ToString("dd/MM/yyyy") + " t/m " +
+                                                b.GetFestival().EndDate.ToString("dd/MM/yyyy");
                     }
 
+                    HtmlGenericControl divCell4 = new HtmlGenericControl();
+                    divCell4.Attributes["class"] = "col table-center-vertical";
+                    divCell4.TagName = "div";
 
-                    TableCell cell4 = new TableCell();
                     Button btnProgram = new Button
                     {
-                        Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer bezochte optredens" : "Bekijk programma"
+                        Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer Bezochte Optredens" : "Bekijk Programma",
+                        CssClass = "btn btn-primary btn-primary-small btn-primary-table"
                     };
 
 
                     btnProgram.Click += btnProgramClick;
-                    cell4.Controls.Add(btnProgram);
+                    divCell4.Controls.Add(btnProgram);
 
-                    row.Cells.Add(cell);
-                    row.Cells.Add(cell2);
-                    row.Cells.Add(cell3);
-                    row.Cells.Add(cell4);
+                    divRow.Controls.Add(divCell);
+                    divRow.Controls.Add(divCell2);
+                    divRow.Controls.Add(divCell3);
+                    divRow.Controls.Add(divCell4);
 
-                    tblTickets.Rows.Add(row);
+                    pnlTickets.Controls.Add(divRow);
                 }
         }
 
