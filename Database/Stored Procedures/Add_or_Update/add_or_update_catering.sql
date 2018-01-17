@@ -15,8 +15,8 @@ GO
 CREATE PROC sp_add_or_update_catering
 	@catering_number			INT = NULL,
 	@festival_company_number	INT,
-	@name						VARCHAR(50),
 	@electricity				BIT,
+	@name						VARCHAR(50),
 	@insert						BIT
 AS
 BEGIN
