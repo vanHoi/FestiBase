@@ -30,6 +30,8 @@ CREATE PROC sp_add_or_update_performance
 AS
 BEGIN
 	BEGIN TRY
+
+
 		IF (@podium_schedule_number IS NOT NULL OR @podium_schedule_number != 0)
 			BEGIN
 				/* Checking if the start_date matches the schedules start_date */
@@ -150,13 +152,13 @@ GO
 
 -- INSERT (An artist is already playing during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', '20:00:00', 90, 15, 1 
+EXEC sp_add_or_update_performance NULL, 8, 2, 2, '31-03-2018', '20:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 -- INSERT (This artist is already going to perform during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 9, 4, 2, '16-06-2018', '21:00:00', 90, 15, 1 
+EXEC sp_add_or_update_performance NULL, 9, 4, 3, '16-06-2018', '21:00:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
@@ -168,19 +170,19 @@ GO
 
 -- INSERT (This performance does not fit the schedule)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', '13:59:00', 90, 15, 1 
+EXEC sp_add_or_update_performance NULL, 8, 4, 3, '16-06-2018', '13:59:00', 90, 15, 1 
 ROLLBACK TRAN
 GO
 
 --  INSERT ( Podium of wrong festival )
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, 3, 1, '15-06-2018', NULL, 90, 30, 1
-ROLLBACK TRAN
-GO
+--BEGIN TRAN
+--EXEC sp_add_or_update_performance NULL, 8, NULL, 3, '15-06-2018', NULL, 90, 30, 1
+--ROLLBACK TRAN
+--GO
 
 -- INSERT (The artist has the wrong genre for this podium)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 3, 1, 1, '30-03-2018', '14:00:00', 30, 5, 1
+EXEC sp_add_or_update_performance NULL, 4, 3, 3, '15-06-2018', '14:00:00', 30, 5, 1
 ROLLBACK TRAN
 GO
 
