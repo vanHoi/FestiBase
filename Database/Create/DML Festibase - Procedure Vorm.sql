@@ -113,10 +113,10 @@ EXEC sp_add_or_update_artist_file  NULL, 1, 15, 'Setlist Rapper Sjors', 'De setl
 GO
 
 -- Visitor
-EXEC sp_add_or_update_visitor NULL, 1, 'robertverkerk@hetnet.nl', 'Robert', 'Verkerk', 0612345678, '15-07-1995', 'robert_verkerk', 'robert.verkerk', 'Cuijk', 'Nederland', 1
-EXEC sp_add_or_update_visitor NULL, 1, 'mario@hotmail.com', 'Mariusz', 'Blautzik', 0632165487, '12-02-1993 00:00:00', NULL, 'mariusBlautzik', 'Cuijk', 'Nederland', 1
-EXEC sp_add_or_update_visitor NULL, 'ivoreum@gmail.com', 'Ivo', 'Reumkens', 0632141587, '12-02-1996 00:00:00', NULL, NULL, 'Vlijmen', 'Nederland', 1
-EXEC sp_add_or_update_visitor NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, 1
+EXEC sp_add_or_update_visitor NULL, 'robertverkerk@hetnet.nl', 'Robert', 'Verkerk', 0612345678, '15-07-1995', 'robert_verkerk', 'robert.verkerk', 'Robertstraat', 16, 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, 'mario@hotmail.com', 'Mariusz', 'Blautzik', 0632165487, '07-08-1991', NULL, 'mariuszBlautzik', 'Mariostraat', 1, 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, 'ivoreum@gmail.com', 'Ivo', 'Reumkens', 0632141587, '16-07-1996', NULL, NULL, 'Ivostraat', 2, 'Vlijmen', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1
 GO
 
 -- Ticket Type
@@ -204,14 +204,15 @@ EXEC sp_add_or_update_locker NULL, 11, 1
 GO
 
 -- Locker Rented
-EXEC sp_add_or_update_locker_rented 1, '14-04-2017 08:12:23', '16-04-2017 22:59:17', 1
-EXEC sp_add_or_update_locker_rented 2, '14-04-2017 10:00:43', NULL, 1
-EXEC sp_add_or_update_locker_rented 11, '30-03-2018 14:37:23', NULL, 1
-EXEC sp_add_or_update_locker_rented 12, '31-03-2018 10:37:12', '31-03-2018 23:23:56', 1
+/* NOT WORKING NOW
+EXEC sp_add_or_update_locker_rented 1, '14-04-2017 08:12:23', '16-04-2017 22:59:17', 1, 1
+EXEC sp_add_or_update_locker_rented 2, '14-04-2017 10:00:43', NULL, 2, 1
+EXEC sp_add_or_update_locker_rented 11, '30-03-2018 14:37:23', NULL, 3, 1
+EXEC sp_add_or_update_locker_rented 12, '31-03-2018 10:37:12', '31-03-2018 23:23:56', 4, 1
 GO
+*/
 
 -- Tent
-INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES
 EXEC sp_add_or_update_tent NULL, 1, 'Tent 1', 1800, 2500, 900, 1500, 1900, 2700, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 1
 EXEC sp_add_or_update_tent NULL, 1, 'Tent 2', 5000, 3000, 400, 800, 5200, 3200, 'Pagode', 'wit', 'cassetevloer', 10000, 1
 EXEC sp_add_or_update_tent NULL, 2, 'Hele Grote Tent', 3000, 2500, 500, 1000, 3100, 3000, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000, 1
@@ -219,9 +220,9 @@ GO
 
 -- Podium
 EXEC sp_add_or_update_podium 0, 1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment', 1
-EXEC sp_add_or_update_podium 0, 1, 1, 'PopPodium', 1500, 1200, 700, null, 9000, 50, 1300, 1000, 600, 'beautiful trees'), 1
-EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
-EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 1, 1, 'PopPodium', 1500, 1200, 700, null, 9000, 50, 1300, 1000, 600, 'beautiful trees', 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 1900, 1200, 800, 150, 30, 120, 1800, 1100, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 1600, 1300, 800, 150, 30, 120, 1500, 1200, 600, 'Hele grote open ruimte', 1
 EXEC sp_add_or_update_podium 0, 3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
 GO
 
