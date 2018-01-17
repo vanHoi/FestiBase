@@ -81,6 +81,7 @@ BEGIN
 								ELSE IF EXISTS (SELECT performance_number
 												FROM performance
 												WHERE podium_schedule_number = @podium_schedule_number
+												AND "start_date" = @start_date
 												AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
 													AND DATEADD(minute, play_time + @break_time, start_time)
 													OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
