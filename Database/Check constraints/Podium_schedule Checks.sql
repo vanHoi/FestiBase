@@ -9,6 +9,9 @@
 USE FestiBase
 GO
 
+SET DATEFORMAT DMY
+GO
+
 /* start date must come before the end date */
 
 ALTER TABLE PODIUM_SCHEDULE
