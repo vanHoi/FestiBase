@@ -18,12 +18,12 @@ CREATE PROC sp_check_locker_rented_start_end_date
 AS
 BEGIN
 	BEGIN TRY
-		IF (@start_date < (SELECT start_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
+		IF (@start_date < (SELECT start_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM FESTIVAL_COMPANY WHERE festival_company_number  = (SELECT festival_company_number FROM LOCKER WHERE locker_number = @locker_number))))
 		BEGIN	
 			;THROW 50000, 'The startdate must be after the startdate of a festival', 1
 		END
 		/*check if enddate is voor endate van festival*/
-		IF (@end_date > (SELECT end_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM LOCKER WHERE locker_number = @locker_number)))
+		IF (@end_date > (SELECT end_date FROM FESTIVAL WHERE festival_number = (SELECT festival_number FROM FESTIVAL_COMPANY WHERE festival_company_number  = (SELECT festival_company_number FROM LOCKER WHERE locker_number = @locker_number))))
 		BEGIN	
 			;THROW 50001, 'The enddate must be before the enddate of a festival', 1	
 		END
