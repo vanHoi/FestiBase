@@ -159,7 +159,7 @@ GO
 /* Not enough standing room (less then 3 meters) on the podium */
 BEGIN TRAN
 UPDATE TENT SET ridge_height = 750 WHERE tent_number = 3
-EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 499, 700, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 1000, 500, 12000, 12, 1000, 450, 450, 'Veel ruimte', 1
 ROLLBACK TRAN
 GO
 
