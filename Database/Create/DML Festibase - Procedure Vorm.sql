@@ -4,6 +4,7 @@
 /* Last edited:		19-12-2017									*/
 /* Created by:		Robert Verkerk								*/
 /* Edited by:		Yuri Vannisselroy & Ivo Reumkens		    */
+/* Converted to procedures by:	Ivo Reumkens					*/
 /* Script:			DML											*/
 /*==============================================================*/
 
@@ -20,235 +21,267 @@ EXEC sp_add_or_update_organisation NULL, 'Paaspop', 1
 EXEC sp_add_or_update_organisation NULL, 'Pinkpop', 1
 EXEC sp_add_or_update_organisation NULL, 'Emporium', 1
 EXEC sp_add_or_update_organisation NULL, 'Rock Am', 1
+EXEC sp_add_or_update_organisation NULL, 'Yuri B.V.', 1
 GO
 
 -- Festival
 EXEC sp_add_or_update_festival null, 1, 'Paaspop 2017', '14-04-2017 00:00:00', '16-04-2017 23:59:00', 'Schijndel', '2.50', 1
 EXEC sp_add_or_update_festival null, 1, 'Paaspop 2018', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 'Schijndel', '3.00', 1
 EXEC sp_add_or_update_festival null, 2, 'Pinkpop 2018', '15-06-2018 00:00:00', '17-06-2018 00:00:00', 'Megaland Landgraaf', '3.00', 1
-EXEC sp_add_or_update_festival null, 4, 'Rock Am Ring 2018', '1-06-2018 00:00:00', '03-06-2018 23:59:00', 'Nürburgring', '3.00', 1
+EXEC sp_add_or_update_festival null, 4, 'Rock Am Ring 2018', '01-06-2018 00:00:00', '03-06-2018 23:59:00', 'Nürburgring', '3.00', 1
+EXEC sp_add_or_update_festival null, 5, 'The Iron iYuriZ Fest', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 'Goffertpark', '4.00', 1
 GO
 
 -- Company
-EXEC sp_add_or_update_company 23456001, 'Henks Hamburgers', 1
-EXEC sp_add_or_update_company 23456002, 'Roys Reuzenrad', 1
-EXEC sp_add_or_update_company 23456003, 'Verkerk Verhuur', 1
-EXEC sp_add_or_update_company 23456004, 'Piets Podiums', 1
+EXEC sp_add_or_update_company 23456001, 'Hans Hamburgers', 1
+EXEC sp_add_or_update_company 23456002, 'Leons Wilde Rit', 1
+EXEC sp_add_or_update_company 23456003, 'Roberts Neef Tent Verhuur', 1
+EXEC sp_add_or_update_company 23456004, 'Ivos Podiums', 1
 EXEC sp_add_or_update_company 23456005, 'Heineken', 1
-EXEC sp_add_or_update_company 23456006, 'Aries Attracties', 1
+EXEC sp_add_or_update_company 23456006, 'Chris Attracties', 1
 EXEC sp_add_or_update_company 23456007, 'Tentencompany', 1
-EXEC sp_add_or_update_company 23456008, 'Stagecompany', 1
+EXEC sp_add_or_update_company 23456008, 'Mac Donalds', 1
 EXEC sp_add_or_update_company 23456009, 'Burger King', 1
-EXEC sp_add_or_update_company 23456010, 'Roberts Inbreekservices', 1
+EXEC sp_add_or_update_company 23456010, 'Marios Inbreekservices', 1
 EXEC sp_add_or_update_company 23456011, 'Leons Kaartjes Oplichterijen', 1
 EXEC sp_add_or_update_company 23456012, 'D-Records', 1
-EXEC sp_add_or_update_company 23456013, 'Music HQ', 1
+EXEC sp_add_or_update_company 23456013, 'Maiks Mooie Maikletten', 1
 GO
 
 -- Company Branch
-EXEC sp_add_or_update_company_branch NULL, 23456003, 'Aleidestraat', '15', 'Nijmegen', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456005, 'Hatertseweg', '123', 'Cuijk', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456006, 'Schijndelseweg', '5', 'Schijndel', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456001, 'Aleidestraat', '15', 'Nijmegen', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456002, 'Leonstraat', '15', 'Roermond', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456003, 'Hatertseweg', '123', 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456004, 'Schijndelseweg', '5A', 'Schijndel', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456005, 'Schijndelseweg', '5B', 'Schijndel', 'Nederland', 1
 EXEC sp_add_or_update_company_branch NULL, 23456006, 'Maaskantjeseweg', '5', 'Maaskantje', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456001, 'Grotestraat', '2', 'Landgraaf', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456001, 'Hondenkaas', '25', 'Cuijk', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456005, 'Datdorp', '27', 'Landgraaf', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456045, 'Coolestraat', '28', 'Landgraaf', 'Nederland', 1,
-EXEC sp_add_or_update_company_branch NULL, 23456048, 'Oplichtersstraat', '1', 'Cuijk', 'Nederland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456060, 'Lankforst', '29', 'Nürburg', 'Duitsland', 1
-EXEC sp_add_or_update_company_branch NULL, 23456061, 'Lankforst', '28', 'Nürburg', 'Duitsland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456007, 'Grotestraat', '2', 'Landgraaf', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456008, 'Hondenkaas', '25', 'Arnhem', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456009, 'Datdorp', '27', 'Landgraaf', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456010, 'Oplichtersstraat', '1', 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456011, 'Coolestraat', '28', 'Landgraaf', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456012, 'Lankforst', '29', 'Nürburg', 'Duitsland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456012, 'Lakforst', '28', 'Norberg', 'Nederland', 1
+EXEC sp_add_or_update_company_branch NULL, 23456013, 'Maikweg', '45', 'Cuijk', 'Nederland', 1
 GO
 
-BEGIN TRAN
-ROLLBACK TRAN
-
-
-EXEC sp_add_or_update_festival_company NULL, 1, 12, 'Kees Kroket', 'Beschrijving', 0612312312, 1
-
-INSERT INTO FESTIVAL_COMPANY (branch_number, festival_number, contact_person, description, telephone_number) VALUES
-(1, 1, 'Robert Verkerk', 'Tent verhuur', '0612345678'),
-(2, 1, 'Freddie Heineken', 'Ja, bier!!', '0271234567'),
-(3, 1, 'Henk van Amstel', 'Attractieverhuur', '0698765432'),
-(4, 2, 'Klaas van Heineken', 'Attractieverhuur', '0698478512'),
-(5, 3, 'Frida Heemskerk', 'hamburgerbar', '0611122233'),
-(6, 2, 'Mac Donalds', 'Voedselcatering', '0624577885'),
-(7, 3, 'Ham Burgers', 'Hamburgerbar', '0687433772'),
-(8, 1, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
-(9, 2, 'Robert De Inbreker', 'Kluisjesverhuurdbedrijf', '0654188745'),
-(10, 1, 'Leon De Oplichter', 'Ticket bedrijf', '0654788412'),
-(11, 1, 'Dirk Records',  'Manager 3ROBI', '0689702314'),
-(12, 1, 'Mary Headquarters', 'Manager B-Front', '0612449983')
+-- Festival Company
+EXEC sp_add_or_update_festival_company NULL, 1, 1, 'Hans G.', 'De beste hamburgers ter wereld!', 0612312312, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 2, 'Leon Chen', 'Voor de beste wilde ritjes!', 0612314514, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 3, 'Robert Verkerk', 'Tent verhuur', 0612345678, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 4, 'Ivo Reumkens', 'De beste podias!', 0612345678, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 5, 'Freddie Heineken', 'Ja, bier!!', 0271234567, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 6, 'Chris S.', 'Attracties van Chris', 0698765432, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 7, 'Jan', 'Tentverhuur', 0698765432, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 8, 'Mac Donalds', 'Voedselcatering', 0624577885, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 9, 'Ham Burgers', 'Hamburgerbar', 0687433772, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 10, 'Mario De Inbreker', 'Kluisjesverhuurdbedrijf', 0654188745, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 10, 'Mario De Inbreker', 'Kluisjesverhuurdbedrijf', 0654188745, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 11, 'Leon De Oplichter', 'Ticket bedrijf', 0654788412, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 11, 'Leon De Oplichter', 'Ticket bedrijf', 0654788412, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 12, 'Dirk Records',  'Manager 3ROBI', 0689702314, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 12, 'Dirk Records',  'Manager 3ROBI', 0689702314, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 3, 'Claudia Verkerk', 'Tent verhuur', 0612345671, 1
+EXEC sp_add_or_update_festival_company NULL, 2, 4, 'Ivo Reumkens', 'De beste podias!', 0612345678, 1
+EXEC sp_add_or_update_festival_company NULL, 1, 14, 'Maik C.', 'De mooiste toiletten!', 0612345678, 1
+EXEC sp_add_or_update_festival_company NULL, 3, 3, 'Roberta Verkerk', 'Tent verhuur', 0612345679, 1
+EXEC sp_add_or_update_festival_company NULL, 3, 4, 'Joost Reumkens', 'De beste podias!', 0612345678, 1
 GO
 
-INSERT INTO ARTIST (name) VALUES
-('3ROBI'),
-('B-Front'),
-('De Toppers'),
-('Justin Bieber'),
-('Big Shaq'),
-('Eminem'),
-('Rapper Sjors'),
-('Pearl Jam'),
-('Foo Fighters'),
-('Bruno Mars')
+-- Artist
+EXEC sp_add_or_update_artist NULL, 'Rapper Sjors', 1
+EXEC sp_add_or_update_artist NULL, 'Darude', 1
+EXEC sp_add_or_update_artist NULL, 'Donald Trump', 1
+EXEC sp_add_or_update_artist NULL, 'PSY', 1
+EXEC sp_add_or_update_artist NULL, 'Rapper Boef', 1
+EXEC sp_add_or_update_artist NULL, 'Je Broer', 1
+EXEC sp_add_or_update_artist NULL, 'Je Moeder', 1
+EXEC sp_add_or_update_artist NULL, 'Gordon', 1
+EXEC sp_add_or_update_artist NULL, 'Gerard Joling', 1
+EXEC sp_add_or_update_artist NULL, 'Geer VS Goor', 1
+EXEC sp_add_or_update_artist NULL, 'Vitas', 1
+EXEC sp_add_or_update_artist NULL, 'Ylvis', 1
+EXEC sp_add_or_update_artist NULL, 'Zanger Rinus', 1
+EXEC sp_add_or_update_artist NULL, 'Mark Rutte', 1
+EXEC sp_add_or_update_artist NULL, 'Günther', 1
 GO
 
-INSERT INTO ARTIST_FILE (artist_number, festival_company_number, "file", description) VALUES
-(1, 11, 'contract 3ROBI', 'Het contract van 3ROBI'),
-(2, 12, 'contract B-Front', 'Het contract van B-Front'),
-(9, 12, 'Setlist Foo Fighters', 'De setlist van de Foo Fighters')
-
-INSERT INTO ATTRACTION (festival_company_number, name, attraction_type) VALUES
-(1, 'Henks Draaimolen', 'Draaimolen'),
-(2, 'Booster', 'Booster'),
-(3, 'Booster', 'Booster'),
-(3, 'Das Omen', 'Spookhuis')
+-- Artist File
+EXEC sp_add_or_update_artist_file  NULL, 2, 14, 'Contract Darude', 'Het contract van Darude', 1
+EXEC sp_add_or_update_artist_file  NULL, 7, 15, 'Contract Je Moeder', 'Het contract van Je Moeder', 1
+EXEC sp_add_or_update_artist_file  NULL, 1, 15, 'Setlist Rapper Sjors', 'De setlist van de Rapper Sjors', 1
 GO
 
-INSERT INTO VISITOR (town_number, email, first_name, surname, telephone_number, birthdate, twitter_username, facebook_username) VALUES
-(1, 'robertverkerk@hetnet.nl', 'Robert', 'Verkerk', '0612345678', convert(datetime, '15-07-1995 00:00:00', 105), 'robert_verkerk', NULL),
-(1, 'mariusssss@gmail.com', 'Mariuszsz', 'Blautzik', '0632165487', convert(datetime, '12-02-1993 00:00:00', 105), NULL, 'mariusBlautzik'),
-(2, 'ivorr@reumkens.nl', 'Ivo', 'Reumkens', '0632141587', convert(datetime, '12-02-1996 00:00:00', 105), NULL, NULL),
-(null, null, null, null, null, null, null, null)
+-- Visitor
+EXEC sp_add_or_update_visitor NULL, 1, 'robertverkerk@hetnet.nl', 'Robert', 'Verkerk', 0612345678, '15-07-1995', 'robert_verkerk', 'robert.verkerk', 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, 1, 'mario@hotmail.com', 'Mariusz', 'Blautzik', 0632165487, '12-02-1993 00:00:00', NULL, 'mariusBlautzik', 'Cuijk', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, 'ivoreum@gmail.com', 'Ivo', 'Reumkens', 0632141587, '12-02-1996 00:00:00', NULL, NULL, 'Vlijmen', 'Nederland', 1
+EXEC sp_add_or_update_visitor NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,NULL, NULL, NULL, NULL, 1
 GO
 
-INSERT INTO TICKET_TYPE (festival_company_number, ticket_type, price, date_valid_from, date_valid_to) VALUES
-(10, 'Premium ticket', '75', convert(datetime, '30-03-2018 00:00:00', 105), convert(datetime, '01-04-2018 23:59:00', 105)),
-(10, 'VIP', '120', convert(datetime, '14-04-2014 00:00:00', 105), convert(datetime, '16-04-2014 23:59:00', 105)),
-(10, 'dagticket', '50', convert(datetime, '01-06-2017 00:00:00', 105), convert(datetime, '04-06-2017 02:00:00', 105))
+-- Ticket Type
+EXEC sp_add_or_update_ticket_type 12, 'Premium Ticket', 75, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 12, 'Ultra Weekend Ticket', 5000, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 12, 'Normaal Ticket', 50, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 13, 'VIP Ticket', '120', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 13, 'Dagticket', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 13, 'Weekendticket', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 13, 'Weekendticket incl Camping', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
 GO
 
-INSERT INTO BOUGHT_TICKET (festival_company_number, ticket_type, visitor_number, scan_date) VALUES
-(10, 'Premium ticket', 1, null),
-(10, 'Premium ticket', 1, null),
-(10, 'VIP', 2, null)
+-- Bought Ticket
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Premium Ticket', 1, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Normaal Ticket', 2, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Ultra Weekend Ticket', 3, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Premium Ticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Normaal Ticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Ultra Weekend Ticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket', 1, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket', 2, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket incl Camping', 3, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket incl Camping', NULL, NULL, 1
 GO
 
-INSERT INTO CATERING (festival_company_number, name, electricity) VALUES
-(1, 'Hamburgerbar', 1),
-(2, 'Friettent', 1),
-(7, 'Tacos', 1),
-(8, 'Bierkar', 0)
+-- Catering
+EXEC sp_add_or_update_catering 0, 1, 1, 'Hamburgerbar', 1
+EXEC sp_add_or_update_catering 0, 2, 1, 'Hamburgertent', 1
+EXEC sp_add_or_update_catering 0, 7, 1, 'Hamburgertent', 1
+EXEC sp_add_or_update_catering 0, 8, 0, 'Bierkar', 1
 GO
 
-INSERT INTO FESTIVAL_COMPANY_FILE (festival_company_number, "file", description) VALUES
-(1, 'path/to/file.pdf', 'factuur huur tent'),
-(3, 'file/path.jpg', 'afbeelding attractie')
+-- Festival Company File
+EXEC sp_add_or_update_festival_company_file NULL, 1, 'path/to/file.pdf', 'Recept Beste Hamburger Ooit!', 1
+EXEC sp_add_or_update_festival_company_file NULL, 2, 'file/path.jpg', 'Afbeelding wilde attractie', 1
 GO
 
-INSERT INTO GENRE (genre) VALUES
-('Rap'),
-('Nederlands'),
-('Pop'),
-('Hardstyle')
+-- Genre
+EXEC sp_add_or_update_genre NULL, 'Rock', 1
+EXEC sp_add_or_update_genre NULL, 'Klassiek', 1
+EXEC sp_add_or_update_genre NULL, 'Rap', 1
+EXEC sp_add_or_update_genre NULL, 'Metal', 1
+EXEC sp_add_or_update_genre NULL, 'Hardstyle', 1
+EXEC sp_add_or_update_genre NULL, 'Trance', 1
+EXEC sp_add_or_update_genre NULL, 'Pop', 1
+EXEC sp_add_or_update_genre NULL, 'HipHop', 1
+EXEC sp_add_or_update_genre NULL, 'Electric', 1
+EXEC sp_add_or_update_genre NULL, 'Dance', 1
+EXEC sp_add_or_update_genre NULL, 'Dubstep', 1
+EXEC sp_add_or_update_genre NULL, 'House', 1
+EXEC sp_add_or_update_genre NULL, 'Techno', 1
+EXEC sp_add_or_update_genre NULL, 'Drum & Bass', 1
 GO
 
-INSERT INTO GENRE_of_ARTIST (genre_number, artist_number) VALUES
-(1, 1),
-(3, 1),
-(2, 3),
-(4, 7)
+-- Genre of Artist
+EXEC sp_add_genre_of_artist 1, 1
+EXEC sp_add_genre_of_artist 2, 3
+EXEC sp_add_genre_of_artist 3, 3
 GO
 
-INSERT INTO GENRE_preference_VISITOR (visitor_number, genre_number) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(3, 4)
+-- Genre preference Visitor
+EXEC sp_add_genre_preference_visitor 1, 1
+EXEC sp_add_genre_preference_visitor 1, 2
+EXEC sp_add_genre_preference_visitor 2, 3
+EXEC sp_add_genre_preference_visitor 3, 4
 GO
 
-INSERT INTO LOCKER (festival_company_number) VALUES
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8),
-(8)
+-- Locker
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 10, 1
+EXEC sp_add_or_update_locker NULL, 11, 1
+EXEC sp_add_or_update_locker NULL, 11, 1
+EXEC sp_add_or_update_locker NULL, 11, 1
+EXEC sp_add_or_update_locker NULL, 11, 1
 GO
 
-INSERT INTO LOCKER_RENTED (locker_number, visitor_number, start_date, end_date) VALUES
-(1, 1, convert(datetime, '15-07-2017 00:00:00', 105), convert(datetime, '17-07-2017 00:00:00', 105)),
-(2, 3, convert(datetime, '15-07-2017 00:00:00', 105), null)
+-- Locker Rented
+EXEC sp_add_or_update_locker_rented 1, '14-04-2017 08:12:23', '16-04-2017 22:59:17', 1
+EXEC sp_add_or_update_locker_rented 2, '14-04-2017 10:00:43', NULL, 1
+EXEC sp_add_or_update_locker_rented 11, '30-03-2018 14:37:23', NULL, 1
+EXEC sp_add_or_update_locker_rented 12, '31-03-2018 10:37:12', '31-03-2018 23:23:56', 1
 GO
 
+-- Tent
 INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) VALUES
-(1, 'tent1', 5000, 3000, 240, 400, 5200, 3200, 'aluhal', 'wit', 'dansvloer', 10000),
-(2, 'tent2', 5000, 3000, 240, 400, 5200, 3200, 'pagode', 'wit', 'cassetevloer', 1000),
-(1, 'Hele Grote Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000) 
+EXEC sp_add_or_update_tent NULL, 1, 'Tent 1', 1800, 2500, 900, 1500, 1900, 2700, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 1
+EXEC sp_add_or_update_tent NULL, 1, 'Tent 2', 5000, 3000, 400, 800, 5200, 3200, 'Pagode', 'wit', 'cassetevloer', 10000, 1
+EXEC sp_add_or_update_tent NULL, 2, 'Hele Grote Tent', 3000, 2500, 500, 1000, 3100, 3000, 'Grote Tent voor meerdere podiums', 'Blauw-wit', 'Systeemvloer', 12000, 1
 GO
 
-INSERT INTO PODIUM (festival_number, tent_number, name, construction_width, construction_length, construction_height, floor_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) VALUES
-(1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment'),
-(2, 2, 'PopPodium', 1500, 1200, 700, null, 12000, 50, 1300, 1000, 600, 'beautiful trees'),
-(3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte')
+-- Podium
+EXEC sp_add_or_update_podium 0, 1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment', 1
+EXEC sp_add_or_update_podium 0, 1, 1, 'PopPodium', 1500, 1200, 700, null, 9000, 50, 1300, 1000, 600, 'beautiful trees'), 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
 GO
 
-INSERT INTO PODIUM_SCHEDULE (podium_number, start_date, start_time, end_date, end_time, break_time) VALUES
-(1, '30-03-2018', '14:00:00', '30-03-2018', '23:00:00', 15),
-(2, '31-03-2018', '10:00:00', '31-03-2018', '23:00:00', 60),
-(3, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60),
-(3, '16-06-2018', '14:00:00', '15-06-2018', '23:00:00', 60),
-(3, '17-06-2018', '16:00:00', '17-06-2018', '02:00:00', 60)
+-- Podium Schedule
+EXEC sp_add_or_update_podium_schedule NULL, 1, '14-04-2017', '14:00:00', '14-04-2017', '23:00:00', 15, 1
+EXEC sp_add_or_update_podium_schedule NULL, 2, '31-03-2018', '10:00:00', '31-03-2018', '23:30:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 3, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 3, '16-06-2018', '14:00:00', '17-06-2018', '02:00:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 3, '17-06-2018', '10:00:00', '17-06-2018', '23:00:00', 0, 1
 GO
 
-INSERT INTO PERFORMANCE (artist_number, podium_schedule_number, festival_number, "start_date", start_time, play_time, min_prep_time) VALUES
-(1, 1, 1, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
-(2, 1, 1, '30-03-2018', convert(varchar(8), NULL, 108), 30,  30),
-(3, 1, 1, '30-03-2018', convert(varchar(8), NULL, 108), 60,  15),
-(4, 1, 2, '30-03-2018', convert(varchar(8), NULL, 108), 75,  60),
-(5, 2, 2, '31-03-2018', convert(varchar(8), '10:00:00', 108), 60,  15),
-(6, 2, 2, '31-03-2018', convert(varchar(8), '18:00:00', 108), 60, 15),
-(7, 2, 2, '31-03-2018', convert(varchar(8), '20:15:00', 108), 45,  15),
-(1, 2, 2, '31-03-2018', convert(varchar(8), '22:15:00', 108), 90,  15),
-(8, NULL, 2, '31-03-2018', NULL, 90,  30),
-(9, 4, 2, '30-03-2018', convert(varchar(8), '21:15:00', 108), 90,  30),
-(10, 5, 3, '15-06-2018', convert(varchar(8), '21:15:00', 108), 90,  45)
+-- Performance
+EXEC sp_add_or_update_performance NULL, 1, 1, 1, '14-04-2017', '14:00:00', 60,  15, 1
+EXEC sp_add_or_update_performance NULL, 2, NULL, 1, '14-04-2017', NULL, 30,  30, 1
+EXEC sp_add_or_update_performance NULL, 3, 2, 1, '31-03-2018', NULL, 60,  15, 1
+EXEC sp_add_or_update_performance NULL, 4, 2, 2, '31-03-2018', NULL, 75,  60, 1
+EXEC sp_add_or_update_performance NULL, 5, 2, 2, '31-03-2018', '10:00:00', 60,  15, 1
+EXEC sp_add_or_update_performance NULL, 6, 3, 2, '15-06-2018', '18:00:00', 60, 15, 1
+EXEC sp_add_or_update_performance NULL, 7, 3, 2, '15-06-2018', '20:15:00', 45,  15, 1
+EXEC sp_add_or_update_performance NULL, 1, 3, 2, '15-06-2018', '22:15:00', 75,  15, 1
+EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', NULL, 90,  30, 1
+EXEC sp_add_or_update_performance NULL, 9, 4, 2, '16-06-2018','23:00:00', 120,  30, 1
+EXEC sp_add_or_update_performance NULL, 10, 5, 3, '17-06-2018', '21:15:00', 90, 0, 1
 GO
 
-INSERT INTO PODIUM_FILE(podium_number, festival_company_number, "file", description) VALUES
-(1, 1, 'path/to/buildingbook.pdf', 'a beautifl description'),
-(2, 1, 'path/to/file.pdf', 'a description')
+-- Podium File
+EXEC sp_add_or_podium_file NULL, 1, 4, 'path/to/buildingbook.pdf', 'A beautiful description!! :D', 1
+EXEC sp_add_or_podium_file NULL, 2, 17, 'path/to/file.pdf', 'A description', 1
 GO
 
-INSERT INTO PODIUM_plays_GENRE (genre_number, podium_number) VALUES
-(1, 1),
-(2, 2)
+-- Podium plays Genre
+EXEC sp_add_podium_plays_genre 1, 1
 GO
 
-INSERT INTO TENT_FILE(tent_number, festival_company_number, "file", description) VALUES
-(1, 1, 'path/to/file.pdf', 'factuur huur tent'),
-(2, 1, 'file/path.jpg', 'afbeelding attractie')
+-- Tent File
+EXEC sp_add_or_tent_file NULL, 1, 3, 'path/to/file.pdf', 'Factuur huur tent'),
+EXEC sp_add_or_tent_file NULL, 2, 16, 'file/path.jpg', 'Bouwplan Tent')
 GO
 
-INSERT INTO TOILET (festival_company_number, name, capacity) VALUES
-(1, 'Toilet 1', 500),
-(1, 'Toilet 2', 50)
+-- Toilet
+EXEC sp_add_or_update_toilet NULL, 18, 'Maikletten Plein 1', 500, 1
+EXEC sp_add_or_update_toilet NULL, 1, 'Maikinoirs 1', 50, 1
 GO
 
+-- Visitor likes Performance
 INSERT INTO VISITOR_likes_PERFORMANCE (visitor_number, performance_number) VALUES
-(1, 2),
-(1, 1),
-(2, 1),
-(1, 9),
-(2, 9),
-(3, 9),
-(4, 9)
+EXEC sp_add_visitor_likes_performance 1, 2
+EXEC sp_add_visitor_likes_performance 1, 1
+EXEC sp_add_visitor_likes_performance 2, 1
+EXEC sp_add_visitor_likes_performance 1, 9
+EXEC sp_add_visitor_likes_performance 2, 9
+EXEC sp_add_visitor_likes_performance 3, 9
+EXEC sp_add_visitor_likes_performance 4, 9
 GO
 
+-- Visitor visited Performance
 INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES
-(1,2),
-(1,1),
-(2,1)
+EXEC sp_add_visitor_visited_performance 1, 1
+EXEC sp_add_visitor_visited_performance 1, 2
+EXEC sp_add_visitor_visited_performance 2, 1
 GO
 
 USE master

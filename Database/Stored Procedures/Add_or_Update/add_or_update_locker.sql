@@ -47,30 +47,30 @@ GO
 
 /* add new locker */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 1, NULL, 8
+EXEC sp_add_or_update_locker NULL, 8, 1
 ROLLBACK TRAN
 GO
 
 /* add locker, wrong company */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 1, NULL, 999
+EXEC sp_add_or_update_locker NULL, 999, 1
 ROLLBACK TRAN
 GO
 
 /*update locker*/
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, 15, 7
+EXEC sp_add_or_update_locker 15, 7, 0
 ROLLBACK TRAN
 GO
 
 /*update locker NULL*/
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, NULL, 8
+EXEC sp_add_or_update_locker NULL, 8, 0
 ROLLBACK TRAN
 GO
 
 /* update locker locker does not exists */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, 9999, 8
+EXEC sp_add_or_update_locker 9999, 8, 0
 ROLLBACK TRAN
 GO

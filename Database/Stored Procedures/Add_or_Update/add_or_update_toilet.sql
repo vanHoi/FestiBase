@@ -52,30 +52,30 @@ GO
 
 /* add new toilet */
 BEGIN TRAN
-EXEC sp_add_or_update_toilet 1, NULL, 1, 'Toilet 3', 500
+EXEC sp_add_or_update_toilet NULL, 1, 'Toilet 3', 500, 1
 ROLLBACK TRAN
 GO
 
 /* add toilet, wrong company */
 BEGIN TRAN
-EXEC sp_add_or_update_toilet 1, NULL, 999, 'Toilet 3', 100
+EXEC sp_add_or_update_toilet NULL, 999, 'Toilet 3', 100, 1
 ROLLBACK TRAN
 GO
 
 /*update toilet*/
 BEGIN TRAN
-EXEC sp_add_or_update_toilet 0, 2, 7, 'Toilet 3', 250
+EXEC sp_add_or_update_toilet 2, 7, 'Toilet 3', 250, 0
 ROLLBACK TRAN
 GO
 
 /*update toilet NULL*/
 BEGIN TRAN
-EXEC sp_add_or_update_toilet 0, NULL, 7, 'Toilet 3', 205
+EXEC sp_add_or_update_toilet NULL, 7, 'Toilet 3', 205, 0
 ROLLBACK TRAN
 GO
 
 /* update toilet toilet does not exists */
 BEGIN TRAN
-EXEC sp_add_or_update_toilet 0, 9999, 8, 'Toilet 3', 205
+EXEC sp_add_or_update_toilet 9999, 8, 'Toilet 3', 205, 0
 ROLLBACK TRAN
 GO

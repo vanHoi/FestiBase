@@ -15,8 +15,8 @@ GO
 CREATE PROC sp_add_or_update_catering
 	@catering_number			INT = NULL,
 	@festival_company_number	INT,
-	@name						VARCHAR(50),
 	@electricity				BIT,
+	@name						VARCHAR(50),
 	@insert						BIT
 AS
 BEGIN
@@ -56,13 +56,13 @@ GO
 
 /*insert*/
 BEGIN TRAN
-EXEC sp_add_or_update_catering 1, NULL, 1, 'Bier', 1
+EXEC sp_add_or_update_catering 0, 2, 1, 'Bier', 1
 ROLLBACK TRAN
 GO
 
 /*update*/
 BEGIN TRAN
-EXEC sp_add_or_update_catering 0, 4, 8, 'bier', 0
+EXEC sp_add_or_update_catering 1, 4, 8, 'bier', 0
 ROLLBACK TRAN
 GO
 
