@@ -7,9 +7,6 @@ using Domain;
 
 namespace DAO
 {
-    /// <summary>
-    /// Summary description for BoughtTicketDAO
-    /// </summary>
     public class BoughtTicketDAO
     {
         private readonly SqlConnection _conn;
@@ -63,6 +60,58 @@ namespace DAO
             }
 
             return null;
+        }
+
+        public bool AddVisitorToTicket(int visitorNumber, int ticketNumber)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("SELECT * FROM BOUGHT_TICKET WHERE ticket_number = @ticketNumber", _conn);
+                command.Parameters.AddWithValue("ticketNumber", ticketNumber);
+                SqlDataReader reader = command.ExecuteReader();
+                BoughtTicket boughtTicket = new BoughtTicket();
+
+                while (reader.Read())
+                {
+                    boughtTicket.Visitor.VisitorNumber = reader["visitor_number"] != DBNull.Value ? Convert.ToInt32(reader["visitor_number"]) : 0;
+                    boughtTicket.ScanDate = reader["scan_date"] != DBNull.Value ? Convert.ToDateTime(reader["scan_date"]) : DateTime.MinValue;
+                    boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber = Convert.ToInt32(reader["festival_company_number"]);
+                    boughtTicket.TicketType.Type = Convert.ToString(reader["ticket_type"]);
+                    boughtTicket.TicketNumber = ticketNumber;
+                }
+
+                if (boughtTicket.Visitor.VisitorNumber != 0)
+                {
+                    return false;
+                }
+
+                _conn.Close();
+                _conn.Open();
+
+                command = new SqlCommand("EXEC sp_add_or_update_bought_ticket @ticketNumber, @festivalCompanyNumber, @ticketType, @visitorNumber, @scanDate,0", _conn);
+                command.Parameters.AddWithValue("ticketNumber", ticketNumber);
+                command.Parameters.AddWithValue("festivalCompanyNumber", boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber);
+                command.Parameters.AddWithValue("ticketType", boughtTicket.TicketType.Type);
+                command.Parameters.AddWithValue("visitorNumber", visitorNumber);
+                if (boughtTicket.ScanDate == DateTime.MinValue)
+                {
+                    command.Parameters.AddWithValue("scanDate", DBNull.Value);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("scanDate", boughtTicket.ScanDate);
+                }
+                command.ExecuteNonQuery();
+
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            return false;
+
         }
     }
 }

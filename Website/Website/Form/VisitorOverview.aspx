@@ -46,7 +46,7 @@
             <h3 class="extra-padding-top-sm">Hier ziet u een overzicht van uw festivals.</h3>
 
             <div class="extra-padding-top-sm">
-                <asp:Button ID="btnAddTicket" runat="server" Text="Ticket Toevoegen" CssClass="btn btn-primary btn-primary-big" />
+                <asp:Button ID="btnAddTicket" runat="server" Text="Ticket Toevoegen" CssClass="btn btn-primary btn-primary-big" OnClick="btnAddTicketClick"/>
             </div>
 
             <div class="extra-padding-top-sm table-wrapper">
