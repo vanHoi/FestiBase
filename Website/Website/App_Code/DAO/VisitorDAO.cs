@@ -29,11 +29,14 @@ namespace DAO
 
         public Visitor LoginVisitor(string email)
         {
-            try
-            {   
-                CheckIfVisitorExists(email);
+            Visitor visitor = new Visitor();
 
-                Visitor visitor = new Visitor();
+            try
+            {
+                if (CheckIfVisitorExists(email))
+                {
+                    AddVisitor(email);
+                }
 
                 SqlCommand command = new SqlCommand("SELECT * FROM Visitor WHERE email = @email", _conn);
                 command.Parameters.AddWithValue("email", email);
@@ -98,35 +101,33 @@ namespace DAO
                 }
 
                 _conn.Close();
-                return visitor;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
 
-            return null;
+            return visitor;
         }
 
-        public void CheckIfVisitorExists(string email)
+        private bool CheckIfVisitorExists(string email)
         {
             try
             {
                 SqlCommand command = new SqlCommand("SELECT visitor_number FROM Visitor WHERE email = @email", _conn);
                 command.Parameters.AddWithValue("email", email);
 
-                if (Convert.ToInt32(command.ExecuteScalar()) == 0)
-                {
-                    AddVisitor(email);
-                }
+                return Convert.ToInt32(command.ExecuteScalar()) == 0;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
+
+            return false;
         }
 
-        public void AddVisitor(string email)
+        private void AddVisitor(string email)
         {
             try
             {
