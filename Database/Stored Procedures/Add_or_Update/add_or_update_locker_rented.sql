@@ -1,7 +1,7 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last Edited:		19-12-2017									*/
+/* PDM version:		7											*/
+/* Last Edited:		17-01-2017									*/
 /* Edited by:		Robert Verkerk								*/	
 /* Procedure:		Insert + Update LOCKER_RENTED				*/
 /*==============================================================*/

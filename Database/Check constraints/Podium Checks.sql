@@ -1,8 +1,8 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version 6												*/
+/* PDM version 7												*/
 /* Ivo Reumkens													*/	
-/* 19-12-2017													*/
+/* 17-01-2018													*/
 /* Constraint 1													*/
 /*==============================================================*/
 
@@ -32,29 +32,3 @@ ALTER TABLE PODIUM
 ADD CONSTRAINT chk_podium_height_must_be_greater_or_equal_to_free_span_height
 CHECK ((construction_height - floor_height) >= free_span_height OR construction_height IS NULL)
 GO
-
-/* Testdata */
-
--- Correct
-BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 400, 'Plat vlak land') 
-ROLLBACK TRAN
-
--- Width too wide
-BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 1200, 500, 400, 'Plat vlak land') 
-ROLLBACK TRAN
-
--- Length too long
-BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 700, 400, 'Plat vlak land') 
-ROLLBACK TRAN
-
--- Height too high
-BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 550, 'Plat vlak land') 
-ROLLBACK TRAN

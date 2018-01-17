@@ -1,9 +1,9 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		15-1-2018									*/
+/* PDM version:		7											*/
+/* Last edited:		17-1-2018									*/
 /* Created by:		Mariusz Blautzik							*/
-/* Edited by:		Robert Verkerk								*/
+/* Edited by:		Ivo Reumkens & Robert Verkerk				*/
 /* Procedure:		Insert + Update PODIUM						*/
 /*==============================================================*/
 
@@ -180,13 +180,13 @@ EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12
 ROLLBACK TRAN
 GO
 
-/* Update zonder tentnummer */
+/* Update without tent_number */
 BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 1, 0, 'Tent 15', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
 GO
 
-/* Correcte update */
+/* Correct update */
 BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
@@ -209,3 +209,21 @@ BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 1, 2, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 0
 ROLLBACK TRAN
 GO
+
+-- Construction_width is smaller then free_span_width
+BEGIN TRAN
+INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
+VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 1200, 500, 400, 'Plat vlak land') 
+ROLLBACK TRAN
+
+-- Construction_length is smaller then free_span_length
+BEGIN TRAN
+INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
+VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 700, 400, 'Plat vlak land') 
+ROLLBACK TRAN
+
+-- -- Construction_height is smaller then free_span_height
+BEGIN TRAN
+INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
+VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 550, 'Plat vlak land') 
+ROLLBACK TRAN
