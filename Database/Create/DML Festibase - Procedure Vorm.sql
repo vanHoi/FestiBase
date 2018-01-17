@@ -222,6 +222,7 @@ EXEC sp_add_or_update_podium 0, 1, 1, 'PopPodium', 1500, 1200, 700, null, 9000, 
 EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 1900, 1200, 800, 150, 30, 120, 1800, 1100, 600, 'Krappe tent', 1
 EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 1600, 1300, 800, 150, 30, 120, 1500, 1200, 600, 'Krappe tent', 1
 EXEC sp_add_or_update_podium 0, 3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 5, NULL, 'The Iron Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'In een ijzermijn', 1
 GO
 
 -- Podium Schedule
@@ -231,6 +232,7 @@ EXEC sp_add_or_update_podium_schedule NULL, 3, '31-03-2018', '10:00:00', '31-03-
 EXEC sp_add_or_update_podium_schedule NULL, 5, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60, 1
 EXEC sp_add_or_update_podium_schedule NULL, 5, '16-06-2018', '14:00:00', '16-06-2018', '23:00:00', 60, 1
 EXEC sp_add_or_update_podium_schedule NULL, 5, '17-06-2018', '10:00:00', '17-06-2018', '23:00:00', 0, 1
+EXEC sp_add_or_update_podium_schedule NULL, 6, '31-03-2018', '10:00:00', '31-03-2018', '23:30:00', 60, 1
 GO
 
 -- Performance
