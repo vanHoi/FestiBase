@@ -30,6 +30,11 @@ namespace Model
             return _boughtTicketDao.GetAllBoughtTicketsOfVisitor(visitorNumber);
         }
 
+        public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
+        {
+            return _boughtTicketDao.AddVisitorToTicket(visitorNumber, ticketNumber);
+        }
+
         public List<Genre> GetGenresOfVisitor(int visitorNumber)
         {
             return _genreDao.GetGenresOfVisitor(visitorNumber);

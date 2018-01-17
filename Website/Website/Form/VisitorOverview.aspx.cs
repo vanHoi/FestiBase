@@ -9,14 +9,17 @@ namespace Form
     public partial class FormVisitorOverview : System.Web.UI.Page
     {
         private VisitorModel _visitorModel;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             _visitorModel = new VisitorModel();
-
             if (Session["visitor"] == null)
             {
                 Response.Redirect("VisitorLogin.aspx");
+            }
+            if (Session["ticketAdded"] != null)
+            {
+                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd" ;
+                Session.Remove("ticketAdded");
             }
 
             Visitor visitor = (Visitor)Session["visitor"];
@@ -28,7 +31,6 @@ namespace Form
             {
                 lblVisitor.Text = "Welkom " + visitor.FirstName + "!";
             }
-
             if (visitor != null)
                 foreach (BoughtTicket b in _visitorModel.GetAllBoughtTicketsOfVisitor(visitor.VisitorNumber))
                 {
@@ -93,6 +95,11 @@ namespace Form
             Response.Redirect("VisitorLogin.aspx");
         }
 
+        protected void btnAddTicketClick(object sender, EventArgs e)
+        {
+            Response.Redirect("AddTicket.aspx");
+        }
+        
         protected void btnGenreEdit(object sender, EventArgs e)
         {
             Response.Redirect("VisitorEditGenres.aspx");

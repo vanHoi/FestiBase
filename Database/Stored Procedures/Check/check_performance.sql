@@ -78,7 +78,19 @@ BEGIN
 									END
 
 								/* BR14		Is there a different artist already playing on the same stage during that time? */
-								ELSE IF EXISTS (SELECT performance_number
+								ELSE IF EXISTS (SELECT *
+												FROM performance
+												WHERE podium_schedule_number = @podium_schedule_number
+												AND "start_date" = @start_date
+												AND ((@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
+													AND DATEADD(minute, play_time + @break_time, start_time))
+													OR (DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
+														AND DATEADD(minute, play_time + @break_time, start_time))
+													OR (@start_time <= DATEADD(minute, 0 - @break_time, start_time) 
+														AND DATEADD(minute, @play_time, @start_time) >= DATEADD(minute, play_time + @break_time, start_time))))
+									BEGIN
+										BEGIN
+										SELECT *
 												FROM performance
 												WHERE podium_schedule_number = @podium_schedule_number
 												AND "start_date" = @start_date
@@ -87,9 +99,13 @@ BEGIN
 													OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
 														AND DATEADD(minute, play_time + @break_time, start_time)
 													OR (@start_time <= DATEADD(minute, 0 - @break_time, start_time) 
-														AND DATEADD(minute, @play_time, @start_time) >= DATEADD(minute, play_time + @break_time, start_time))))
-									BEGIN
-										;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
+														AND DATEADD(MINUTE, @play_time, @start_time) >= DATEADD(MINUTE, play_time + @break_time, start_time)))
+											END
+											BEGIN
+											
+											;THROW 50000, 'test', 1
+											END
+										--;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 									END
 
 								/* BR20		Does the inserted/updated performance fit within the start and endtime of that podium_schedule */
