@@ -129,17 +129,7 @@ EXEC sp_add_or_update_performance NULL, 8, NULL, 3, '16-06-2018', NULL, 90, 30, 
 ROLLBACK TRAN
 GO
 
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 1, 2, 2, '31-03-2018', '14:30:00', 90, 10, 1 
-ROLLBACK TRAN
-GO
-
 -- UPDATE
-BEGIN TRAN
-EXEC sp_add_or_update_performance 10, 1, 2, 2, '31-03-2018', '14:30:00', 90, 10, 0 
-ROLLBACK TRAN
-GO
-
 BEGIN TRAN
 EXEC sp_add_or_update_performance 10, 8, NULL, 1, '14-04-2017', NULL, 90, 30, 0
 ROLLBACK TRAN
@@ -181,14 +171,14 @@ GO
 --GO
 
 -- INSERT (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 4, 3, 3, '15-06-2018', '14:00:00', 30, 5, 1
-ROLLBACK TRAN
-GO
+--BEGIN TRAN
+--EXEC sp_add_or_update_performance NULL, 4, 3, 3, '15-06-2018', '14:00:00', 30, 5, 1
+--ROLLBACK TRAN
+--GO
 
 -- INSERT (Wrong starttime)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 1, 1, 1, '30-03-2018', '09:00:00', 10, 5, 1
+EXEC sp_add_or_update_performance NULL, 1, 3, 3, '15-06-2018', '09:00:00', 10, 5, 1
 ROLLBACK TRAN
 GO
 
@@ -200,13 +190,13 @@ GO
 
 -- UPDATE (An artist is already playing during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 4, 2, '16-06-2018', '20:00:00', 90, 15, 0
+EXEC sp_add_or_update_performance 9, 8, 2, 2, '31-03-2018', '20:00:00', 90, 15, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (This artist is already going to perform during that time)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 9, 4, 2, '16-06-2018', '21:00:00', 90, 15, 0 
+EXEC sp_add_or_update_performance 9, 9, 4, 3, '16-06-2018', '21:00:00', 90, 15, 0 
 ROLLBACK TRAN
 GO
 
@@ -218,43 +208,43 @@ GO
 
 -- UPDATE (This performance does not fit the schedule)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 9, 8, 1, 1, '30-03-2018', '13:59:00', 90, 15, 0
+EXEC sp_add_or_update_performance 9, 8, 4, 3, '16-06-2018', '13:59:00', 90, 15, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (@performance_number cannot be NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '30-03-2018', NULL, 90, 15, 0 
+EXEC sp_add_or_update_performance NULL, 8, NULL, 1, '14-04-2017', NULL, 90, 15, 0 
 ROLLBACK TRAN
 GO
 
 -- UPDATE (This performance does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 300, 1, 1, 1, '30-03-2018', '15:00:00', 90, 15, 0
+EXEC sp_add_or_update_performance 300, 1, 4, 3, '16-06-2018', '10:00:00', 90, 15, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (WARNING - PODIUM TOO SMALL)
 BEGIN TRAN 
-EXEC sp_add_or_update_performance 9, 8, 3, 3, '15-06-2015', '14:00:00', 90,  15, 0
+EXEC sp_add_or_update_performance 9, 8, 3, 3, '15-06-2018', '14:00:00', 90,  15, 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE (The artist has the wrong genre for this podium)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 5, 1, 1, '30-03-2018', '14:00:00', 30, 5, 1
-ROLLBACK TRAN
-GO
+--BEGIN TRAN
+--EXEC sp_add_or_update_performance 2, 3, 4, 3, '16-06-2018', '14:00:00', 30, 5, 1
+--ROLLBACK TRAN
+--GO
 
 -- UPDATE (Podium of wrong festival)
-BEGIN TRAN
-EXEC sp_add_or_update_performance 10, 8, 3, 2, '30-03-2018', NULL, 90, 30, 0
-ROLLBACK TRAN
-GO
+--BEGIN TRAN
+--EXEC sp_add_or_update_performance 10, 8, 2, 3, '16-06-2018', NULL, 90, 30, 0
+--ROLLBACK TRAN
+--GO
 
 -- UPDATE (wrong endtime)
 BEGIN TRAN
-EXEC sp_add_or_update_performance 2, 1, 1, 1, '30-03-2018', '23:01:00', 30, 5,  0
+EXEC sp_add_or_update_performance 2, 1, 4, 3, '16-06-2018', '23:01:00', 30, 5,  0
 ROLLBACK TRAN
 GO
 
