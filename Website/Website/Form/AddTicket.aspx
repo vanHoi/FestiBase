@@ -9,16 +9,10 @@
 <body>
 <form id="form1" runat="server">
     <div>
-
-
-
         <asp:Button ID="btnCancel" runat="server" OnClick="btnCancelClick" Text="Annuleren" />
-
         <h1> Ticket Toevoegen</h1>
-
-        <h2> Nieuwe festivalticket gekocht?</h2>
+        <h2> Nieuw festivalticket gekocht?</h2>
         <h2> Voeg hem hieronder toe aan uw FestiBase account!</h2>
-
     </div>
     <p>
         <asp:Label ID="labelError" runat="server"></asp:Label>

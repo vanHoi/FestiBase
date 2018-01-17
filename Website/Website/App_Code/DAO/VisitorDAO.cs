@@ -6,9 +6,6 @@ using Domain;
 
 namespace DAO
 {
-    /// <summary>
-    /// Summary description for VisitorDAO
-    /// </summary>
     public class VisitorDAO
     {
         private readonly SqlConnection _conn;
