@@ -17,7 +17,7 @@ namespace Form
             }
             if (Session["ticketAdded"] != null)
             {
-                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd." ;
+                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd" ;
                 Session.Remove("ticketAdded");
             }
 

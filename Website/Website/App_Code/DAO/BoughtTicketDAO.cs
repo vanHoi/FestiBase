@@ -7,9 +7,6 @@ using Domain;
 
 namespace DAO
 {
-    /// <summary>
-    /// Summary description for BoughtTicketDAO
-    /// </summary>
     public class BoughtTicketDAO
     {
         private readonly SqlConnection _conn;
@@ -70,26 +67,17 @@ namespace DAO
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM BOUGHT_TICKET WHERE ticket_number = @ticketNumber", _conn);
-
                 command.Parameters.AddWithValue("ticketNumber", ticketNumber);
-
                 SqlDataReader reader = command.ExecuteReader();
-
                 BoughtTicket boughtTicket = new BoughtTicket();
 
                 while (reader.Read())
                 {
-
                     boughtTicket.Visitor.VisitorNumber = reader["visitor_number"] != DBNull.Value ? Convert.ToInt32(reader["visitor_number"]) : 0;
-
                     boughtTicket.ScanDate = reader["scan_date"] != DBNull.Value ? Convert.ToDateTime(reader["scan_date"]) : DateTime.MinValue;
-
                     boughtTicket.TicketType.FestivalCompany.FestivalCompanyNumber = Convert.ToInt32(reader["festival_company_number"]);
-
                     boughtTicket.TicketType.Type = Convert.ToString(reader["ticket_type"]);
-
                     boughtTicket.TicketNumber = ticketNumber;
-
                 }
 
                 if (boughtTicket.Visitor.VisitorNumber != 0)
