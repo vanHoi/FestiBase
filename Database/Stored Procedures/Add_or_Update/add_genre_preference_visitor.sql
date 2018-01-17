@@ -45,13 +45,13 @@ EXEC sp_add_genre_preference_visitor 3, 2
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED - NO VISITOR
 BEGIN TRAN
-EXEC sp_add_genre_preference_visitor 3, 7   
+EXEC sp_add_genre_preference_visitor 1, 0   
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED - NO GENRE
 BEGIN TRAN
 EXEC sp_add_genre_preference_visitor 0, 1  
 ROLLBACK TRAN

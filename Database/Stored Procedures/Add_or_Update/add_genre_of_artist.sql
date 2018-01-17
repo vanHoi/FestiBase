@@ -45,13 +45,13 @@ EXEC sp_add_genre_of_artist 3, 7
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED - NO ARTIST_NUMBER
 BEGIN TRAN
-EXEC sp_add_genre_of_artist 8, 20   
+EXEC sp_add_genre_of_artist 1, 0   
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED - NO GENRE
 BEGIN TRAN
 EXEC sp_add_genre_of_artist 0, 5   
 ROLLBACK TRAN

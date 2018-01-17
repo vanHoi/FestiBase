@@ -39,8 +39,8 @@ EXEC sp_add_podium_plays_genre 1, 3
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED - INCORRECT PODIUM_NUMBER
 BEGIN TRAN
-EXEC sp_add_podium_plays_genre 8, 20   
+EXEC sp_add_podium_plays_genre 8, 20
 ROLLBACK TRAN
 GO
