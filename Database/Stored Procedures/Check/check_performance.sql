@@ -1,8 +1,8 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
 /* PDM version:		7											*/
-/* Last edited:		11-01-2018									*/
-/* Edited by:		Yuri Vannisselroy							*/
+/* Last edited:		12-01-2018									*/
+/* Edited by:		Robert Verkerk								*/
 /* Procedure:		Check performance constraints (C5)			*/
 /*==============================================================*/
 
@@ -16,6 +16,7 @@ GO
 	- The performancetime must be between the festivals duration time.
 	- If the date of performance of an artist is unknown, the start time
 	  must be unknown as well.
+	- Start date and time are between festival start and end date
 */
 DROP PROC IF EXISTS sp_check_performance;
 GO
@@ -41,7 +42,15 @@ BEGIN
 						;THROW 50000, '@start_time must be NULL if the podium_schedule_number is NULL', 1
 					END
 			END
-
+		
+		DECLARE @start_date_time DATETIME = CAST(@start_date AS DATETIME) + CAST(ISNULL(@start_time, '') AS DATETIME)
+		PRINT @start_date_time
+		IF ( @start_date_time NOT BETWEEN 
+			(SELECT start_date FROM FESTIVAL WHERE festival_number = @festival_number) AND
+			(SELECT end_date FROM FESTIVAL WHERE festival_number = @festival_number))
+			BEGIN
+				;THROW 500001, 'The start date and time must fit between the start and end dates of the festival', 1
+			END
 		IF @podium_schedule_number IS NOT NULL
 			BEGIN
 				SET @break_time = (SELECT break_time
@@ -72,12 +81,13 @@ BEGIN
 								ELSE IF EXISTS (SELECT performance_number
 												FROM performance
 												WHERE podium_schedule_number = @podium_schedule_number
+												AND "start_date" = @start_date
 												AND (@start_time BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
 													AND DATEADD(minute, play_time + @break_time, start_time)
 													OR DATEADD(minute, @play_time, @start_time) BETWEEN DATEADD(minute, 0 - @break_time, start_time) 
 														AND DATEADD(minute, play_time + @break_time, start_time)
-													OR (@start_time < DATEADD(minute, 0 - @break_time, start_time) 
-														AND DATEADD(minute, @play_time, @start_time) > DATEADD(minute, play_time + @break_time, start_time))))
+													OR (@start_time <= DATEADD(minute, 0 - @break_time, start_time) 
+														AND DATEADD(minute, @play_time, @start_time) >= DATEADD(minute, play_time + @break_time, start_time))))
 									BEGIN
 										;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
 									END

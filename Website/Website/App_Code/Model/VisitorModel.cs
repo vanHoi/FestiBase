@@ -11,11 +11,13 @@ namespace Model
     {
         private readonly VisitorDAO _visitorDao;
         private readonly BoughtTicketDAO _boughtTicketDao;
+        private readonly GenreDAO _genreDao;
 
         public VisitorModel()
         {
             _visitorDao = new VisitorDAO();
             _boughtTicketDao = new BoughtTicketDAO();
+            _genreDao = new GenreDAO();
         }
 
         public Visitor LoginVisitor(string email)
@@ -31,6 +33,21 @@ namespace Model
         public bool addVisitorToTicket(int visitorNumber, int ticketNumber)
         {
             return _boughtTicketDao.AddVisitorToTicket(visitorNumber, ticketNumber);
+        }
+
+        public List<Genre> GetGenresOfVisitor(int visitorNumber)
+        {
+            return _genreDao.GetGenresOfVisitor(visitorNumber);
+        }
+
+        public void DeleteLikedGenre(int visitorNumber, int genreNumber)
+        {
+            _genreDao.DeleteLikedGenre(genreNumber, visitorNumber);
+        }
+
+        public void AddLikedGenre(int visitorNumber, int genreNumber)
+        {
+            _genreDao.AddLikedGenre(genreNumber, visitorNumber);
         }
     }
 }
