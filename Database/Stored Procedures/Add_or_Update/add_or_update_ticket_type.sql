@@ -74,6 +74,12 @@ EXEC sp_add_or_update_ticket_type 1, 'Ultra Weekend Ticket', 5000, '2017-04-14 1
 ROLLBACK TRAN
 GO
 
+-- UPDATE SUCCESSFUL
+BEGIN TRAN
+EXEC sp_add_or_update_ticket_type 1, 'Weekend Ticket', 175, '2017-04-14 10:00:00', '2017-04-16 23:00:00', 1
+ROLLBACK TRAN
+GO
+
 -- INSERT FAILED
 BEGIN TRAN
 EXEC sp_add_or_update_ticket_type 10, 'Ultra Weekend Ticket', 5000, '2018-07-20 10:00:00', '2018-07-23 23:00:00', 1
