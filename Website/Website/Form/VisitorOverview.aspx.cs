@@ -97,7 +97,7 @@ namespace Form
 
         protected void btnAddTicketClick(object sender, EventArgs e)
         {
-            Response.Redirect("~/Form/VisitorAddTicket.aspx");
+            Response.Redirect("VisitorAddTicket.aspx");
         }
         
         protected void btnGenreEdit(object sender, EventArgs e)
