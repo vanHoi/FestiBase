@@ -20,7 +20,12 @@
         <section class="container-fluid">
 
             <div class="row extra-padding-top-xs">
-                <div class="col-9"></div>
+                <div class="col-3"></div>
+                <div class="col-6 text-center">
+                    <h3 class="extra-padding-top-xs text-success">
+                        <asp:Label ID="labelTicketAdded" runat="server"></asp:Label>
+                    </h3>
+                </div>
                 <div class="col-3 text-right">
                     <asp:Button ID="btnLogout" runat="server" OnClick="btnLogoutClick" Text="Uitloggen" CssClass="btn btn-primary btn-primary-small" />
                 </div>
