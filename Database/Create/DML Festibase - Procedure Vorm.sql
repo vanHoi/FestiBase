@@ -27,7 +27,7 @@ GO
 -- Festival
 EXEC sp_add_or_update_festival null, 1, 'Paaspop 2017', '14-04-2017 00:00:00', '16-04-2017 23:59:00', 'Schijndel', '2.50', 1
 EXEC sp_add_or_update_festival null, 1, 'Paaspop 2018', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 'Schijndel', '3.00', 1
-EXEC sp_add_or_update_festival null, 2, 'Pinkpop 2018', '15-06-2018 00:00:00', '17-06-2018 00:00:00', 'Megaland Landgraaf', '3.00', 1
+EXEC sp_add_or_update_festival null, 2, 'Pinkpop 2018', '15-06-2018 00:00:00', '17-06-2018 23:59:00', 'Megaland Landgraaf', '3.00', 1
 EXEC sp_add_or_update_festival null, 4, 'Rock Am Ring 2018', '01-06-2018 00:00:00', '03-06-2018 23:59:00', 'Nürburgring', '3.00', 1
 EXEC sp_add_or_update_festival null, 5, 'The Iron iYuriZ Fest', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 'Goffertpark', '4.00', 1
 GO
@@ -204,13 +204,11 @@ EXEC sp_add_or_update_locker NULL, 11, 1
 GO
 
 -- Locker Rented
-/* NOT WORKING NOW
 EXEC sp_add_or_update_locker_rented 1, '14-04-2017 08:12:23', '16-04-2017 22:59:17', 1, 1
 EXEC sp_add_or_update_locker_rented 2, '14-04-2017 10:00:43', NULL, 2, 1
 EXEC sp_add_or_update_locker_rented 11, '30-03-2018 14:37:23', NULL, 3, 1
 EXEC sp_add_or_update_locker_rented 12, '31-03-2018 10:37:12', '31-03-2018 23:23:56', 4, 1
 GO
-*/
 
 -- Tent
 EXEC sp_add_or_update_tent NULL, 1, 'Tent 1', 1800, 2500, 900, 1500, 1900, 2700, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 1
@@ -221,31 +219,32 @@ GO
 -- Podium
 EXEC sp_add_or_update_podium 0, 1, NULL, 'Heineken Stage', 1500, 1000, 700, 100, 12000, 100, 1400, 800, 600, 'description of environment', 1
 EXEC sp_add_or_update_podium 0, 1, 1, 'PopPodium', 1500, 1200, 700, null, 9000, 50, 1300, 1000, 600, 'beautiful trees', 1
-EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 1900, 1200, 800, 150, 30, 120, 1800, 1100, 600, 'Hele grote open ruimte', 1
-EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 1600, 1300, 800, 150, 30, 120, 1500, 1200, 600, 'Hele grote open ruimte', 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Main', 1900, 1200, 800, 150, 30, 120, 1800, 1100, 600, 'Krappe tent', 1
+EXEC sp_add_or_update_podium 0, 2, 3, 'Tent Stage Small', 1600, 1300, 800, 150, 30, 120, 1500, 1200, 600, 'Krappe tent', 1
 EXEC sp_add_or_update_podium 0, 3, NULL, 'Main Stage', 3500, 1200, 800, 150, 30, 120, 800, 700, 600, 'Hele grote open ruimte', 1
 GO
 
 -- Podium Schedule
 EXEC sp_add_or_update_podium_schedule NULL, 1, '14-04-2017', '14:00:00', '14-04-2017', '23:00:00', 15, 1
-EXEC sp_add_or_update_podium_schedule NULL, 2, '31-03-2018', '10:00:00', '31-03-2018', '23:30:00', 60, 1
-EXEC sp_add_or_update_podium_schedule NULL, 3, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60, 1
-EXEC sp_add_or_update_podium_schedule NULL, 3, '16-06-2018', '14:00:00', '17-06-2018', '02:00:00', 60, 1
-EXEC sp_add_or_update_podium_schedule NULL, 3, '17-06-2018', '10:00:00', '17-06-2018', '23:00:00', 0, 1
+EXEC sp_add_or_update_podium_schedule NULL, 2, '14-04-2017', '10:00:00', '14-04-2017', '23:30:00', 30, 1
+EXEC sp_add_or_update_podium_schedule NULL, 3, '31-03-2018', '10:00:00', '31-03-2018', '23:30:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 5, '15-06-2018', '14:00:00', '15-06-2018', '22:30:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 5, '16-06-2018', '14:00:00', '16-06-2018', '23:00:00', 60, 1
+EXEC sp_add_or_update_podium_schedule NULL, 5, '17-06-2018', '10:00:00', '17-06-2018', '23:00:00', 0, 1
 GO
 
 -- Performance
 EXEC sp_add_or_update_performance NULL, 1, 1, 1, '14-04-2017', '14:00:00', 60,  15, 1
 EXEC sp_add_or_update_performance NULL, 2, NULL, 1, '14-04-2017', NULL, 30,  30, 1
-EXEC sp_add_or_update_performance NULL, 3, 2, 1, '31-03-2018', NULL, 60,  15, 1
-EXEC sp_add_or_update_performance NULL, 4, 2, 2, '31-03-2018', NULL, 75,  60, 1
-EXEC sp_add_or_update_performance NULL, 5, 2, 2, '31-03-2018', '10:00:00', 60,  15, 1
-EXEC sp_add_or_update_performance NULL, 6, 3, 2, '15-06-2018', '18:00:00', 60, 15, 1
-EXEC sp_add_or_update_performance NULL, 7, 3, 2, '15-06-2018', '20:15:00', 45,  15, 1
-EXEC sp_add_or_update_performance NULL, 1, 3, 2, '15-06-2018', '22:15:00', 75,  15, 1
-EXEC sp_add_or_update_performance NULL, 8, 4, 2, '16-06-2018', NULL, 90,  30, 1
-EXEC sp_add_or_update_performance NULL, 9, 4, 2, '16-06-2018','23:00:00', 120,  30, 1
-EXEC sp_add_or_update_performance NULL, 10, 5, 3, '17-06-2018', '21:15:00', 90, 0, 1
+EXEC sp_add_or_update_performance NULL, 3, 2, 1, '14-04-2017', NULL, 60, 15, 1
+EXEC sp_add_or_update_performance NULL, 4, 2, 1, '14-04-2017', NULL, 75, 60, 1
+EXEC sp_add_or_update_performance NULL, 5, 2, 1, '14-04-2017', '10:00:00', 60,  15, 1
+EXEC sp_add_or_update_performance NULL, 6, 3, 2, '31-03-2018', '18:00:00', 60, 15, 1
+EXEC sp_add_or_update_performance NULL, 7, 3, 2, '31-03-2018', '20:15:00', 45, 15, 1
+EXEC sp_add_or_update_performance NULL, 8, 4, 3, '15-06-2018', '21:15:00', 75, 15, 1
+EXEC sp_add_or_update_performance NULL, 9, 5, 3, '16-06-2018', NULL, 90, 30, 1
+EXEC sp_add_or_update_performance NULL, 10, 5, 3, '16-06-2018','21:00:00', 120,  30, 1
+EXEC sp_add_or_update_performance NULL, 11, 6, 3, '17-06-2018', '21:15:00', 90, 0, 1
 GO
 
 -- Podium File
@@ -258,8 +257,8 @@ EXEC sp_add_podium_plays_genre 1, 1
 GO
 
 -- Tent File
-EXEC sp_add_or_tent_file NULL, 1, 3, 'path/to/file.pdf', 'Factuur huur tent'),
-EXEC sp_add_or_tent_file NULL, 2, 16, 'file/path.jpg', 'Bouwplan Tent')
+EXEC sp_add_or_tent_file NULL, 1, 3, 'path/to/file.pdf', 'Factuur huur tent', 1
+EXEC sp_add_or_tent_file NULL, 2, 16, 'file/path.jpg', 'Bouwplan Tent', 1
 GO
 
 -- Toilet
@@ -268,7 +267,6 @@ EXEC sp_add_or_update_toilet NULL, 1, 'Maikinoirs 1', 50, 1
 GO
 
 -- Visitor likes Performance
-INSERT INTO VISITOR_likes_PERFORMANCE (visitor_number, performance_number) VALUES
 EXEC sp_add_visitor_likes_performance 1, 2
 EXEC sp_add_visitor_likes_performance 1, 1
 EXEC sp_add_visitor_likes_performance 2, 1
@@ -279,7 +277,6 @@ EXEC sp_add_visitor_likes_performance 4, 9
 GO
 
 -- Visitor visited Performance
-INSERT INTO VISITOR_VISITED_PERFORMANCE (visitor_number, performance_number) VALUES
 EXEC sp_add_visitor_visited_performance 1, 1
 EXEC sp_add_visitor_visited_performance 1, 2
 EXEC sp_add_visitor_visited_performance 2, 1
