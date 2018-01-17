@@ -8,23 +8,18 @@ namespace Form
     public partial class FormVisitorOverview : System.Web.UI.Page
     {
         private VisitorModel _visitorModel;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             _visitorModel = new VisitorModel();
-
             if (Session["visitor"] == null)
             {
                 Response.Redirect("VisitorLogin.aspx");
             }
-
             if (Session["ticketAdded"] != null)
             {
-                labelTicketAdded.Text = " De ticket is succesvol toegevoegd" ;
+                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd." ;
                 Session.Remove("ticketAdded");
             }
-
-
 
             Visitor visitor = (Visitor) Session["visitor"];
             if (String.IsNullOrEmpty(visitor?.FirstName))
@@ -35,7 +30,6 @@ namespace Form
             {
                 lblVisitor.Text = "Welkom " + visitor.FirstName + "!";
             }
-
             if (visitor != null)
                 foreach (BoughtTicket b in _visitorModel.GetAllBoughtTicketsOfVisitor(visitor.VisitorNumber))
                 {
@@ -56,13 +50,11 @@ namespace Form
                                      b.GetFestival().EndDate.ToString("dd/MM/yyyy");
                     }
 
-
                     TableCell cell4 = new TableCell();
                     Button btnProgram = new Button
                     {
                         Text = b.GetFestival().EndDate < DateTime.Now ? "Beheer bezochte optredens" : "Bekijk programma"
                     };
-
 
                     btnProgram.Click += btnProgramClick;
                     cell4.Controls.Add(btnProgram);

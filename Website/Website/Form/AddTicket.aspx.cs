@@ -6,9 +6,7 @@ namespace Form
 {
     public partial class FormAddTicket : System.Web.UI.Page
     {
-
         private VisitorModel _visitorModel;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +19,6 @@ namespace Form
 
         }
 
-
         protected void btnAddClick(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(tboxTicketNumber.Text))
@@ -31,16 +28,13 @@ namespace Form
 
                 if (_visitorModel.addVisitorToTicket(visitor.VisitorNumber, Convert.ToInt32(tboxTicketNumber.Text)))
                 {
-
                     Session["ticketAdded"] = true;
                     Response.Redirect("VisitorOverview.aspx");
-
-
                 }
+
                 else
                 {
-                    labelError.Text = " Deze ticket is al gebruikt ";
-
+                    labelError.Text = " Dit ticket is al gebruikt ";
                 }
             }
         }
