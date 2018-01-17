@@ -9,9 +9,9 @@
 USE FestiBase
 GO
 
-DROP PROCEDURE IF EXISTS sp_add_or_podium_file
+DROP PROCEDURE IF EXISTS sp_add_or_update_podium_file
 GO
-CREATE PROCEDURE sp_add_or_podium_file
+CREATE PROCEDURE sp_add_or_update_podium_file
 	@file_number INT = NULL,
 	@podium_number INT,
 	@festival_company_number INT,
@@ -47,24 +47,24 @@ GO
 
 /*insert*/
 BEGIN TRAN
-EXEC sp_add_or_podium_file NULL, 1, 1, 'path', 'beschrijving', 1
+EXEC sp_add_or_update_podium_file NULL, 1, 1, 'path', 'beschrijving', 1
 ROLLBACK TRAN
 GO
 
 /*update*/
 BEGIN TRAN
-EXEC sp_add_or_podium_file 1, 1, 1, 'path', 'beschrijving', 0
+EXEC sp_add_or_update_podium_file 1, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
 GO
 
 /* update, podium doesn't exist */
 BEGIN TRAN
-EXEC sp_add_or_podium_file 66, 1, 1, 'path', 'beschrijving', 0
+EXEC sp_add_or_update_podium_file 66, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
 GO
 
 /*update, podium is null*/
 BEGIN TRAN
-EXEC sp_add_or_podium_file NULL, 1, 1, 'path', 'beschrijving', 0
+EXEC sp_add_or_update_podium_file NULL, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
 GO
