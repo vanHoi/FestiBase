@@ -34,7 +34,7 @@ namespace Form
 
                 else
                 {
-                    labelError.Text = " Dit ticket is al gebruikt ";
+                    labelError.Text = " Dit ticket is ongeldig.";
                 }
             }
         }
