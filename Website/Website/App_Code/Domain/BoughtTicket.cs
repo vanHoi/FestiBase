@@ -10,14 +10,15 @@ namespace Domain
         public BoughtTicket()
         {
             TicketType = new TicketType();
+            Visitor = new Visitor();
         }
 
-        public BoughtTicket(int ticketNumber, TicketType ticketType, 
-            string visitorNumber, DateTime scanDate)
+        public BoughtTicket(int ticketNumber, TicketType ticketType,
+            Visitor visitor, DateTime scanDate)
         {
             this.TicketNumber = ticketNumber;
             this.TicketType = ticketType;
-            this.VisitorNumber = visitorNumber;
+            this.Visitor = visitor;
             this.ScanDate = scanDate;
         }
 
@@ -25,7 +26,7 @@ namespace Domain
 
         public TicketType TicketType { get; set; }
 
-        public string VisitorNumber { get; set; }
+        public Visitor Visitor { get; set; }
 
         public DateTime ScanDate { get; set; }
 
