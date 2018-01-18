@@ -18,7 +18,7 @@ namespace Form
             }
             if (Session["ticketAdded"] != null)
             {
-                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd" ;
+                labelTicketAdded.Text = " Het ticket is succesvol toegevoegd!" ;
                 Session.Remove("ticketAdded");
             }
 
@@ -97,7 +97,7 @@ namespace Form
 
         protected void btnAddTicketClick(object sender, EventArgs e)
         {
-            Response.Redirect("AddTicket.aspx");
+            Response.Redirect("VisitorAddTicket.aspx");
         }
         
         protected void btnGenreEdit(object sender, EventArgs e)
