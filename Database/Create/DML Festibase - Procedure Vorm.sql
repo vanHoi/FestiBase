@@ -122,24 +122,24 @@ GO
 -- Ticket Type
 EXEC sp_add_or_update_ticket_type 12, 'Premium Ticket', 75, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
 EXEC sp_add_or_update_ticket_type 12, 'Ultra Weekend Ticket', 5000, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
-EXEC sp_add_or_update_ticket_type 12, 'Normaal Ticket', 50, '14-04-2017 00:00:00', '16-04-2017 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 12, 'Standaard Ticket Vrijdag', 50, '14-04-2017 00:00:00', '14-04-2017 23:59:00', 1
 EXEC sp_add_or_update_ticket_type 13, 'VIP Ticket', '120', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
-EXEC sp_add_or_update_ticket_type 13, 'Dagticket', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
+EXEC sp_add_or_update_ticket_type 13, 'Dagticket Vrijdag', '50', '30-03-2018 00:00:00', '30-03-2018 23:59:00', 1
 EXEC sp_add_or_update_ticket_type 13, 'Weekendticket', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
 EXEC sp_add_or_update_ticket_type 13, 'Weekendticket incl Camping', '50', '30-03-2018 00:00:00', '01-04-2018 23:59:00', 1
 GO
 
 -- Bought Ticket
 EXEC sp_add_or_update_bought_ticket NULL, 12, 'Premium Ticket', 1, NULL, 1
-EXEC sp_add_or_update_bought_ticket NULL, 12, 'Normaal Ticket', 2, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Standaard Ticket Vrijdag', 2, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 12, 'Ultra Weekend Ticket', 3, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 12, 'Premium Ticket', NULL, NULL, 1
-EXEC sp_add_or_update_bought_ticket NULL, 12, 'Normaal Ticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 12, 'Standaard Ticket Vrijdag', NULL, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 12, 'Ultra Weekend Ticket', NULL, NULL, 1
-EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket', 1, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket Vrijdag', 1, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket', 2, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket incl Camping', 3, NULL, 1
-EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket', NULL, NULL, 1
+EXEC sp_add_or_update_bought_ticket NULL, 13, 'Dagticket Vrijdag', NULL, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket', NULL, NULL, 1
 EXEC sp_add_or_update_bought_ticket NULL, 13, 'Weekendticket incl Camping', NULL, NULL, 1
 GO
