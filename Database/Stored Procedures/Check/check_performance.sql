@@ -89,7 +89,7 @@ BEGIN
 													OR (@start_time <= DATEADD(minute, 0 - @break_time, start_time) 
 														AND DATEADD(minute, @play_time, @start_time) >= DATEADD(minute, play_time + @break_time, start_time))))
 									BEGIN
-										;THROW 50000, 'An artist is already going to perfom on this stage during that time', 1
+										;THROW 50000, 'An artist is already going to perform on this stage during that time', 1
 									END
 
 								/* BR20		Does the inserted/updated performance fit within the start and endtime of that podium_schedule */
