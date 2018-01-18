@@ -39,9 +39,8 @@ EXEC sp_add_visitor_likes_performance 1, 3
 ROLLBACK TRAN
 GO
 
--- INSERT SUCCESSFUL
+-- INSERT FAILED - INCORRECT PERFORMANCE_NUMBER
 BEGIN TRAN
-EXEC sp_add_visitor_likes_performance 3, 7   
+EXEC sp_add_visitor_likes_performance 3, 20  
 ROLLBACK TRAN
 GO
-

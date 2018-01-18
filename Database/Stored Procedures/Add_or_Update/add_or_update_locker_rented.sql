@@ -1,7 +1,7 @@
 ﻿/*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last Edited:		19-12-2017									*/
+/* PDM version:		7											*/
+/* Last Edited:		17-01-2017									*/
 /* Edited by:		Robert Verkerk								*/	
 /* Procedure:		Insert + Update LOCKER_RENTED				*/
 /*==============================================================*/
@@ -81,7 +81,6 @@ GO
 /* new locker already rented */
 BEGIN TRAN
 EXEC sp_add_or_update_locker_rented 1, '2017-04-15 00:00:00', '2017-04-16 00:00:00', 2, 1
-EXEC sp_add_or_update_locker_rented 1, '2017-04-15 19:00:00', '2017-04-16 20:00:00', 2, 1
 ROLLBACK TRAN
 GO
 

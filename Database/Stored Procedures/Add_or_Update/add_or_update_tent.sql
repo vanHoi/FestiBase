@@ -1,7 +1,8 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
+/* PDM version:		7											*/
 /* Last edited:		21-12-2017									*/
+/* Created by:		Ivo Reumkens								*/
 /* Edited by:		Yuri Vannisselroy							*/
 /* Procedure:		Insert + Update TENT						*/
 /*==============================================================*/
@@ -97,7 +98,25 @@ EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300,
 ROLLBACK TRAN
 GO
 
--- Test UDATE (SK does not exist)
+-- Width too wide
+BEGIN TRAN
+EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1600, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+ROLLBACK TRAN
+GO
+
+-- Length too long
+BEGIN TRAN
+EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 3400, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+ROLLBACK TRAN
+GO
+
+-- Side height too high
+BEGIN TRAN
+EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 2000, 1100, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+ROLLBACK TRAN
+GO
+
+-- Test UPDATE (SK does not exist)
 BEGIN TRAN
 EXEC sp_add_or_update_tent 200, 2, 'Test Tent', 1300, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
 ROLLBACK TRAN

@@ -54,26 +54,26 @@ GO
 
 /* Tests */
 
-/*insert*/
+/* insert */
 BEGIN TRAN
-EXEC sp_add_or_update_catering 1, NULL, 1, 'Bier', 1
+EXEC sp_add_or_update_catering 0, 2, 1, 'Bier', 1
 ROLLBACK TRAN
 GO
 
-/*update*/
+/* update */
 BEGIN TRAN
-EXEC sp_add_or_update_catering 0, 4, 8, 'bier', 0
+EXEC sp_add_or_update_catering 2, 4, 8, 'bier', 0
 ROLLBACK TRAN
 GO
 
-/*update fail*/
+/* update fail - catering does not exist */
 BEGIN TRAN
-EXEC sp_add_or_update_catering 0, 5, 5, 'bier', 0
+EXEC sp_add_or_update_catering 999, 5, 5, 'bier', 0
 ROLLBACK TRAN
 GO
 
-/*update fail*/
+/* update fail - catering number can't be null*/
 BEGIN TRAN
-EXEC sp_add_or_update_catering 0, NULL, 5, 'bier', 0
+EXEC sp_add_or_update_catering 0, 2, 5, 'bier', 0
 ROLLBACK TRAN
 GO

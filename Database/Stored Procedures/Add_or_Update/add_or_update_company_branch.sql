@@ -105,17 +105,23 @@ GO
 
 -- Test UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_company_branch 9, 23456045, 'Coolestraatje', '332', 'Nijmegen', 'Nederland', 0
+EXEC sp_add_or_update_company_branch 1, 23456001, 'Coolestraatje', '332', 'Nijmegen', 'Nederland', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK does not exist)
+-- UPDATE FAILED (coc_number doesn't exist)
+BEGIN TRAN
+EXEC sp_add_or_update_company_branch 1, 99999999, 'Coolestraatje', '332', 'Nijmegen', 'Nederland', 0
+ROLLBACK TRAN
+GO
+
+-- UPDATE FAILED (SK doesn't exist)
 BEGIN TRAN
 EXEC sp_add_or_update_company_branch 200, 23456045, 'Zwanenveld', '332', 'Nijmegen', 'Nederland', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK NULL)
+--  UPDATE FAILED (SK NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_company_branch NULL, 23456045, 'Bleustraat', '332', 'Nijmegen', 'Nederland', 0
 ROLLBACK TRAN

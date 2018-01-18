@@ -28,7 +28,7 @@ BEGIN
 			BEGIN
 				;THROW 50000, '@locker_number cannot be NULL if an update is to be commerced.', 1
 			END
-			ELSE IF EXISTS (SELECT * FROM locker WHERE locker_number = @locker_number)
+			ELSE IF NOT EXISTS (SELECT * FROM locker WHERE locker_number = @locker_number)
 			BEGIN
 				;THROW 50000, 'This locker does not exist', 1
 			END
@@ -45,32 +45,38 @@ BEGIN
 END
 GO
 
-/* add new locker */
+/* insert */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 1, NULL, 8
+EXEC sp_add_or_update_locker NULL, 10, 1
 ROLLBACK TRAN
 GO
 
-/* add locker, wrong company */
+/* insert failed - wrong company */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 1, NULL, 999
+EXEC sp_add_or_update_locker NULL, 999, 1
 ROLLBACK TRAN
 GO
 
-/*update locker*/
+/* update */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, 15, 7
+EXEC sp_add_or_update_locker 2, 10, 0
 ROLLBACK TRAN
 GO
 
-/*update locker NULL*/
+/* update failed - locker_number can't be NULL */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, NULL, 8
+EXEC sp_add_or_update_locker NULL, 10, 0
 ROLLBACK TRAN
 GO
 
-/* update locker locker does not exists */
+/* update failed - festival_company_number can't be NULL */
 BEGIN TRAN
-EXEC sp_add_or_update_locker 0, 9999, 8
+EXEC sp_add_or_update_locker 2, NULL, 0
+ROLLBACK TRAN
+GO
+
+/* update failed - locker doesn't exists */
+BEGIN TRAN
+EXEC sp_add_or_update_locker 9999, 10, 0
 ROLLBACK TRAN
 GO

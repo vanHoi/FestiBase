@@ -1,9 +1,9 @@
 /*==============================================================*/
 /* DBMS name:		FestiBase									*/
-/* PDM version:		6											*/
-/* Last edited:		15-1-2018									*/
+/* PDM version:		7											*/
+/* Last edited:		17-1-2018									*/
 /* Created by:		Mariusz Blautzik							*/
-/* Edited by:		Robert Verkerk								*/
+/* Edited by:		Ivo Reumkens & Robert Verkerk				*/
 /* Procedure:		Insert + Update PODIUM						*/
 /*==============================================================*/
 
@@ -180,13 +180,13 @@ EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 10', 1200, 600, 100, 1200, 12000, 12
 ROLLBACK TRAN
 GO
 
-/* Update zonder tentnummer */
+/* Update without tent_number */
 BEGIN TRAN
 EXEC sp_add_or_update_podium 0, 1, 0, 'Tent 15', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
 GO
 
-/* Correcte update */
+/* Correct update */
 BEGIN TRAN
 EXEC sp_add_or_update_podium 1, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 450, 'Veel ruimte', 0
 ROLLBACK TRAN
@@ -207,5 +207,23 @@ GO
 /* update tent from wrong festival */
 BEGIN TRAN 
 EXEC sp_add_or_update_podium 1, 1, 2, 'Tent 1', 4000, 2000, 200, NULL, 999, 12, 1000, 1000, NULL, 'Bomen', 0
+ROLLBACK TRAN
+GO
+
+-- Construction_width is smaller then free_span_width
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1300, 450, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+-- Construction_length is smaller then free_span_length
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 650, 450, 'Veel ruimte', 1
+ROLLBACK TRAN
+GO
+
+-- -- Construction_height is smaller then free_span_height
+BEGIN TRAN
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 650, 'Veel ruimte', 1
 ROLLBACK TRAN
 GO

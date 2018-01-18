@@ -59,24 +59,24 @@ GO
 
 -- Test INSERT
 BEGIN TRAN
-EXEC sp_add_or_update_attraction NULL, 1, 'Wannabe London Eye', 'Reuzen Rad', 1
+EXEC sp_add_or_update_attraction NULL, 2, 'Wannabe London Eye', 'Reuzen Rad', 1
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE
 BEGIN TRAN
-EXEC sp_add_or_update_attraction 1, 1, 'Wannabe London Eye', 'Reuzen Rad', 0
+EXEC sp_add_or_update_attraction 2, 2, 'Wannabe London Eye', 'Reuzen Rad', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_attraction 300, 1, 'Wannabe London Eye', 'Reuzen Rad', 0
+EXEC sp_add_or_update_attraction 999, 2, 'Wannabe London Eye', 'Reuzen Rad', 0
 ROLLBACK TRAN
 GO
 
 -- Test UPDATE (SK cannot be NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_attraction NULL, 1, 'Wannabe London Eye', 'Reuzen Rad', 0
+EXEC sp_add_or_update_attraction NULL, 2, 'Wannabe London Eye', 'Reuzen Rad', 0
 ROLLBACK TRAN
 GO
