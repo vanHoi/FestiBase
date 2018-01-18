@@ -42,25 +42,25 @@ BEGIN
 END
 GO
 
-/*insert*/
+-- Test INSERT successvol
 BEGIN TRAN
 EXEC sp_add_or_update_organisation NULL, 'org1', 1
 ROLLBACK TRAN
 GO
 
-/*update*/
+-- Test UPDATE successvol
 BEGIN TRAN
 EXEC sp_add_or_update_organisation 3, 'org2', 0
 ROLLBACK TRAN
 GO
 
-/* update, org doesn't exist */
+-- Test UPDATE NIET successvol (organisation doesn't exist)
 BEGIN TRAN
-EXEC sp_add_or_update_organisation 5, 'org2', 0
+EXEC sp_add_or_update_organisation 10, 'org2', 0
 ROLLBACK TRAN
 GO
 
-/*update, org is null*/
+-- Test UPDATE NIET successvol (organisation is null)
 BEGIN TRAN
 EXEC sp_add_or_update_organisation NULL, 'org2', 0
 ROLLBACK TRAN

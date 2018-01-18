@@ -135,59 +135,61 @@ BEGIN
 END
 GO
 
--- Test INSERT
+-- Test INSERT succesvol
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Nijmegen', 'Nederland', 1
 ROLLBACK TRAN
 GO
 
+-- Test INSERT succesvol
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', NULL, NULL, 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (new town)
+-- Test INSERT succesvol (new town)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Amstelveen', 'Nederland', 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (new town and country)
+-- Test INSERT succesvol (new town and country)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Madrid', 'Spanje', 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (cannot insert duplicate email)
+-- Test INSERT NIET succesvol (cannot insert duplicate email)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'robertverkerk@hetnet.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Amstelveen', 'Nederland', 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (must have both town and country either NULL or NOT NULL)
+-- Test INSERT NIET succesvol (must have both town and country either NULL or NOT NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', NULL, 'Nederland', 1
 ROLLBACK TRAN
 GO
 
-BEGIN TRAN
+-- Test INSERT NIET succesvol (must have both town and country either NULL or NOT NULL)
+BEGIN TRAN 
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Nijmegen', NULL, 1
 ROLLBACK TRAN
 GO
 
--- Test UPDATE
+-- Test UPDATE succesvol
 BEGIN TRAN
 EXEC sp_add_or_update_visitor 1, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Amstelveen', 'Nederland', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK does not exist)
+-- Test UPDATE NIET succesvol (visitor_number does not exist)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor 300, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Amstelveen', 'Nederland', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK NULL)
+-- Test UPDATE NIET succesvol (visitor_number NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_visitor NULL, 'yuriz@live.nl', 'Yuri', 'Vannisselroy', '0682006373', '1996-09-25', 'NULL', 'NULL', 'NULL', 'NULL', 'Amstelveen', 'Nederland', 0
 ROLLBACK TRAN
