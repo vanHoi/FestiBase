@@ -68,48 +68,49 @@ BEGIN
 END
 GO
 
--- Test INSERT
+-- Test INSERT successvol
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
 
--- Test UPDATE
+-- Test UPDATE successvol
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule 1, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK does not exist)
+-- Test UPDATE NIET successvol (Podium_schedule does not exist)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule 300, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK NULL)
+-- Test UPDATE NIET successvol  (Podium_schedule is NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-16', '02:00:00', 30, 0
 ROLLBACK TRAN
 GO
 
--- Test INSERT (fails the check)
+-- Test INSERT NIET successvol (fails the check)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-16', '14:00:00', '2017-04-17', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
 
+-- Test INSERT NIET successvol (fails the check)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-13', '14:00:00', '2017-04-14', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (startdate before enddate)
+-- Test INSERT NIET successvol (startdate before enddate)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-14', '02:00:00', 30, 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (startdate same as enddate)
+-- Test INSERT NIET successvol (startdate same as enddate)
 BEGIN TRAN
 EXEC sp_add_or_update_podium_schedule NULL, 1, '2017-04-15', '14:00:00', '2017-04-15', '00:00:00', 30, 1
 ROLLBACK TRAN

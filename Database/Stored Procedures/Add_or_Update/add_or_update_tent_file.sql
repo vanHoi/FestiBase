@@ -45,25 +45,25 @@ BEGIN
 END
 GO
 
-/*insert*/
+-- Test INSERT successvol
 BEGIN TRAN
 EXEC sp_add_or_update_tent_file NULL, 1, 1, 'path', 'beschrijving', 1
 ROLLBACK TRAN
 GO
 
-/*update*/
+-- Test UPDATE successvol 
 BEGIN TRAN
 EXEC sp_add_or_update_tent_file 1, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
 GO
 
-/* update, tent doesn't exist */
+-- Test UPDATE NIET successvol  (tent_file doesn't exist)
 BEGIN TRAN
 EXEC sp_add_or_update_tent_file 66, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
 GO
 
-/*update, tent is null*/
+-- Test UPDATE NIET successvol  (tent_file is null)
 BEGIN TRAN
 EXEC sp_add_or_update_tent_file NULL, 1, 1, 'path', 'beschrijving', 0
 ROLLBACK TRAN
