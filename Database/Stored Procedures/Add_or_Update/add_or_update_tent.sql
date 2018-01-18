@@ -100,21 +100,21 @@ GO
 
 -- Width too wide
 BEGIN TRAN
-EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1600, 2000, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) 
+VALUES (1, 'Test Tent', 1200, 2000, 500, 1000, 1000, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000)
 ROLLBACK TRAN
-GO
 
 -- Length too long
 BEGIN TRAN
-EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 3400, 500, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) 
+VALUES (1, 'Test Tent', 1200, 2000, 500, 1000, 1400, 1800, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000)
 ROLLBACK TRAN
-GO
 
 -- Side height too high
 BEGIN TRAN
-EXEC sp_add_or_update_tent 1, 2, 'Test Tent', 1300, 2000, 1100, 1000, 1500, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000, 0
+INSERT INTO TENT (festival_number, name, width, length, side_height, ridge_height, construction_width, construction_length, tent_type, color, floor_type, capacity) 
+VALUES (1, 'Test Tent', 1200, 2000, 1200, 1000, 1400, 3300, 'Grote Tent', 'Blauw-wit', 'Systeemvloer', 12000)
 ROLLBACK TRAN
-GO
 
 -- Test UPDATE (SK does not exist)
 BEGIN TRAN

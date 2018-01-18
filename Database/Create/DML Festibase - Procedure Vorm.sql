@@ -112,13 +112,6 @@ EXEC sp_add_or_update_artist_file  NULL, 7, 15, 'Contract Je Moeder', 'Het contr
 EXEC sp_add_or_update_artist_file  NULL, 1, 15, 'Setlist Rapper Sjors', 'De setlist van de Rapper Sjors', 1
 GO
 
--- Attraction
-EXEC sp_add_or_update_attraction NULL, 2, 'Leons Wilde Rit', 'Octopus', 1
-EXEC sp_add_or_update_attraction NULL, 2, 'Wannabe Booster', 'Booster', 1
-EXEC sp_add_or_update_attraction NULL, 6, 'Booster XXL', 'Booster', 1
-EXEC sp_add_or_update_attraction NULL, 6, 'Das Onvoldoende', 'Spookhuis', 1
-GO
-
 -- Visitor
 EXEC sp_add_or_update_visitor NULL, 'robertverkerk@hetnet.nl', 'Robert', 'Verkerk', 0612345678, '15-07-1995', 'robert_verkerk', 'robert.verkerk', 'Robertstraat', 16, 'Cuijk', 'Nederland', 1
 EXEC sp_add_or_update_visitor NULL, 'mario@hotmail.com', 'Mariusz', 'Blautzik', 0632165487, '07-08-1991', NULL, 'mariuszBlautzik', 'Mariostraat', 1, 'Cuijk', 'Nederland', 1

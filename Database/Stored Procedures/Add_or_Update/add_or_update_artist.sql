@@ -56,17 +56,17 @@ GO
 
 /* update */
 BEGIN TRAN
-EXEC sp_add_or_update_artist 1, 'De Zingende Pool', 0
+EXEC sp_add_or_update_artist 1, 'name', 0
 ROLLBACK TRAN
 GO
 
-/* UPDATE FAILED - artist_number can't be NULL */
+/* update key NULL */
 BEGIN TRAN
 EXEC sp_add_or_update_artist NULL, 'name', 0
 ROLLBACK TRAN
 GO
 
-/* UPDATE FAILED - artist_number doesn't exist */
+/* update, wrong artist */
 BEGIN TRAN
 EXEC sp_add_or_update_artist 9999, 'name', 0
 ROLLBACK TRAN
