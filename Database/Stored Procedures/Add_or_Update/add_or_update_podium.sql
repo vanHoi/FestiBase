@@ -212,18 +212,18 @@ GO
 
 -- Construction_width is smaller then free_span_width
 BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 1200, 500, 400, 'Plat vlak land') 
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1300, 450, 450, 'Veel ruimte', 1
 ROLLBACK TRAN
+GO
 
 -- Construction_length is smaller then free_span_length
 BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 700, 400, 'Plat vlak land') 
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 650, 450, 'Veel ruimte', 1
 ROLLBACK TRAN
+GO
 
 -- -- Construction_height is smaller then free_span_height
 BEGIN TRAN
-INSERT INTO PODIUM (festival_number, name, construction_width, construction_length, floor_height, construction_height, capacity, floor_load, free_span_width, free_span_length, free_span_height, environment) 
-VALUES (1, 'Test Stage', 1000, 600, 100, 500, 10000, 15, 800, 500, 550, 'Plat vlak land') 
+EXEC sp_add_or_update_podium 0, 1, 3, 'Tent 1', 1200, 600, 600, 100, 12000, 12, 1000, 450, 650, 'Veel ruimte', 1
 ROLLBACK TRAN
+GO
