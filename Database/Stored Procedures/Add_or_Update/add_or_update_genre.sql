@@ -61,19 +61,19 @@ GO
 
 -- INSERT SUCCESSFUL
 BEGIN TRAN
-EXEC sp_add_or_update_genre NULL, 'House', 1
+EXEC sp_add_or_update_genre NULL, 'Trash', 1
 ROLLBACK TRAN
 GO
 
 -- UPDATE SUCCESSFUL
 BEGIN TRAN
-EXEC sp_add_or_update_genre 2, 'Drum & Bass', 0
+EXEC sp_add_or_update_genre 2, 'Hardcore', 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE FAILED (Genre does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_genre 17, 'Nederlandse Classics', 0
+EXEC sp_add_or_update_genre 20, 'Nederlandse Classics', 0
 ROLLBACK TRAN
 GO
 
