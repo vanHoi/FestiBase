@@ -63,13 +63,7 @@ GO
 
 -- INSERT SUCCESSFUL
 BEGIN TRAN
-EXEC sp_add_or_update_artist_file  NULL, 4, 5, 'Contract met Jannes', 'Contract met Jannes voor 2 uur optreden op zaterdag', 1
-ROLLBACK TRAN
-GO
-
--- INSERT SUCCESSFUL
-BEGIN TRAN
-EXEC sp_add_or_update_artist_file  NULL, 2, 7, 'Tracklist Abba', 'Tracklist van Abba voor zondag 5-5-1986', 1
+EXEC sp_add_or_update_artist_file  NULL, 4, 5, 'Contract met Jannes', 'Contract met De Zingend Pool voor 2 uur optreden op zaterdag', 1
 ROLLBACK TRAN
 GO
 
@@ -79,27 +73,20 @@ EXEC sp_add_or_update_artist_file  1, 1, 11, 'Contract 3ROBI Zondag', 'Het nieuw
 ROLLBACK TRAN
 GO
 
--- INSERT FAILED
+-- INSERT FAILED (Festival Company doesn't exist)
 BEGIN TRAN
-EXEC sp_add_or_update_artist_file  NULL, 1, 100, 'Trackkzzz', 'Tracklist voor de radio', 1
+EXEC sp_add_or_update_artist_file  NULL, 1, 999, 'Trackkzzz', 'Tracklist voor de radio', 1
 ROLLBACK TRAN
 GO
 
-
 -- UPDATE FAILED (File_number does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_artist_file  5, 1, 11, 'Tracklist Hardwell', 'Het tracklist van Hardwell voor eindshow', 0
+EXEC sp_add_or_update_artist_file  999, 1, 11, 'Tracklist Hardwell', 'Het tracklist van Hardwell voor eindshow', 0
 ROLLBACK TRAN
 GO
 
 -- UPDATE FAILED (Festival company number cannot be NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_artist_file  NULL, 1, 11, 'Tiesto Liedjes Mixx', 'Het liedjes mixx van Tiestoooooooo', 0
-ROLLBACK TRAN
-GO
-
--- UPDATE FAILED (Festival company number cannot be ZERO)
-BEGIN TRAN
-EXEC sp_add_or_update_artist_file  0, 1, 11, 'Tiesto & Armin van Buren Tracks', 'Tiesto & Armin van Buren nieuwste tracks', 0
 ROLLBACK TRAN
 GO
