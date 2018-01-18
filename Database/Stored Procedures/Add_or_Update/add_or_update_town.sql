@@ -61,31 +61,31 @@ BEGIN
 END
 GO
 
--- Test INSERT
+-- Test INSERT successvol
 BEGIN TRAN
 EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 1
 ROLLBACK TRAN
 GO
 
--- Test INSERT (new country)
+-- Test INSERT successvol (new country)
 BEGIN TRAN
 EXEC sp_add_or_update_town NULL, 'Brazilië', 'Rio', 1
 ROLLBACK TRAN
 GO
 
--- Test UPDATE
+-- Test UPDATE successvol
 BEGIN TRAN
 EXEC sp_add_or_update_town 1, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK does not exist)
+-- Test UPDATE NIET successvol (Town does not exist)
 BEGIN TRAN
 EXEC sp_add_or_update_town 234, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN
 GO
 
--- Test UPDATE (SK NULL)
+-- Test UPDATE NIET successvol (Town_Number is NULL)
 BEGIN TRAN
 EXEC sp_add_or_update_town NULL, 'Nederland', 'Groningen', 0
 ROLLBACK TRAN

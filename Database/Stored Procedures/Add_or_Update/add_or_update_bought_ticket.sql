@@ -63,42 +63,42 @@ GO
 
 -- INSERT SUCCESSFUL
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  NULL, 13, 'Dagticket Vrijdag', 2, NULL, 1       
+EXEC sp_add_or_update_bought_ticket  NULL, 10, 'dagticket', 2, '2018-06-01 15:05:20', 1       
+ROLLBACK TRAN
+GO
+
+-- INSERT SUCCESSFUL
+BEGIN TRAN
+EXEC sp_add_or_update_bought_ticket  NULL, 10, 'VIP', 3, '2018-07-11 09:45:20', 1       
 ROLLBACK TRAN
 GO
 
 -- UPDATE SUCCESSFUL
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  2, 13, 'Dagticket Vrijdag', 1, '2018-03-30 09:36:56', 0       
-ROLLBACK TRAN
-GO
-
--- UPDATE FAILED - Visitor does not exist
-BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  2, 13, 'Dagticket Vrijdag', 999, '2018-03-30 09:36:56', 0       
+EXEC sp_add_or_update_bought_ticket  2, 10, 'dagticket', 1, '2018-01-08 19:24:38', 0       
 ROLLBACK TRAN
 GO
 
 -- UPDATE FAILED (Ticket Number does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  999, 13, 'Dagticket Vrijdag', 1, NULL, 0       
+EXEC sp_add_or_update_bought_ticket  90, 10, 'dagticket', 1, '2018-01-08 19:24:38', 0       
 ROLLBACK TRAN
 GO
 
--- UPDATE FAILED (Ticket Type does not exist)
+-- UPDATE FAILED (Ticket Number does not exist)
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  2, 13, 'Dagticket Zaterdag', 1, '2018-03-30 09:36:56', 0       
+EXEC sp_add_or_update_bought_ticket  '100', 10, 'dagticket', 1, '2018-01-08 19:24:38', 0       
 ROLLBACK TRAN
 GO
 
 -- UPDATE FAILED (Festival company number cannot be NULL)
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  2, NULL, 'Dagticket Vrijdag', 1, '2018-03-30 09:36:56', 0       
+EXEC sp_add_or_update_bought_ticket  NULL, 10, 'dagticket', 1, '2018-01-08 19:24:38', 0       
 ROLLBACK TRAN
 GO
 
--- UPDATE FAILED (Festival company doesn't exist)
+-- UPDATE FAILED (Festival company number cannot be ZERO)
 BEGIN TRAN
-EXEC sp_add_or_update_bought_ticket  2, 999, 'Dagticket Vrijdag', 3, '2018-03-30 09:36:56', 0    
+EXEC sp_add_or_update_bought_ticket  0, 10, 'VIP', 3, '2018-01-08 19:24:38', 0    
 ROLLBACK TRAN
 GO
