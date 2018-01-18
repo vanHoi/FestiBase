@@ -81,7 +81,6 @@ GO
 /* new locker already rented */
 BEGIN TRAN
 EXEC sp_add_or_update_locker_rented 1, '2017-04-15 00:00:00', '2017-04-16 00:00:00', 2, 1
-EXEC sp_add_or_update_locker_rented 1, '2017-04-15 19:00:00', '2017-04-16 20:00:00', 2, 1
 ROLLBACK TRAN
 GO
 
